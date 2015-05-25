@@ -75,49 +75,6 @@ class ebay_ShoppingAPI extends ebay_adapter {
     }
 
     /**
-     * @func getProducts()
-     *  - Gets a specific product's details.
-     *  @return     array
-     *                  [result] -  OK/ERROR
-     *                  [output]
-     *                          - OK - Products object.
-     *                          - ERROR - Error msg.
-     */
-    public function getProducts(){
-        // Create the XML request to be POSTed
-        $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-        $xmlrequest .= "<GetMultipleItemsRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n";
-        if (!empty($this->itemOptions->IncludeSelector)){
-            $xmlrequest .= "<IncludeSelector>".implode(",", $this->itemOptions->IncludeSelector)."</IncludeSelector>\n";
-        }
-        $xmlrequest .= "<ItemID>"._BuildXMLItemList($this->itemOptions->itemID)."</ItemID>\n";
-        $xmlrequest .= "</GetMultipleItemsRequest>\n";
-
-        // Set our headers properly
-        $this->headers["X-EBAY-API-CALL-NAME"] = "GetMultipleItems";
-
-        // Make the call to eBay.
-        $itemDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
-
-        // Parse our result into an object.
-        $itemDetails = simplexml_load_string($itemDetailsRaw);
-
-        // Checks to see if we have any type of failed call.
-        if ($itemDetails->ack == "Failure" || $itemDetails->ack == "PartialFailure") {
-            // Returns an error.
-            return array(
-                'result' => "ERROR",
-                "output" => "ERROR:: (".$search->errorMessage->error->errorId.") - ".$search->errorMessage->error->category."\nERROR-MESSAGE:".$search->errorMessage->error->message."\n"
-            );
-        }
-        // Returns a proper products object.
-        return array(
-            'result' => "OK",
-            "output" => $itemDetails
-        );
-    }
-
-    /**
      * @func getProduct()
      *  - Gets a specific product's details.
      *  @return     array
@@ -158,8 +115,49 @@ class ebay_ShoppingAPI extends ebay_adapter {
             'result' => "OK",
             "output" => $itemDetails
         );
+    }
 
+    /**
+     * @func getProducts()
+     *  - Gets a specific product's details.
+     *  @return     array
+     *                  [result] -  OK/ERROR
+     *                  [output]
+     *                          - OK - Products object.
+     *                          - ERROR - Error msg.
+     */
+    public function getProducts(){
+        // Create the XML request to be POSTed
+        $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+        $xmlrequest .= "<GetMultipleItemsRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n";
+        if (!empty($this->itemOptions->IncludeSelector)){
+            $xmlrequest .= "<IncludeSelector>".implode(",", $this->itemOptions->IncludeSelector)."</IncludeSelector>\n";
+        }
+        $xmlrequest .= "<ItemID>"._BuildXMLItemList($this->itemOptions->itemID)."</ItemID>\n";
+        $xmlrequest .= "</GetMultipleItemsRequest>\n";
 
+        // Set our headers properly
+        $this->headers["X-EBAY-API-CALL-NAME"] = "GetMultipleItems";
+
+        // Make the call to eBay.
+        $itemDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+
+        // Parse our result into an object.
+        $itemDetails = simplexml_load_string($itemDetailsRaw);
+
+        // Checks to see if we have any type of failed call.
+        if ($itemDetails->ack == "Failure" || $itemDetails->ack == "PartialFailure") {
+            // Returns an error.
+            return array(
+                'result' => "ERROR",
+                "output" => "ERROR:: (".$search->errorMessage->error->errorId.") - ".$search->errorMessage->error->category."\nERROR-MESSAGE:".$search->errorMessage->error->message."\n"
+            );
+        }
+        // Returns a proper products object.
+        return array(
+            'result' => "OK",
+            "output" => $itemDetails
+        );
     }
 
 

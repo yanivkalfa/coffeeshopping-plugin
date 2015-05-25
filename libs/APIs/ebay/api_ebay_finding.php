@@ -32,6 +32,23 @@ class ebay_FindingAPI extends ebay_adapter {
     }
 
     /*
+     * @func _setSearchQuery()
+     *  - Sets our searching query.
+     */
+    public function _setSearchQuery($searchQuery){
+        $this->searchOptions->searchQuery = $searchQuery;
+    }
+    /*
+     * @func _setSearchOptions()
+     *  - Sets our searching options.
+     */
+    public function _setSearchOptions($searchOptions){
+        foreach($searchOptions as $optName => $optValue){
+            if (isset($this->searchOptions->$optName)){ $this->searchOptions->$optName = $optValue; }
+        }
+    }
+
+    /*
      * @func _setDefaultHeaders()
      *  - Resets our headers to the default API headers.
      */

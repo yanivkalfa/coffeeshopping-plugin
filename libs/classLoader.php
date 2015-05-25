@@ -6,8 +6,8 @@ class classLoader{
 	}
 
     public function requireFiles(){
-        require_once 'core/method/ajax_method.php';
-        require_once 'core/method/method.php';
+        require_once 'ajax/handler.php';
+        require_once 'ajax/method.php';
     }
 }
 

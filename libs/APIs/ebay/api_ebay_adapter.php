@@ -54,7 +54,7 @@ class ebay_adapter {
         $sec   = (int) $matchAry[4];
 
         $retnStr = '';
-        if ($days)  { $retnStr .= "$days day"    . pluralS($days);  }
+        if ($days)  { $retnStr .= " $days day"   . pluralS($days);  }
         if ($hours) { $retnStr .= " $hours hour" . pluralS($hours); }
         if ($min)   { $retnStr .= " $min minute" . pluralS($min);   }
         if ($sec)   { $retnStr .= " $sec second" . pluralS($sec);   }
@@ -79,13 +79,15 @@ class ebay_adapter {
 
 }
 // Require the extensions.
-require "api_ebay_finding.php";
-require "api_ebay_shopping.php";
+require_once "api_ebay_finding.php";
+require_once "api_ebay_shopping.php";
+if (!function_exists("get_url")){require_once "/../Utils.php";}
+
 
 /* ---------------------------------------------------------------------------------------------
  * TRYOUT
  * ---------------------------------------------------------------------------------------------
- */
+
 $filterarray = array(
     array(
         'name' => 'MinPrice',
@@ -122,7 +124,7 @@ $product->itemOptions->itemID = "151672890723";
 echo "<pre>";print_r($product);echo "</pre>";
 $obj = $product->getProduct();
 echo "<pre>";print_r($obj);echo "</pre>";
-
+*/
 
 
 ?>

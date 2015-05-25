@@ -18,6 +18,33 @@ class ajax_handler {
 		add_action('wp_ajax_nopriv_ajax_handler', array($this, 'handle_ajax'));
         add_action('wp_ajax_ajax_handler', array($this, 'handle_ajax'));
 	}
+
+    private function isAuthenticated($methodName) {
+        global $methods;
+        if(!isset($methods[$methodName])) return false;
+
+        $method = isset($methods[$methodName]['method']) ? $methods[$methodName]['method'] : null;
+        $protected = isset($methods[$methodName]['protected']) ? $methods[$methodName]['protected'] : null;
+        $req_capabilities = isset($methods[$methodName]['req_capabilities']) ? $methods[$methodName]['req_capabilities'] : null;
+
+        $methodInit =  new Method($methodName, $protected, $req_capabilities);
+        return $this->authenticate($methodInit);
+    }
+
+    private function authenticate($method){
+        if($method->protected){
+            if(count($method->req_capabilities)){
+                foreach($method->req_capabilities as $cap){
+                    if(current_user_can($cap)) return true;
+                }
+                return false;
+            }else {
+                return is_user_logged_in();
+            }
+        }
+
+        return true;
+    }
 	
 	/*
 	* @ function checks if $_post method is set and then call the method while passing the $_POST post variables. 
@@ -26,7 +53,7 @@ class ajax_handler {
 	*/
 	public function handle_ajax() {
 
-		if(isset($_POST['method']) && ajax_method::isAuthenticated($_POST['method'])) {
+		if(isset($_POST['method']) && $this->isAuthenticated($_POST['method'])) {
 			$method = $_POST['method'];
 			if(method_exists($this, $method)) {
 				if(isset($_POST['post']) && $_POST['post'] != 'false') {
