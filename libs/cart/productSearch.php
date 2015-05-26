@@ -24,7 +24,9 @@
  */
 
 /*
- * TODO: search in a specific API for pagination/user choice.
+ * TODO:
+ * search in a specific API for pagination/user choice.
+ * maybe break down search() into 2 functions - searchAPI() and searchAll() which uses searchAPI() with different APIs;
  */
 
 class productSearch {
@@ -56,6 +58,7 @@ class productSearch {
         $searchResults->count =                 array();
         $searchResults->paginationOutput =      array();
         $searchResults->items =                 array();
+        $searchResults->status =                array();
 
         // perform the search for each active API we have.
         foreach($this->activeAPIs as $API){
@@ -75,6 +78,7 @@ class productSearch {
             $finder->_setSearchOptions($this->searchOpts);
             // Run the search and get a results obj.
             $result = $finder->getSearch();
+            $searchResults->status["$API"] = $result["result"];
             if ($result["result"]=="OK"){
                 // Store our count for current API.
                 $searchResults->count["$API"] = $result["output"]->count;
@@ -83,7 +87,7 @@ class productSearch {
                 // Store our items per API.
                 $searchResults->items["$API"] = $result["output"]->item;
             }else{
-                $searchResults[] = "$API-".$result["output"];
+                $searchResults->status["$API"] = $result["output"];
             }
         }
         return $searchResults;
