@@ -48,13 +48,14 @@
             </li>
             <li>
                 <?php if($item["isTopSeller"]){ ?>
-                    <span class="topratedimg">
-                    <img class="iconETRS1" src="" height="19px" width="122px" alt="Top Seller">
-                </span>
+                    <img class="" src="" height="19px" width="122px" alt="Top Seller">
                 <?php }; ?>
             </li>
         </ul>
         <ul class="viewproductdiv nolistbull">
+            <li>
+                <img class="" src="" height="19px" width="122px" alt="@$API">
+            </li>
             <li>
                 <a href="#MAKELINK"><input type="button" value="View details"></a>
             </li>

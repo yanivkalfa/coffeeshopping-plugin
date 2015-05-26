@@ -22,6 +22,11 @@
         sortOrder = "BestMatch";          //  Search results sorting order. [BestMatch, PricePlusShippingHighest, PricePlusShippingLowest]
         searchQuery = "";                 //  Our search query.
  */
+
+/*
+ * TODO: search in a specific API for pagination/user choice.
+ */
+
 class productSearch {
     public $searchVal = "";                             // Holds our search value.
     public $activeAPIs = array();                       // Which APIs are in use.
@@ -95,6 +100,7 @@ class productSearch {
                 $searchOutput .= ob_get_clean();
             }
         }
+        $searchOutput .= "</ul>";
         return $searchOutput;
     }
 }
