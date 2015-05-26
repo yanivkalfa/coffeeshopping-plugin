@@ -28,9 +28,9 @@ if(!class_exists('coffee_shopping'))
         public function __construct()
         {
 
-           /*
-           * @ remove admin bar for user
-           */
+            /*
+            * @ remove admin bar for user
+            */
             add_action( 'init', array($this, 'removeAdminBarForUsers') );
 
             /*
@@ -39,14 +39,14 @@ if(!class_exists('coffee_shopping'))
             add_action( 'plugins_loaded', array($this, 'includeClasses') );
 
             /*
+            * @ include classes
+            */
+            add_action( 'plugins_loaded', array($this, 'instantiateCart') );
+
+            /*
              * $ add some roles/capabilities
              * */
             add_action( 'admin_init', array($this, 'dashboard_roles'));
-
-            /*
-            * @ include classes
-            */
-            add_action( 'plugins_loaded', array($this, 'includeClasses') );
 
             /*
             * @ adding CSS / JS/ and name Scapes - change to load as per page basis
@@ -73,6 +73,7 @@ if(!class_exists('coffee_shopping'))
             add_action( 'authenticate', array($this, 'custom_login_empty'));
 
 
+
         }
 
         public function removeAdminBarForUsers(){
@@ -90,6 +91,94 @@ if(!class_exists('coffee_shopping'))
                 }
                 add_filter('wp_head','remove_admin_bar_style_frontend', 99);
             }
+        }
+
+        /*
+        * @ Including libs
+        */
+        public function includeClasses()
+        {
+            $allClassFolders = array(
+                glob(CONFIGS.'/*.php'),
+            );
+
+            foreach($allClassFolders as $classLib)
+            {
+                foreach($classLib as $className)
+                {
+                    if(!class_exists(str_replace('.php', '', basename($className))))
+                    {
+                        include($className);
+                    }
+                }
+            }
+            function autoLoader ($cName) {
+                global $classes;
+                echo $cName.'<br>';
+                echo BASE_ADDRESS .$classes[$cName] . $cName. ".php<br>";
+                include(BASE_ADDRESS .$classes[$cName] . $cName. ".php");
+            }
+            spl_autoload_register("autoLoader");
+        }
+
+        public function instantiateCart(){
+
+
+            new Cart(2);
+
+            var_dump($_SESSION['cart']);
+            echo '<br>';
+            //unset($_SESSION['cart']);
+            /*
+             * testing the cart
+             * */
+            if(!isset($_SESSION['cart'])){
+                $_SESSION['cart'] = new Cart(0);
+            }
+
+            var_dump(new Product(15,1,5));
+            $_SESSION['cart']->add(new Product(15, 1, 153, 'ebay','','bekini', 230));
+            $_SESSION['cart']->add(new Product(5, 1, 153, 'ebay', '', 'bycles', 123));
+
+            echo '<br> total:'.$_SESSION['cart']->getTotal();
+            echo '<pre>';
+            print_r($_SESSION['cart']);
+            echo '</pre>';
+            /*
+            unset($_SESSION['cart']);
+
+
+            $products = [
+                [
+                    'ID' => 5,
+                    'cart_id' => 1,
+                    'unique_store_id' => 250,
+                    'store' => 'ebay',
+                    'img' => '',
+                    'title' => 'bekini',
+                    'price' => 432,
+                    'status' => ''
+                ],
+                [
+                    'ID' => 5,
+                    'cart_id' => 1,
+                    'unique_store_id' => 153,
+                    'store' => 'ebay',
+                    'img' => '',
+                    'title' => 'bycles',
+                    'price' => 123,
+                    'status' => ''
+                ]
+            ];
+
+            $_SESSION['cart'] = new Cart(0, new Address(0), $products);
+
+
+            echo '<br> total:'.$_SESSION['cart']->getTotal();
+            echo '<pre>';
+            print_r($_SESSION['cart']);
+            echo '</pre>';
+            */
         }
 
 
@@ -164,29 +253,6 @@ if(!class_exists('coffee_shopping'))
             }
             */
             wp_redirect( site_url().'/user_login.php?status=empty' );
-        }
-
-        /*
-        * @ Including libs
-        */
-        public function includeClasses()
-        {
-
-            $allClassFolders = array(
-                glob(CONFIGS.'/*.php'),
-                glob(LIBS.'/*.php')
-            );
-
-            foreach($allClassFolders as $classLib)
-            {
-                foreach($classLib as $className)
-                {
-                    if(!class_exists(str_replace('.php', '', basename($className))))
-                    {
-                        include($className);
-                    }
-                }
-            }
         }
 
         public function frontRegisterScripts()
@@ -279,12 +345,16 @@ if(!class_exists('coffee_shopping'))
             dbDelta($table);
 
 
-            $table_name = $wpdb->prefix . "cs_cart_items";
+            $table_name = $wpdb->prefix . "cs_cart_products";
             $table = "CREATE TABLE $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 cart_id bigint(20) NOT NULL,
                 unique_store_id bigint(20) NOT NULL,
                 store varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                img varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                title varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                price float(20) NOT NULL,
+                status bigint(20) varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);

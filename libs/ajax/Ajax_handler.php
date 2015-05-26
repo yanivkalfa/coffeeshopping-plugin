@@ -4,7 +4,7 @@
 * @ constract just add action.
 */
 
-class ajax_handler {
+class Ajax_handler {
 	/*
 	* @ premissions/capabilities responses.
 	*/

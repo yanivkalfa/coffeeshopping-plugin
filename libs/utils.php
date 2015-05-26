@@ -2,6 +2,37 @@
 
 abstract class Utils{
 
+
+
+    static function indexOf($arr, $srch, $prop){
+        $srch = is_object($srch) ? (array)$srch : $srch;
+        for($i = 0; $i < count($arr); $i++){
+            $item = is_object($arr[$i]) ? (array)$arr[$i] : $arr[$i];
+
+            /*
+            echo '<br>property: '.$prop;
+            echo '<br>$item: ';
+            echo '<pre>';
+            print_r($item);
+            echo '</pre>';
+
+            echo '<br>$srch: ';
+            echo '<pre>';
+            print_r($srch);
+            echo '</pre>';
+
+            echo '<br>$srch[$prop]: ';
+            echo '<pre>';
+            print_r($srch[$prop]);
+            echo '</pre>';
+            */
+
+            if($prop && $item[$prop] && ($item[$prop] === $srch[$prop] || $item[$prop] === $srch)) return $i;
+            if($item === $srch) return $i;
+        }
+        return -1;
+    }
+
 	/*
 	* @ Uploading files to server.
 	* @ Accept: global FILES, string Location to save the file.

@@ -1,5 +1,5 @@
 <?php
-class shortcode_management{
+class Shortcode_management{
 	public $section;
 	
 	public function __construct(){
