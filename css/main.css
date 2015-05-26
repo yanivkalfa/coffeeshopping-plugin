@@ -1,0 +1,40 @@
+.nolistbull{list-style: none outside none;}
+
+/* Search Page BEGIN*/
+.searchresultsul{}
+.searchresultentry{
+    display: block;
+    float: left;
+    width: 100%;
+}
+.imgdiv{
+    border: 1px solid #ddd;
+    margin: 10px 20px 10px 20px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 225px;
+    display: inline-block;
+    float:left;
+}
+.imgdiv img{
+    max-height: 225px !important;
+}
+.catspan{
+    float: right;
+    font-size: 12px;
+    color: #999;
+    font-weight: normal;
+    padding-right: 30px;
+}
+.minidetails{
+    width: 25%;
+    display: inline-block;
+    float: left;
+}
+.viewproductdiv{
+    width: 15%;
+    display: inline-block;
+    float: right;
+}
+/* Search Page END*/

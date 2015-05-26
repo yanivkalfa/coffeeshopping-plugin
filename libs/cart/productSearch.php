@@ -18,6 +18,7 @@
         filters = array();                //  Filter our search - Array(array('name' => 'filtername','value' => 'filtervalue','paramName' => 'name','paramValue' => 'value'));
         aspects = array();                //  Aspect filter - Array("aspectName1" => array("value1", "value2", "value3"...),"aspectName2" => array("value1", "value2", "value3"...)...)
         categories = array();             //  Categories for the search - Array("categoryID1", "categoryID2", "categoryID3"...)
+        outputSelector = array();         //  OutputSelector for the search - Array("OutputSelector1", "OutputSelector2"...)
         sortOrder = "BestMatch";          //  Search results sorting order. [BestMatch, PricePlusShippingHighest, PricePlusShippingLowest]
         searchQuery = "";                 //  Our search query.
  */
@@ -44,9 +45,12 @@ class productSearch {
         $this->_includeAPIs($this->activeAPIs); // include our active APIs.
     }
 
-    public function performSearch(){
+    public function search(){
         echo "searching for: ".$this->searchVal;
-        $searchResults = array();
+        $searchResults = new stdClass();
+        $searchResults->count =                 array();
+        $searchResults->paginationOutput =      array();
+        $searchResults->items =                 array();
 
         // perform the search for each active API we have.
         foreach($this->activeAPIs as $API){
@@ -58,9 +62,7 @@ class productSearch {
             if ($this->sandbox){
                 $finder->_setSandbox();
             }else{
-                echo "SET LIVE NOW BIATCH";
                 $finder->_setLive();
-                echo "LIVE IS SET MOFO";
             }
             // Set our search query.
             $finder->_setSearchQuery($this->searchVal);
@@ -69,7 +71,12 @@ class productSearch {
             // Run the search and get a results obj.
             $result = $finder->getSearch();
             if ($result["result"]=="OK"){
-                $searchResults[] = $result["output"];
+                // Store our count for current API.
+                $searchResults->count["$API"] = $result["output"]->count;
+                // Store our pagination of that API.
+                $searchResults->paginationOutput["$API"] = $result["output"]->paginationOutput;
+                // Store our items per API.
+                $searchResults->items["$API"] = $result["output"]->item;
             }else{
                 $searchResults[] = "$API-".$result["output"];
             }
@@ -77,17 +84,30 @@ class productSearch {
         return $searchResults;
     }
 
-    // Construction
-    public function constructSearchResults(){
-
+    // Construction of our search results page.
+    public function constructSearchResults($searchResults){
+        $searchOutput = '<ul class="searchresultsul nolistbull">';
+        foreach ($searchResults->items as $API => $Items){
+            $searchOutput .= "$API Search Results:";
+            foreach ($Items as $item){
+                ob_start();
+                require "../../templates/searchResults.php";
+                $searchOutput .= ob_get_clean();
+            }
+        }
+        return $searchOutput;
     }
 }
 
 /*
+
 $src = new productSearch();
 $src->searchOpts = array("pageToGet" => 1);
 $src->searchVal = "samsung galaxy gear";
-$src->search()
-*/
+echo constructSearchResults($src->search());
 
+*/
 ?>
+
+
+
