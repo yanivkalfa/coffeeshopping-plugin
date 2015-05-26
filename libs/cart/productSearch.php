@@ -26,7 +26,7 @@
 /*
  * TODO:
  * search in a specific API for pagination/user choice.
- * maybe break down search() into 2 functions - searchAPI() and searchAll() which uses searchAPI() with different APIs;
+ * Break down search() into 2 functions - searchAPI() and searchAll() which uses searchAPI() with different APIs;
  */
 
 class productSearch {
@@ -59,6 +59,7 @@ class productSearch {
         $searchResults->paginationOutput =      array();
         $searchResults->items =                 array();
         $searchResults->status =                array();
+        $searchResults->errors =                array();
 
         // perform the search for each active API we have.
         foreach($this->activeAPIs as $API){
@@ -87,7 +88,7 @@ class productSearch {
                 // Store our items per API.
                 $searchResults->items["$API"] = $result["output"]->item;
             }else{
-                $searchResults->status["$API"] = $result["output"];
+                $searchResults->errors["$API"] = $result["output"];
             }
         }
         return $searchResults;
