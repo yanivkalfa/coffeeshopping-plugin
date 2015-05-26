@@ -17,14 +17,15 @@ class ebay_FindingAPI extends ebay_adapter {
         parent::__construct();
         // Get and set search options.
         $this->searchOptions = new stdClass();
-        $this->searchOptions->searchDescription = "false";      //  Should we search in the description? [true,false]
-        $this->searchOptions->entriesPerPage = 10;              //  [Min: 1. Max: 100. Default: 100.]
-        $this->searchOptions->pageToGet = 1;                    //  [Min: 1. Max: 100. Default: 1.]
-        $this->searchOptions->filters = array();                //  Filter our search - Array(array('name' => 'filtername','value' => 'filtervalue','paramName' => 'name','paramValue' => 'value'));
-        $this->searchOptions->aspects = array();                //  Aspect filter - Array("aspectName1" => array("value1", "value2", "value3"...),"aspectName2" => array("value1", "value2", "value3"...)...)
-        $this->searchOptions->categories = array();             //  Categories for the search - Array("categoryID1", "categoryID2", "categoryID3"...)
-        $this->searchOptions->sortOrder = "BestMatch";          //  Search results sorting order. [BestMatch, PricePlusShippingHighest, PricePlusShippingLowest]
-        $this->searchOptions->searchQuery = "";                 //  Our search query.
+        $this->searchOptions->searchDescription = "false";          //  Should we search in the description? [true,false]
+        $this->searchOptions->entriesPerPage = 10;                  //  [Min: 1. Max: 100. Default: 100.]
+        $this->searchOptions->pageToGet = 1;                        //  [Min: 1. Max: 100. Default: 1.]
+        $this->searchOptions->filters = array();                    //  Filter our search - Array(array('name' => 'filtername','value' => 'filtervalue','paramName' => 'name','paramValue' => 'value'));
+        $this->searchOptions->aspects = array();                    //  Aspect filter - Array("aspectName1" => array("value1", "value2", "value3"...),"aspectName2" => array("value1", "value2", "value3"...)...)
+        $this->searchOptions->categories = array();                 //  Categories for the search - Array("categoryID1", "categoryID2", "categoryID3"...)
+        $this->searchOptions->outputSelector = array();             //  OutputSelector for the search - Array("OutputSelector1", "OutputSelector2"...)
+        $this->searchOptions->sortOrder = "BestMatch";              //  Search results sorting order. [BestMatch, PricePlusShippingHighest, PricePlusShippingLowest, StartTimeNewest]
+        $this->searchOptions->searchQuery = "";                     //  Our search query.
 
         // Default comms header.
         $this->headers = array();
@@ -55,12 +56,12 @@ class ebay_FindingAPI extends ebay_adapter {
     private function _setDefaultHeaders(){
         $this->headers =
             array(
-                'X-EBAY-SOA-OPERATION-NAME' => '',
-                'X-EBAY-SOA-SERVICE-VERSION' => '1.13.0',       // Latest - http://developer.ebay.com/devzone/finding/ReleaseNotes.html
+                'X-EBAY-SOA-OPERATION-NAME' =>      '',
+                'X-EBAY-SOA-SERVICE-VERSION' =>     '1.13.0',       // Latest - http://developer.ebay.com/devzone/finding/ReleaseNotes.html
                 'X-EBAY-SOA-REQUEST-DATA-FORMAT' => 'XML',
-                'X-EBAY-SOA-GLOBAL-ID' => 'EBAY-US',
-                'X-EBAY-SOA-SECURITY-APPNAME' => $this->appid,
-                'Content-Type' => 'text/xml;charset=utf-8',
+                'X-EBAY-SOA-GLOBAL-ID' =>           'EBAY-US',
+                'X-EBAY-SOA-SECURITY-APPNAME' =>    $this->appid,
+                'Content-Type' =>                   'text/xml;charset=utf-8'
             );
     }
 
@@ -116,13 +117,14 @@ class ebay_FindingAPI extends ebay_adapter {
      * @func _buildXMLAspectFilter($aspectFilterArr)
      *  - Creates a proper xml aspect filter to use in API calls.
      * @param      array   $aspectFilterArr
-     *  - An array in the format: Array("aspectName1" => array("value1", "value2", "value3"...),"aspectName2" => array("value1", "value2", "value3"...)...)
+     *  - An array in the format:
+     *    Array("aspectName1" => array("value1", "value2", "value3"...),"aspectName2" => array("value1", "value2", "value3"...)...)
      * @return     string  $xmlAspects
      */
     private function _buildXMLAspectFilter($aspectFilterArr){
         $xmlAspects = "";
         // Iterate through each aspect in the array
-        foreach ($aspectfilterArr as $aspect => $values) {
+        foreach ($aspectFilterArr as $aspect => $values) {
             $xmlAspects .= "<aspectFilter>\n";
             $xmlAspects .= "<aspectName>$aspect</aspectName>\n";
             if(is_array($values)) {
@@ -149,6 +151,19 @@ class ebay_FindingAPI extends ebay_adapter {
             $xmlCats .= "<categoryId> $categoryID </categoryId>\n";
         }
         return "$xmlCats";
+    }
+
+    /*
+     * @func _buildXMLOutputSelector($outputSelectorArray)
+     *  - Creates a proper XML categories filter for API calls.
+     * @param      array    $outputSelectorArray - simple outputSelector array, format: array("outputSelector1", "outputSelector2"...)
+     */
+    private function _buildXMLOutputSelector($outputSelectorArray){
+        $xmlOutput = "";
+        foreach ($outputSelectorArray as $outputSelector) {
+            $xmlCats .= "<outputSelector> $outputSelector </outputSelector>\n";
+        }
+        return "$xmlOutput";
     }
 
 
@@ -184,6 +199,9 @@ class ebay_FindingAPI extends ebay_adapter {
         }
         $xmlrequest .= "<descriptionSearch>".$this->searchOptions->searchDescription."</descriptionSearch>\n";
         $xmlrequest .= "<keywords>".$this->searchOptions->searchQuery."</keywords>\n";
+        if (!empty($this->searchOptions->outputSelector)) {
+            $xmlrequest .= $this->_buildXMLOutputSelector($this->searchOptions->outputSelector);
+        }
         $xmlrequest .= "<paginationInput>\n";
         $xmlrequest .= "<entriesPerPage>".$this->searchOptions->entriesPerPage."</entriesPerPage>\n";
         $xmlrequest .= "<pageNumber>".$this->searchOptions->pageToGet."</pageNumber>\n";
@@ -194,12 +212,8 @@ class ebay_FindingAPI extends ebay_adapter {
         // Set our headers properly
         $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "findItemsAdvanced";
 
-        echo "<pre>";print_r($xmlrequest);echo "</pre>";
-
         // Make the call to eBay.
         $searchRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
-
-        echo "<pre>";print_r($searchRaw);echo "</pre>";
 
         // Parse our products
         $search = simplexml_load_string($searchRaw);
@@ -215,10 +229,46 @@ class ebay_FindingAPI extends ebay_adapter {
         // Returns a proper products object.
         return array(
             'result' => "OK",
-            "output" => $search
+            "output" => $this->_formatSearchOutput($search)
         );
     }
 
+    /**
+     * @func _formatSearchOutput($searchOutput)
+     *  - Creates a "proper" search object to display our results.
+     * @param   object      $searchOutput       - As returned by ebay's 'findItemsAdvanced' XML API call.
+     * @return  object      $ObjSearch          - Search results object.
+     */
+    public function _formatSearchOutput($searchOutput){
+        $ObjSearch = new stdClass();
+        $ObjSearch->count = (int)$searchOutput->searchResult["count"];
+        $ObjSearch->paginationOutput = array(
+            "pageNumber" =>     (int)$searchOutput->paginationOutput->pageNumber,
+            "entriesPerPage" => (int)$searchOutput->paginationOutput->entriesPerPage,
+            "totalPages" =>     (int)$searchOutput->paginationOutput->totalPages,
+            "totalEntries" =>   (int)$searchOutput->paginationOutput->totalEntries,
+        );
+        if ($ObjSearch->count == 0){
+            return $ObjSearch;
+        }
+        $ObjSearch->item = array();
+        foreach ($searchOutput->searchResult->item as $item){
+            $ObjSearch->item[] = array(
+                "ID" =>             (int)$item->itemId,
+                "image" =>          (string)$item->galleryURL,
+                "title" =>          (string)$item->title,
+                "subtitle" =>       (string)$item->subtitle,
+                "price" =>          (string)$item->sellingStatus->convertedCurrentPrice,
+                "priceCurrency" =>  (string)$item->sellingStatus->convertedCurrentPrice["currencyId"],
+                "shippingType" =>   (string)$item->shippingInfo->shippingType,
+                "locationInfo" =>   (string)$item->location,
+                "isTopSeller" =>    (string)$item->topRatedListing,
+                "categoryText" =>   (string)$item->primaryCategory->categoryName,
+                "conditionText" =>  (string)$item->condition->conditionDisplayName
+            );
+        }
+        return $ObjSearch;
+    }
 
 }
 ?>

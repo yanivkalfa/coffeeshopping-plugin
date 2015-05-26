@@ -83,7 +83,11 @@ class productSearch {
     }
 }
 
-$searcher = new productSearch();
-print_r($searcher->performSearch());
+/*
+$src = new productSearch();
+$src->searchOpts = array("pageToGet" => 1);
+$src->searchVal = "samsung galaxy gear";
+$src->search()
+*/
 
 ?>
