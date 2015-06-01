@@ -15,7 +15,6 @@ define("SERVICES",BASE_ADDRESS.'/services');
 
 
 // run time configs
-if(!session_id()){ session_start(); }
 error_reporting( E_ALL /*-1*/);
 /* E_ALL */
 //ini_set("display_errors", 1);
@@ -100,6 +99,7 @@ if(!class_exists('coffee_shopping'))
         {
             $allClassFolders = array(
                 glob(CONFIGS.'/*.php'),
+                glob(LIBS.'/*.php'),
             );
 
             foreach($allClassFolders as $classLib)
@@ -112,31 +112,32 @@ if(!class_exists('coffee_shopping'))
                     }
                 }
             }
+
             function autoLoader ($cName) {
                 global $classes;
+                if(!isset($classes[$cName])) return false;
                 echo $cName.'<br>';
                 echo BASE_ADDRESS .$classes[$cName] . $cName. ".php<br>";
                 include(BASE_ADDRESS .$classes[$cName] . $cName. ".php");
+                return true;
             }
             spl_autoload_register("autoLoader");
+
+            if(!session_id()){ session_start(); }
         }
 
         public function instantiateCart(){
+            if(is_user_logged_in()){
 
-
-            new Cart(2);
-
-            var_dump($_SESSION['cart']);
-            echo '<br>';
-            //unset($_SESSION['cart']);
-            /*
-             * testing the cart
-             * */
+            }
             if(!isset($_SESSION['cart'])){
                 $_SESSION['cart'] = new Cart(0);
             }
 
-            var_dump(new Product(15,1,5));
+            echo '<pre>';
+            print_r($_SESSION['cart']->products);
+            echo '</pre>';
+
             $_SESSION['cart']->add(new Product(15, 1, 153, 'ebay','','bekini', 230));
             $_SESSION['cart']->add(new Product(5, 1, 153, 'ebay', '', 'bycles', 123));
 
