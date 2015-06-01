@@ -67,9 +67,9 @@ if(!class_exists('coffee_shopping'))
             add_action( 'authenticate', array($this, 'custom_login_empty'));
 
             /*
-             * add action to register our widget
+             * add action to register our widgets
              */
-            add_action( 'widgets_init', 'register_foo_widget' );
+            add_action( 'widgets_init', array($this, 'register_coffeeshoppingwidgets') );
 
         }
 
@@ -253,6 +253,19 @@ if(!class_exists('coffee_shopping'))
             }
             */
             wp_redirect( site_url().'/user_login.php?status=empty' );
+        }
+
+        // Register our widgets.
+        public function register_coffeeshoppingwidgets() {
+            require (dirname(__FILE__).'/services/searchWidget.php');
+            require (dirname(__FILE__).'/services/searchResultsWidget.php');
+            require (dirname(__FILE__).'/services/featuredProductsWidget.php');
+            require (dirname(__FILE__).'/services/myCartWidget.php');
+            register_widget( 'searchWidget' );
+            register_widget( 'searchResultsWidget' );
+            register_widget( 'featuredProductsWidget' );
+            register_widget( 'myCartWidget' );
+
         }
 
         public function frontRegisterScripts()
@@ -448,6 +461,7 @@ if(!class_exists('coffee_shopping'))
             $wpdb->query("DROP TABLE IF EXISTS $table_name");
             */
         }
+
     }
 }
 

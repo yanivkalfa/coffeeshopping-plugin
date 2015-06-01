@@ -3,19 +3,17 @@
  * Created by PhpStorm.
  * User: SK
  * Date: 6/1/2015
- * Time: 8:30 PM
+ * Time: 9:01 PM
  */
 
-class searchWidget extends WP_Widget {
+class featuredProductsWidget extends WP_Widget {
 
-    /**
-     * Register widget with WordPress.
-     */
+    // Register widget with WordPress.
     function __construct() {
         parent::__construct(
-            'searchWidget', // Base ID
-            __( 'CoffeeShopping search', 'text_domain' ), // Name
-            array( 'description' => __( 'Store searching widget', 'text_domain' ), ) // Args
+            'featuredProductsWidget', // Base ID
+            __( 'CoffeeShopping featured', 'text_domain' ), // Name
+            array( 'description' => __( 'Featured products widget', 'text_domain' ), ) // Args
         );
     }
 
@@ -31,7 +29,7 @@ class searchWidget extends WP_Widget {
         if ( ! empty( $instance['title'] ) ) {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         }
-        echo __( 'THIS IS MY SEARCH HERE', 'text_domain' );
+        echo __( 'THIS IS MY FEATURED PRODUCTS WIDGET', 'text_domain' );
         echo $args['after_widget'];
     }
 
@@ -67,6 +65,6 @@ class searchWidget extends WP_Widget {
         return $instance;
     }
 
-} // class searchWidget
+} // class featuredProductsWidget
 
 ?>
