@@ -38,11 +38,6 @@ if(!class_exists('coffee_shopping'))
             add_action( 'plugins_loaded', array($this, 'includeClasses') );
 
             /*
-            * @ include classes
-            */
-            add_action( 'plugins_loaded', array($this, 'instantiateCart') );
-
-            /*
              * $ add some roles/capabilities
              * */
             add_action( 'admin_init', array($this, 'dashboard_roles'));
@@ -71,7 +66,10 @@ if(!class_exists('coffee_shopping'))
             add_action( 'wp_login_failed', array($this, 'custom_login_fail') );
             add_action( 'authenticate', array($this, 'custom_login_empty'));
 
-
+            /*
+             * add action to register our widget
+             */
+            add_action( 'widgets_init', 'register_foo_widget' );
 
         }
 
@@ -134,6 +132,7 @@ if(!class_exists('coffee_shopping'))
                 $_SESSION['cart'] = new Cart(0);
             }
 
+            /*
             echo '<pre>';
             print_r($_SESSION['cart']->products);
             echo '</pre>';

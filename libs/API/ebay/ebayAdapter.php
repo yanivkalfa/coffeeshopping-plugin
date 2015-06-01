@@ -13,7 +13,7 @@
  *
  */
 
-class ebay_adapter {
+class ebayAdapter {
     // API variables
     public $appid;                  // Our appID.
 
@@ -81,7 +81,6 @@ class ebay_adapter {
 // Require the extensions.
 require_once "api_ebay_finding.php";
 require_once "api_ebay_shopping.php";
-if (!function_exists("get_url")){require_once "/../Utils.php";}
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -109,8 +108,9 @@ $filterarray = array(
     ),
 );
 
+/* ------------------- DEAD OR UNUSED CODE ---------------- */
 
-
+/*
 $finder = new ebay_FindingAPI();
 $finder->_setLive();
 $finder->searchOptions->searchQuery = "Samsung Galaxy Gear";
@@ -126,5 +126,5 @@ $obj = $product->getProduct();
 echo "<pre>";print_r($obj);echo "</pre>";
 */
 
-
+/* ------------------- DEAD OR UNUSED CODE ---------------- */
 ?>

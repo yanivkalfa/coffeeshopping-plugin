@@ -9,6 +9,162 @@
 // no direct access
 //defined('ABSPATH') or die('Restricted access');
 
+abstract class productSearch {
+    /**
+     * @func search_API($API, $searchVal [$searchOpts = array(), $sandbox = flase])
+     *  - performs a search on specific API with the given specified details.
+     * @param   string    $API                    - The API to use for the search.
+     * @param   string    $searchVal              - Holds our search value.
+     * @param   array     $searchOpts [Optional]  - Holds our search options as specified for the given API.
+     * @param   boolean   $sandbox    [Optional]  - Do we use the sandbox or live? (defaults to live)
+     * @return  array     $result                 - An array with 2 keys - result/output.
+     *      - Success - result = "OK"
+     *                  output = $ObjSearch object ready for constructSearchResults().
+     *                  $ObjSearch          - Search results object:
+     *                                              int count.
+     *                                              array paginationOutput ("pageNumber", "entriesPerPage", "totalPages", "totalEntries")
+     *                                              array item ("ID", "image", "title", "subtitle", "price", "priceCurrency",
+     *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
+     *
+     *      - Failure - result = "ERROR",
+     *                  output = Error description.
+     */
+    public function searchAPI($API, $searchVal, $searchOpts = array(), $sandbox = false){
+        echo "searching for: ".$this->searchVal;
+        // Check if our FindingAPI exists.
+        if (!class_exists($API."_FindingAPI")){
+            return array(
+                "result" => "ERROR",
+                "output" => "API doesn't exists, can't search!"
+            );
+        }
+        $apiClass = $API."_FindingAPI";
+        $finder = new $apiClass();
+        // Set the API to work live/sandbox.
+        if ($sandbox){
+            $finder->_setSandbox();
+        }else{
+            $finder->_setLive();
+        }
+        // Set our search query.
+        $finder->_setSearchQuery($searchVal);
+        // Set our search options.
+        $finder->_setSearchOptions($searchOpts);
+        // Run the search and get a results obj.
+        $result = $finder->getSearch();
+        return $result;
+    }
+
+    /**
+     * @func searchALL($APIs, $searchVal, $searchOpts = array(), $sandbox = flase)
+     *  - performs a search on multiple APIs with the given specified details.
+     * @param   array     $APIs                   - The APIs to use for the search in a simple array. eg array("ebay", "amazon")
+     * @param   string    $searchVal              - Holds our search value.
+     * @param   array     $searchOpts [Optional]  - Holds our search options as specified for the given API.
+     * @param   boolean   $sandbox    [Optional]  - Do we use the sandbox or live? (defaults to live)
+     * @return  object    $result                 - An array with 2 keys - result/output.
+     *      - Success - result = "OK"
+     *                  output = $ObjSearch object ready for constructSearchResults().
+     *                  $ObjSearch          - Search results object:
+     *                                              int count.
+     *                                              array paginationOutput ("pageNumber", "entriesPerPage", "totalPages", "totalEntries")
+     *                                              array item ("ID", "image", "title", "subtitle", "price", "priceCurrency",
+     *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
+     *
+     *      - Failure - result = "ERROR",
+     *                  output = Error description.
+     */
+    public function searchALL($APIs, $searchVal, $searchOpts = array(), $sandbox = false){
+        echo "searching for: ".$this->searchVal;
+        $searchResults = new stdClass();
+        $searchResults->count =                 array();
+        $searchResults->paginationOutput =      array();
+        $searchResults->items =                 array();
+        $searchResults->status =                array();
+        $searchResults->errors =                array();
+
+        // perform the search for each active API we have.
+        foreach($APIs as $API){
+            $result = search_API($API, $searchVal, $searchOpts, $sandbox);
+            $searchResults->status["$API"] = $result["result"];
+            if ($result["result"]=="OK"){
+                // Store our count for current API.
+                $searchResults->count["$API"] = $result["output"]->count;
+                // Store our pagination of that API.
+                $searchResults->paginationOutput["$API"] = $result["output"]->paginationOutput;
+                // Store our items per API.
+                $searchResults->items["$API"] = $result["output"]->item;
+            }else{
+                $searchResults->errors["$API"] = $result["output"];
+            }
+
+        }
+        return $searchResults;
+    }
+
+    /**
+     * @func constructResultsAPI($Items)
+     *  - Construction of our searchAPI() search results using our search results template.
+     * @param   object  $Items                 - as provided by our searchAPI() function.
+     * @return  string  $searchOutput          - HTML ready ul with out search results.
+     */
+    public function constructResultsAPI($Items){
+        $searchOutput = '<ul class="searchresultsul nolistbull">';
+        foreach ($Items as $item){
+            $searchOutput .= searchResultsTemplates::getSearchResultItem($item);
+        }
+        $searchOutput .= "</ul>";
+        return $searchOutput;
+    }
+
+    /**
+     * @func constructResultsAPIs($searchResults)
+     *  - Construction of our searchALL() search results using our search results template.
+     * @param   object  $searchResults         - as provided by our searchALL() function.
+     * @return  string  $searchOutput          - HTML ready ul with out search results.
+     */
+    public function constructResultsAPIs($searchResults){
+        $searchOutput = '<ul class="searchresultsul nolistbull">';
+        foreach ($searchResults->items as $API => $Items){
+            $searchOutput .= "$API Search Results:";
+            foreach ($Items as $item){
+                $searchOutput .= searchResultsTemplates::getSearchResultItem($item);
+            }
+        }
+        $searchOutput .= "</ul>";
+        return $searchOutput;
+    }
+
+    /**
+     * @func constructResults($searchResults)
+     *  - Construction of our search results using our search results template. (Works for both searchALL() and searchAPI())
+     * @param   object  $searchResults         - as provided by our searchALL() OR searchAPI() functions.
+     * @return  string  $searchOutput          - HTML ready ul with out search results.
+     */
+    public function constructResults($searchResults){
+        $searchOutput = '<ul class="searchresultsul nolistbull">';
+        if (isset($searchResults->items)){
+            // deals with searchALL() object.
+            foreach ($searchResults->items as $API => $Items){
+                $searchOutput .= "$API Search Results:";
+                foreach ($Items as $item){
+                    $searchOutput .= searchResultsTemplates::getSearchResultItem($item);
+                }
+            }
+        }else{
+            // deals with searchAPI() array results.
+            $Items = $searchResults["output"]->item;
+            foreach ($Items as $item){
+                $searchOutput .= searchResultsTemplates::getSearchResultItem($item);
+            }
+        }
+        $searchOutput .= "</ul>";
+        return $searchOutput;
+    }
+}
+
+/* ------------------- DEAD OR UNUSED CODE ---------------- */
+
 /*
  * Search Options list:
  * [Provide in an array["optName" => "optValue"], eg. Array("searchDescription" => falue);
@@ -21,103 +177,24 @@
         outputSelector = array();         //  OutputSelector for the search - Array("OutputSelector1", "OutputSelector2"...)
         sortOrder = "BestMatch";          //  Search results sorting order. [BestMatch, PricePlusShippingHighest, PricePlusShippingLowest]
         searchQuery = "";                 //  Our search query.
- */
+*/
 
 /*
- * TODO:
- * search in a specific API for pagination/user choice.
- * Break down search() into 2 functions - searchAPI() and searchAll() which uses searchAPI() with different APIs;
- */
-
-class productSearch {
-    public $searchVal = "";                             // Holds our search value.
-    public $activeAPIs = array();                       // Which APIs are in use.
-    public $sandbox = false;                            // Do we use sandbox or live.
-    public $searchOpts = array();                       // Holds our search options as specified for APIs.
-
-    private function _includeAPIs($APIs){
-        foreach($APIs as $api){
-            require_once ABSPATH . "/wp-content/themes/" . get_template() . "/lib/apis/api_".$api."_adapter.php";
-        }
-    }
-
-    public function __construct(){
-        // Vars should be loaded from wp settings/get/post of page.
+// Vars should be loaded from wp settings/get/post of page.
         $this->searchVal = "samsung galaxy gear";
         $this->searchOpts = array();
         $this->activeAPIs = array("ebay");
         $this->sandbox = false;
 
-        // Actual construct.
-        $this->_includeAPIs($this->activeAPIs); // include our active APIs.
-    }
-
-    public function search(){
-        echo "searching for: ".$this->searchVal;
-        $searchResults = new stdClass();
-        $searchResults->count =                 array();
-        $searchResults->paginationOutput =      array();
-        $searchResults->items =                 array();
-        $searchResults->status =                array();
-        $searchResults->errors =                array();
-
-        // perform the search for each active API we have.
-        foreach($this->activeAPIs as $API){
-            // Check if our FindingAPI exists.
-            if (!class_exists($API."_FindingAPI")){continue;}
-            $apiClass = $API."_FindingAPI";
-            $finder = new $apiClass();
-            // Set the API to work live/sandbox.
-            if ($this->sandbox){
-                $finder->_setSandbox();
-            }else{
-                $finder->_setLive();
-            }
-            // Set our search query.
-            $finder->_setSearchQuery($this->searchVal);
-            // Set our search options.
-            $finder->_setSearchOptions($this->searchOpts);
-            // Run the search and get a results obj.
-            $result = $finder->getSearch();
-            $searchResults->status["$API"] = $result["result"];
-            if ($result["result"]=="OK"){
-                // Store our count for current API.
-                $searchResults->count["$API"] = $result["output"]->count;
-                // Store our pagination of that API.
-                $searchResults->paginationOutput["$API"] = $result["output"]->paginationOutput;
-                // Store our items per API.
-                $searchResults->items["$API"] = $result["output"]->item;
-            }else{
-                $searchResults->errors["$API"] = $result["output"];
-            }
-        }
-        return $searchResults;
-    }
-
-    // Construction of our search results page.
-    public function constructSearchResults($searchResults){
-        $searchOutput = '<ul class="searchresultsul nolistbull">';
-        foreach ($searchResults->items as $API => $Items){
-            $searchOutput .= "$API Search Results:";
-            foreach ($Items as $item){
-                ob_start();
-                require "../../templates/searchResults.php";
-                $searchOutput .= ob_get_clean();
-            }
-        }
-        $searchOutput .= "</ul>";
-        return $searchOutput;
-    }
-}
-
-/*
-
 $src = new productSearch();
 $src->searchOpts = array("pageToGet" => 1);
 $src->searchVal = "samsung galaxy gear";
 echo constructSearchResults($src->search());
-
 */
+
+
+/* ------------------- DEAD OR UNUSED CODE ---------------- */
+
 ?>
 
 

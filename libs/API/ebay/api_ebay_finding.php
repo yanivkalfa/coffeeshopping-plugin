@@ -237,7 +237,11 @@ class ebay_FindingAPI extends ebay_adapter {
      * @func _formatSearchOutput($searchOutput)
      *  - Creates a "proper" search object to display our results.
      * @param   object      $searchOutput       - As returned by ebay's 'findItemsAdvanced' XML API call.
-     * @return  object      $ObjSearch          - Search results object. [arrays: count, paginationOutput, item]
+     * @return  object      $ObjSearch          - Search results object:
+     *                                              int count.
+     *                                              array paginationOutput ("pageNumber", "entriesPerPage", "totalPages", "totalEntries")
+     *                                              array item ("ID", "image", "title", "subtitle", "price", "priceCurrency",
+     *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
      */
     public function _formatSearchOutput($searchOutput){
         $ObjSearch = new stdClass();
