@@ -6,7 +6,7 @@
  * Time: 2:50 AM
  */
 
-class ebay_ShoppingAPI extends ebay_adapter {
+class ebay_ShoppingAPI extends ebayAdapter {
     // API variables
     public $endpoint;               // The eBay Shopping API address
     public $itemOptions;            // To hold our options.

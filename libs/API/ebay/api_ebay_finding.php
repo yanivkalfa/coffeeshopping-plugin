@@ -5,7 +5,7 @@
  * Date: 5/21/2015
  * Time: 2:49 AM
  */
-class ebay_FindingAPI extends ebay_adapter {
+class ebay_FindingAPI extends ebayAdapter {
     // API variables
     public $endpoint;               // The eBay Finding API address
     public $searchOptions;          // To hold our options.

@@ -5,6 +5,11 @@
   Version: 0.0.1
 */
 
+/*
+ * IMPORTANT NOTE:
+ * on gantry framework plugin - \wp-content\plugins\gantry\core\renderers\gantrymainbodyrenderer.class.php there is
+ * an error/bug on line 157, the function should be static, so change to: static public function invertPositionOrder($sidebar_widgets).
+ * */
 
 define("BASE_ADDRESS", dirname(__FILE__));
 define("IMAGES_DIR", dirname(plugin_dir_url(__FILE__))."/images/");

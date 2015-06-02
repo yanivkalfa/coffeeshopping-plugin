@@ -8,7 +8,7 @@
 
 abstract class searchResultsTemplates {
 
-    public function getSearchResultItem($item){
+    static public function getSearchResultItem($item){
         ob_start();
         ?>
         <li id="<?php echo $item["ID"];?>" class="searchresultentry">
