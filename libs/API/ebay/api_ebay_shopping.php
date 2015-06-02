@@ -17,7 +17,8 @@ class ebay_ShoppingAPI extends ebayAdapter {
         parent::__construct();
         // Get and set search options.
         $this->itemOptions = new stdClass();
-        $this->itemOptions->IncludeSelector = array();      //  Simple array of selectors to request for the item. (empty by default) [Details, Description, TextDescription, ShippingCosts, ItemSpecifics, Variations, Compatibility]
+        $this->itemOptions->IncludeSelector = array();      //  Simple array of selectors to request for the item. (empty by default)
+                                                            //          [Details, Description, TextDescription, ShippingCosts, ItemSpecifics, Variations, Compatibility]
         $this->itemOptions->itemID = "0";                   //  The unique item ID(s) to get info for. [for multiple items use a simple array(ID, ID, ID...)]
 
         // Default comms header.

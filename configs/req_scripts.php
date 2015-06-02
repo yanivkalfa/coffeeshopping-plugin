@@ -11,7 +11,13 @@ global $req_scripts;
 $req_scripts = array(
 
     'front_end' => array(
-
+        // WE HAVE jq UI in 'H:\wamp\www\CoffeeShopping\wp-includes\js\jquery\ui' we should add it from there.
+        array('handle' => 'core.min', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),      // jq ui required for ZoomIt
+        array('handle' => 'draggable.min', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'), // jq ui required for ZoomIt
+        array('handle' => 'mouse.min', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),     // jq ui required for ZoomIt
+        array('handle' => 'widget.min', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),    // jq ui required for ZoomIt
+        array('handle' => 'zoomit.jquery', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'), // ZoomIt image gallery.
+        array('handle' => 'zoomit', 'src' => '/scripts/ZoomIt', 'extension' => 'css', 'deps' => '', 'media' => 'screen')        // ZoomIt image gallery.
     ),
 
     'back_end' => array(
@@ -40,9 +46,9 @@ $req_scripts = array(
         /* font-awesome */
         array('handle' => 'font-awesome', 'src' => 'bower_components/font-awesome/css/font-awesome.min', 'extension' => 'css', 'deps' => '', 'media' => 'screen'),
 
-
         /* extras - js*/
         array('handle' => 'app_js', 'src' => 'scripts/app', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
+
         /* extras - css */
         array('handle' => 'main_css', 'src' => 'css/main', 'extension' => 'css', 'deps' => '', 'media' => 'screen'),
     )

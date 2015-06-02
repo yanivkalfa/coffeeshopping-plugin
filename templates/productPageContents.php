@@ -9,6 +9,7 @@
 if (isset($_GET["view-product"]) && !empty($_GET["view-product"]) && isset($_GET["store"]) && !empty($_GET["store"])) {
     // Create an instance for our API.
 
+    // Details,Description,ShippingCosts,ItemSpecifics,Variations,Compatibility
 
 
 }

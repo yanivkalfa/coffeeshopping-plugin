@@ -12,6 +12,35 @@ abstract class productViewTemplates {
         ob_start();
         ?>
 
+        <div id="topcontainer">
+            <div id="toppicturepanel">
+
+            </div>
+            <div id="topdetailspanel">
+
+            </div>
+
+        </div>
+
+        <div id="detailscontainer">
+            <div id="detailspaenlbutton">
+                Product details
+            </div>
+            <div id="shippingpanelbutton">
+                Shipping Info
+            </div>
+
+            <div id="detailspaenl">
+
+            </div>
+            <div id="shippingpanel">
+
+            </div>
+
+
+        </div>
+
+
         <?php
         return ob_get_clean();
     }

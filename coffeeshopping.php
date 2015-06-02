@@ -300,8 +300,6 @@ if(!class_exists('coffee_shopping'))
 
         public function registerScripts($scripts)
         {
-
-
             foreach($scripts as $singleHeader)
             {
                 $handle = $singleHeader['handle'];
