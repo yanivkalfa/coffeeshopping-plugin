@@ -84,6 +84,10 @@ if (!class_exists("ebay_FindingAPI")){echo "Failed to load ebay_FindingAPI class
 require_once dirname(__FILE__)."/api_ebay_shopping.php";
 if (!class_exists("ebay_ShoppingAPI")){echo "Failed to load ebay_ShoppingAPI class!";}
 
+
+
+/* ------------------- DEAD OR UNUSED CODE ---------------- */
+
 /* ---------------------------------------------------------------------------------------------
  * TRYOUT
  * ---------------------------------------------------------------------------------------------
@@ -108,8 +112,6 @@ $filterarray = array(
         'paramValue' => ''
     ),
 );
-
-/* ------------------- DEAD OR UNUSED CODE ---------------- */
 
 /*
 $finder = new ebay_FindingAPI();

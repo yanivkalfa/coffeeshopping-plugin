@@ -263,11 +263,11 @@ if(!class_exists('coffee_shopping'))
         // Register our widgets.
         public function register_coffeeshoppingwidgets() {
             require (dirname(__FILE__).'/services/searchWidget.php');
-            require (dirname(__FILE__).'/services/searchResultsWidget.php');
+            //require (dirname(__FILE__).'/services/searchResultsWidget.php');
             require (dirname(__FILE__).'/services/featuredProductsWidget.php');
             require (dirname(__FILE__).'/services/myCartWidget.php');
             register_widget( 'searchWidget' );
-            register_widget( 'searchResultsWidget' );
+            //register_widget( 'searchResultsWidget' );
             register_widget( 'featuredProductsWidget' );
             register_widget( 'myCartWidget' );
 

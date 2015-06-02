@@ -148,7 +148,7 @@ class ebay_FindingAPI extends ebayAdapter {
     private function _buildXMLCategories($categoriesArray){
         $xmlCats = "";
         foreach ($categoriesArray as $categoryID) {
-            $xmlCats .= "<categoryId> $categoryID </categoryId>\n";
+            $xmlCats .= "<categoryId>$categoryID</categoryId>\n";
         }
         return "$xmlCats";
     }
@@ -161,7 +161,7 @@ class ebay_FindingAPI extends ebayAdapter {
     private function _buildXMLOutputSelector($outputSelectorArray){
         $xmlOutput = "";
         foreach ($outputSelectorArray as $outputSelector) {
-            $xmlCats .= "<outputSelector> $outputSelector </outputSelector>\n";
+            $xmlOutput .= "<outputSelector>$outputSelector</outputSelector>\n";
         }
         return "$xmlOutput";
     }
@@ -213,6 +213,7 @@ class ebay_FindingAPI extends ebayAdapter {
         $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "findItemsAdvanced";
 
         // Make the call to eBay.
+        echo "<pre>".$xmlrequest."</pre>";
         $searchRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
 
         // Parse our products
