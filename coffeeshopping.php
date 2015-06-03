@@ -303,7 +303,7 @@ if(!class_exists('coffee_shopping'))
             foreach($scripts as $singleHeader)
             {
                 $handle = $singleHeader['handle'];
-                $src = plugins_url($singleHeader['src'].'.'.$singleHeader['extension'],__FILE__);
+                $src = plugins_url($singleHeader['src'].'.'.$singleHeader['extension'], __FILE__);
                 $deps = isset($singleHeader['deps']) ? $singleHeader['deps'] : '';
                 $ver = false;
                 if($singleHeader['extension'] == 'js')
@@ -321,7 +321,8 @@ if(!class_exists('coffee_shopping'))
 
         /*
          * @ create admin pages
-         * */
+         *
+        */
         public function set_up_admin_menu()
         {
             add_menu_page('Coffee Shopping', 'Coffee Shopping', 'manage_options', 'coffeeShopping', array($this, 'settings'));
@@ -339,7 +340,8 @@ if(!class_exists('coffee_shopping'))
 
         /*
          * @ on activation create Db and default page
-         * */
+         *
+        */
         public function create_db_when_activate()
         {
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');

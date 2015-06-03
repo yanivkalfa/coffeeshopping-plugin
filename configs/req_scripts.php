@@ -12,12 +12,12 @@ $req_scripts = array(
 
     'front_end' => array(
         // WE HAVE jq UI in 'H:\wamp\www\CoffeeShopping\wp-includes\js\jquery\ui' we should add it from there.
-        array('handle' => 'core.min', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),      // jq ui required for ZoomIt
-        array('handle' => 'draggable.min', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'), // jq ui required for ZoomIt
-        array('handle' => 'mouse.min', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),     // jq ui required for ZoomIt
-        array('handle' => 'widget.min', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),    // jq ui required for ZoomIt
-        array('handle' => 'zoomit.jquery', 'src' => '/scripts/ZoomIt', 'extension' => 'js', 'deps' => '', 'media' => 'screen'), // ZoomIt image gallery.
-        array('handle' => 'zoomit', 'src' => '/scripts/ZoomIt', 'extension' => 'css', 'deps' => '', 'media' => 'screen')        // ZoomIt image gallery.
+        array('handle' => 'core.min', 'src' => '/scripts/ZoomIt/core.min', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),      // jq ui required for ZoomIt
+        array('handle' => 'widget.min', 'src' => '/scripts/ZoomIt/widget.min', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),    // jq ui required for ZoomIt
+        array('handle' => 'mouse.min', 'src' => '/scripts/ZoomIt/mouse.min', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),     // jq ui required for ZoomIt
+        array('handle' => 'draggable.min', 'src' => '/scripts/ZoomIt/draggable.min', 'extension' => 'js', 'deps' => '', 'media' => 'screen'), // jq ui required for ZoomIt
+        array('handle' => 'zoomit.jquery', 'src' => '/scripts/ZoomIt/zoomit.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'), // ZoomIt image gallery.
+        array('handle' => 'zoomit', 'src' => '/scripts/ZoomIt/zoomit', 'extension' => 'css', 'deps' => '', 'media' => 'screen')        // ZoomIt image gallery.
     ),
 
     'back_end' => array(
