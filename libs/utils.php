@@ -131,7 +131,7 @@ abstract class Utils{
 
     static public function getCountryFromCode($countryCode){
         // Get our $country array.
-        require "countryCodes.php";
+        require "countryCodesArr.php";
         if (!isset($countries[$countryCode])){return "Unknown (".$countryCode.")";}
         return $countries[$countryCode];
     }
