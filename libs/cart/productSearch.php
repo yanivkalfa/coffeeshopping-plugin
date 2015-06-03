@@ -30,11 +30,11 @@ abstract class productSearch {
      *                  output = Error description.
      */
     static public function searchAPI($API, $searchVal, $searchOpts = array(), $sandbox = false){
-        // Check if our FindingAPI exists.
-        if (!class_exists("ebayAdapter")){
+        // Check if our Adapter exists.
+        if (!class_exists($API."Adapter")){
             return array(
                 "result" => "ERROR",
-                "output" => "API class (ebayAdapter) doesn't exists, can't search!"
+                "output" => "API class (".$API."Adapter) doesn't exists, can't search!"
             );
         }
         $apiClass = $API."_FindingAPI";

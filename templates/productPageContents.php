@@ -7,7 +7,13 @@
  */
 
 if (isset($_GET["view-product"]) && !empty($_GET["view-product"]) && isset($_GET["store"]) && !empty($_GET["store"])) {
-    // Create an instance for our API.
+    // Our product id.
+    $productID = (int)$_GET["view-product"];
+
+    // Our options array.
+    $itemOpts = array();
+    // Handle pagination
+    $itemOpts["IncludeSelector"] = (isset($_GET["pg"]) && !empty($_GET["pg"])) ? (int)$_GET["pg"] : 1;
 
     // Details,Description,ShippingCosts,ItemSpecifics,Variations,Compatibility
 

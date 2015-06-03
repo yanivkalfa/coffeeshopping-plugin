@@ -28,6 +28,23 @@ class ebay_ShoppingAPI extends ebayAdapter {
     }
 
     /*
+     * @func _setItemID()
+     *  - Sets our searching query.
+     */
+    public function _setItemID($itemID){
+        $this->itemOptions->itemID = $itemID;
+    }
+    /*
+     * @func _setItemOptions()
+     *  - Sets our searching options.
+     */
+    public function _setItemOptions($itemOptions){
+        foreach($itemOptions as $optName => $optValue){
+            if (isset($this->itemOptions->$optName)){ $this->itemOptions->$optName = $optValue; }
+        }
+    }
+
+    /*
     * @func _setDefaultHeaders()
     *  - Resets our headers to the default API headers.
     */
@@ -98,7 +115,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $this->headers["X-EBAY-API-CALL-NAME"] = "GetSingleItem";
 
         // Make the call to eBay.
-        $itemDetailsRaw = get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+        $itemDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
 
         // Parse our result into an object.
         $itemDetails = simplexml_load_string($itemDetailsRaw);
@@ -114,7 +131,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Returns a proper products object.
         return array(
             'result' => "OK",
-            "output" => $itemDetails
+            "output" => $this->_formatProductOutput($itemDetails)
         );
     }
 
@@ -161,12 +178,47 @@ class ebay_ShoppingAPI extends ebayAdapter {
         );
     }
 
-
+    /**
+     * @func _formatProductOutput($productOutput)
+     *  - Creates a "proper" product object to display in our product page.
+     * @param   object      $productOutput       - As returned by ebay's 'GetSingleItemRequest' XML API call.
+     * @return  object      $ObjProduct          - Product object:
+     *
+     *                                              int count.
+     *                                              array paginationOutput ("pageNumber", "entriesPerPage", "totalPages", "totalEntries")
+     *                                              array item ("ID", "image", "title", "subtitle", "price", "priceCurrency",
+     *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
+     */
     public function _formatProductOutput($productOutput){
-
+        $ObjProduct = new stdClass();
+        $ObjProduct->count =     (int)$productOutput->searchResult["count"];
+        $ObjProduct->paginationOutput = array(
+            "pageNumber" =>     (int)$searchOutput->paginationOutput->pageNumber,
+            "entriesPerPage" => (int)$searchOutput->paginationOutput->entriesPerPage,
+            "totalPages" =>     (int)$searchOutput->paginationOutput->totalPages,
+            "totalEntries" =>   (int)$searchOutput->paginationOutput->totalEntries,
+        );
+        if ($ObjProduct->count == 0){
+            return $ObjProduct;
+        }
+        $ObjProduct->item = array();
+        foreach ($searchOutput->searchResult->item as $item){
+            $ObjProduct->item[] = array(
+                "ID" =>             (int)$item->itemId,
+                "image" =>          (string)$item->galleryURL,
+                "title" =>          (string)$item->title,
+                "subtitle" =>       (string)$item->subtitle,
+                "price" =>          (string)$item->sellingStatus->convertedCurrentPrice,
+                "priceCurrency" =>  (string)$item->sellingStatus->convertedCurrentPrice["currencyId"],
+                "shippingType" =>   (string)$item->shippingInfo->shippingType,
+                "locationInfo" =>   (string)$item->location,
+                "isTopSeller" =>    (string)$item->topRatedListing,
+                "categoryText" =>   (string)$item->primaryCategory->categoryName,
+                "conditionText" =>  (string)$item->condition->conditionDisplayName
+            );
+        }
+        return $ObjProduct;
     }
-
-
 }
 
 ?>
