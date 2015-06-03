@@ -54,10 +54,10 @@ class ebayAdapter {
         $sec   = (int) $matchAry[4];
 
         $retnStr = '';
-        if ($days)  { $retnStr .= " $days day"   . pluralS($days);  }
-        if ($hours) { $retnStr .= " $hours hour" . pluralS($hours); }
-        if ($min)   { $retnStr .= " $min minute" . pluralS($min);   }
-        if ($sec)   { $retnStr .= " $sec second" . pluralS($sec);   }
+        if ($days)  { $retnStr .= " $days day"   . $this->pluralS($days);  }
+        if ($hours) { $retnStr .= " $hours hour" . $this->pluralS($hours); }
+        if ($min)   { $retnStr .= " $min minute" . $this->pluralS($min);   }
+        if ($sec)   { $retnStr .= " $sec second" . $this->pluralS($sec);   }
 
         return $retnStr;
     } // function

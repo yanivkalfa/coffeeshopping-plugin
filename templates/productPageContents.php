@@ -6,21 +6,28 @@
  * Time: 1:49 PM
  */
 
-if (isset($_GET["view-product"]) && !empty($_GET["view-product"]) && isset($_GET["store"]) && !empty($_GET["store"])) {
-    // Our product id.
-    $productID = (int)$_GET["view-product"];
+
+if (
+    (isset($_GET["view-product"]) && !empty($_GET["view-product"]))
+    &&
+    (isset($_GET["store"]) && !empty($_GET["store"]) && utils::API_Exists($_GET["store"]))
+    )
+{
+    // Sanitize our product id and store name.
+    $productID = $_GET["view-product"];
+    $store = $_GET["store"];
 
     // Our options array.
     $itemOpts = array();
-    // Handle pagination
-    $itemOpts["IncludeSelector"] = (isset($_GET["pg"]) && !empty($_GET["pg"])) ? (int)$_GET["pg"] : 1;
+    // Requested details.
+    $itemOpts["IncludeSelector"] = explode(",", "Details,Description,ItemSpecifics,Variations,Compatibility");
+    $sandbox = false;
 
-    // Details,Description,ShippingCosts,ItemSpecifics,Variations,Compatibility
-
-
+    // performs the actual request.
+    $result = productView::getProduct($store, $productID, $itemOpts, $sandbox);
+    utils::preEcho($result);
 }
 
 
 
 ?>
-

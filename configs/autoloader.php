@@ -9,7 +9,9 @@ $classes = array(
     'Shortcode_management' => '/libs/shortcode/',
     'Utils' => '/libs/',
     'searchResultsTemplates' => '/templates/',
+    'productViewTemplates' => '/templates/',
     'ebayAdapter' => '/libs/API/ebay/',
     'productSearch' => '/libs/cart/',
+    'productView' => '/libs/cart/',
 
 );

@@ -213,7 +213,7 @@ class ebay_FindingAPI extends ebayAdapter {
         $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "findItemsAdvanced";
 
         // Make the call to eBay.
-        echo "<pre>".$xmlrequest."</pre>";
+        utils::preEcho($xmlrequest);
         $searchRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
 
         // Parse our products
@@ -239,37 +239,38 @@ class ebay_FindingAPI extends ebayAdapter {
      *  - Creates a "proper" search object to display our results.
      * @param   object      $searchOutput       - As returned by ebay's 'findItemsAdvanced' XML API call.
      * @return  object      $ObjSearch          - Search results object:
-     *                                              int count.
+     *                                              string count.
      *                                              array paginationOutput ("pageNumber", "entriesPerPage", "totalPages", "totalEntries")
      *                                              array item ("ID", "image", "title", "subtitle", "price", "priceCurrency",
      *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
      */
     public function _formatSearchOutput($searchOutput){
         $ObjSearch = new stdClass();
-        $ObjSearch->count =     (int)$searchOutput->searchResult["count"];
+        $ObjSearch->count            =      (string)$searchOutput->searchResult["count"];
         $ObjSearch->paginationOutput = array(
-            "pageNumber" =>     (int)$searchOutput->paginationOutput->pageNumber,
-            "entriesPerPage" => (int)$searchOutput->paginationOutput->entriesPerPage,
-            "totalPages" =>     (int)$searchOutput->paginationOutput->totalPages,
-            "totalEntries" =>   (int)$searchOutput->paginationOutput->totalEntries,
+            "pageNumber"        =>          (string)$searchOutput->paginationOutput->pageNumber,
+            "entriesPerPage"    =>          (string)$searchOutput->paginationOutput->entriesPerPage,
+            "totalPages"        =>          (string)$searchOutput->paginationOutput->totalPages,
+            "totalEntries"      =>          (string)$searchOutput->paginationOutput->totalEntries,
         );
         if ($ObjSearch->count == 0){
             return $ObjSearch;
         }
+
         $ObjSearch->item = array();
         foreach ($searchOutput->searchResult->item as $item){
-            $ObjSearch->item[] = array(
-                "ID" =>             (int)$item->itemId,
-                "image" =>          (string)$item->galleryURL,
-                "title" =>          (string)$item->title,
-                "subtitle" =>       (string)$item->subtitle,
-                "price" =>          (string)$item->sellingStatus->convertedCurrentPrice,
-                "priceCurrency" =>  (string)$item->sellingStatus->convertedCurrentPrice["currencyId"],
-                "shippingType" =>   (string)$item->shippingInfo->shippingType,
-                "locationInfo" =>   (string)$item->location,
-                "isTopSeller" =>    (string)$item->topRatedListing,
-                "categoryText" =>   (string)$item->primaryCategory->categoryName,
-                "conditionText" =>  (string)$item->condition->conditionDisplayName
+            $ObjSearch->item[]  = array(
+                "ID"            =>          (string)$item->itemId,
+                "image"         =>          (string)$item->galleryURL,
+                "title"         =>          (string)$item->title,
+                "subtitle"      =>          (string)$item->subtitle,
+                "price"         =>          (string)$item->sellingStatus->convertedCurrentPrice,
+                "priceCurrency" =>          (string)$item->sellingStatus->convertedCurrentPrice["currencyId"],
+                "shippingType"  =>          (string)$item->shippingInfo->shippingType,
+                "locationInfo"  =>          (string)$item->location,
+                "isTopSeller"   =>          (string)$item->topRatedListing,
+                "categoryText"  =>          (string)$item->primaryCategory->categoryName,
+                "conditionText" =>          (string)$item->condition->conditionDisplayName
             );
         }
         return $ObjSearch;

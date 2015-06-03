@@ -9,10 +9,11 @@
 // no direct access
 //defined('ABSPATH') or die('Restricted access');
 
-abstract class productSearch {
+abstract class productView {
+
     static public function getProduct($API, $productID, $itemOpts = array(), $sandbox = false){
         // Check if our Adapter exists.
-        if (!class_exists($API."Adapter")){
+        if ( !utils::API_Exists($API) ){
             return array(
                 "result" => "ERROR",
                 "output" => "API class (".$API."Adapter) doesn't exists, can't get product!"
@@ -26,19 +27,20 @@ abstract class productSearch {
             );
         }
 
-        $finder = new $apiClass();
+        $getter = new $apiClass();
         // Set the API to work live/sandbox.
         if ($sandbox){
-            $finder->_setSandbox();
+            $getter->_setSandbox();
         }else{
-            $finder->_setLive();
+            $getter->_setLive();
         }
         // Set our item ID.
-        $finder->_setItemID($searchVal);
+        utils::preEcho("_setItemID:".$productID);
+        $getter->_setItemID($productID);
         // Set our item options.
-        $finder->_setItemOptions($searchOpts);
+        $getter->_setItemOptions($itemOpts);
         // Run the search and get a results obj.
-        $result = $finder->getProduct();
+        $result = $getter->getProduct();
         return $result;
     }
 

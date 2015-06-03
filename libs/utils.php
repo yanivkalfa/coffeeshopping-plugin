@@ -2,7 +2,22 @@
 
 abstract class Utils{
 
+    /**
+     * @func API_Exists($API)
+     * @param string $API - API name to check.
+     * @return bool.
+     */
+    static public function API_Exists($API){
+        return class_exists($API."Adapter");
+    }
 
+    static public function preEcho($print_r, $preString = "", $postString = ""){
+        echo "<pre>";
+        echo $preString;
+        print_r($print_r);
+        echo $postString;
+        echo "</pre>";
+    }
 
     static function indexOf($arr, $srch, $prop){
         $srch = is_object($srch) ? (array)$srch : $srch;
@@ -112,6 +127,13 @@ abstract class Utils{
         }
         curl_close($crl);
         return $ret;
+    }
+
+    static public function getCountryFromCode($countryCode){
+        // Get our $country array.
+        require "countryCodes.php";
+        if (!isset($countries[$countryCode])){return "Unknown (".$countryCode.")";}
+        return $countries[$countryCode];
     }
 }
 

@@ -31,7 +31,7 @@ abstract class productSearch {
      */
     static public function searchAPI($API, $searchVal, $searchOpts = array(), $sandbox = false){
         // Check if our Adapter exists.
-        if (!class_exists($API."Adapter")){
+        if ( !utils::API_Exists($API) ){
             return array(
                 "result" => "ERROR",
                 "output" => "API class (".$API."Adapter) doesn't exists, can't search!"

@@ -13,7 +13,7 @@
 // Handle our search calls.
 if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     // Our searching keywords.
-    $searchVal = sanitize_text_field($_GET["search-product"]);
+    $searchVal = sanitize_text_field($_GET["search-product"]); // WP func sanitize_text_field()
 
     // Our options array.
     $searchOpts = array();
@@ -29,13 +29,14 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     $searchOpts["categories"] = (isset($_GET["pcats"]) && !empty($_GET["pcats"]))? array_map('intval', $_GET["pcats"]) : 0;
 
     /*
-     * Should be loaded from admin panel.
+     * TODO: Should be loaded from admin panel.
     */
     // Add our filters.
     $searchOpts["filters"] = Array(
         array('name' => 'ListingType', 'value' => array('AuctionWithBIN','FixedPrice','StoreInventory'), 'paramName' => 'name', 'paramValue' => 'value'),
         array('name' => 'MinQuantity', 'value' => '1', 'paramName' => 'name', 'paramValue' => 'value'),
         array('name' => 'AvailableTo', 'value' => 'IL', 'paramName' => 'name', 'paramValue' => 'value'),
+        array('name' => 'PaymentMethod', 'PayPal' => 'IL', 'paramName' => 'name', 'paramValue' => 'value'),
         //array('name' => 'Condition','value' => array('1000', '1500', '1750', '2000'),'paramName' => 'name','paramValue' => 'value'),
     );
     // Our sorting order
@@ -46,9 +47,8 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
 
     // performs the actual search.
     $result = productSearch::searchALL($APIs, $searchVal, $searchOpts, $sandbox);
-    echo "<pre>";
-    print_r($result);
-    echo "</pre>";
+    utils::preEcho($result);
+
     // Output results if we have any proper ones, else display errors.
     $hasResults = false;
     foreach ($result->status as $API => $status) {

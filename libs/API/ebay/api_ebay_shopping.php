@@ -29,14 +29,14 @@ class ebay_ShoppingAPI extends ebayAdapter {
 
     /*
      * @func _setItemID()
-     *  - Sets our searching query.
+     *  - Sets our item ID for the query.
      */
     public function _setItemID($itemID){
         $this->itemOptions->itemID = $itemID;
     }
     /*
      * @func _setItemOptions()
-     *  - Sets our searching options.
+     *  - Sets our item request options.
      */
     public function _setItemOptions($itemOptions){
         foreach($itemOptions as $optName => $optValue){
@@ -82,7 +82,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
      */
     public function _BuildXMLItemList($itemIDs){
         if (!is_array($itemIDs)){
-            return "<ItemID>".$itemID."</ItemID>\n";
+            return "<ItemID>".$itemIDs."</ItemID>\n";
         }
         $xmllist = "";
         // Iterate through each filter in the array
@@ -115,6 +115,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $this->headers["X-EBAY-API-CALL-NAME"] = "GetSingleItem";
 
         // Make the call to eBay.
+        utils::preEcho($xmlrequest);
         $itemDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
 
         // Parse our result into an object.
@@ -125,13 +126,13 @@ class ebay_ShoppingAPI extends ebayAdapter {
             // Returns an error.
             return array(
                 'result' => "ERROR",
-                "output" => "ERROR:: (".$search->errorMessage->error->errorId.") - ".$search->errorMessage->error->category."\nERROR-MESSAGE:".$search->errorMessage->error->message."\n"
+                "output" => "ERROR:: (".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category."\nERROR-MESSAGE:".$itemDetails->errorMessage->error->message."\n"
             );
         }
         // Returns a proper products object.
         return array(
             'result' => "OK",
-            "output" => $this->_formatProductOutput($itemDetails)
+            "output" => $this->_formatProductOutput($itemDetails->Item)
         );
     }
 
@@ -151,7 +152,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         if (!empty($this->itemOptions->IncludeSelector)){
             $xmlrequest .= "<IncludeSelector>".implode(",", $this->itemOptions->IncludeSelector)."</IncludeSelector>\n";
         }
-        $xmlrequest .= "<ItemID>"._BuildXMLItemList($this->itemOptions->itemID)."</ItemID>\n";
+        $xmlrequest .= "<ItemID>".$this->_BuildXMLItemList($this->itemOptions->itemID)."</ItemID>\n";
         $xmlrequest .= "</GetMultipleItemsRequest>\n";
 
         // Set our headers properly
@@ -168,13 +169,21 @@ class ebay_ShoppingAPI extends ebayAdapter {
             // Returns an error.
             return array(
                 'result' => "ERROR",
-                "output" => "ERROR:: (".$search->errorMessage->error->errorId.") - ".$search->errorMessage->error->category."\nERROR-MESSAGE:".$search->errorMessage->error->message."\n"
+                "output" => "ERROR:: (".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category."\nERROR-MESSAGE:".$itemDetails->errorMessage->error->message."\n"
+            );
+        }
+        // Make sure our item listing is "Active".
+        if ($itemDetails->Item->ListingStatus != "Active"){
+            // Returns an error.
+            return array(
+                'result' => "ERROR",
+                "output" => "It seems like this item's listing is inactive."."\n"
             );
         }
         // Returns a proper products object.
         return array(
             'result' => "OK",
-            "output" => $itemDetails
+            "output" => $this->_formatProductOutput($itemDetails->Item)
         );
     }
 
@@ -182,41 +191,90 @@ class ebay_ShoppingAPI extends ebayAdapter {
      * @func _formatProductOutput($productOutput)
      *  - Creates a "proper" product object to display in our product page.
      * @param   object      $productOutput       - As returned by ebay's 'GetSingleItemRequest' XML API call.
-     * @return  object      $ObjProduct          - Product object:
+     * @return  object      $ObjProduct          - Product object.
+     *                                              Array examples:
+     *                                              $ObjProduct->variationSets["Color"]["Rose"] = "Link to image"
+     *                                              $ObjProduct->variationSets["Color"]["Pink"] = "Link to image"
+     *                                              $ObjProduct->variationSets["Compatible Model"]["HTC"] = null; (false for 'isset()')
      *
-     *                                              int count.
-     *                                              array paginationOutput ("pageNumber", "entriesPerPage", "totalPages", "totalEntries")
-     *                                              array item ("ID", "image", "title", "subtitle", "price", "priceCurrency",
-     *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
+     *                                              $ObjProduct->variations[HQ7531]["SKU"] = HQ7531
+     *                                              $ObjProduct->variations[HQ7531]["startPrice"] = 12.3
+     *                                              $ObjProduct->variations[HQ7531]["setInfo"]["COLOR"] = "Rose"
+     *                                              $ObjProduct->variations[HQ7531]["setInfo"]["Compatible Model"] = "HTC"
+     *
      */
     public function _formatProductOutput($productOutput){
         $ObjProduct = new stdClass();
-        $ObjProduct->count =     (int)$productOutput->searchResult["count"];
-        $ObjProduct->paginationOutput = array(
-            "pageNumber" =>     (int)$searchOutput->paginationOutput->pageNumber,
-            "entriesPerPage" => (int)$searchOutput->paginationOutput->entriesPerPage,
-            "totalPages" =>     (int)$searchOutput->paginationOutput->totalPages,
-            "totalEntries" =>   (int)$searchOutput->paginationOutput->totalEntries,
+        $ObjProduct->ID                     =     (string)  $productOutput->ItemID;
+        $ObjProduct->title                  =     (string)  $productOutput->Title;
+        $ObjProduct->descriptionHTML        =     (string)  $productOutput->Description;
+        $ObjProduct->storeLink              =     (string)  $productOutput->ViewItemURLForNaturalSearch;
+        $ObjProduct->pics                   =     (array)   $productOutput->PictureURL;
+        $ObjProduct->categoryText           =     (string)  $productOutput->PrimaryCategoryName;
+        $ObjProduct->price                  =     (string)  $productOutput->ConvertedCurrentPrice;
+        $ObjProduct->priceCurrency          =     (string)  $productOutput->convertedCurrentPrice["currencyId"];
+        $ObjProduct->country                =     (string)  utils::getCountryFromCode((string)$productOutput->Country);
+        $ObjProduct->location               =     (string)  $productOutput->Location;
+        $ObjProduct->quantityAvailable      =     (string)  $productOutput->Quantity;
+        $ObjProduct->quantitySold           =     (string)  $productOutput->QuantitySold;
+        $ObjProduct->timeLeft               =     parent::getPrettyTimeFromEbayTime((string)$productOutput->TimeLeft); // Limited timed offer.
+        $ObjProduct->availableTill          =     (string)  $productOutput->EndTime;            // Availability until (eg. format: 2015-07-01T09:01:10.000Z)
+        $ObjProduct->listingType            =     (string)  $productOutput->ListingType;        // If 'AuctionWithBIN' -> Rush buy before someone bids. [our types: AuctionWithBIN,FixedPrice,StoreInventory]
+        $ObjProduct->handlingTime           =     (string)  $productOutput->HandlingTime;       // Number of days until shipment - int.
+        $ObjProduct->conditionText          =     (string)  $productOutput->ConditionDisplayName;
+        $ObjProduct->maxItemsOrder          =     (string)  $productOutput->QuantityThreshold;  // How many items can you order at once.
+        $ObjProduct->topRatedItem           =     (string)  $productOutput->TopRatedListing;
+
+        $ObjProduct->sellerInfo             =     array(
+            "userID"                =>  (string)  $productOutput->Seller->UserID,                   // User name.
+            "feedbackRating"        =>  (string)  $productOutput->Seller->FeedbackRatingStar,       // Star color. (green, yellow etc)
+            "feedbackScore"         =>  (string)  $productOutput->Seller->FeedbackScore,            // int for feedbacks.
+            "feedbackPercent"       =>  (string)  $productOutput->Seller->PositiveFeedbackPercent,  // Positive %.
+            "topRated"              =>  (string)  $productOutput->Seller->TopRatedSeller,           // Is he top rated? (Boolean)
         );
-        if ($ObjProduct->count == 0){
-            return $ObjProduct;
+
+        $ObjProduct->returnPolicy             =     array(
+            "refund"                =>  (string)  $productOutput->ReturnPolicy->Refund,             // types: Money Back, MoneyBackOrExchange, MoneyBackOrReplacement
+            "returnsWithin"         =>  (string)  $productOutput->ReturnPolicy->ReturnsWithin,      // String time (eg. 30 Days)
+            "returnsAccepted"       =>  (string)  $productOutput->ReturnPolicy->ReturnsAccepted,    // String (eg. Returns Accepted)
+            "description"           =>  (string)  $productOutput->ReturnPolicy->Description,        // A description of the return policy for the item.
+            "shippingCostPaidBy"    =>  (string)  $productOutput->ReturnPolicy->ShippingCostPaidBy, // String (eg. Buyer/Seller)
+        );
+
+        // Get the variations for this item.
+        if (isset($productOutput->Variations->VariationSpecificsSet->NameValueList)){
+            $ObjProduct->variationSets      = array();
+            $ObjProduct->variations         = array();
+
+            // Get our variation sets.
+            foreach($productOutput->Variations->VariationSpecificsSet->NameValueList as $variationSet){
+                foreach($variationSet->Value as $setVal){
+                    $ObjProduct->variationSets[(string)$variationSet->Name][(string)$setVal] = null;
+                }
+            }
+            foreach($productOutput->Variations->Pictures as $variationPicSet){ // Associating pics.
+                foreach($variationPicSet->VariationSpecificPictureSet as $PicDetails){
+                    $ObjProduct->variationSets[(string)$variationPicSet->VariationSpecificName][(string)$PicDetails->VariationSpecificValue] = (string)$PicDetails->PictureURL;
+                }
+            }
+
+            // Get our actual variations and their details.
+            foreach($productOutput->Variations->Variation as $variation){
+                $ObjProduct->variations[(string)$variation->SKU] = array(
+                    "SKU"           =>  (string)    $variation->SKU,
+                    "startPrice"    =>  (string)    $variation->StartPrice,
+                    "quantity"      =>  (string)    $variation->Quantity,
+                    "quanitySold"   =>  (string)    $variation->SellingStatus->QuantitySold
+                );
+                // Associate our variation with it's SET(s).
+                foreach($variation->VariationSpecifics->NameValueList as $variationSet){
+                    $ObjProduct->variations[(string)$variation->SKU]["setInfo"][(string)$variationSet->Name] = (string)$variationSet->Value;
+                }
+            }
+
+
         }
-        $ObjProduct->item = array();
-        foreach ($searchOutput->searchResult->item as $item){
-            $ObjProduct->item[] = array(
-                "ID" =>             (int)$item->itemId,
-                "image" =>          (string)$item->galleryURL,
-                "title" =>          (string)$item->title,
-                "subtitle" =>       (string)$item->subtitle,
-                "price" =>          (string)$item->sellingStatus->convertedCurrentPrice,
-                "priceCurrency" =>  (string)$item->sellingStatus->convertedCurrentPrice["currencyId"],
-                "shippingType" =>   (string)$item->shippingInfo->shippingType,
-                "locationInfo" =>   (string)$item->location,
-                "isTopSeller" =>    (string)$item->topRatedListing,
-                "categoryText" =>   (string)$item->primaryCategory->categoryName,
-                "conditionText" =>  (string)$item->condition->conditionDisplayName
-            );
-        }
+
         return $ObjProduct;
     }
 }
