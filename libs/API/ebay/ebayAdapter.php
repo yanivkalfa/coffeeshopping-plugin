@@ -81,7 +81,7 @@ class ebayAdapter {
 // Require the extensions.
 require_once dirname(__FILE__)."/api_ebay_finding.php";
 if (!class_exists("ebay_FindingAPI")){echo "Failed to load ebay_FindingAPI class!";}
-require_once dirname(__FILE__)."/api_ebay_shopping.php";
+require_once dirname(__FILE__) . "/api_ebay_product.php";
 if (!class_exists("ebay_ShoppingAPI")){echo "Failed to load ebay_ShoppingAPI class!";}
 
 

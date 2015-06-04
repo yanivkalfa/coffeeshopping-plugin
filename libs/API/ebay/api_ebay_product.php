@@ -115,8 +115,15 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $this->headers["X-EBAY-API-CALL-NAME"] = "GetSingleItem";
 
         // Make the call to eBay.
-        utils::preEcho($xmlrequest);
         $itemDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+        if ($itemDetailsRaw["result"]=="ERROR"){
+            utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
+            return array(
+                'result' => "ERROR",
+                "output" => utils::getErrorCode("API", "ebay", "product", "1")
+            );
+        }
+        $itemDetailsRaw = $itemDetailsRaw["output"];
 
         // Parse our result into an object.
         $itemDetails = simplexml_load_string($itemDetailsRaw);
@@ -124,15 +131,91 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Checks to see if we have any type of failed call.
         if ($itemDetails->ack == "Failure" || $itemDetails->ack == "PartialFailure") {
             // Returns an error.
+            utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category." - ".$itemDetails->errorMessage->error->message."\n", " getProduct() ERROR:: ");
             return array(
                 'result' => "ERROR",
-                "output" => "ERROR:: (".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category."\nERROR-MESSAGE:".$itemDetails->errorMessage->error->message."\n"
+                "output" => utils::getErrorCode("API", "ebay", "product", "2")
             );
         }
+
+        // Make sure our item listing is "Active".
+        if ($itemDetails->Item->ListingStatus != "Active"){
+            // Returns an error.
+            return array(
+                'result' => "ERROR",
+                "output" => utils::getErrorCode("API", "ebay", "product", "4")
+            );
+        }
+
+        // format our product properly.
+        $itemDetailsProp = $this->_formatProductOutput($itemDetails->Item);
+
+        // get the shipping costs for this product
+        $shippingDetails = $this->getShippingCosts();
+        // Checks to see if we have any type of failed call.
+        if ($shippingDetails["result"] == "ERROR") {
+            // Returns an error.
+            return array(
+                'result' => "ERROR",
+                "output" => $shippingDetails["output"] // Just pass on the error from prev func.
+            );
+        }
+
+        // add our shipping costs to our proper object.
+        $itemDetailsProp->shippingDetails = $shippingDetails["output"];
+        utils::preEcho($itemDetailsProp);
+
         // Returns a proper products object.
         return array(
             'result' => "OK",
-            "output" => $this->_formatProductOutput($itemDetails->Item)
+            "output" => $itemDetailsProp
+        );
+    }
+    
+    public function getShippingCosts(){
+        // Create the XML request to be POSTed.
+        $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+        $xmlrequest .= "<GetShippingCostsRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n";
+        $xmlrequest .= "<ItemID>".$this->itemOptions->itemID."</ItemID>\n";
+        $xmlrequest .= "<DestinationCountryCode>IL</DestinationCountryCode>\n";
+        $xmlrequest .= "<IncludeDetails>true</IncludeDetails>\n";
+        $xmlrequest .= "</GetShippingCostsRequest>​\n";
+
+        // Set our headers properly
+        $this->headers["X-EBAY-API-CALL-NAME"] = "GetShippingCosts";
+
+        // Make the call to eBay.
+        $shippingDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+        if ($shippingDetailsRaw["result"]=="ERROR"){
+            utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
+            return array(
+                'result' => "ERROR",
+                "output" => utils::getErrorCode("API", "ebay", "product", "1")
+            );
+        }
+        $shippingDetailsRaw = $shippingDetailsRaw["output"];
+
+        // Parse our result into an object.
+        $shippingDetails = simplexml_load_string($shippingDetailsRaw);
+        // Checks to see if we have any type of failed call.
+        if ($shippingDetails->Ack == "Failure" || $shippingDetails->Ack == "PartialFailure") {
+            // Returns an error.
+            $errorsText = "";
+            foreach ($shippingDetails->Errors as $Error){
+                $errorsText .= "ERROR:: (".$Error->ErrorCode.") - ".$Error->ErrorClassification." - ".$Error->LongMessage."\n";
+            }
+            utils::adminPreECHO($errorsText, "getShippingCosts() ERROR:: ");
+
+            return array(
+                'result' => "ERROR",
+                "output" => utils::getErrorCode("API", "ebay", "product", "3")
+            );
+        }
+
+        // Returns a proper shipping details object.
+        return array(
+            'result' => "OK",
+            "output" => $this->_formatShippingCosts($shippingDetails->ShippingDetails)
         );
     }
 
@@ -160,6 +243,14 @@ class ebay_ShoppingAPI extends ebayAdapter {
 
         // Make the call to eBay.
         $itemDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+        if ($itemDetailsRaw["result"]=="ERROR"){
+            utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
+            return array(
+                'result' => "ERROR",
+                "output" => utils::getErrorCode("API", "ebay", "product", "1")
+            );
+        }
+        $itemDetailsRaw = $itemDetailsRaw["output"];
 
         // Parse our result into an object.
         $itemDetails = simplexml_load_string($itemDetailsRaw);
@@ -167,19 +258,13 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Checks to see if we have any type of failed call.
         if ($itemDetails->ack == "Failure" || $itemDetails->ack == "PartialFailure") {
             // Returns an error.
+            utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category."\nERROR-MESSAGE:".$itemDetails->errorMessage->error->message."\n", "getProducts() ERROR:: ");
             return array(
                 'result' => "ERROR",
-                "output" => "ERROR:: (".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category."\nERROR-MESSAGE:".$itemDetails->errorMessage->error->message."\n"
+                "output" => utils::getErrorCode("API", "ebay", "product", "5")
             );
         }
-        // Make sure our item listing is "Active".
-        if ($itemDetails->Item->ListingStatus != "Active"){
-            // Returns an error.
-            return array(
-                'result' => "ERROR",
-                "output" => "It seems like this item's listing is inactive."."\n"
-            );
-        }
+
         // Returns a proper products object.
         return array(
             'result' => "OK",
@@ -276,6 +361,33 @@ class ebay_ShoppingAPI extends ebayAdapter {
         }
 
         return $ObjProduct;
+    }
+
+    public function _formatShippingCosts($shippingObject){
+        $ObjShipping = new stdClass();
+        $ObjShipping->shippingOptions                       =   array();
+        $ObjShipping->internationalInsuranceCost            =   (string)    $shippingObject->InternationalInsuranceCost;
+        $ObjShipping->internationalInsuranceCostCurrency    =   (string)    $shippingObject->InternationalInsuranceCost["currencyID"];
+        $ObjShipping->internationalInsuranceOption          =   (string)    $shippingObject->InternationalInsuranceOption;
+
+        foreach ($shippingObject->InternationalShippingServiceOption as $option){
+            $ObjShipping->shippingOptions[] = array(
+                "shippingServiceName"                   =>  (string)    $option->ShippingServiceName,
+                "shippingServiceAdditionalCost"         =>  (string)    $option->ShippingServiceAdditionalCost,
+                "shippingServiceAdditionalCostCurrency" =>  (string)    $option->ShippingServiceAdditionalCost["currencyID"],
+                "shippingServiceCost"                   =>  (string)    $option->ShippingServiceCost,
+                "shippingServiceCostCurrency"           =>  (string)    $option->ShippingServiceCost["currencyID"],
+                "shippingServicePriority"               =>  (string)    $option->ShippingServicePriority,
+                "estimatedDeliveryMinTime"              =>  (string)    $option->EstimatedDeliveryMinTime,
+                "estimatedDeliveryMaxTime"              =>  (string)    $option->EstimatedDeliveryMaxTime,
+                "importCharge"                          =>  (string)    $option->ImportCharge,
+                "importChargeCurrency"                  =>  (string)    $option->ImportCharge["currencyID"],
+                "shippingInsuranceCost"                 =>  (string)    $option->ShippingInsuranceCost,
+                "shippingInsuranceCostCurrency"         =>  (string)    $option->ShippingInsuranceCost["currencyID"],
+            );
+        }
+
+        return $ObjShipping;
     }
 }
 

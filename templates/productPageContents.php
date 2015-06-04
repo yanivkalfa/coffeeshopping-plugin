@@ -6,7 +6,6 @@
  * Time: 1:49 PM
  */
 
-
 if (
     (isset($_GET["view-product"]) && !empty($_GET["view-product"]))
     &&

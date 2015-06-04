@@ -181,7 +181,7 @@ class ebay_FindingAPI extends ebayAdapter {
             // No proper search query - return error.
             return array(
                 'result' => "ERROR",
-                "output" => "ERROR:: (internal) improper search string"
+                "output" => utils::getErrorCode("API", "ebay", "finding", "0")
             );
         }
 
@@ -215,6 +215,14 @@ class ebay_FindingAPI extends ebayAdapter {
         // Make the call to eBay.
         utils::preEcho($xmlrequest);
         $searchRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+        if ($searchRaw["result"]=="ERROR"){
+            utils::adminPreECHO($searchRaw["output"], "cURL ERROR details:: ");
+            return array(
+                'result' => "ERROR",
+                "output" => utils::getErrorCode("API", "ebay", "finding", "1")
+            );
+        }
+        $searchRaw = $searchRaw["output"];
 
         // Parse our products
         $search = simplexml_load_string($searchRaw);
@@ -222,9 +230,10 @@ class ebay_FindingAPI extends ebayAdapter {
         // Checks to see if we have any type of failed call.
         if ($search->ack == "Failure" || $search->ack == "PartialFailure") {
             // Returns an error.
+            utils::adminPreECHO("(".$search->errorMessage->error->errorId.") - ".$search->errorMessage->error->category." - ".$search->errorMessage->error->message."\n", " getSearch() ERROR:: ");
             return array(
                 'result' => "ERROR",
-                "output" => "ERROR:: (".$search->errorMessage->error->errorId.") - ".$search->errorMessage->error->category."\nERROR-MESSAGE:".$search->errorMessage->error->message."\n"
+                "output" => utils::getErrorCode("API", "ebay", "finding", "6")
             );
         }
         // Returns a proper products object.

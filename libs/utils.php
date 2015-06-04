@@ -11,7 +11,28 @@ abstract class Utils{
         return class_exists($API."Adapter");
     }
 
+    static public function getErrorCode($cat, $sub, $type, $num){
+        include "errorCodes.php";
+        return $errorCategories["$cat"].$errorSubCategories["$sub"].$errorSubCategoryTypes["$type"]."$num";
+    }
+    static public function getErrorCodeText($errorCode){
+        include "errorCodes.php";
+        $errorNum = substr($errorCode, -1);
+        if (isset($errorCodesHandler[$errorNum])){
+            return $errorCodesHandler[$errorNum];
+        }
+    }
+
+
     static public function preEcho($print_r, $preString = "", $postString = ""){
+        echo "<pre>";
+        echo $preString;
+        print_r($print_r);
+        echo $postString;
+        echo "</pre>";
+    }
+    static public function adminPreECHO($print_r, $preString = "", $postString = ""){
+        if (!is_super_admin()){return;}
         echo "<pre>";
         echo $preString;
         print_r($print_r);
@@ -122,11 +143,18 @@ abstract class Utils{
         $ret = curl_exec($crl);
         // Check if any error occured
         if(curl_errno($crl)){
-            echo '<br />cURLing::'.$url.'- Curl error: (#'.curl_errno($crl).') ' . curl_error($crl).'<br />';
-            print_r($data);
+            curl_close($crl);
+            return array(
+                "result" => "ERROR",
+                "output" => '<br />cURLing::'.$url.'- Curl error: (#'.curl_errno($crl).') ' . curl_error($crl).'<br />'
+            );
+
         }
         curl_close($crl);
-        return $ret;
+        return array(
+            "result" => "OK",
+            "output" => $ret
+        );
     }
 
     static public function getCountryFromCode($countryCode){
