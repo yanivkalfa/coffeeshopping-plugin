@@ -69,8 +69,18 @@ abstract class productView {
      * @return  string  $productOutput          - HTML ready ul with our product view.
      */
     static public function constructResults($productResults){
-        $productOutput = searchResultsTemplates::getSearchResultItem($productResults);
+        $productOutput = productViewTemplates::getProductView($productResults);
         return $productOutput;
+    }
+
+    /**
+     * @func displayError($msg)
+     *  - Gets the template for our product error.
+     * @param   string  $msg                - The msg to place in the error page.
+     * @return  string  HTML error page.
+     */
+    static public function displayError($msg){
+        return productViewTemplates::getProductErrorContent($msg);
     }
 }
 

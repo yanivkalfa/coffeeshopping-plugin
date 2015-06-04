@@ -10,14 +10,16 @@ abstract class searchResultsTemplates {
     /**
      * @func getSearchErrorContent($msg)
      *  - Returns a HTML ready formatted search result error to display.
-     * @param   object  $item          - $ObjSearch object->item.
-     * @return  string  HTML item.
+     * @param   string  $msg          - The message to put inside the template.
+     * @return  string  HTML error page.
      */
     static public function getSearchErrorContent($msg){
         ob_start();
         ?>
 
-        <div class="searchresulterror"><?php echo $msg?></div>
+        <div class="searchresulterror">
+            <?php echo $msg?>
+        </div>
 
         <?php
         return ob_get_clean();

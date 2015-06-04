@@ -26,8 +26,10 @@ if (
     $result = productView::getProduct($store, $productID, $itemOpts, $sandbox);
 
     // Output results if we have any proper ones, else display errors.
-    if ($result[""] == ERROR){
-        echo productView::DisplayError($result);
+    if ($result["result"] == "ERROR"){
+        echo productView::displayError($result["output"]);
+    }else{
+        echo productView::constructResults($result["output"]);
     }
 
 }

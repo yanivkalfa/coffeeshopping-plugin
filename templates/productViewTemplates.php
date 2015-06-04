@@ -7,7 +7,30 @@
  */
 
 abstract class productViewTemplates {
+    /**
+     * @func getProductErrorContent($msg)
+     *  - Returns a HTML ready formatted search result error to display.
+     * @param   string  $msg          - The message to put inside the template.
+     * @return  string  HTML error page.
+     */
+    static public function getProductErrorContent($msg){
+        ob_start();
+        ?>
 
+        <div class="searchresulterror">
+            <?php echo $msg?>
+        </div>
+
+        <?php
+        return ob_get_clean();
+    }
+
+    /**
+     * @func getProductView($product)
+     *  - Returns a HTML ready formatted product page view content.
+     * @param   object  $product         - $ObjProduct object.
+     * @return  string  HTML product page.
+     */
     static public function getProductView($product){
         ob_start();
         ?>
