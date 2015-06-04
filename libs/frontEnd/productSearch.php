@@ -32,16 +32,18 @@ abstract class productSearch {
     static public function searchAPI($API, $searchVal, $searchOpts = array(), $sandbox = false){
         // Check if our Adapter exists.
         if ( !utils::API_Exists($API) ){
+            utils::adminPreECHO("API class (".$API."Adapter) doesn't exists, can't search!", "searchAPI() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => "API class (".$API."Adapter) doesn't exists, can't search!"
+                "output" => utils::getErrorCode("frontEnd", "productSearch", "searchAPI", "6")
             );
         }
         $apiClass = $API."_FindingAPI";
         if (!class_exists($apiClass)){
+            utils::adminPreECHO("API class ($apiClass) doesn't exists, can't search!", "searchAPI() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => "API class ($apiClass) doesn't exists, can't search!"
+                "output" => utils::getErrorCode("frontEnd", "productSearch", "searchAPI", "6")
             );
         }
 
@@ -115,9 +117,10 @@ abstract class productSearch {
                 "output" => $searchResults
             );
         }else{
+            utils::adminPreECHO($searchResults, "searchALL() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => $searchResults
+                "output" => utils::getErrorCode("frontEnd", "productSearch", "searchALL", "6")
             );
         }
 

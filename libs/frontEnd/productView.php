@@ -31,14 +31,15 @@ abstract class productView {
             utils::adminPreECHO("API class (".$API."Adapter) doesn't exists, can't get product!", "getProduct() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => utils::getErrorCode("frontEnd", "productView", "getProduct", "7")
+                "output" => utils::getErrorCode("frontEnd", "productView", "getProduct", "2")
             );
         }
         $apiClass = $API."_ShoppingAPI";
         if (!class_exists($apiClass)){
+            utils::adminPreECHO("API class ($apiClass) doesn't exists, can't get product!", "getProduct() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => "API class ($apiClass) doesn't exists, can't get product!"
+                "output" => utils::getErrorCode("frontEnd", "productView", "getProduct", "2")
             );
         }
 
