@@ -69,20 +69,37 @@ abstract class productViewTemplates {
         </script>
         <div id="topcontainer">
             <div id="toppicturepanel">
+
                 <div class="container">
                     <div class="full-image">
-                        <a href="pictures/1.jpg" class="zoomIt visible"><img src="<?php echo $product->img;?>" alt="" /></a>
-                        <a href="pictures/2.jpg" class="zoomIt hidden"><img src="pictures/tn_2.jpg" alt="" /></a>
-                        <a href="pictures/3.jpg" class="zoomIt hidden"><img src="pictures/tn_3.jpg" alt="" /></a>
-                        <a href="pictures/4.jpg" class="zoomIt hidden"><img src="pictures/tn_4.jpg" alt="" /></a>
+                        <?php
+                            $class = "visible";
+                            foreach ($product->pics as $pic){
+                                $imgGallery = ebay_Utils::getEbayPicture($pic, "400s");
+                                $imgBig = ebay_Utils::getEbayPicture($pic, "1200s");
+                                ?>
+
+                        <a href="<?php echo $imgBig;?>" class="zoomIt <?php echo $class;?>"><img src="<?php echo $imgGallery;?>" alt="" /></a>
+
+                                <?php
+                                $class = "hidden";
+                            }
+                        ?>
                     </div>
                     <ul class="gallery-thumbnails">
-                        <li><a href="#"><img src="pictures/tn_1.jpg" width="50" alt="" /></a></li>
-                        <li><a href="#"><img src="pictures/tn_2.jpg" width="50" alt="" /></a></li>
-                        <li><a href="#"><img src="pictures/tn_3.jpg" width="50" alt="" /></a></li>
-                        <li><a href="#"><img src="pictures/tn_4.jpg" width="50" alt="" /></a></li>
+                        <?php
+                        foreach ($product->pics as $pic){
+                            $imgThumb = ebay_Utils::getEbayPicture($pic, "64s");
+                            ?>
+
+                        <li><a href="#"><img src="<?php echo $imgThumb;?>" width="50" alt="" /></a></li>
+
+                            <?php
+                        }
+                        ?>
                     </ul>
                 </div>
+
             </div>
             <div id="topdetailspanel">
 

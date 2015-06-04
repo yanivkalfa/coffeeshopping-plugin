@@ -60,6 +60,13 @@ abstract class productSearch {
         $finder->_setSearchOptions($searchOpts);
         // Run the search and get a results obj.
         $result = $finder->getSearch();
+        // Error checking
+        if ($result["result"]=="ERROR"){
+            return array(
+                "result" => "ERROR",
+                "output" => $result["output"]
+            );
+        }
         return array(
             "result" => "OK",
             "output" => $result["output"]

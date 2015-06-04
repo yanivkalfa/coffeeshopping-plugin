@@ -147,9 +147,6 @@ class ebay_ShoppingAPI extends ebayAdapter {
             );
         }
 
-        // format our product properly.
-        $itemDetailsProp = $this->_formatProductOutput($itemDetails->Item);
-
         // get the shipping costs for this product
         $shippingDetails = $this->getShippingCosts();
         // Checks to see if we have any type of failed call.
@@ -160,6 +157,9 @@ class ebay_ShoppingAPI extends ebayAdapter {
                 "output" => $shippingDetails["output"] // Just pass on the error from prev func.
             );
         }
+
+        // format our product properly.
+        $itemDetailsProp = $this->_formatProductOutput($itemDetails->Item);
 
         // add our shipping costs to our proper object.
         $itemDetailsProp->shippingDetails = $shippingDetails["output"];

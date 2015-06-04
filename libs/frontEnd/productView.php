@@ -56,6 +56,14 @@ abstract class productView {
         $getter->_setItemOptions($itemOpts);
         // Run the search and get a results obj.
         $result = $getter->getProduct();
+        // Error checking
+        if ($result["result"]=="ERROR"){
+            return array(
+                "result" => "ERROR",
+                "output" => $result["output"]
+            );
+        }
+
         return array(
             "result" => "OK",
             "output" => $result["output"]
