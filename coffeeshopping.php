@@ -119,8 +119,8 @@ if(!class_exists('coffee_shopping'))
             function autoLoader ($cName) {
                 global $classes;
                 if(!isset($classes[$cName])) return false;
-                echo $cName.'<br>';
-                echo BASE_ADDRESS .$classes[$cName] . $cName. ".php<br>";
+                //echo $cName.'<br>';
+                //echo BASE_ADDRESS .$classes[$cName] . $cName. ".php<br>";
                 include(BASE_ADDRESS .$classes[$cName] . $cName. ".php");
                 return true;
             }
