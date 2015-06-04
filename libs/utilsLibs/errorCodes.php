@@ -7,22 +7,24 @@
  */
 
 $errorCategories = array(
-    "API"           => 0,
-    "frontEnd"      => 1,
-    "backEnd"       => 2,
+    "API",
+    "frontEnd",
+    "backEnd",
 );
 $errorSubCategories = array(
-    "ebay"          => 0,
-    "aliexp"        => 1,
-    "productView"   => 2,
-    "productSearch" => 3,
+    "ebay",
+    "aliexp",
+    "productView",
+    "productSearch",
 );
 $errorSubCategoryTypes = array(
-    "finding"       => 0,
-    "product"       => 1,
-    "getProduct"    => 2,
-    "searchAPI"     => 3,
-    "searchALL"     => 4,
+    "getSearch",
+    "getProduct",
+    "getShippingCosts",
+    "getProduct",
+    "getProducts",
+    "searchAPI",
+    "searchALL",
 );
 
 
@@ -31,7 +33,7 @@ $errorCodesHandler = array(
     "0" => "improper search string",
     "1" => "cURL Communication error",
     "2" => "Failed to get the requested item details",
-    "3" => "Failed to get the product's shipping details",
+    "3" => "",
     "4" => "It seems like this item's listing is inactive",
     "5" => "Failed to get the requested item(s) details",
     "6" => "Failed to get the search results",

@@ -120,7 +120,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
             utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "product", "1")
+                "output" => utils::getErrorCode("API", "ebay", "getProduct", "1")
             );
         }
         $itemDetailsRaw = $itemDetailsRaw["output"];
@@ -134,7 +134,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
             utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category." - ".$itemDetails->errorMessage->error->message."\n", " getProduct() ERROR:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "product", "2")
+                "output" => utils::getErrorCode("API", "ebay", "getProduct", "2")
             );
         }
 
@@ -143,7 +143,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
             // Returns an error.
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "product", "4")
+                "output" => utils::getErrorCode("API", "ebay", "getProduct", "4")
             );
         }
 
@@ -163,7 +163,6 @@ class ebay_ShoppingAPI extends ebayAdapter {
 
         // add our shipping costs to our proper object.
         $itemDetailsProp->shippingDetails = $shippingDetails["output"];
-        utils::preEcho($itemDetailsProp);
 
         // Returns a proper products object.
         return array(
@@ -190,7 +189,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
             utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "product", "1")
+                "output" => utils::getErrorCode("API", "ebay", "getShippingCosts", "1")
             );
         }
         $shippingDetailsRaw = $shippingDetailsRaw["output"];
@@ -208,7 +207,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
 
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "product", "3")
+                "output" => utils::getErrorCode("API", "ebay", "getShippingCosts", "2")
             );
         }
 
@@ -247,7 +246,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
             utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "product", "1")
+                "output" => utils::getErrorCode("API", "ebay", "getProducts", "1")
             );
         }
         $itemDetailsRaw = $itemDetailsRaw["output"];
@@ -261,7 +260,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
             utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category."\nERROR-MESSAGE:".$itemDetails->errorMessage->error->message."\n", "getProducts() ERROR:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "product", "5")
+                "output" => utils::getErrorCode("API", "ebay", "getProducts", "5")
             );
         }
 

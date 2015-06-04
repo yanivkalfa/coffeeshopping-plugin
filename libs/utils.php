@@ -13,7 +13,7 @@ abstract class Utils{
 
     static public function getErrorCode($cat, $sub, $type, $num){
         require "utilsLibs/errorCodes.php";
-        return $errorCategories["$cat"].$errorSubCategories["$sub"].$errorSubCategoryTypes["$type"]."$num";
+        return array_search("$cat", $errorCategories).array_search("$sub", $errorSubCategories).array_search("$type", $errorSubCategoryTypes)."$num";
     }
     static public function getErrorCodeText($errorCode){
         require "utilsLibs/errorCodes.php";
