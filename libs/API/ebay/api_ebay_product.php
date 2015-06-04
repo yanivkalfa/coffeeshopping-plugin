@@ -339,6 +339,8 @@ class ebay_ShoppingAPI extends ebayAdapter {
             foreach($productOutput->Variations->Pictures as $variationPicSet){ // Associating pics.
                 foreach($variationPicSet->VariationSpecificPictureSet as $PicDetails){
                     $ObjProduct->variationSets[(string)$variationPicSet->VariationSpecificName][(string)$PicDetails->VariationSpecificValue] = (string)$PicDetails->PictureURL;
+                    // Also add the variation pictures to our main gallery.
+                    $ObjProduct->pics[] = (string)$PicDetails->PictureURL;
                 }
             }
 

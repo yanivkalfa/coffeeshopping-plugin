@@ -45,8 +45,8 @@ abstract class productViewTemplates {
             // use load event on window to start the script
             jQuery(document).ready( function(){
 
-                var previews 	= jQuery('.zoomItcontainer.full-image a'), // image previews
-                    thumbnails 	= jQuery('.zoomItcontainer.gallery-thumbnails a'); // small thumbnails for changing previews
+                var previews 	= jQuery('.zoomItcontainer .full-image a'), // image previews
+                    thumbnails 	= jQuery('.zoomItcontainer .gallery-thumbnails a'); // small thumbnails for changing previews
 
                 // start zoom only on visible element
                 jQuery('.zoomIt.visible').jqZoomIt({
@@ -71,7 +71,21 @@ abstract class productViewTemplates {
                         // add zoom loaded class
                         jQuery(previews[key]).addClass('zoomIt_loaded');
                     }
-                })
+                });
+
+                var m = jQuery('.galleryContainer').CB_CarouseljQ({
+                    visibleItems : 6,
+                    cycle		: true,
+                    opacityIdle : .7,
+                    opacityOn	: 1,
+                    opacityOver : .8,
+                    animateNavs : true,
+                    threshold	: 20,
+
+                    change: function(s, obj){
+                        jQuery(obj).children("a").click();
+                    }
+                });
 
             });
         </script>
@@ -84,7 +98,7 @@ abstract class productViewTemplates {
                             $class = "visible";
                             foreach ($product->pics as $pic){
                                 $imgGallery = ebay_Utils::getEbayPicture($pic, "400s");
-                                $imgBig = ebay_Utils::getEbayPicture($pic, "1200s");
+                                $imgBig = ebay_Utils::getEbayPicture($pic, "1600s");
                                 ?>
                         <a href="<?php echo $imgBig;?>" class="zoomIt <?php echo $class;?>"><img src="<?php echo $imgGallery;?>" alt="" /></a>
                                 <?php
@@ -92,16 +106,20 @@ abstract class productViewTemplates {
                             }
                         ?>
                     </div>
-                    <ul class="gallery-thumbnails">
-                        <?php
-                        foreach ($product->pics as $pic){
-                            $imgThumb = ebay_Utils::getEbayPicture($pic, "64s");
-                            ?>
-                        <li><a href="#"><img src="<?php echo $imgThumb;?>" width="50" alt="" /></a></li>
+                    <div class="galleryContainer">
+                        <ul class="gallery-thumbnails">
                             <?php
-                        }
-                        ?>
-                    </ul>
+                            foreach ($product->pics as $pic){
+                                $imgThumb = ebay_Utils::getEbayPicture($pic, "64s");
+                                ?>
+                            <li class="item"><a href="#"><img src="<?php echo $imgThumb;?>" width="50" alt="" /></a></li>
+                                <?php
+                            }
+                            ?>
+                        </ul>
+                        <a href="#" class="nav-back"></a>
+                        <a href="#" class="nav-fwd"></a>
+                    </div>
                 </div>
 
             </div>

@@ -11,8 +11,9 @@ global $req_scripts;
 $req_scripts = array(
 
     'front_end' => array(
-        array('handle' => 'zoomit.jquery', 'src' => '/scripts/ZoomIt/zoomit.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'), // ZoomIt image gallery.
-        array('handle' => 'zoomit', 'src' => '/scripts/ZoomIt/zoomit', 'extension' => 'css', 'deps' => '', 'media' => 'screen')        // ZoomIt image gallery.
+        array('handle' => 'zoomit.jquery', 'src' => '/scripts/ZoomIt/zoomit.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),   // ZoomIt image gallery js.
+        array('handle' => 'cbcarousel.jquery', 'src' => '/scripts/ZoomIt/cbcarousel.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),   // ZoomIt image gallery js.
+        array('handle' => 'zoomit', 'src' => '/scripts/ZoomIt/zoomit', 'extension' => 'css', 'deps' => '', 'media' => 'screen')                 // ZoomIt image gallery css.
     ),
 
     'back_end' => array(

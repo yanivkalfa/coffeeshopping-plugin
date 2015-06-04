@@ -30,8 +30,8 @@
 			zoomAreaOpacity		: .5, // zoomed area opacity
 			zoomDistance		: 10, // distance of the zoomer from the trigger
 			// full image multipliers based on small preview image size
-			multiplierX			: 1.2, // how much of the big image width will be displayed
-			multiplierY			: 1.2, // how much of the big image height will be displayed
+			multiplierX			: 2, // how much of the big image width will be displayed
+			multiplierY			: 2, // how much of the big image height will be displayed
 			// events
 			init				: function(){},
 			zoom				: function(){},

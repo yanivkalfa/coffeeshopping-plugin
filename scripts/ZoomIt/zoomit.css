@@ -1,17 +1,8 @@
-a.zoomIt img{
-    border:none;
-}
-a.zoomIt{
-    display:block;
-    position:relative;
-    float:left;
-    clear:both;
-}
 
-/* 
-ZoomIt customizations 
+/*
+ZoomIt customizations
 
-The 3 CSS classes below can be changed to any other CSS class you desire. Just make sure 
+The 3 CSS classes below can be changed to any other CSS class you desire. Just make sure
 to fill the parameters with the new classes when starting jqZoomIt().
 
 Default values in script:
@@ -37,7 +28,16 @@ Default values in script:
     border:none;
 }
 
-/* Gallery CSS */
+/* zoomItContainer CSS */
+.zoomItcontainer a.zoomIt img{
+    border:none;
+}
+.zoomItcontainer a.zoomIt{
+    display:block;
+    position:relative;
+    float:left;
+    clear:both;
+}
 .zoomItcontainer .full-image a.visible{
     display:block;
 }
@@ -45,14 +45,66 @@ Default values in script:
     display:none;
 }
 
-.zoomItcontainer ul.gallery-thumbnails{
-    margin:0px;
-    padding:10px 0px 0px;
-    clear:both;
-    width:100%;
-    list-style-type:none;
-}
-.zoomItcontainer ul.gallery-thumbnails li{
+/* Gallery CSS */
+.zoomItcontainer .galleryContainer{
+    display:block;
+    position:relative;
+    width:0px;
     float:left;
-    margin-right:5px;
+    overflow:hidden;
+    border:1px #ccc solid;
+    box-shadow:1px 1px 10px #000000;
+    padding:0px 5px;
+}
+.zoomItcontainer .galleryContainer .gallery-thumbnails{
+    display:block;
+    position:relative;
+    float:left;
+    list-style-type:none;
+    margin:0px;
+    padding:0px;
+    width:5000px;
+}
+.zoomItcontainer .galleryContainer .gallery-thumbnails .item{
+    display:block;
+    position:relative;
+    float:left;
+    padding:10px 5px;
+    margin:0px;
+}
+.zoomItcontainer .galleryContainer .gallery-thumbnails .item a{
+    display:block;
+    border:1px #FFF solid;
+}
+.zoomItcontainer .galleryContainer .gallery-thumbnails .item.active a{
+    border:1px #000 solid;
+}
+
+.zoomItcontainer .galleryContainer .gallery-thumbnails .item img{
+    margin:0px;
+    padding:0px;
+    display:block;
+}
+
+.zoomItcontainer .galleryContainer .nav-back{
+    display:block;
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    background-image:url(arrow-left.png);
+    background-repeat:no-repeat;
+    background-position:center center;
+    width:30px;
+    height:100%;
+}
+.zoomItcontainer .galleryContainer .nav-fwd{
+    display:block;
+    position:absolute;
+    bottom:0px;
+    right:0px;
+    background-image:url(arrow-right.png);
+    background-repeat:no-repeat;
+    background-position:center center;
+    width:30px;
+    height:100%;
 }
