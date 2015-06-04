@@ -7,7 +7,7 @@
  * License: MIT (http://www.opensource.org/licenses/mit-license.php)
  */
 
-;$.noConflict();(function($){
+;(function($){
 
 	$.fn.jqZoomIt = function(options){
 		if (this.length > 1){
@@ -86,6 +86,7 @@
 				'left' : sizes.zLeft
 			});
 			// if no zoom is needed stop here
+
 			if( $.data( self, 'no_zoom') ){
 				return;
 			}
@@ -109,7 +110,8 @@
 				fullImg.css({
 					'position'	: 'absolute',
 					'top'		: 0,
-					'left'		: 0
+					'left'		: 0,
+                    'max-width' : 'inherit'
 				}).appendTo( $(elems.zoomer) );
 
 				$.data( self, 'loaded', true );
@@ -167,8 +169,6 @@
 							mouseX = e.pageX;
 							mouseY = e.pageY;
 						}
-
-                        console.log("Moving: ", $(self), "To: " + mouseX + "x" + mouseY);
 
 						var sizes = get_small_size(),
 							mX = mouseX - sizes.left - dw/2,
