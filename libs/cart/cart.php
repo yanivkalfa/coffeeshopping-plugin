@@ -2,22 +2,40 @@
 
 class Cart extends Collection{
     public $ID;
+    public $user_id;
+    public $deliver_to;
+    public $address_id;
+    public $payment_method;
+    public $purchase_location;
+    public $status;
+    public $create_date;
     public $address;
 
-    public function __construct($ID, $address = '', $products = array()) {
+    public function __construct($cart = NULL, Address $address = NULL, $products = NULL) {
         $prdc = $products;
-        if(count($products) && is_array($products[0])){
+        if($products && count($products) && is_array($products[0])){
             $prdc = [];
             foreach($products as $key => $prd){
-                $prdc[$key] = new Product($prd['ID'],$prd['cart_id'],$prd['unique_store_id'],$prd['store'],$prd['img'],$prd['title'],$prd['price'],$prd['status']);
+                $prdc[$key] = new Product($prd);
             }
         }
 
         $colOpts = array( 'collection' => $prdc, 'colName' => 'products'  );
         parent::__construct($colOpts);
 
-        $this->ID = $ID;
+        if(is_array($cart)){
+            $this->ID = $cart['ID'];
+            $this->user_id = $cart['user_id'];
+            $this->deliver_to = $cart['deliver_to'];
+            $this->address_id = $cart['address_id'];
+            $this->payment_method = $cart['payment_method'];
+            $this->purchase_location = $cart['purchase_location'];
+            $this->status = $cart['status'];
+            $this->create_date = $cart['create_date'];
+        }
+
         $this->address = $address;
+
     }
 
     public function generateRandomId($randId = ''){
@@ -49,8 +67,49 @@ class Cart extends Collection{
         $total = 0;
         $products = $this->get();
         foreach($products as $product){
-            $total += $product->price;
+            $total += $product->getPrice();
         }
         return $total;
     }
+
+
 }
+
+/*
+utils::preEcho($_SESSION['cart']->products);
+
+$_SESSION['cart']->add(new Product(15, 1, 153, 'ebay','','bekini', 230));
+$_SESSION['cart']->add(new Product(5, 1, 153, 'ebay', '', 'bycles', 123));
+
+utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
+
+unset($_SESSION['cart']);
+
+
+$products = [
+    [
+        'ID' => 5,
+        'cart_id' => 1,
+        'unique_store_id' => 250,
+        'store' => 'ebay',
+        'img' => '',
+        'title' => 'bekini',
+        'price' => 432,
+        'status' => ''
+    ],
+    [
+        'ID' => 5,
+        'cart_id' => 1,
+        'unique_store_id' => 153,
+        'store' => 'ebay',
+        'img' => '',
+        'title' => 'bycles',
+        'price' => 123,
+        'status' => ''
+    ]
+];
+
+$_SESSION['cart'] = new Cart(0, new Address(0), $products);
+
+utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
+*/

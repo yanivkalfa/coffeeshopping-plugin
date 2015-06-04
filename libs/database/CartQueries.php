@@ -1,33 +1,40 @@
 <?php
 /*
-* @ DashboardSketch abstract class that handles anything that relates to dahsboard backend representation.
+* @
 */
 
-class DashboardSketch
-{
-	public $sections = array();
+abstract class CartQueries {
 
 
-    /*
-     * @ Getting all dashboard by selecting all dashboard ids and calling get_dashboard() [single]
-     * @ Accept: Nothing.
-     * @ Returns: (Array) - All dashboard's details.
-     * */
-    public static function get_all_dashboards()
-    {
+    /**
+     * getCart by user id
+     *
+     * @param {number} $userId
+     * @return bool|row
+     */
+    public static function getCart($userId){
         global $wpdb;
-        $table_name = $wpdb->prefix . DB_TABLE_NAME_DASHBOARDS;
-        $results = $wpdb->get_results("SELECT `ID` FROM $table_name ORDER BY `ID` ASC", ARRAY_A);
-        $toReturn = false;
-        if($wpdb->num_rows)
-        {
-           foreach($results as $aDashboard)
-           {
-               $dashboard = self::get_dashboard($aDashboard['ID']);
-               $toReturn[$dashboard['details']['ID']] = $dashboard;
-           }
+        $table_name = $wpdb->prefix . 'cs_carts';
+        return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` NOT IN('paid', 'storage', 'at_store', 'delivered') ORDER BY `create_date` DESC", ARRAY_A);
+    }
+
+
+    public static function getCartProduct($cartId){
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'cs_cart_products';
+        if($results = $wpdb->get_results("SELECT * FROM $table_name WHERE `cart_id` = '$cartId' ORDER BY `ID` ASC", ARRAY_A)) {
+            foreach($results as $key => $modification) {
+                $results[$key]['price_modifiers'] = unserialize($modification['price_modifiers']);
+            }
         }
-        return $toReturn;
+
+        return $results;
+    }
+
+    public static function getCartAddress($cartId){
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'cs_addresses';
+        return $wpdb->get_row("SELECT * FROM $table_name WHERE `ID` = '$cartId'", ARRAY_A);
     }
 
     /*

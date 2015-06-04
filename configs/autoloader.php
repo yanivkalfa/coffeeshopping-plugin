@@ -8,10 +8,10 @@ $classes = array(
     'Method' => '/libs/ajax/',
     'Shortcode_management' => '/libs/shortcode/',
     'Utils' => '/libs/',
+    'CartQueries' => '/libs/database/',
     'searchResultsTemplates' => '/templates/',
     'productViewTemplates' => '/templates/',
     'ebayAdapter' => '/libs/API/ebay/',
-    'productSearch' => '/libs/frontEnd/',
-    'productView' => '/libs/frontEnd/',
-
+    'productSearch' => '/libs/cart/',
+    'productView' => '/libs/cart/',
 );

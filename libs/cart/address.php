@@ -8,15 +8,17 @@ class Address {
     public $postcode;
     public $phone_number;
 
-    public function __construct($ID,$city = '',$house = '',$apt = '',$postcode = '',$phone_number = ''){
+    public function __construct($address=NULL){
 
-        if(empty($ID)) return false;
+        if(is_array($address)) {
+            $this->ID = $address['ID'];
+            $this->city = $address['city'];
+            $this->house = $address['house'];
+            $this->apt = $address['apt'];
+            $this->postcode = $address['postcode'];
+            $this->phone_number = $address['phone_number'];
+        }
 
-        $this->ID = $ID;
-        $this->city = $city;
-        $this->house = $house;
-        $this->apt = $apt;
-        $this->postcode = $postcode;
-        $this->phone_number = $phone_number;
+
     }
 }

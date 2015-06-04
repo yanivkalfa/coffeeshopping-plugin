@@ -2,11 +2,13 @@
   "name": "coffeeshopping",
   "version": "0.0.0",
   "dependencies": {
+    "jquery": "~2.1.4",
+    "jquery.ui": "~1.11.4",
     "es5-shim": "^4.0.0",
     "font-awesome": "~4.2.0",
-    "moment" : "~2.10.3",
-    "bootstrap" : "~3.3.4",
-    "lodash" : "~3.8.0",
+    "moment": "~2.10.3",
+    "bootstrap": "~3.3.4",
+    "lodash": "~3.8.0",
     "dragula.js": "~1.6.0"
   }
 }

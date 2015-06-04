@@ -43,6 +43,11 @@ if(!class_exists('coffee_shopping'))
             add_action( 'plugins_loaded', array($this, 'includeClasses') );
 
             /*
+            * @ Instantiate cart
+            */
+            add_action( 'plugins_loaded', array($this, 'instantiateCart') );
+
+            /*
              * $ add some roles/capabilities
              * */
             add_action( 'admin_init', array($this, 'dashboard_roles'));
@@ -130,51 +135,19 @@ if(!class_exists('coffee_shopping'))
         }
 
         public function instantiateCart(){
-            if(is_user_logged_in()){
-
-            }
             if(!isset($_SESSION['cart'])){
-                $_SESSION['cart'] = new Cart(0);
+                $savedCart = NULL;
+                if(is_user_logged_in()){
+                    $current_user = wp_get_current_user();
+                    $savedCart = CartQueries::getCart($current_user->ID);
+                }
+                $products = isset($savedCart['ID']) ? CartQueries::getCartProduct($savedCart['ID']) : NULL;
+                $address = isset($savedCart['ID']) ? new Address(CartQueries::getCartAddress($savedCart['ID'])) :  new Address();
+
+                $_SESSION['cart'] = new Cart($savedCart, $address, $products);
             }
 
-            /*
-            utils::preEcho($_SESSION['cart']->products);
-
-            $_SESSION['cart']->add(new Product(15, 1, 153, 'ebay','','bekini', 230));
-            $_SESSION['cart']->add(new Product(5, 1, 153, 'ebay', '', 'bycles', 123));
-
-            utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
-            /*
-            unset($_SESSION['cart']);
-
-
-            $products = [
-                [
-                    'ID' => 5,
-                    'cart_id' => 1,
-                    'unique_store_id' => 250,
-                    'store' => 'ebay',
-                    'img' => '',
-                    'title' => 'bekini',
-                    'price' => 432,
-                    'status' => ''
-                ],
-                [
-                    'ID' => 5,
-                    'cart_id' => 1,
-                    'unique_store_id' => 153,
-                    'store' => 'ebay',
-                    'img' => '',
-                    'title' => 'bycles',
-                    'price' => 123,
-                    'status' => ''
-                ]
-            ];
-
-            $_SESSION['cart'] = new Cart(0, new Address(0), $products);
-
-            utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
-            */
+            //Utils::preEcho($_SESSION['cart']);
         }
 
 
@@ -264,9 +237,21 @@ if(!class_exists('coffee_shopping'))
 
         }
 
+        /**
+         * dequeue and deregister old jquery
+         */
+        public function removeJquery(){
+            wp_dequeue_script( 'jquery');
+            wp_deregister_script( 'jquery');
+        }
+
+        /**
+         * removing jquery - adding shared scripts and then fonrend scripts lastly adding constants. to constants.js
+         */
         public function frontRegisterScripts()
         {
             global $req_scripts;
+            $this->removeJquery();
             $this->registerScripts($req_scripts['shared']);
             $this->registerScripts($req_scripts['front_end']);
 
@@ -276,9 +261,13 @@ if(!class_exists('coffee_shopping'))
             wp_localize_script('constants.js','$ns',$main_js_namespace);
         }
 
+        /**
+         * removing jquery - adding shared scripts and then backend scripts lastly adding constants to app.js.
+         */
         public function backRegisterScripts()
         {
             global $req_scripts;
+            $this->removeJquery();
             $this->registerScripts($req_scripts['shared']);
             $this->registerScripts($req_scripts['back_end']);
 
@@ -288,7 +277,12 @@ if(!class_exists('coffee_shopping'))
             wp_localize_script('app.js','$ns',$main_js_namespace);
         }
 
-
+        /**
+         * taking an array of scripts handles iterating over it and
+         * register/queuing scripts and styles.
+         *
+         * @param {array} $scripts
+         */
         public function registerScripts($scripts)
         {
             foreach($scripts as $singleHeader)
@@ -347,8 +341,8 @@ if(!class_exists('coffee_shopping'))
                 address_id bigint(20) NOT NULL,
                 payment_method varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 purchase_location varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-                status bigint(20) varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-                create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);
@@ -358,12 +352,13 @@ if(!class_exists('coffee_shopping'))
             $table = "CREATE TABLE $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 cart_id bigint(20) NOT NULL,
-                unique_store_id bigint(20) NOT NULL,
+                unique_store_id varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 store varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 img varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 title varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                price_modifiers text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 price float(20) NOT NULL,
-                status bigint(20) varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);
