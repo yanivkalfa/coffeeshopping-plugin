@@ -19,7 +19,7 @@ abstract class productSearch {
      * @param   boolean   $sandbox    [Optional]  - Do we use the sandbox or live? (defaults to live)
      * @return  array     $result                 - An array with 2 keys - result/output.
      *      - Success - result = "OK"
-     *                  output = $ObjSearch object ready for constructSearchResults().
+     *                  output = $ObjSearch object ready for constructResults(). [Proper example format found at: ebay_FindingAPI::_formatSearchOutput()]
      *                  $ObjSearch          - Search results object:
      *                                              int count.
      *                                              array paginationOutput ("pageNumber", "entriesPerPage", "totalPages", "totalEntries")
@@ -27,7 +27,7 @@ abstract class productSearch {
      *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
      *
      *      - Failure - result = "ERROR",
-     *                  output = Error description.
+     *                  output = Error code, codes reference at: utils::getErrorCodeText($errorCode).
      */
     static public function searchAPI($API, $searchVal, $searchOpts = array(), $sandbox = false){
         // Check if our Adapter exists.
@@ -58,7 +58,10 @@ abstract class productSearch {
         $finder->_setSearchOptions($searchOpts);
         // Run the search and get a results obj.
         $result = $finder->getSearch();
-        return $result;
+        return array(
+            "result" => "OK",
+            "output" => $result["output"]
+        );
     }
 
     /**
@@ -78,7 +81,7 @@ abstract class productSearch {
      *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
      *
      *      - Failure - result = "ERROR",
-     *                  output = Error description.
+     *                  output = Error code, codes reference at: utils::getErrorCodeText($errorCode).
      */
     static public function searchALL($APIs, $searchVal, $searchOpts = array(), $sandbox = false){
         $searchResults = new stdClass();
@@ -88,11 +91,14 @@ abstract class productSearch {
         $searchResults->status =                array();
         $searchResults->errors =                array();
 
+        // Keep track of our results, to see if we have any.
+        $hasResults = false;
         // perform the search for each active API we have.
         foreach($APIs as $API){
             $result = productSearch::searchAPI($API, $searchVal, $searchOpts, $sandbox);
             $searchResults->status["$API"] = $result["result"];
             if ($result["result"]=="OK"){
+                $hasResults = true;
                 // Store our count for current API.
                 $searchResults->count["$API"] = $result["output"]->count;
                 // Store our pagination of that API.
@@ -102,9 +108,19 @@ abstract class productSearch {
             }else{
                 $searchResults->errors["$API"] = $result["output"];
             }
-
         }
-        return $searchResults;
+        if ($hasResults){
+            return array(
+                "result" => "OK",
+                "output" => $searchResults
+            );
+        }else{
+            return array(
+                "result" => "ERROR",
+                "output" => $searchResults
+            );
+        }
+
     }
 
     /**
@@ -126,7 +142,7 @@ abstract class productSearch {
      * @func constructResultsAPIs($searchResults)
      *  - Construction of our searchALL() search results using our search results template.
      * @param   object  $searchResults         - as provided by our searchALL() function.
-     * @return  string  $searchOutput          - HTML ready ul with out search results.
+     * @return  string  $searchOutput          - HTML ready ul with our search results.
      */
     static public function constructResultsAPIs($searchResults){
         $searchOutput = '<ul class="searchresultsul nolistbull">';
@@ -144,7 +160,7 @@ abstract class productSearch {
      * @func constructResults($searchResults)
      *  - Construction of our search results using our search results template. (Works for both searchALL() and searchAPI())
      * @param   object  $searchResults         - as provided by our searchALL() OR searchAPI() functions.
-     * @return  string  $searchOutput          - HTML ready ul with out search results.
+     * @return  string  $searchOutput          - HTML ready ul with our search results.
      */
     static public function constructResults($searchResults){
         $searchOutput = '<ul class="searchresultsul nolistbull">';

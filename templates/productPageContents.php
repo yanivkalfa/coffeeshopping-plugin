@@ -25,6 +25,12 @@ if (
     // performs the actual request.
     $result = productView::getProduct($store, $productID, $itemOpts, $sandbox);
     utils::preEcho($result);
+
+    // Output results if we have any proper ones, else display errors.
+    if ($result[""] == ERROR){
+        echo productView::DisplayError($result);
+    }
+
 }
 
 

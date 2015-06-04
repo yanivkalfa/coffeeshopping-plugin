@@ -12,11 +12,11 @@ abstract class Utils{
     }
 
     static public function getErrorCode($cat, $sub, $type, $num){
-        require "errorCodes.php";
+        require "utilsLibs/errorCodes.php";
         return $errorCategories["$cat"].$errorSubCategories["$sub"].$errorSubCategoryTypes["$type"]."$num";
     }
     static public function getErrorCodeText($errorCode){
-        require "errorCodes.php";
+        require "utilsLibs/errorCodes.php";
         $errorNum = substr($errorCode, -1);
         if (isset($errorCodesHandler[$errorNum])){
             return $errorCodesHandler[$errorNum];
@@ -136,7 +136,6 @@ abstract class Utils{
                 "result" => "ERROR",
                 "output" => '<br />cURLing::'.$url.'- Curl error: (#'.curl_errno($crl).') ' . curl_error($crl).'<br />'
             );
-
         }
         curl_close($crl);
         return array(
@@ -147,7 +146,7 @@ abstract class Utils{
 
     static public function getCountryFromCode($countryCode){
         // Get our $country array.
-        require "countryCodesArr.php";
+        require "utilsLibs/countryCodesArr.php";
         if (!isset($countries[$countryCode])){return "Unknown (".$countryCode.")";}
         return $countries[$countryCode];
     }
