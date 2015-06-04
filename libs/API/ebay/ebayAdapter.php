@@ -88,46 +88,5 @@ if (!class_exists("ebay_ShoppingAPI")){echo "Failed to load ebay_ShoppingAPI cla
 
 /* ------------------- DEAD OR UNUSED CODE ---------------- */
 
-/* ---------------------------------------------------------------------------------------------
- * TRYOUT
- * ---------------------------------------------------------------------------------------------
-
-$filterarray = array(
-    array(
-        'name' => 'MinPrice',
-        'value' => '10',
-        'paramName' => 'Currency',
-        'paramValue' => 'USD'
-    ),
-    array(
-        'name' => 'FreeShippingOnly',
-        'value' => 'true',
-        'paramName' => '',
-        'paramValue' => ''
-    ),
-    array(
-        'name' => 'ListingType',
-        'value' => array('AuctionWithBIN','FixedPrice','StoreInventory'),
-        'paramName' => '',
-        'paramValue' => ''
-    ),
-);
-
-/*
-$finder = new ebay_FindingAPI();
-$finder->_setLive();
-$finder->searchOptions->searchQuery = "Samsung Galaxy Gear";
-echo "<pre>";print_r($finder);echo "</pre>";
-$obj = $finder->getSearch();
-echo "<pre>";print_r($obj);echo "</pre>";
-
-$product = new ebay_ShoppingAPI();
-$product->_setLive();
-$product->itemOptions->itemID = "151672890723";
-echo "<pre>";print_r($product);echo "</pre>";
-$obj = $product->getProduct();
-echo "<pre>";print_r($obj);echo "</pre>";
-*/
-
 /* ------------------- DEAD OR UNUSED CODE ---------------- */
 ?>

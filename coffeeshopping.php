@@ -138,17 +138,12 @@ if(!class_exists('coffee_shopping'))
             }
 
             /*
-            echo '<pre>';
-            print_r($_SESSION['cart']->products);
-            echo '</pre>';
+            utils::preEcho($_SESSION['cart']->products);
 
             $_SESSION['cart']->add(new Product(15, 1, 153, 'ebay','','bekini', 230));
             $_SESSION['cart']->add(new Product(5, 1, 153, 'ebay', '', 'bycles', 123));
 
-            echo '<br> total:'.$_SESSION['cart']->getTotal();
-            echo '<pre>';
-            print_r($_SESSION['cart']);
-            echo '</pre>';
+            utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
             /*
             unset($_SESSION['cart']);
 
@@ -178,11 +173,7 @@ if(!class_exists('coffee_shopping'))
 
             $_SESSION['cart'] = new Cart(0, new Address(0), $products);
 
-
-            echo '<br> total:'.$_SESSION['cart']->getTotal();
-            echo '<pre>';
-            print_r($_SESSION['cart']);
-            echo '</pre>';
+            utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
             */
         }
 

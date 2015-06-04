@@ -46,21 +46,9 @@ abstract class Utils{
             $item = is_object($arr[$i]) ? (array)$arr[$i] : $arr[$i];
 
             /*
-            echo '<br>property: '.$prop;
-            echo '<br>$item: ';
-            echo '<pre>';
-            print_r($item);
-            echo '</pre>';
-
-            echo '<br>$srch: ';
-            echo '<pre>';
-            print_r($srch);
-            echo '</pre>';
-
-            echo '<br>$srch[$prop]: ';
-            echo '<pre>';
-            print_r($srch[$prop]);
-            echo '</pre>';
+            utils::preEcho($item, '<br>property: '.$prop.'<br>$item: ');
+            utils::preEcho($srch, '<br>$srch: ');
+            utils::preEcho($srch[$prop], '<br>$srch[$prop]: ');
             */
 
             if($prop && $item[$prop] && ($item[$prop] === $srch[$prop] || $item[$prop] === $srch)) return $i;
