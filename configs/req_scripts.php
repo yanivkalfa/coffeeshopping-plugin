@@ -11,7 +11,6 @@ global $req_scripts;
 $req_scripts = array(
 
     'front_end' => array(
-        // WE HAVE jq UI in 'H:\wamp\www\CoffeeShopping\wp-includes\js\jquery\ui' we should add it from there.
         array('handle' => 'core.min', 'src' => '/scripts/ZoomIt/core.min', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),      // jq ui required for ZoomIt
         array('handle' => 'widget.min', 'src' => '/scripts/ZoomIt/widget.min', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),    // jq ui required for ZoomIt
         array('handle' => 'mouse.min', 'src' => '/scripts/ZoomIt/mouse.min', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),     // jq ui required for ZoomIt

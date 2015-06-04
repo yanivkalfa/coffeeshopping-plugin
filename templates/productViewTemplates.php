@@ -35,10 +35,18 @@ abstract class productViewTemplates {
         ob_start();
         ?>
         <script language="javascript" type="text/javascript">
+            /**
+             * Full gallery example
+             *
+             * The code below creates the gallery. No editing needed to
+             * actual zoom script file ( zoomit.jquery.js )
+             *
+             */
             // use load event on window to start the script
-            jQuery(window).load(function(){
-                var previews 	= jQuery('.full-image a'),          // image previews
-                    thumbnails 	= jQuery('.gallery-thumbnails a');  // small thumbnails for changing previews
+            jQuery(document).ready( function(){
+
+                var previews 	= jQuery('.full-image a'), // image previews
+                    thumbnails 	= jQuery('.gallery-thumbnails a'); // small thumbnails for changing previews
 
                 // start zoom only on visible element
                 jQuery('.zoomIt.visible').jqZoomIt({
@@ -70,7 +78,7 @@ abstract class productViewTemplates {
         <div id="topcontainer">
             <div id="toppicturepanel">
 
-                <div class="container">
+                <div class="zoomItcontainer">
                     <div class="full-image">
                         <?php
                             $class = "visible";
@@ -78,9 +86,7 @@ abstract class productViewTemplates {
                                 $imgGallery = ebay_Utils::getEbayPicture($pic, "400s");
                                 $imgBig = ebay_Utils::getEbayPicture($pic, "1200s");
                                 ?>
-
                         <a href="<?php echo $imgBig;?>" class="zoomIt <?php echo $class;?>"><img src="<?php echo $imgGallery;?>" alt="" /></a>
-
                                 <?php
                                 $class = "hidden";
                             }
@@ -91,9 +97,7 @@ abstract class productViewTemplates {
                         foreach ($product->pics as $pic){
                             $imgThumb = ebay_Utils::getEbayPicture($pic, "64s");
                             ?>
-
                         <li><a href="#"><img src="<?php echo $imgThumb;?>" width="50" alt="" /></a></li>
-
                             <?php
                         }
                         ?>
