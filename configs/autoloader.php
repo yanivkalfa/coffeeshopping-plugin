@@ -12,6 +12,6 @@ $classes = array(
     'searchResultsTemplates' => '/templates/',
     'productViewTemplates' => '/templates/',
     'ebayAdapter' => '/libs/API/ebay/',
-    'productSearch' => '/libs/cart/',
-    'productView' => '/libs/cart/',
+    'productSearch' => '/libs/API/',
+    'productView' => '/libs/API/',
 );

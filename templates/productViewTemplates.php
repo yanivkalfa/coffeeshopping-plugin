@@ -45,8 +45,8 @@ abstract class productViewTemplates {
             // use load event on window to start the script
             jQuery(document).ready( function(){
 
-                var previews 	= jQuery('.full-image a'), // image previews
-                    thumbnails 	= jQuery('.gallery-thumbnails a'); // small thumbnails for changing previews
+                var previews 	= jQuery('.zoomItcontainer.full-image a'), // image previews
+                    thumbnails 	= jQuery('.zoomItcontainer.gallery-thumbnails a'); // small thumbnails for changing previews
 
                 // start zoom only on visible element
                 jQuery('.zoomIt.visible').jqZoomIt({
