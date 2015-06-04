@@ -127,39 +127,6 @@ abstract class productSearch {
     }
 
     /**
-     * @func constructResultsAPI($Items)
-     *  - Construction of our searchAPI() search results using our search results template.
-     * @param   object  $Items                 - as provided by our searchAPI() function.
-     * @return  string  $searchOutput          - HTML ready ul with out search results.
-     */
-    static public function constructResultsAPI($Items){
-        $searchOutput = '<ul class="searchresultsul nolistbull">';
-        foreach ($Items as $item){
-            $searchOutput .= searchResultsTemplates::getSearchResultItem($item);
-        }
-        $searchOutput .= "</ul>";
-        return $searchOutput;
-    }
-
-    /**
-     * @func constructResultsAPIs($searchResults)
-     *  - Construction of our searchALL() search results using our search results template.
-     * @param   object  $searchResults         - as provided by our searchALL() function.
-     * @return  string  $searchOutput          - HTML ready ul with our search results.
-     */
-    static public function constructResultsAPIs($searchResults){
-        $searchOutput = '<ul class="searchresultsul nolistbull">';
-        foreach ($searchResults->items as $API => $Items){
-            $searchOutput .= "$API Search Results:";
-            foreach ($Items as $item){
-                $searchOutput .= searchResultsTemplates::getSearchResultItem($item);
-            }
-        }
-        $searchOutput .= "</ul>";
-        return $searchOutput;
-    }
-
-    /**
      * @func constructResults($searchResults)
      *  - Construction of our search results using our search results template. (Works for both searchALL() and searchAPI())
      * @param   object  $searchResults         - as provided by our searchALL() OR searchAPI() functions.
@@ -185,9 +152,53 @@ abstract class productSearch {
         $searchOutput .= "</ul>";
         return $searchOutput;
     }
+
+    /**
+     * @func displayError($msg)
+     *  - Gets the template for our search results error.
+     * @param   string  $msg                - The msg to place in the error page.
+     * @return  string  HTML error page.
+     */
+    static public function displayError($msg){
+        return searchResultsTemplates::getSearchErrorContent($msg);
+    }
 }
 
 /* ------------------- DEAD OR UNUSED CODE ---------------- */
+
+/**
+ * @func constructResultsAPI($Items)
+ *  - Construction of our searchAPI() search results using our search results template.
+ * @param   object  $Items                 - as provided by our searchAPI() function.
+ * @return  string  $searchOutput          - HTML ready ul with out search results.
+static public function constructResultsAPI($Items){
+    $searchOutput = '<ul class="searchresultsul nolistbull">';
+    foreach ($Items as $item){
+        $searchOutput .= searchResultsTemplates::getSearchResultItem($item);
+    }
+    $searchOutput .= "</ul>";
+    return $searchOutput;
+}
+
+    /**
+     * @func constructResultsAPIs($searchResults)
+     *  - Construction of our searchALL() search results using our search results template.
+     * @param   object  $searchResults         - as provided by our searchALL() function.
+     * @return  string  $searchOutput          - HTML ready ul with our search results.
+    static public function constructResultsAPIs($searchResults){
+    $searchOutput = '<ul class="searchresultsul nolistbull">';
+    foreach ($searchResults->items as $API => $Items){
+        $searchOutput .= "$API Search Results:";
+        foreach ($Items as $item){
+            $searchOutput .= searchResultsTemplates::getSearchResultItem($item);
+        }
+    }
+    $searchOutput .= "</ul>";
+    return $searchOutput;
+}
+*/
+
+
 
 /*
  * Search Options list:

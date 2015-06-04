@@ -7,7 +7,28 @@
  */
 
 abstract class searchResultsTemplates {
+    /**
+     * @func getSearchErrorContent($msg)
+     *  - Returns a HTML ready formatted search result error to display.
+     * @param   object  $item          - $ObjSearch object->item.
+     * @return  string  HTML item.
+     */
+    static public function getSearchErrorContent($msg){
+        ob_start();
+        ?>
 
+        <div class="searchresulterror"><?php echo $msg?></div>
+
+        <?php
+        return ob_get_clean();
+    }
+
+    /**
+     * @func getSearchResultItem($item)
+     *  - Returns a HTML ready formatted search result item.
+     * @param   object  $item          - $ObjSearch object->item.
+     * @return  string  HTML item.
+     */
     static public function getSearchResultItem($item){
         ob_start();
         ?>

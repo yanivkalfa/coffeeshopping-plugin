@@ -49,21 +49,16 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     $result = productSearch::searchALL($APIs, $searchVal, $searchOpts, $sandbox);
     utils::preEcho($result);
 
-    // Output results if we have any proper ones, else display errors.
-    $hasResults = false;
-    foreach ($result->status as $API => $status) {
-        if ($status == "OK") {
-            $hasResults = true;
-            echo productSearch::constructResults($result);
-        }
-    }
-    if (!$hasResults) {
-        foreach ($result->errors as $API => $Error) {
-            echo "Search error trying to search " . $API . " :: " . $Error;
-        }
-    }
+    if ($result["result"]=="OK"){
+        echo productSearch::constructResults($result);
 
-
+    }else{
+        $errorsText = "";
+        foreach ($result["output"]->errors as $API => $Error) {
+            $errorsText .= "(" . $API . ") :: " . $Error."\n";
+        }
+        echo productSearch::displayError($errorsText);
+    }
 }
 
 ?>

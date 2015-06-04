@@ -51,7 +51,6 @@ abstract class productView {
             $getter->_setLive();
         }
         // Set our item ID.
-        utils::preEcho("_setItemID:".$productID);
         $getter->_setItemID($productID);
         // Set our item options.
         $getter->_setItemOptions($itemOpts);
