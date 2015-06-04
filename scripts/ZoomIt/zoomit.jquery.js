@@ -7,7 +7,7 @@
  * License: MIT (http://www.opensource.org/licenses/mit-license.php)
  */
 
-;(function($){
+;$.noConflict();(function($){
 
 	$.fn.jqZoomIt = function(options){
 		if (this.length > 1){
@@ -168,6 +168,8 @@
 							mouseY = e.pageY;
 						}
 
+                        console.log("Moving: ", $(self), "To: " + mouseX + "x" + mouseY);
+
 						var sizes = get_small_size(),
 							mX = mouseX - sizes.left - dw/2,
 							mY = mouseY - sizes.top - dh/2;
@@ -260,7 +262,6 @@
 
 		// creates an element that overlaps the image to highlight the area being zoomed
 		var add_preview_area = function(){
-            console.log("Adding zoom area to: ", $(self));
 			var dragger = $('<div />',{
 				'class': options.zoomAreaClass,
 				'css':{
