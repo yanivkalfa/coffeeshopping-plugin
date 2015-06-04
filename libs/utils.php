@@ -12,11 +12,11 @@ abstract class Utils{
     }
 
     static public function getErrorCode($cat, $sub, $type, $num){
-        include "errorCodes.php";
+        require "errorCodes.php";
         return $errorCategories["$cat"].$errorSubCategories["$sub"].$errorSubCategoryTypes["$type"]."$num";
     }
     static public function getErrorCodeText($errorCode){
-        include "errorCodes.php";
+        require "errorCodes.php";
         $errorNum = substr($errorCode, -1);
         if (isset($errorCodesHandler[$errorNum])){
             return $errorCodesHandler[$errorNum];

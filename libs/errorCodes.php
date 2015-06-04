@@ -20,7 +20,7 @@ $errorSubCategoryTypes = array(
 
 
 $errorCodesHandler = array(
-    "0" => "(internal) improper search string",
+    "0" => "improper search string",
     "1" => "cURL Communication error",
     "2" => "Failed to get the requested item details",
     "3" => "Failed to get the product's shipping details",
