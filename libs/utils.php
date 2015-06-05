@@ -12,15 +12,16 @@ abstract class Utils{
     }
 
     static public function getErrorCode($cat, $sub, $type, $num){
-        require "utilsLibs/errorCodes.php";
-        return array_search("$cat", $errorCategories).array_search("$sub", $errorSubCategories).array_search("$type", $errorSubCategoryTypes)."$num";
+        $errorCategories = CSCons::get('errorCategories') ?: array();
+        $errorSubCategories = CSCons::get('errorSubCategories') ?: array();
+        $errorSubCategoryTypes = CSCons::get('errorSubCategoryTypes') ?: array();
+
+        return array_search("$cat",$errorCategories).array_search("$sub", $errorSubCategories).array_search("$type", $errorSubCategoryTypes)."$num";
     }
     static public function getErrorCodeText($errorCode){
-        require "utilsLibs/errorCodes.php";
+        $errorCodesHandler = CSCons::get('errorCodesHandler') ?: NULL;
         $errorNum = substr($errorCode, -1);
-        if (isset($errorCodesHandler[$errorNum])){
-            return $errorCodesHandler[$errorNum];
-        }
+        return isset($errorCodesHandler[$errorNum]) ? $errorCodesHandler[$errorNum] : false ;
     }
 
 
@@ -146,9 +147,17 @@ abstract class Utils{
 
     static public function getCountryFromCode($countryCode){
         // Get our $country array.
-        require "utilsLibs/countryCodesArr.php";
-        if (!isset($countries[$countryCode])){return "Unknown (".$countryCode.")";}
-        return $countries[$countryCode];
+        $countries = CSCons::get('countries') ?: NULL;
+        return isset($countries[$countryCode]) ? $countries[$countryCode] : "Unknown (".$countryCode.")";
+    }
+
+    static public function arrayPluck($arr,$keep){
+        $return = [];
+        foreach($keep as $value){
+            if(!isset($arr[$value])) continue;
+            $return[$value] = $arr[$value];
+        }
+        return $return;
     }
 }
 

@@ -107,7 +107,6 @@ if(!class_exists('coffee_shopping'))
         {
             $allClassFolders = array(
                 glob(CONFIGS.'/*.php'),
-                glob(LIBS.'/*.php'),
             );
 
             foreach($allClassFolders as $classLib)
@@ -135,19 +134,20 @@ if(!class_exists('coffee_shopping'))
         }
 
         public function instantiateCart(){
-            if(!isset($_SESSION['cart'])){
-                $savedCart = NULL;
-                if(is_user_logged_in()){
-                    $current_user = wp_get_current_user();
-                    $savedCart = CartQueries::getCart($current_user->ID);
+
+            if(!current_user_can('manage_options')){
+                if(!isset($_SESSION['cart'])){
+                    $savedCart = NULL;
+                    if(is_user_logged_in()){
+                        $current_user = wp_get_current_user();
+                        $savedCart = CartDatabaseHelper::getCart($current_user->ID);
+                    }
+                    $products = isset($savedCart['ID']) ? CartDatabaseHelper::getCartProduct($savedCart['ID']) : NULL;
+                    $address = isset($savedCart['ID']) ? new Address(CartDatabaseHelper::getCartAddress($savedCart['ID'])) :  new Address();
+
+                    $_SESSION['cart'] = new Cart($savedCart, $address, $products);
                 }
-                $products = isset($savedCart['ID']) ? CartQueries::getCartProduct($savedCart['ID']) : NULL;
-                $address = isset($savedCart['ID']) ? new Address(CartQueries::getCartAddress($savedCart['ID'])) :  new Address();
-
-                $_SESSION['cart'] = new Cart($savedCart, $address, $products);
             }
-
-            //Utils::preEcho($_SESSION['cart']);
         }
 
 
@@ -250,10 +250,9 @@ if(!class_exists('coffee_shopping'))
          */
         public function frontRegisterScripts()
         {
-            global $req_scripts;
             $this->removeJquery();
-            $this->registerScripts($req_scripts['shared']);
-            $this->registerScripts($req_scripts['front_end']);
+            $this->registerScripts(CSCons::get('req_scripts')['shared']);
+            $this->registerScripts(CSCons::get('req_scripts')['front_end']);
 
             $main_js_namespace = array(
                 'ajaxURL' => admin_url('admin-ajax.php')
@@ -266,10 +265,9 @@ if(!class_exists('coffee_shopping'))
          */
         public function backRegisterScripts()
         {
-            global $req_scripts;
             $this->removeJquery();
-            $this->registerScripts($req_scripts['shared']);
-            $this->registerScripts($req_scripts['back_end']);
+            $this->registerScripts(CSCons::get('req_scripts')['shared']);
+            $this->registerScripts(CSCons::get('req_scripts')['back_end']);
 
             $main_js_namespace = array(
                 'ajaxURL' => admin_url('admin-ajax.php')
@@ -359,6 +357,7 @@ if(!class_exists('coffee_shopping'))
                 price_modifiers text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 price float(20) NOT NULL,
                 status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                quantity int(10) NOT NULL,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);
@@ -461,10 +460,71 @@ $coffee_shopping = new coffee_shopping();
 
 
 
-/* ------------------- DEAD OR UNUSED CODE ---------------- */
 /*
-*/
-/* ------------------- DEAD OR UNUSED CODE ---------------- */
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'cs_cart_products';
 
+            $priceMod = array(
+                array(
+                    'name' => 'storeCommission',
+                    'nameAs' => 'Store commission',
+                    'value' => 3,
+                ),
+                array(
+                    'name' => 'PayPalFees',
+                    'nameAs' => 'PayPal transaction fees',
+                    'value' => 5,
+                ),
+                array(
+                    'name' => 'PayPalDollarExchange',
+                    'nameAs' => 'PayPal dollar exchange fee',
+                    'value' => 9,
+                ),
+                array(
+                    'name' => 'shippingCosts',
+                    'nameAs' => 'Product Shipping cost',
+                    'value' => 6,
+                )
+            );
+            $wpdb->update($table_name,array('price_modifiers' => serialize($priceMod)),array( 'ID' => 1 ));
+
+            $priceMod = array(
+                array(
+                    'name' => 'storeCommission',
+                    'nameAs' => 'Store commission',
+                    'value' => 5,
+                ),
+                array(
+                    'name' => 'PayPalFees',
+                    'nameAs' => 'PayPal transaction fees',
+                    'value' => 12,
+                ),
+                array(
+                    'name' => 'shippingCosts',
+                    'nameAs' => 'Product Shipping cost',
+                    'value' => 8,
+                )
+            );
+            $wpdb->update($table_name,array('price_modifiers' => serialize($priceMod)),array( 'ID' => 2 ));
+
+            $priceMod = array(
+                array(
+                    'name' => 'PayPalFees',
+                    'nameAs' => 'PayPal transaction fees',
+                    'value' => 1,
+                ),
+                array(
+                    'name' => 'PayPalDollarExchange',
+                    'nameAs' => 'PayPal dollar exchange fee',
+                    'value' => 11,
+                ),
+                array(
+                    'name' => 'shippingCosts',
+                    'nameAs' => 'Product Shipping cost',
+                    'value' => 14,
+                )
+            );
+            $wpdb->update($table_name,array('price_modifiers' => serialize($priceMod)),array( 'ID' => 3 ));
+            */
 
 ?>

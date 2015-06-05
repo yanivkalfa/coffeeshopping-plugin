@@ -67,7 +67,7 @@ class Cart extends Collection{
         $total = 0;
         $products = $this->get();
         foreach($products as $product){
-            $total += $product->getPrice();
+            $total += $product->getPriceAfterQuantity();
         }
         return $total;
     }
