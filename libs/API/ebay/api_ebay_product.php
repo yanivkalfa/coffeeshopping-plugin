@@ -186,7 +186,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Make the call to eBay.
         $shippingDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
         if ($shippingDetailsRaw["result"]=="ERROR"){
-            utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
+            utils::adminPreECHO($shippingDetailsRaw["output"], "cURL ERROR details:: ");
             return array(
                 'result' => "ERROR",
                 "output" => utils::getErrorCode("API", "ebay", "getShippingCosts", "1")
@@ -291,6 +291,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct = new stdClass();
         $ObjProduct->ID                     =     (string)  $productOutput->ItemID;
         $ObjProduct->title                  =     (string)  $productOutput->Title;
+        $ObjProduct->subtitle               =     (string)  $productOutput->Subtitle;
         $ObjProduct->descriptionHTML        =     (string)  $productOutput->Description;
         $ObjProduct->storeLink              =     (string)  $productOutput->ViewItemURLForNaturalSearch;
         $ObjProduct->pics                   =     (array)   $productOutput->PictureURL;

@@ -51,3 +51,14 @@
     float: right;
 }
 /* END Search Page*/
+
+/* Product Page BEGIN */
+#toppicturepanel{
+
+    float: left;
+    display:inline-block;
+}
+#topdetailspanel{
+
+}
+/* END Product Page*/

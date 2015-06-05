@@ -73,15 +73,8 @@ abstract class productViewTemplates {
                     }
                 });
 
+                // Load our carousel.
                 var m = jQuery('.galleryContainer').CB_CarouseljQ({
-                    visibleItems : 6,
-                    cycle		: true,
-                    opacityIdle : .7,
-                    opacityOn	: 1,
-                    opacityOver : .8,
-                    animateNavs : true,
-                    threshold	: 20,
-
                     change: function(s, obj){
                         jQuery(obj).children("a").click();
                     }
@@ -89,7 +82,19 @@ abstract class productViewTemplates {
 
             });
         </script>
+
         <div id="topcontainer">
+            <div id="topdetailspanel">
+                <div class="productDetailsTitle">
+                    <h1><?php echo $product->title; ?></h1>
+                    <h2><?php echo $product->subtitle; ?></h2>
+                </div>
+                <hr/>
+            </div>
+        </div>
+
+        <div id="middlecontainer">
+
             <div id="toppicturepanel">
 
                 <div class="zoomItcontainer">
@@ -106,13 +111,13 @@ abstract class productViewTemplates {
                             }
                         ?>
                     </div>
-                    <div class="galleryContainer">
+                    <div class="galleryContainer" align="center">
                         <ul class="gallery-thumbnails">
                             <?php
                             foreach ($product->pics as $pic){
                                 $imgThumb = ebay_Utils::getEbayPicture($pic, "64s");
                                 ?>
-                            <li class="item"><a href="#"><img src="<?php echo $imgThumb;?>" width="50" alt="" /></a></li>
+                            <li class="item"><a href="#"><img src="<?php echo $imgThumb;?>" width="54" alt="" /></a></li>
                                 <?php
                             }
                             ?>
@@ -123,9 +128,13 @@ abstract class productViewTemplates {
                 </div>
 
             </div>
-            <div id="topdetailspanel">
 
+            <div id="productchoices">
+                <table width="100%">
+
+                </table>
             </div>
+
 
         </div>
 

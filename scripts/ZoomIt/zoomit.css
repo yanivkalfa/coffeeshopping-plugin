@@ -28,7 +28,9 @@ Default values in script:
     border:none;
 }
 
-/* zoomItContainer CSS */
+/*
+                                            zoomItContainer CSS
+*/
 .zoomItcontainer a.zoomIt img{
     border:none;
 }
@@ -52,9 +54,7 @@ Default values in script:
     width:0px;
     float:left;
     overflow:hidden;
-    border:1px #ccc solid;
-    box-shadow:1px 1px 10px #000000;
-    padding:0px 5px;
+    padding:0px 3px;
 }
 .zoomItcontainer .galleryContainer .gallery-thumbnails{
     display:block;
@@ -84,6 +84,8 @@ Default values in script:
     margin:0px;
     padding:0px;
     display:block;
+    border: 1px #aaa solid;
+    border-radius: 3px;
 }
 
 .zoomItcontainer .galleryContainer .nav-back{
