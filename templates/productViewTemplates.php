@@ -89,6 +89,9 @@ abstract class productViewTemplates {
                     <h1><?php Utils::pageEcho($product->title); ?></h1>
                     <h2><?php Utils::pageEcho($product->subtitle); ?></h2>
                 </div>
+                <div class="productCategoryText">
+                <?php echo (isset($product->categoryText) && !empty($product->categoryText))? "<h4> Category: ".$product->categoryText."</h4>": "";?>
+                </div>
             </div>
         </div>
 
@@ -130,11 +133,13 @@ abstract class productViewTemplates {
 
             <div id="productchoices">
                 <h3>
-                    Make your order:
+                    Make your order
+                    <?php echo $product->topRatedItem ? " top-rated-item " : "";?>
+                    :
                 </h3>
                 <div id="itemcondition">
-                    <div class="inline">Item condition:</div>
-                    <div class="inline"><?php Utils::pageEcho($product->conditionText);?></div>
+                    <div class="inline size25">Item condition:</div>
+                    <div class="inline size25"><?php Utils::pageEcho($product->conditionText);?></div>
                 </div>
 
                 <div id="itemvariations">
@@ -142,8 +147,8 @@ abstract class productViewTemplates {
                     foreach ($product->variationSets as $setName => $setVars){
                         ?>
                         <div id="vardiv_<?php echo $setName;?>">
-                            <div class="inline"><?php Utils::pageEcho($setName);?>:</div>
-                            <div class="inline">
+                            <div class="inline size25"><?php Utils::pageEcho($setName);?>:</div>
+                            <div class="inline size25">
                                 <select name="varset_<?php echo $setName;?>">
                                     <?php
                                     foreach ($setVars as $variation => $variationIMG){
@@ -163,8 +168,8 @@ abstract class productViewTemplates {
 
                 <div id="itemshippingdiv">
                     <div id="shippmentdiv">
-                        <div class="inline">Shipping options:</div>
-                        <div class="inline">
+                        <div class="inline size25">Shipping options:</div>
+                        <div class="inline size25">
                             <select id="shippingOptions" name="shippingopts">
                                 <?php
                                     foreach ($product->shippingDetails->shippingOptions as $shippingOpts){
@@ -177,24 +182,73 @@ abstract class productViewTemplates {
                                 ?>
                             </select>
                         </div>
-                        <div class="inline serviceCost">
+                        <div id="shippingcostsdets" class="inline size50">
 
                         </div>
                     </div>
                 </div>
 
-                <div id="availability"><?php Utils::pageEcho($product->quantityAvailable);?> available / <?php Utils::pageEcho($product->quantitySold);?>  sold</div>
-                <div id="orderquantitydiv">
-                    <div class="inline">Quantity: </div>
-                    <div class="inline"><input id="orderquantity" type="number" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1"></div>
-                </div>
+                <hr/>
 
-                <div id="buynowdiv">
-                    <div id="buynowbuttondiv">
-                        BUY NOW
+                <div id="quicksummary">
+                    <div id="sellerinfo">
+                        <span> <?php echo $product->sellerInfo["userID"];?></span>
+                        <span> Score: <?php echo $product->sellerInfo["feedbackScore"];?></span>
+                        <span> Positive: <?php echo $product->sellerInfo["feedbackPercent"];?>%</span>
+                        <?php echo $product->sellerInfo["topRated"]? "<div class=\"topratedsellerimg\"></div>" : "";?>
+                    </div>
+                    <div id="shippinginfo">
+                        <div class="inline size25">
+                            Shipping from:
+                        </div>
+                        <div class="inline size25">
+                            <?php Utils::pageEcho($product->location.", ".$product->country);?>
+                        </div>
+                        <div class="inline size25">
+                            Delivery time:
+                        </div>
+                        <div class="inline size25">
+                            Between <span id="deliverytimefrom"> X </span> and <span id="deliverytimeto"> Y </span>
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
+                    <div id="pricinginfoheaders" class="inline size25">
+                        <div>Item price:</div>
+                        <div>Shipping price:</div>
+                        <div>Store comission:</div>
+                        <div>Paypal comission:</div>
+                    </div>
+                    <div id="pricinginfodets" class="inline size12">
+                        <div id="itemprice"><?php echo $product->price;?> <?php echo $product->priceCurrency;?></div>
+                        <div id="shippingprice">123</div>
+                        <div id="storeprice">456</div>
+                        <div id="paypalprice">789</div>
+                    </div>
+                    <div id="totalprice" class="inline size12">
+                        <div>Price per item:</div>
+                        <div id="totalprice">1233</div>
+                        <div>Total price:</div>
+                        <div id="finalPrice">123123</div>
                     </div>
                 </div>
 
+                <div id="orderquantity">
+                    <div class="inline size25">
+                        <div>
+                            <span> Available <?php Utils::pageEcho($product->quantityAvailable);?> </span> / <span> Sold <?php Utils::pageEcho($product->quantitySold);?> </span>
+                        </div>
+                        <div>
+                            Quantity: <input id="orderquantity" type="number" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1" value="1">
+                        </div>
+                    </div>
+                    <div class="inline size25">
+                        <div id="buynowbuttondiv">
+                            BUY NOW
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
@@ -202,7 +256,7 @@ abstract class productViewTemplates {
 
         <div id="detailscontainer">
             <div id="detailspaenlbutton">
-                Product details
+                <?php echo $product->descriptionHTML;?>
             </div>
             <div id="shippingpanelbutton">
                 Shipping Info

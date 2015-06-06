@@ -1,4 +1,8 @@
 .nolistbull{list-style: none outside none;}
+.inline{display:inline-block;}
+.size12{width:12%;}
+.size25{width:25%;}
+.size50{width:50%;}
 
 /* Search Widget BEGIN*/
 #search-product{
@@ -58,16 +62,25 @@
     display:inline-block;
     width: 49%;
 }
+#middlecontainer{
+    min-height: 480px;
+}
 #topdetailspanel{
 
 }
-.productpagecontent .inline{
-    display: inline-block;
-    width: 25%;
-}
 
 input[type="number"]{
-    width:220px;
+    width:60px;
     height:30px !important;
+}
+.topratedsellerimg{
+    background-image: url("images/topratedseller.png");
+    width: 80px;
+    height:19px;
+    display:inline-block;
+}
+.productCategoryText h4{
+    font-size: 14px;
+    color: #888;
 }
 /* END Product Page*/
