@@ -76,12 +76,12 @@ class Cart extends Collection{
 }
 
 /*
-utils::preEcho($_SESSION['cart']->products);
+Utils::preEcho($_SESSION['cart']->products);
 
 $_SESSION['cart']->add(new Product(15, 1, 153, 'ebay','','bekini', 230));
 $_SESSION['cart']->add(new Product(5, 1, 153, 'ebay', '', 'bycles', 123));
 
-utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
+Utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
 
 unset($_SESSION['cart']);
 
@@ -111,5 +111,5 @@ $products = [
 
 $_SESSION['cart'] = new Cart(0, new Address(0), $products);
 
-utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
+Utils::preEcho($_SESSION['cart'], '<br> total:'.$_SESSION['cart']->getTotal());
 */

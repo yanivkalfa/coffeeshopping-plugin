@@ -181,7 +181,7 @@ class ebay_FindingAPI extends ebayAdapter {
             // No proper search query - return error.
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getSearch", "0")
+                "output" => Utils::getErrorCode("API", "ebay", "getSearch", "0")
             );
         }
 
@@ -215,10 +215,10 @@ class ebay_FindingAPI extends ebayAdapter {
         // Make the call to eBay.
         $searchRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
         if ($searchRaw["result"]=="ERROR"){
-            utils::adminPreECHO($searchRaw["output"], "cURL ERROR details:: ");
+            Utils::adminPreECHO($searchRaw["output"], "cURL ERROR details:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getSearch", "1")
+                "output" => Utils::getErrorCode("API", "ebay", "getSearch", "1")
             );
         }
         $searchRaw = $searchRaw["output"];
@@ -229,10 +229,10 @@ class ebay_FindingAPI extends ebayAdapter {
         // Checks to see if we have any type of failed call.
         if ($search->ack == "Failure" || $search->ack == "PartialFailure") {
             // Returns an error.
-            utils::adminPreECHO("(".$search->errorMessage->error->errorId.") - ".$search->errorMessage->error->category." - ".$search->errorMessage->error->message."\n", " getSearch() ERROR:: ");
+            Utils::adminPreECHO("(".$search->errorMessage->error->errorId.") - ".$search->errorMessage->error->category." - ".$search->errorMessage->error->message."\n", " getSearch() ERROR:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getSearch", "6")
+                "output" => Utils::getErrorCode("API", "ebay", "getSearch", "6")
             );
         }
         // Returns a proper products object.

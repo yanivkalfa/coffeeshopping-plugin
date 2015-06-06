@@ -23,23 +23,23 @@ abstract class productView {
      *                  output = $ObjProduct object ready for constructResults(). [Proper example format found at: ebay_ShoppingAPI::_formatProductOutput()]
      *
      *      - Failure - result = "ERROR",
-     *                  output = Error code, codes reference at: utils::getErrorCodeText($errorCode).
+     *                  output = Error code, codes reference at: Utils::getErrorCodeText($errorCode).
      */
     static public function getProduct($API, $productID, $itemOpts = array(), $sandbox = false){
         // Check if our Adapter exists.
-        if ( !utils::API_Exists($API) ){
-            utils::adminPreECHO("API class (".$API."Adapter) doesn't exists, can't get product!", "getProduct() ERROR:: ");
+        if ( !Utils::API_Exists($API) ){
+            Utils::adminPreECHO("API class (".$API."Adapter) doesn't exists, can't get product!", "getProduct() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => utils::getErrorCode("frontEnd", "productView", "getProduct", "2")
+                "output" => Utils::getErrorCode("frontEnd", "productView", "getProduct", "2")
             );
         }
         $apiClass = $API."_ShoppingAPI";
         if (!class_exists($apiClass)){
-            utils::adminPreECHO("API class ($apiClass) doesn't exists, can't get product!", "getProduct() ERROR:: ");
+            Utils::adminPreECHO("API class ($apiClass) doesn't exists, can't get product!", "getProduct() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => utils::getErrorCode("frontEnd", "productView", "getProduct", "2")
+                "output" => Utils::getErrorCode("frontEnd", "productView", "getProduct", "2")
             );
         }
 

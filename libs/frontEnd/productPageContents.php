@@ -27,7 +27,7 @@
 if (
             (isset($_GET["view-product"]) && !empty($_GET["view-product"]))
             &&
-            (isset($_GET["store"]) && !empty($_GET["store"]) && utils::API_Exists($_GET["store"]))
+            (isset($_GET["store"]) && !empty($_GET["store"]) && Utils::API_Exists($_GET["store"]))
         ) {
             // Sanitize our product id and store name.
             $productID = $_GET["view-product"];

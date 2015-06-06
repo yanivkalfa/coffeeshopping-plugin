@@ -47,7 +47,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
 
     // performs the actual search.
     $result = productSearch::searchALL($APIs, $searchVal, $searchOpts, $sandbox);
-    utils::preEcho($result);
+    Utils::preEcho($result);
 
     // error checking
     if ($result["result"]=="ERROR"){

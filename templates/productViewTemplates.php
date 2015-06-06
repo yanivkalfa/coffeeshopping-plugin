@@ -18,7 +18,7 @@ abstract class productViewTemplates {
         ?>
 
         <div class="searchresulterror">
-            <?php echo $msg?>
+            <?php Utils::pageEcho($msg)?>
         </div>
 
         <?php
@@ -32,6 +32,8 @@ abstract class productViewTemplates {
      * @return  string  HTML product page.
      */
     static public function getProductView($product){
+        Utils::preEcho($product);
+
         ob_start();
         ?>
         <script language="javascript" type="text/javascript">
@@ -86,10 +88,9 @@ abstract class productViewTemplates {
         <div id="topcontainer">
             <div id="topdetailspanel">
                 <div class="productDetailsTitle">
-                    <h1><?php echo $product->title; ?></h1>
-                    <h2><?php echo $product->subtitle; ?></h2>
+                    <h1><?php Utils::pageEcho($product->title); ?></h1>
+                    <h2><?php Utils::pageEcho($product->subtitle); ?></h2>
                 </div>
-                <hr/>
             </div>
         </div>
 
@@ -130,9 +131,26 @@ abstract class productViewTemplates {
             </div>
 
             <div id="productchoices">
-                <table width="100%">
+                <div id="itemcondition">
+                    <div id="inline">Item condition:</div>
+                    <div><?php Utils::pageEcho($product->conditionText);?></div>
+                </div>
 
-                </table>
+                <?php
+
+                ?>
+
+                <div id="itemvariations">
+                    <div id="inline">Item condition:</div>
+                    <div><?php Utils::pageEcho($product->conditionText);?></div>
+                </div>
+
+                <div id="availability"><?php Utils::pageEcho($product->quantityAvailable);?> available / <?php Utils::pageEcho($product->quantitySold);?>  sold</div>
+                <div id="orderquantitydiv">
+                    <div id="inline">Quantity: </div>
+                    <div id="inline"><input id="orderquantity" type="range" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1"></div>
+                </div>
+
             </div>
 
 

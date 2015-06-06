@@ -2,6 +2,10 @@
 
 abstract class Utils{
 
+    static public function pageEcho($echo){
+        echo $echo;
+    }
+
     /**
      * @func API_Exists($API)
      * @param string $API - API name to check.
@@ -47,9 +51,9 @@ abstract class Utils{
             $item = is_object($arr[$i]) ? (array)$arr[$i] : $arr[$i];
 
             /*
-            utils::preEcho($item, '<br>property: '.$prop.'<br>$item: ');
-            utils::preEcho($srch, '<br>$srch: ');
-            utils::preEcho($srch[$prop], '<br>$srch[$prop]: ');
+            Utils::preEcho($item, '<br>property: '.$prop.'<br>$item: ');
+            Utils::preEcho($srch, '<br>$srch: ');
+            Utils::preEcho($srch[$prop], '<br>$srch[$prop]: ');
             */
 
             if($prop && $item[$prop] && ($item[$prop] === $srch[$prop] || $item[$prop] === $srch)) return $i;

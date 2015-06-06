@@ -27,23 +27,23 @@ abstract class productSearch {
      *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
      *
      *      - Failure - result = "ERROR",
-     *                  output = Error code, codes reference at: utils::getErrorCodeText($errorCode).
+     *                  output = Error code, codes reference at: Utils::getErrorCodeText($errorCode).
      */
     static public function searchAPI($API, $searchVal, $searchOpts = array(), $sandbox = false){
         // Check if our Adapter exists.
-        if ( !utils::API_Exists($API) ){
-            utils::adminPreECHO("API class (".$API."Adapter) doesn't exists, can't search!", "searchAPI() ERROR:: ");
+        if ( !Utils::API_Exists($API) ){
+            Utils::adminPreECHO("API class (".$API."Adapter) doesn't exists, can't search!", "searchAPI() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => utils::getErrorCode("frontEnd", "productSearch", "searchAPI", "6")
+                "output" => Utils::getErrorCode("frontEnd", "productSearch", "searchAPI", "6")
             );
         }
         $apiClass = $API."_FindingAPI";
         if (!class_exists($apiClass)){
-            utils::adminPreECHO("API class ($apiClass) doesn't exists, can't search!", "searchAPI() ERROR:: ");
+            Utils::adminPreECHO("API class ($apiClass) doesn't exists, can't search!", "searchAPI() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => utils::getErrorCode("frontEnd", "productSearch", "searchAPI", "6")
+                "output" => Utils::getErrorCode("frontEnd", "productSearch", "searchAPI", "6")
             );
         }
 
@@ -90,7 +90,7 @@ abstract class productSearch {
      *                                                          "shippingType", "locationInfo", "isTopSeller", "categoryText", "conditionText")
      *
      *      - Failure - result = "ERROR",
-     *                  output = Error code, codes reference at: utils::getErrorCodeText($errorCode).
+     *                  output = Error code, codes reference at: Utils::getErrorCodeText($errorCode).
      */
     static public function searchALL($APIs, $searchVal, $searchOpts = array(), $sandbox = false){
         $searchResults = new stdClass();
@@ -124,10 +124,10 @@ abstract class productSearch {
                 "output" => $searchResults
             );
         }else{
-            utils::adminPreECHO($searchResults, "searchALL() ERROR:: ");
+            Utils::adminPreECHO($searchResults, "searchALL() ERROR:: ");
             return array(
                 "result" => "ERROR",
-                "output" => utils::getErrorCode("frontEnd", "productSearch", "searchALL", "6")
+                "output" => Utils::getErrorCode("frontEnd", "productSearch", "searchALL", "6")
             );
         }
 

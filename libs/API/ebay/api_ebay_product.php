@@ -117,10 +117,10 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Make the call to eBay.
         $itemDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
         if ($itemDetailsRaw["result"]=="ERROR"){
-            utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
+            Utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getProduct", "1")
+                "output" => Utils::getErrorCode("API", "ebay", "getProduct", "1")
             );
         }
         $itemDetailsRaw = $itemDetailsRaw["output"];
@@ -131,10 +131,10 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Checks to see if we have any type of failed call.
         if ($itemDetails->ack == "Failure" || $itemDetails->ack == "PartialFailure") {
             // Returns an error.
-            utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category." - ".$itemDetails->errorMessage->error->message."\n", " getProduct() ERROR:: ");
+            Utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category." - ".$itemDetails->errorMessage->error->message."\n", " getProduct() ERROR:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getProduct", "2")
+                "output" => Utils::getErrorCode("API", "ebay", "getProduct", "2")
             );
         }
 
@@ -143,7 +143,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
             // Returns an error.
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getProduct", "4")
+                "output" => Utils::getErrorCode("API", "ebay", "getProduct", "4")
             );
         }
 
@@ -186,10 +186,10 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Make the call to eBay.
         $shippingDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
         if ($shippingDetailsRaw["result"]=="ERROR"){
-            utils::adminPreECHO($shippingDetailsRaw["output"], "cURL ERROR details:: ");
+            Utils::adminPreECHO($shippingDetailsRaw["output"], "cURL ERROR details:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getShippingCosts", "1")
+                "output" => Utils::getErrorCode("API", "ebay", "getShippingCosts", "1")
             );
         }
         $shippingDetailsRaw = $shippingDetailsRaw["output"];
@@ -203,11 +203,11 @@ class ebay_ShoppingAPI extends ebayAdapter {
             foreach ($shippingDetails->Errors as $Error){
                 $errorsText .= "ERROR:: (".$Error->ErrorCode.") - ".$Error->ErrorClassification." - ".$Error->LongMessage."\n";
             }
-            utils::adminPreECHO($errorsText, "getShippingCosts() ERROR:: ");
+            Utils::adminPreECHO($errorsText, "getShippingCosts() ERROR:: ");
 
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getShippingCosts", "2")
+                "output" => Utils::getErrorCode("API", "ebay", "getShippingCosts", "2")
             );
         }
 
@@ -243,10 +243,10 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Make the call to eBay.
         $itemDetailsRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
         if ($itemDetailsRaw["result"]=="ERROR"){
-            utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
+            Utils::adminPreECHO($itemDetailsRaw["output"], "cURL ERROR details:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getProducts", "1")
+                "output" => Utils::getErrorCode("API", "ebay", "getProducts", "1")
             );
         }
         $itemDetailsRaw = $itemDetailsRaw["output"];
@@ -257,10 +257,10 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Checks to see if we have any type of failed call.
         if ($itemDetails->ack == "Failure" || $itemDetails->ack == "PartialFailure") {
             // Returns an error.
-            utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category."\nERROR-MESSAGE:".$itemDetails->errorMessage->error->message."\n", "getProducts() ERROR:: ");
+            Utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category."\nERROR-MESSAGE:".$itemDetails->errorMessage->error->message."\n", "getProducts() ERROR:: ");
             return array(
                 'result' => "ERROR",
-                "output" => utils::getErrorCode("API", "ebay", "getProducts", "5")
+                "output" => Utils::getErrorCode("API", "ebay", "getProducts", "5")
             );
         }
 
@@ -298,7 +298,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct->categoryText           =     (string)  $productOutput->PrimaryCategoryName;
         $ObjProduct->price                  =     (string)  $productOutput->ConvertedCurrentPrice;
         $ObjProduct->priceCurrency          =     (string)  $productOutput->convertedCurrentPrice["currencyId"];
-        $ObjProduct->country                =     (string)  utils::getCountryFromCode((string)$productOutput->Country);
+        $ObjProduct->country                =     (string)  Utils::getCountryFromCode((string)$productOutput->Country);
         $ObjProduct->location               =     (string)  $productOutput->Location;
         $ObjProduct->quantityAvailable      =     (string)  $productOutput->Quantity;
         $ObjProduct->quantitySold           =     (string)  $productOutput->QuantitySold;
