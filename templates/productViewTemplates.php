@@ -240,7 +240,7 @@ abstract class productViewTemplates {
                             <span> Available <?php Utils::pageEcho($product->quantityAvailable);?> </span> / <span> Sold <?php Utils::pageEcho($product->quantitySold);?> </span>
                         </div>
                         <div>
-                            Quantity: <input id="orderquantity" type="number" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1" value="1">
+                            Quantity: <input id="orderquantity" type="number" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1" value="1" />
                         </div>
                     </div>
                     <div class="inline size25">
@@ -255,21 +255,34 @@ abstract class productViewTemplates {
         </div>
 
         <div id="detailscontainer">
-            <div id="detailspaenlbutton">
+            <div id="itemIDspec" align="left"><?php echo $_GET["store"];?> item number: <?php echo $product->ID;?></div>
+            <div id="itemspecs">
+                <h3>Item Specifics:</h3>
+                <table id="itemspecstable" width="100%">
+                    <tr>
+                        <?php
+                        $cnt = 0;
+                        foreach($product->itemSpecifics as $spec => $value){
+                            $cnt ++;
+                            if ($cnt>2){
+                                $cnt = 0;
+                                echo "</tr><tr>";
+                            }
+                        ?>
+
+                        <td width="20%"><?php echo $spec;?>:</td>
+                        <td width="30%"><?php echo $value;?></td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                </table>
+            </div>
+
+            <hr>
+            <div id="detailspaenl">
                 <?php echo $product->descriptionHTML;?>
             </div>
-            <div id="shippingpanelbutton">
-                Shipping Info
-            </div>
-
-            <div id="detailspaenl">
-
-            </div>
-            <div id="shippingpanel">
-
-            </div>
-
-
         </div>
 
 </div>

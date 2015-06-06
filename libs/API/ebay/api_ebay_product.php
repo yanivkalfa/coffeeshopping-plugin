@@ -318,7 +318,16 @@ class ebay_ShoppingAPI extends ebayAdapter {
             "topRated"              =>  (string)  $productOutput->Seller->TopRatedSeller,           // Is he top rated? (Boolean)
         );
 
-        $ObjProduct->returnPolicy             =     array(
+        // Get the item specifics.
+        $ObjProduct->itemSpecifics          =     array();
+        if (isset($productOutput->ItemSpecifics->NameValueList)){
+
+            foreach($productOutput->ItemSpecifics->NameValueList as $spec){
+                $ObjProduct->itemSpecifics[(string)$spec->Name] = implode(", ", (array)$spec->Value);
+            }
+        }
+
+        $ObjProduct->returnPolicy           =     array(
             "refund"                =>  (string)  $productOutput->ReturnPolicy->Refund,             // types: Money Back, MoneyBackOrExchange, MoneyBackOrReplacement
             "returnsWithin"         =>  (string)  $productOutput->ReturnPolicy->ReturnsWithin,      // String time (eg. 30 Days)
             "returnsAccepted"       =>  (string)  $productOutput->ReturnPolicy->ReturnsAccepted,    // String (eg. Returns Accepted)
@@ -327,10 +336,9 @@ class ebay_ShoppingAPI extends ebayAdapter {
         );
 
         // Get the variations for this item.
+        $ObjProduct->variationSets          = array();
+        $ObjProduct->variations             = array();
         if (isset($productOutput->Variations->VariationSpecificsSet->NameValueList)){
-            $ObjProduct->variationSets      = array();
-            $ObjProduct->variations         = array();
-
             // Get our variation sets.
             foreach($productOutput->Variations->VariationSpecificsSet->NameValueList as $variationSet){
                 foreach($variationSet->Value as $setVal){
