@@ -260,15 +260,17 @@ abstract class productViewTemplates {
         <div id="detailscontainer">
             <div id="itemIDspec" align="left"><?php echo $_GET["store"];?> item number: <?php echo $product->ID;?></div>
             <div id="itemspecs">
-                        <?php
-                        $specs = "";
-                        foreach($product->itemSpecifics as $spec => $value){
-                            $specs .= "<div class=\"inline size50\">".$spec.": </div>";
-                            $specs .= "<div class=\"inline size50\">".$value."</div>";
-                        }
-                        ?>
                 <h3>Item Specifics:</h3>
-                <?php echo $specs; ?>
+                <?php
+                foreach($product->itemSpecifics as $spec => $value){
+                    ?>
+                    <div class="inline block">
+                        <div class="inline header"><?php echo $spec;?>:</div>
+                        <div id="itemprice" class="inline"><?php echo $value;?></div>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
 
             <hr>

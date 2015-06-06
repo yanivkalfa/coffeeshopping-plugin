@@ -107,6 +107,7 @@ input[type="number"]{
     color: #777;
 }
 #ordercontainer{
+    padding:5px;
     background: #e2e2e2;
     border: 1px solid #ddd;
     -webkit-border-radius: 3px;
@@ -114,37 +115,48 @@ input[type="number"]{
     border-radius: 3px;
 }
 
+#detailscontainer{
+    overflow: auto;
+}
+
+
+/* ++++ Product Page Responsiveness ++++ */
 @media screen and (min-width: 300px) {
     #productchoices select {width:99%;}
     .inline {display:block;}
-    #toppicturepanel, #productchoices, #quicksummary, #ordercontainer {
-        width: 100%;
-    }
+    #toppicturepanel, #productchoices, #quicksummary, #ordercontainer {width: 100%;}
 }
 @media screen and (min-width: 540px){
+    #productchoices select {width:99%;}
+    #productchoices .inline {display: inline-block; width:55%;}
+    #productchoices .header{width:40%;}
+
     #quicksummary .inline{display:inline-block;}
     #pricinginfo{width: 60%;}
     #pricinginfo .header{width:70%;}
     #totalprice{width: 38%;}
 
-    #productchoices select {width:99%;}
-    #productchoices .inline {display: inline-block; width:55%;}
-    #productchoices .header{width:40%;}
+    #itemspecs .inline{display:inline-block;}
+    #itemspecs .header{width:100%;}
+    #itemspecs .block{width:49%;}
 
 }
 @media screen and (min-width: 720px){
-    #toppicturepanel, #productchoices{
-        width: 50%;
-    }
-
+    #toppicturepanel, #productchoices{  width: 50%;}
     #productchoices .inline {display: block;width:100%;}
+
 }
 @media screen and (min-width: 960px) {
     #productchoices .inline {display: inline-block; width:55%;}
-    #productchoices .header{width:40%;}
     #quicksummary {width: 50%;}
+
+    #itemspecs .inline{width:45%;}
+    #itemspecs .header{width:45%;float: right;}
+    #itemspecs .block{width:49%;}
+
 }
 @media screen and (min-width: 1200px) {
+    .inline {display:inline-block;}
     #productchoices .header{width:30%;}
     #ordercontainer{width: 50%;}
 }
