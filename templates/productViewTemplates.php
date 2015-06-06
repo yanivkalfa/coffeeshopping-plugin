@@ -32,8 +32,6 @@ abstract class productViewTemplates {
      * @return  string  HTML product page.
      */
     static public function getProductView($product){
-        Utils::preEcho($product);
-
         ob_start();
         ?>
         <script language="javascript" type="text/javascript">
@@ -84,7 +82,7 @@ abstract class productViewTemplates {
 
             });
         </script>
-
+<div class="productpagecontent">
         <div id="topcontainer">
             <div id="topdetailspanel">
                 <div class="productDetailsTitle">
@@ -131,24 +129,70 @@ abstract class productViewTemplates {
             </div>
 
             <div id="productchoices">
+                <h3>
+                    Make your order:
+                </h3>
                 <div id="itemcondition">
-                    <div id="inline">Item condition:</div>
-                    <div><?php Utils::pageEcho($product->conditionText);?></div>
+                    <div class="inline">Item condition:</div>
+                    <div class="inline"><?php Utils::pageEcho($product->conditionText);?></div>
                 </div>
 
-                <?php
-
-                ?>
-
                 <div id="itemvariations">
-                    <div id="inline">Item condition:</div>
-                    <div><?php Utils::pageEcho($product->conditionText);?></div>
+                    <?php
+                    foreach ($product->variationSets as $setName => $setVars){
+                        ?>
+                        <div id="vardiv_<?php echo $setName;?>">
+                            <div class="inline"><?php Utils::pageEcho($setName);?>:</div>
+                            <div class="inline">
+                                <select name="varset_<?php echo $setName;?>">
+                                    <?php
+                                    foreach ($setVars as $variation => $variationIMG){
+                                        ?>
+                                        <option value="<?php echo $variation;?>" rel="<?php Utils::pageEcho($variationIMG);?>"><?php Utils::pageEcho($variation);?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                    <?php
+                    }
+                    ?>
+                </div>
+
+                <div id="itemshippingdiv">
+                    <div id="shippmentdiv">
+                        <div class="inline">Shipping options:</div>
+                        <div class="inline">
+                            <select id="shippingOptions" name="shippingopts">
+                                <?php
+                                    foreach ($product->shippingDetails->shippingOptions as $shippingOpts){
+                                        ?>
+                                    <option value="<?php echo $shippingOpts["shippingServiceCost"];?>" data-currency="<?php echo $shippingOpts["shippingServiceCostCurrency"];?>" data-additional="<?php echo $shippingOpts["shippingServiceAdditionalCost"];?>" data-additionalCurrency="<?php echo $shippingOpts["shippingServiceAdditionalCostCurrency"];?>" data-delMin="<?php echo $shippingOpts["estimatedDeliveryMinTime"];?>" data-delMax="<?php echo $shippingOpts["estimatedDeliveryMaxTime"];?>" data-duty="<?php echo $shippingOpts["importCharge"];?>" data-dutyCurrency="<?php echo $shippingOpts["importChargeCurrency"];?>">
+                                        <?php Utils::pageEcho($shippingOpts["shippingServiceName"]);?>
+                                    </option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="inline serviceCost">
+
+                        </div>
+                    </div>
                 </div>
 
                 <div id="availability"><?php Utils::pageEcho($product->quantityAvailable);?> available / <?php Utils::pageEcho($product->quantitySold);?>  sold</div>
                 <div id="orderquantitydiv">
-                    <div id="inline">Quantity: </div>
-                    <div id="inline"><input id="orderquantity" type="range" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1"></div>
+                    <div class="inline">Quantity: </div>
+                    <div class="inline"><input id="orderquantity" type="number" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1"></div>
+                </div>
+
+                <div id="buynowdiv">
+                    <div id="buynowbuttondiv">
+                        BUY NOW
+                    </div>
                 </div>
 
             </div>
@@ -174,7 +218,7 @@ abstract class productViewTemplates {
 
         </div>
 
-
+</div>
         <?php
         return ob_get_clean();
     }
