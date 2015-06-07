@@ -40,6 +40,9 @@ Default values in script:
     float:left;
     clear:both;
 }
+.zoomItcontainer .full-image {
+    min-height: 400px;
+}
 .zoomItcontainer .full-image a.visible{
     display:block;
 }

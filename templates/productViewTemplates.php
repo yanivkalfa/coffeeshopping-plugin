@@ -80,7 +80,30 @@ abstract class productViewTemplates {
                     }
                 });
 
+                // handle our shipping options.
+                jQuery(".shippingopt").click(function(e){
+                    console.log(jQuery(this));
+                    // Set the description text:
+                    var shippingdet = "Estimated delivery between " + jQuery(this).data("delmin") + " and " + jQuery(this).data("delmax");
+                    shippingdet = shippingdet + "<br />";
+                    shippingdet = shippingdet + "Additional item cost: " + jQuery(this).data("additional");
+                    if (jQuery(this).data("duty")!=" "){
+                        shippingdet = shippingdet + "<br />";
+                        shippingdet = shippingdet + "Import charges: " + jQuery(this).data("duty");
+                    }
+                    jQuery("#shippingcostsdets").html(shippingdet);
+                    // Set the price value.
+                    jQuery("#shippingprice").html(jQuery(this).data("price"));
+                    // Update the prices.
+                    updatePrices();
+                });
+
+                function updatePrices(){
+
+                }
             });
+
+
         </script>
 <div class="productpagecontent">
         <div id="topcontainer">
@@ -167,22 +190,28 @@ abstract class productViewTemplates {
                 </div>
 
                 <div id="itemshippingdiv">
+                    <div>Shipping options:</div>
                     <div id="shippmentdiv">
-                        <div class="inline header">Shipping options:</div>
-                        <div class="inline">
-                            <select id="shippingOptions" name="shippingopts">
-                                <?php
-                                    foreach ($product->shippingDetails->shippingOptions as $shippingOpts){
-                                        ?>
-                                    <option value="<?php echo $shippingOpts["shippingServiceCost"];?>" data-currency="<?php echo $shippingOpts["shippingServiceCostCurrency"];?>" data-additional="<?php echo $shippingOpts["shippingServiceAdditionalCost"];?>" data-additionalCurrency="<?php echo $shippingOpts["shippingServiceAdditionalCostCurrency"];?>" data-delMin="<?php echo $shippingOpts["estimatedDeliveryMinTime"];?>" data-delMax="<?php echo $shippingOpts["estimatedDeliveryMaxTime"];?>" data-duty="<?php echo $shippingOpts["importCharge"];?>" data-dutyCurrency="<?php echo $shippingOpts["importChargeCurrency"];?>">
-                                        <?php Utils::pageEcho($shippingOpts["shippingServiceName"]);?>
-                                    </option>
-                                <?php
-                                    }
-                                ?>
-                            </select>
+                            <?php
+                            $i = 0;
+                            foreach ($product->shippingDetails->shippingOptions as $shippingOpts){
+                                $i++;
+                            ?>
+                        <div>
+                            <div class="radiocol">
+                                <input type="radio" class="shippingopt" name="shippingOptions[]" id="<?php echo "shipradio".$i;?>" data-price="<?php echo $shippingOpts["shippingServiceCost"]. " ". $shippingOpts["shippingServiceCostCurrency"];?>" data-additional="<?php echo $shippingOpts["shippingServiceAdditionalCost"]. " " . $shippingOpts["shippingServiceAdditionalCostCurrency"];?>" data-delMin="<?php echo ebay_Utils::getDeliveryTime($shippingOpts["estimatedDeliveryMinTime"]);?>" data-delMax="<?php echo ebay_Utils::getDeliveryTime($shippingOpts["estimatedDeliveryMaxTime"]);?>" data-duty="<?php echo $shippingOpts["importCharge"] . " " . $shippingOpts["importChargeCurrency"];?>" >
+                            </div>
+                            <div class="namecol">
+                                <label for="<?php echo "shipradio".$i;?>"><?php Utils::pageEcho($shippingOpts["shippingServiceName"]);?></label>
+                            </div>
+                            <div class="pricecol">
+                                <label for="<?php echo "shipradio".$i;?>"><?php echo $shippingOpts["shippingServiceCost"]. " " . $shippingOpts["shippingServiceCostCurrency"];?></label>
+                            </div>
                         </div>
-                        <div id="shippingcostsdets" class="inline">
+                            <?php
+                            }
+                            ?>
+                        <div id="shippingcostsdets">
 
                         </div>
                     </div>

@@ -7,7 +7,8 @@
  */
 
 abstract class ebay_Utils{
-  static public function getEbayPicture($link, $size){
+
+    static public function getEbayPicture($link, $size){
       // s- square, w-wide.
       $sizes = array(
           "42s"           => "13",
@@ -35,6 +36,11 @@ abstract class ebay_Utils{
       $replace = "\$_".$sizes[$size].".JPG";
       return preg_replace($regexp, $replace, $link, 1);
   }
+    static public function getDeliveryTime($time){
+        $regexp = "/T.+/i";
+        $replace = "";
+        return preg_replace($regexp, $replace, $time, 1);
+    }
 }
 
 ?>
