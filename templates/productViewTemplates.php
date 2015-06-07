@@ -82,7 +82,6 @@ abstract class productViewTemplates {
 
                 // handle our shipping options.
                 jQuery(".shippingopt").click(function(e){
-                    console.log(jQuery(this));
                     // Set the description text:
                     var shippingdet = "Estimated delivery between " + jQuery(this).data("delmin") + " and " + jQuery(this).data("delmax");
                     shippingdet = shippingdet + "<br />";
@@ -94,6 +93,10 @@ abstract class productViewTemplates {
                     jQuery("#shippingcostsdets").html(shippingdet);
                     // Set the price value.
                     jQuery("#shippingprice").html(jQuery(this).data("price"));
+                    // Set the delivery estimate.
+                    jQuery("#deliverytimefrom").html(jQuery(this).data("delmin"));
+                    jQuery("#deliverytimeto").html(jQuery(this).data("delmax"));
+
                     // Update the prices.
                     updatePrices();
                 });
@@ -221,10 +224,13 @@ abstract class productViewTemplates {
 
             <div id="quicksummary">
                 <div id="sellerinfo">
-                    <span> <?php echo $product->sellerInfo["userID"];?></span>
-                    <span> Score: <?php echo $product->sellerInfo["feedbackScore"];?></span>
-                    <span> Positive: <?php echo $product->sellerInfo["feedbackPercent"];?>%</span>
-                    <?php echo $product->sellerInfo["topRated"]? "<div class=\"topratedsellerimg\"></div>" : "";?>
+                    <div class="inline header"> Seller: </div>
+                    <div class="inline">
+                        <span> <?php echo $product->sellerInfo["userID"];?></span>,
+                        <span> Score: <?php echo $product->sellerInfo["feedbackScore"];?></span>,
+                        <span> Positive: <?php echo $product->sellerInfo["feedbackPercent"];?>%</span>
+                        <?php echo $product->sellerInfo["topRated"]? "<div class=\"topratedsellerimg\"></div>" : "";?>
+                    </div>
                 </div>
 
                 <div id="shippinginfo">
@@ -239,6 +245,7 @@ abstract class productViewTemplates {
                 </div>
 
                 <div id="pricinginfo" class="inline">
+                    <div>Order summary:</div>
                     <div>
                         <div class="inline header">Item price:</div>
                         <div id="itemprice" class="inline"><?php echo $product->price;?> <?php echo $product->priceCurrency;?></div>
