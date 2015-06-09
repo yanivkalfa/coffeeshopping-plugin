@@ -295,8 +295,8 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct->descriptionHTML        =     (string)  $productOutput->Description;
         $ObjProduct->storeLink              =     (string)  $productOutput->ViewItemURLForNaturalSearch;
         $ObjProduct->categoryText           =     (string)  $productOutput->PrimaryCategoryName;
-        $ObjProduct->price                  =     (string)  $productOutput->ConvertedCurrentPrice;
-        $ObjProduct->priceCurrency          =     (string)  $productOutput->convertedCurrentPrice["currencyId"];
+        $ObjProduct->price                  =     (string)  $productOutput->CurrentPrice;
+        $ObjProduct->priceCurrency          =     (string)  $productOutput->CurrentPrice["currencyID"];
         $ObjProduct->country                =     (string)  Utils::getCountryFromCode((string)$productOutput->Country);
         $ObjProduct->location               =     (string)  $productOutput->Location;
         $ObjProduct->quantityAvailable      =     (string)  $productOutput->Quantity;

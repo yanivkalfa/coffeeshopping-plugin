@@ -34,17 +34,14 @@ abstract class productViewTemplates {
     static public function getProductView($product){
         ob_start();
         ?>
-        <script language="javascript" type="text/javascript">
-            /**
-             * Full gallery example
-             *
-             * The code below creates the gallery. No editing needed to
-             * actual zoom script file ( zoomit.jquery.js )
-             *
-             */
-            // use load event on window to start the script
-            jQuery(document).ready( function(){
+        Debug Output: [<a href="#" id="debugOutPutTogg">+</a>]
+        <div id="DebugProductOutput">
+            <?php Utils::preEcho($product);?>
+        </div>
 
+
+        <script language="javascript" type="text/javascript">
+            jQuery(document).ready( function(){
                 var previews 	= jQuery('.zoomItcontainer .full-image a'), // image previews
                     thumbnails 	= jQuery('.zoomItcontainer .gallery-thumbnails a'); // small thumbnails for changing previews
 
@@ -88,18 +85,23 @@ abstract class productViewTemplates {
                 // handle our shipping options.
                 jQuery(".shippingopt").click(function(e){
                     // Set the description text:
-                    var shippingdet = "Estimated delivery between " + jQuery(this).data("delmin") + " and " + jQuery(this).data("delmax");
-                    shippingdet = shippingdet + "<br />";
-                    shippingdet = shippingdet + "Additional item cost: " + jQuery(this).data("additional") + " " + jQuery(this).data("additionalCurrency");
-                    if (jQuery(this).data("duty")!=" "){
-                        shippingdet = shippingdet + "<br />";
-                        shippingdet = shippingdet + "Import charges: " + jQuery(this).data("duty") + " " + jQuery(this).data("dutyCurrency");
+                    var shippingdet = [];
+                    if (jQuery(this).data("delmin")!=""){
+                        shippingdet.push("Estimated delivery between " + jQuery(this).data("delmin") + " and " + jQuery(this).data("delmax"));
                     }
-                    jQuery("#shippingcostsdets").html(shippingdet);
+                    if (jQuery(this).data("additional")!=""){
+                        if (jQuery(this).data("additional")=="0.0"){
+                            shippingdet.push("FREE Shipping for additional items!");
+                        }else {
+                            shippingdet.push("Additional item cost: " + jQuery(this).data("additional") + " " + jQuery(this).data("additionalcurrency"));
+                        }
+                    }
+                    if (jQuery(this).data("duty")!=""){
+                        shippingdet.push("Import charges: " + jQuery(this).data("duty") + " " + jQuery(this).data("dutycurrency"));
+                    }
+                    jQuery("#shippingcostsdets").html(shippingdet.join("<br />"));
                     // Set the price value.
-                    jQuery("#shippingprice").html(jQuery(this).data("price") + " " + jQuery(this).data("priceCurrency"));
-                    // Set the delivery estimate.
-                    jQuery("#deliveryText").html("Between <span id=\"deliverytimefrom\"> " + jQuery(this).data("delmin") + " </span> and <span id=\"deliverytimeto\"> " + jQuery(this).data("delmax") + " </span>");
+                    jQuery("#shippingprice").html(jQuery(this).data("price") + " " + jQuery(this).data("pricecurrency"));
 
                     // Update the prices.
                     updateProductPrices();
@@ -122,7 +124,7 @@ abstract class productViewTemplates {
                     arrayTest[assocName] = assocVal;
 
                     // Check if we have a picture set for this variation.
-                    jQuery(".gallery-thumbnails .item > a[data-assoc=\"" + assocName + "\"][data-assocVal=\"" + assocVal + "\"]").click();
+                    jQuery(".gallery-thumbnails .item > a[data-assoc=\"" + assocName + "\"][data-assocval=\"" + assocVal + "\"]").click();
 
                     // Start from next set on...
                     nextIndex = variationsArr.indexOf(assocName)+1;
@@ -176,6 +178,23 @@ abstract class productViewTemplates {
                 jQuery("#orderquantity").change(function(e){
                     updateProductPrices();
                 });
+
+                jQuery("#quicksummary").hide();
+                jQuery("#orderdetailstogg").click(function(e){toggleID(this, "#quicksummary", e)});
+                jQuery("#DebugProductOutput").hide();
+                jQuery("#debugOutPutTogg").click(function(e){toggleID(this, "#DebugProductOutput", e)});
+
+                function toggleID(togg, id, e){
+                    e.preventDefault();
+                    if (jQuery(togg).html()=="-") {
+                        jQuery(id).hide();
+                        jQuery(togg).html("+");
+                    }else{
+                        jQuery(id).show();
+                        jQuery(togg).html("-");
+                    }
+                }
+
 
                 function updateProductPrices(){
                     var paypalcomm = parseFloat(10/100).toFixed(2),
@@ -235,7 +254,8 @@ abstract class productViewTemplates {
 
                     console.log("After calcs:", details);
                     Object.keys(details).forEach(function(key){
-                        jQuery("#" + key).html(parseFloat( details[key] ).toFixed(2));
+                        var pageOutput = (parseFloat( details[key] ).toFixed(2)=="NaN") ? "-" : parseFloat( details[key] ).toFixed(2);
+                        jQuery("#" + key).html(pageOutput);
                     });
                 }
 
@@ -266,7 +286,7 @@ abstract class productViewTemplates {
                                 $imgGallery = ebay_Utils::getEbayPicture($pic["picURL"], "400s");
                                 $imgBig = ebay_Utils::getEbayPicture($pic["picURL"], "1600s");
                                 $assoc = (isset($pic["assoc"])&&!empty($pic["assoc"])) ? "data-assoc=\"".$pic["assoc"]."\"" : "";
-                                $assocVal = (isset($pic["assocVal"])&&!empty($pic["assocVal"])) ? "data-assocVal=\"".$pic["assocVal"]."\"" : "";
+                                $assocVal = (isset($pic["assocVal"])&&!empty($pic["assocVal"])) ? "data-assocval=\"".$pic["assocVal"]."\"" : "";
                                 ?>
                         <a href="<?php echo $imgBig;?>" class="zoomIt <?php echo $class;?>" <?php echo $assoc." ".$assocVal; ?>><img src="<?php echo $imgGallery;?>" alt="" /></a>
                                 <?php
@@ -280,7 +300,7 @@ abstract class productViewTemplates {
                             foreach ($product->pics as $pic){
                                 $imgThumb = ebay_Utils::getEbayPicture($pic["picURL"], "64s");
                                 $assoc = (isset($pic["assoc"])&&!empty($pic["assoc"])) ? "data-assoc=\"".$pic["assoc"]."\"" : "";
-                                $assocVal = (isset($pic["assocVal"])&&!empty($pic["assocVal"])) ? "data-assocVal=\"".$pic["assocVal"]."\"" : "";
+                                $assocVal = (isset($pic["assocVal"])&&!empty($pic["assocVal"])) ? "data-assocval=\"".$pic["assocVal"]."\"" : "";
                                 ?>
                             <li class="item"><a href="#" <?php echo $assoc." ".$assocVal; ?>><img src="<?php echo $imgThumb;?>" width="54" alt="" /></a></li>
                                 <?php
@@ -307,13 +327,13 @@ abstract class productViewTemplates {
 
                 <div id="itemvariations">
                     <?php
-                    $i = 0;
+                    $varSetCnt = 0;
                     foreach ($product->variationSets as $setName => $setVars){
                         ?>
-                        <div id="vardiv_<?php echo $i;?>">
+                        <div id="vardiv_<?php echo $varSetCnt;?>">
                             <div class="inline header"><?php Utils::pageEcho($setName);?>:</div>
                             <div class="inline">
-                                <select id="varset_<?php echo $i;?>" name="varset_<?php echo $i;?>" class="varset" data-name="<?php echo $setName;?>">
+                                <select id="varset_<?php echo $varSetCnt;?>" name="varset_<?php echo $varSetCnt;?>" class="varset" data-name="<?php echo $setName;?>">
                                     <option>Select <?php echo $setName;?></option>
                                     <?php
                                     foreach ($setVars as $variation => $variationIMG){
@@ -327,13 +347,15 @@ abstract class productViewTemplates {
                         </div>
 
                     <?php
-                        $i++;
+                        $varSetCnt++;
                     }
                     ?>
                 </div>
+                <?php if ($varSetCnt>0){ ?>
                 <div align="center">
                     <span> Available <span id="quantityavail"><?php Utils::pageEcho($product->quantityAvailable);?></span> </span> / <span> Sold <span id="quantitysold"><?php Utils::pageEcho($product->quantitySold);?></span> </span>
                 </div>
+                <?php } ?>
 
                 <div id="itemshippingdiv">
                     <div>Shipping options:</div>
@@ -345,7 +367,7 @@ abstract class productViewTemplates {
                             ?>
                         <div>
                             <div class="radiocol">
-                                <input type="radio" class="shippingopt" name="shippingOptions[]" id="<?php echo "shipradio".$i;?>" data-price="<?php echo $shippingOpts["shippingServiceCost"];?>" data-priceCurrency="<?php echo $shippingOpts["shippingServiceCostCurrency"];?>" data-additional="<?php echo $shippingOpts["shippingServiceAdditionalCost"];?>" data-additionalCurrency="<?php echo $shippingOpts["shippingServiceAdditionalCostCurrency"];?>" data-delMin="<?php echo ebay_Utils::getDeliveryTime($shippingOpts["estimatedDeliveryMinTime"]);?>" data-delMax="<?php echo ebay_Utils::getDeliveryTime($shippingOpts["estimatedDeliveryMaxTime"]);?>" data-duty="<?php echo $shippingOpts["importCharge"];?>" data-dutyCurrency="<?php echo $shippingOpts["importChargeCurrency"];?>" >
+                                <input type="radio" class="shippingopt" name="shippingOptions[]" id="<?php echo "shipradio".$i;?>" data-price="<?php echo $shippingOpts["shippingServiceCost"];?>" data-pricecurrency="<?php echo $shippingOpts["shippingServiceCostCurrency"];?>" data-additional="<?php echo $shippingOpts["shippingServiceAdditionalCost"];?>" data-additionalcurrency="<?php echo $shippingOpts["shippingServiceAdditionalCostCurrency"];?>" data-delmin="<?php echo ebay_Utils::getDeliveryTime($shippingOpts["estimatedDeliveryMinTime"]);?>" data-delmax="<?php echo ebay_Utils::getDeliveryTime($shippingOpts["estimatedDeliveryMaxTime"]);?>" data-duty="<?php echo $shippingOpts["importCharge"];?>" data-dutycurrency="<?php echo $shippingOpts["importChargeCurrency"];?>" >
                             </div>
                             <div class="namecol">
                                 <label for="<?php echo "shipradio".$i;?>"><?php Utils::pageEcho($shippingOpts["shippingServiceName"]);?></label>
@@ -365,6 +387,7 @@ abstract class productViewTemplates {
             </div>
             <hr/>
 
+            <div>Order details [<a href="#" id="orderdetailstogg">+</a>]</div>
             <div id="quicksummary">
                 <div id="sellerinfo">
                     <div class="inline header"> Seller: </div>
@@ -381,17 +404,13 @@ abstract class productViewTemplates {
                         <div class="inline header"> Shipping from: </div>
                         <div class="inline"><?php Utils::pageEcho($product->location.", ".$product->country);?></div>
                     </div>
-                    <div>
-                    <div class="inline header"> Delivery time: </div>
-                    <div id="deliveryText" class="inline"></div>
-                    </div>
                 </div>
 
                 <div id="pricinginfo" class="inline">
-                    <div>Order summary:</div>
+                    <div>Pricing summary:</div>
                     <div>
                         <div class="inline header">Item price:</div>
-                        <div id="itemprice" class="inline"><?php echo $product->price;?> <?php echo $product->priceCurrency;?></div>
+                        <div id="itemprice" class="inline" data-price="<?php echo $product->price;?>" data-pricecurrency="<?php echo $product->priceCurrency;?>"></div>
                     </div>
                     <div>
                         <div class="inline header">Shipping price:</div>
@@ -407,23 +426,31 @@ abstract class productViewTemplates {
                     </div>
                 </div>
 
-                <div id="pricingsumm" class="inline">
+                <div id="pricingsumm" class="inline" align="center">
                     <div>Price per item:</div>
                     <div id="totalprice"></div>
-                    <div>Total price:</div>
-                    <div id="finalPrice"></div>
                 </div>
             </div>
 
+
+
             <div id="ordercontainer">
-                <div class="inline">
-                    <div>
-                        Quantity: <input id="orderquantity" type="number" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1" value="1" />
+                <?php if ($varSetCnt==0){ ?>
+                    <div align="center">
+                        <span> Available <span id="quantityavail"><?php Utils::pageEcho($product->quantityAvailable);?></span> </span> / <span> Sold <span id="quantitysold"><?php Utils::pageEcho($product->quantitySold);?></span> </span>
                     </div>
+                <?php } ?>
+                <div class="inline">
+                    <div class="inline header">Quantity:</div>
+                    <div class="inline"><input id="orderquantity" type="number" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1" value="1" /></div>
                 </div>
                 <div class="inline">
-                    <div id="buynowbuttondiv">
-                        BUY NOW
+                    <div class="inline header">Total price: </div>
+                    <div id="finalPrice" class="inline" align="center"> - </div>
+                </div>
+                <div class="inline addtocart">
+                    <div id="buynowbuttondiv" align="center">
+                        Add to cart
                     </div>
                 </div>
             </div>
@@ -451,7 +478,7 @@ abstract class productViewTemplates {
 
             <hr>
             <div id="detailspaenl">
-                <?php echo $product->descriptionHTML;?>
+                <?php //echo $product->descriptionHTML;?>
             </div>
         </div>
 
