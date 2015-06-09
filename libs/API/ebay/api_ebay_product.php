@@ -294,7 +294,6 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct->subtitle               =     (string)  $productOutput->Subtitle;
         $ObjProduct->descriptionHTML        =     (string)  $productOutput->Description;
         $ObjProduct->storeLink              =     (string)  $productOutput->ViewItemURLForNaturalSearch;
-        $ObjProduct->pics                   =     (array)   $productOutput->PictureURL;
         $ObjProduct->categoryText           =     (string)  $productOutput->PrimaryCategoryName;
         $ObjProduct->price                  =     (string)  $productOutput->ConvertedCurrentPrice;
         $ObjProduct->priceCurrency          =     (string)  $productOutput->convertedCurrentPrice["currencyId"];
@@ -303,11 +302,11 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct->quantityAvailable      =     (string)  $productOutput->Quantity;
         $ObjProduct->quantitySold           =     (string)  $productOutput->QuantitySold;
         $ObjProduct->timeLeft               =     parent::getPrettyTimeFromEbayTime((string)$productOutput->TimeLeft); // Limited timed offer.
-        $ObjProduct->availableTill          =     (string)  $productOutput->EndTime;            // Availability until (eg. format: 2015-07-01T09:01:10.000Z)
-        $ObjProduct->listingType            =     (string)  $productOutput->ListingType;        // If 'AuctionWithBIN' -> Rush buy before someone bids. [our types: AuctionWithBIN,FixedPrice,StoreInventory]
-        $ObjProduct->handlingTime           =     (string)  $productOutput->HandlingTime;       // Number of days until shipment - int.
+        $ObjProduct->availableTill          =     (string)  $productOutput->EndTime;                // Availability until (eg. format: 2015-07-01T09:01:10.000Z)
+        $ObjProduct->listingType            =     (string)  $productOutput->ListingType;            // If 'AuctionWithBIN' -> Rush buy before someone bids. [our types: AuctionWithBIN,FixedPrice,StoreInventory]
+        $ObjProduct->handlingTime           =     (string)  $productOutput->HandlingTime;           // Number of days until shipment - int.
         $ObjProduct->conditionText          =     (string)  $productOutput->ConditionDisplayName;
-        $ObjProduct->maxItemsOrder          =     (string)  $productOutput->QuantityThreshold;  // How many items can you order at once.
+        $ObjProduct->maxItemsOrder          =     (string)  $productOutput->QuantityThreshold;      // How many items can you order at once.
         $ObjProduct->topRatedItem           =     (string)  $productOutput->TopRatedListing;
 
         $ObjProduct->sellerInfo             =     array(
@@ -317,6 +316,14 @@ class ebay_ShoppingAPI extends ebayAdapter {
             "feedbackPercent"       =>  (string)  $productOutput->Seller->PositiveFeedbackPercent,  // Positive %.
             "topRated"              =>  (string)  $productOutput->Seller->TopRatedSeller,           // Is he top rated? (Boolean)
         );
+
+        // Set the pictures:
+        $ObjProduct->pics                   =     array();
+        foreach($productOutput->PictureURL as $pic){
+            $ObjProduct->pics[]     =   Array(
+                "picURL" => (string)  $pic,                                                         // The link to the image.
+            );
+        }
 
         // Get the item specifics.
         $ObjProduct->itemSpecifics          =     array();
@@ -349,7 +356,11 @@ class ebay_ShoppingAPI extends ebayAdapter {
                 foreach($variationPicSet->VariationSpecificPictureSet as $PicDetails){
                     $ObjProduct->variationSets[(string)$variationPicSet->VariationSpecificName][(string)$PicDetails->VariationSpecificValue] = (string)$PicDetails->PictureURL;
                     // Also add the variation pictures to our main gallery.
-                    $ObjProduct->pics[] = (string)$PicDetails->PictureURL;
+                    $ObjProduct->pics[] = Array(
+                        "picURL"    =>  (string)    $PicDetails->PictureURL,                        // The link to the image.
+                        "assoc"     =>  (string)    $variationPicSet->VariationSpecificName,        // Variation set association.
+                        "assocVal"  =>  (string)    $PicDetails->VariationSpecificValue             // Variation set specific value association.
+                    );
                 }
             }
 
