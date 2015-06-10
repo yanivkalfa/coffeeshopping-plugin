@@ -7,6 +7,11 @@ abstract class CSCons {
 
     public static function get($consName){
         $constants = array(
+            'descRestrictedExt' => array(
+                "js",
+                "json",
+                "css",
+            ),
             'errorCategories' => array(
                 "API",
                 "frontEnd",

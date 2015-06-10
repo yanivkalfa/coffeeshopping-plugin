@@ -292,7 +292,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct->ID                     =     (string)  $productOutput->ItemID;
         $ObjProduct->title                  =     (string)  $productOutput->Title;
         $ObjProduct->subtitle               =     (string)  $productOutput->Subtitle;
-        $ObjProduct->descriptionHTML        =     (string)  $productOutput->Description;
+        $ObjProduct->descriptionHTML        =     Utils::cleanDescriptionHTML((string)  $productOutput->Description);
         $ObjProduct->storeLink              =     (string)  $productOutput->ViewItemURLForNaturalSearch;
         $ObjProduct->categoryText           =     (string)  $productOutput->PrimaryCategoryName;
         $ObjProduct->price                  =     (string)  $productOutput->CurrentPrice;

@@ -34,12 +34,6 @@ abstract class productViewTemplates {
     static public function getProductView($product){
         ob_start();
         ?>
-        Debug Output: [<a href="#" id="debugOutPutTogg">+</a>]
-        <div id="DebugProductOutput">
-            <?php Utils::preEcho($product);?>
-        </div>
-
-
         <script language="javascript" type="text/javascript">
             jQuery(document).ready( function(){
                 var previews 	= jQuery('.zoomItcontainer .full-image a'), // image previews
@@ -110,7 +104,7 @@ abstract class productViewTemplates {
                 // handle our variations.
                 var hasVariations = true;
                 var variationSets = <?php echo json_encode($product->variationSets);?>;
-
+                var variations = <?php echo json_encode($product->variations);?>;
                 jQuery(".varset").change(function(e){
                     var arrayTest = [];
                     var variationsArr = [];
@@ -144,8 +138,31 @@ abstract class productViewTemplates {
                     updateProductPrices();
                 });
 
+                // Handle our quantity changes.
+                jQuery("#orderquantity").change(function(e){
+                    updateProductPrices();
+                });
+
+                // Handle togglers.
+                jQuery("#quicksummary").hide();
+                jQuery("#orderdetailstogg").click(function(e){toggleID(this, "#quicksummary", e)});
+                jQuery("#DebugProductOutput").hide();
+                jQuery("#debugOutPutTogg").click(function(e){toggleID(this, "#DebugProductOutput", e)});
+                // Scroll our details panel to the left to display contents in case of need.
+                jQuery("#detailspaenl").scrollLeft(0);
+
+                function toggleID(togg, id, e){
+                    e.preventDefault();
+                    if (jQuery(togg).html()=="-") {
+                        jQuery(id).hide();
+                        jQuery(togg).html("+");
+                    }else{
+                        jQuery(id).show();
+                        jQuery(togg).html("-");
+                    }
+                }
+
                 // Searches for a specific variation set options. Returns 0 or Variation key
-                var variations = <?php echo json_encode($product->variations);?>;
                 function searchVariation(search){
                     //console.log(search);
                     var itemfound = 0;
@@ -175,52 +192,28 @@ abstract class productViewTemplates {
                     return varArr;
                 }
 
-                jQuery("#orderquantity").change(function(e){
-                    updateProductPrices();
-                });
-
-                jQuery("#quicksummary").hide();
-                jQuery("#orderdetailstogg").click(function(e){toggleID(this, "#quicksummary", e)});
-                jQuery("#DebugProductOutput").hide();
-                jQuery("#debugOutPutTogg").click(function(e){toggleID(this, "#DebugProductOutput", e)});
-
-                function toggleID(togg, id, e){
-                    e.preventDefault();
-                    if (jQuery(togg).html()=="-") {
-                        jQuery(id).hide();
-                        jQuery(togg).html("+");
-                    }else{
-                        jQuery(id).show();
-                        jQuery(togg).html("-");
-                    }
-                }
-
-
                 function updateProductPrices(){
                     var paypalcomm = parseFloat(10/100).toFixed(2),
                         storecomm = 10/100,
                         minstorecomm = 5,
                         details = [];
 
-                    details["sku"] = "";
-                    details["shippingprice"] = parseFloat( jQuery(".shippingopt:checked").data("price") );
-                    details["shippingadditional"] = parseFloat( jQuery(".shippingopt:checked").data("additional") );
-                    details["shippingduty"] = parseFloat( jQuery(".shippingopt:checked").data("duty") );
-                    details["itemprice"] = <?php echo $product->price;?>;
-                    details["quantityavail"] = <?php echo $product->quantityAvailable;?>;
-                    details["quantitysold"] = <?php echo $product->quantitySold;?>;
-                    details["orderquantity"] = parseFloat( jQuery("#orderquantity").val() );
+                    details["sku"]                  = "";
+                    details["shippingprice"]        = parseFloat( jQuery(".shippingopt:checked").data("price") );
+                    details["shippingadditional"]   = parseFloat( jQuery(".shippingopt:checked").data("additional") );
+                    details["shippingduty"]         = parseFloat( jQuery(".shippingopt:checked").data("duty") );
+                    details["itemprice"]            = <?php echo $product->price;?>;
+                    details["quantityavail"]        = <?php echo $product->quantityAvailable;?>;
+                    details["quantitysold"]         = <?php echo $product->quantitySold;?>;
+                    details["orderquantity"]        = parseFloat( jQuery("#orderquantity").val() );
 
-                    if (hasVariations){
-                        var variation = searchVariation(getCurrentVarSel());
-                        if (variation!="0"){
-                            // set variation details.
-                            details["itemprice"] = parseFloat( variations[variation]["startPrice"] );
-                            details["quantityavail"] = parseFloat( variations[variation]["quantity"] );
-                            details["quantitysold"] = parseFloat( variations[variation]["quanitySold"] );
-                            details["sku"] = variations[variation]["SKU"];
-
-                        }
+                    var variation = searchVariation(getCurrentVarSel());
+                    if (variation!="0"){
+                        // set variation details.
+                        details["itemprice"]        = parseFloat( variations[variation]["startPrice"] );
+                        details["quantityavail"]    = parseFloat( variations[variation]["quantity"] );
+                        details["quantitysold"]     = parseFloat( variations[variation]["quanitySold"] );
+                        details["sku"]              = variations[variation]["SKU"];
                     }
                     if (details["orderquantity"]<1 || details["orderquantity"] > details["quantityavail"]){
                         console.log("Choose quantity or Item not available.");
@@ -250,9 +243,9 @@ abstract class productViewTemplates {
                     if (details["storeprice"]<minstorecomm){details["storeprice"] = minstorecomm;}
                     // Final price = item(s) price + shipping + paypal + store
                     details["finalPrice"] = itemprice+details["shippingprice"]+details["paypalprice"]+details["storeprice"];
+                    // Total price per item = final price/quantity.
                     details["totalprice"] = details["finalPrice"]/details["orderquantity"];
 
-                    console.log("After calcs:", details);
                     Object.keys(details).forEach(function(key){
                         var pageOutput = (parseFloat( details[key] ).toFixed(2)=="NaN") ? "-" : parseFloat( details[key] ).toFixed(2);
                         jQuery("#" + key).html(pageOutput);
@@ -442,7 +435,10 @@ abstract class productViewTemplates {
                 <?php } ?>
                 <div class="inline">
                     <div class="inline header">Quantity:</div>
-                    <div class="inline"><input id="orderquantity" type="number" max="<?php Utils::pageEcho($product->maxItemsOrder);?>" min="1" value="1" /></div>
+                    <?php
+                        $maxQuantity = ($product->quantityAvailable > $product->maxItemsOrder) ? $product->maxItemsOrder : $product->quantityAvailable;
+                    ?>
+                    <div class="inline"><input id="orderquantity" type="number" max="<?php Utils::pageEcho($maxQuantity);?>" min="1" value="1" /></div>
                 </div>
                 <div class="inline">
                     <div class="inline header">Total price: </div>
@@ -478,11 +474,15 @@ abstract class productViewTemplates {
 
             <hr>
             <div id="detailspaenl">
-                <?php //echo $product->descriptionHTML;?>
+                <?php echo $product->descriptionHTML;?>
             </div>
         </div>
 
 </div>
+        Debug Output: [<a href="#" id="debugOutPutTogg">+</a>]
+        <div id="DebugProductOutput">
+            <?php Utils::preEcho($product);?>
+        </div>
         <?php
         return ob_get_clean();
     }

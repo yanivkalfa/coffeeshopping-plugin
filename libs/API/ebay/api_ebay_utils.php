@@ -35,7 +35,8 @@ abstract class ebay_Utils{
       $regexp = "/\\$\\_\\d+\\.JPG.+/i";
       $replace = "\$_".$sizes[$size].".JPG";
       return preg_replace($regexp, $replace, $link, 1);
-  }
+    }
+
     static public function getDeliveryTime($time){
         $regexp = "/T.+/i";
         $replace = "";
