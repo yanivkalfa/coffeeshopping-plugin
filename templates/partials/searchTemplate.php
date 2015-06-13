@@ -20,10 +20,21 @@
     </li>
             <?php
         }
+
     }else{
         // deals with searchAPI() array results.
-        $Items = $searchResults->item;
-        foreach ($Items as $item){
+
+
+        $searchPageId = get_option("cs_search_p_id");
+        if (!$searchPageId){
+            Utils::adminPreECHO("productSearch::searchALL(...) failed!", "searchLoader() ERROR:: ");
+            $scope = array(
+                "errorsText" => $result["output"]
+            );
+        }
+        get_page_link($searchPageId);
+        $items = $searchResults->item;
+        foreach ($items as $item){
             $scope = array(
                 "item" => $item
             );
