@@ -44,29 +44,36 @@ if (
             // Output results if we have any proper ones, else display errors.
             if ($result["result"] == "ERROR") {
                 // Couldn't get the product.
-                echo productView::displayError($result["output"]);
+                $scope = array(
+                    'errorsText' => Utils::getErrorCode("templateLoader", "productView", "getProduct", "2")
+                );
+                Utils::getTemplate('productError');
 
             } else {
+                // Load our template.
                 $scope = array();
-                $scope['product'] = $result["output"];
-                $scope['exchangeExtension'] = "Exch";
-                $scope['exchangeCurrency'] = "ILS";
-                productView::_addExchangeRates($scope['product'], $scope['exchangeCurrency'], $scope['exchangeExtension']);
-
-                $scope['itemPricing'] = array(
-                    "price" => $scope['product']->price,
-                    "priceCurrency" => $scope['product']->priceCurrency,
-                    "priceSymbol" => Utils::getCurrencySymbol($scope['product']->priceCurrency),
-                    "price".$scope['exchangeExtension'] => $scope['product']->{'price'.$scope['exchangeExtension']},
-                    "priceSymbol".$scope['exchangeExtension'] => Utils::getCurrencySymbol($scope['exchangeCurrency']),
-                    "exchextension" => $scope['exchangeExtension'],
+                $scope["product"]               = $result["output"];
+                $scope["exchangeCurrency"]      = "ILS";
+                $scope["exchangeExtension"]     = "Exch";
+                // Add our proper exchange rates.
+                productView::_addExchangeRates($result["output"], "ILS", "Exch");
+                $scope["itemPricing"] = array(
+                        "price"                                         => $scope['product']->price,
+                        "priceCurrency"                                 => $scope['product']->priceCurrency,
+                        "priceSymbol"                                   => Utils::getCurrencySymbol($scope['product']->priceCurrency),
+                        "price".$scope['exchangeExtension']             => $scope['product']->{'price'.$scope['exchangeExtension']},
+                        "priceSymbol".$scope['exchangeExtension']       => Utils::getCurrencySymbol($scope['exchangeCurrency']),
+                        "exchextension"                                 => $scope['exchangeExtension'],
                 );
 
-                echo Utils::getTemplate('product',$scope);
+                Utils::getTemplate('product',$scope);
             }
 }else{
     // No product or unknown store.
-    echo Utils::getTemplate('productError');
+    $scope = array(
+        'errorsText' => Utils::getErrorCode("templateLoader", "productView", "missingArgs", "3")
+    );
+    Utils::getTemplate('productError');
 }
 
 ?>

@@ -212,6 +212,10 @@ class ebay_FindingAPI extends ebayAdapter {
         // Set our headers properly
         $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "findItemsAdvanced";
 
+        Utils::preEcho($xmlrequest);
+        Utils::preEcho($this->_formCurlHeaders($this->headers));
+        Utils::preEcho($this->endpoint);
+
         // Make the call to eBay.
         $searchRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
         if ($searchRaw["result"]=="ERROR"){
@@ -221,6 +225,7 @@ class ebay_FindingAPI extends ebayAdapter {
                 "output" => Utils::getErrorCode("API", "ebay", "getSearch", "1")
             );
         }
+        Utils::preEcho($searchRaw["output"]);
         $searchRaw = $searchRaw["output"];
 
         // Parse our products

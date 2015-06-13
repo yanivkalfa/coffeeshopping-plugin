@@ -44,22 +44,35 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     // Our mode (sandbox/live)
     $sandbox = false;
 
-
     // performs the actual search.
     $result = productSearch::searchALL($APIs, $searchVal, $searchOpts, $sandbox);
-    Utils::preEcho($result);
 
     // error checking
     if ($result["result"]=="ERROR"){
         $errorsText = "";
-        foreach ($result["output"]->errors as $API => $Error) {
-            $errorsText .= "(" . $API . ") :: " . $Error."\n";
-        }
-        echo productSearch::displayError($errorsText);
+
+        Utils::adminPreECHO("productSearch::searchALL(...) failed!", "searchLoader() ERROR:: ");
+        $scope = array(
+            "errorsText" => $errorsText
+        );
+        Utils::getTemplate('searchError', $scope);
 
     }else{
-        echo productSearch::constructResults($result);
+        // Output the search results template.
+        $scope = array(
+            "searchResults" => $result["result"]
+        );
+        Utils::getTemplate('search', $scope);
+
+
     }
+}else{
+    Utils::adminPreECHO("No search value was specified, \$_GET[\"search-product\"]='".$_GET["search-product"]."'", "searchLoader() ERROR:: ");
+    $scope = array(
+        "errorsText" => Utils::getErrorCode("templateLoader", "productSearch", "missingArgs", "3")
+    );
+    // No product or unknown store.
+    Utils::getTemplate('searchError', $scope);
 }
 
 ?>
