@@ -4,7 +4,7 @@
  * User: SK
  * Date: 5/26/2015
  * Time: 2:49 PM
- * TODO:: details not in use: $product->>> handlingTime, timeLeft, availableTill, storeLink.
+ *
  */
 
 abstract class productViewTemplates {

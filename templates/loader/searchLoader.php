@@ -33,10 +33,10 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     */
     // Add our filters.
     $searchOpts["filters"] = Array(
-        array('name' => 'ListingType', 'value' => array('AuctionWithBIN','FixedPrice','StoreInventory'), 'paramName' => 'name', 'paramValue' => 'value'),
-        array('name' => 'MinQuantity', 'value' => '1', 'paramName' => 'name', 'paramValue' => 'value'),
-        array('name' => 'AvailableTo', 'value' => 'IL', 'paramName' => 'name', 'paramValue' => 'value'),
-        array('name' => 'PaymentMethod', 'PayPal' => 'IL', 'paramName' => 'name', 'paramValue' => 'value'),
+        array('name' => 'ListingType', 'value' => array('AuctionWithBIN','FixedPrice','StoreInventory')),
+        array('name' => 'MinQuantity', 'value' => '1'),
+        array('name' => 'AvailableTo', 'value' => 'IL'),
+        array('name' => 'PaymentMethod', 'value' => 'PayPal'),
         //array('name' => 'Condition','value' => array('1000', '1500', '1750', '2000'),'paramName' => 'name','paramValue' => 'value'),
     );
     // Our sorting order
@@ -60,7 +60,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     }else{
         // Output the search results template.
         $scope = array(
-            "searchResults" => $result["result"]
+            "searchResults" => $result["output"]
         );
         Utils::getTemplate('search', $scope);
 

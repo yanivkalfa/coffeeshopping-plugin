@@ -1,3 +1,8 @@
+<?php
+/**
+ * TODO: details not in use: $product->>> handlingTime, timeLeft, availableTill, storeLink.
+ */
+?>
 <!-- all variables comes from Utils::getTemplate -->
 
 <script language="javascript" type="text/javascript">

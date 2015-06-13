@@ -57,11 +57,11 @@ abstract class CSCons {
             'req_scripts' => array(
 
                 'front_end' => array(
-                    array('handle' => 'zoomit.jquery', 'src' => '/scripts/ZoomIt/zoomit.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),           // ZoomIt image gallery js.
-                    array('handle' => 'cbcarousel.jquery', 'src' => '/scripts/ZoomIt/cbcarousel.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),   // ZoomIt image gallery js.
-                    array('handle' => 'zoomit', 'src' => '/scripts/ZoomIt/zoomit', 'extension' => 'css', 'deps' => '', 'media' => 'screen'),                        // ZoomIt image gallery css.
-                    array('handle' => 'product_css', 'src' => '/css/productViewTemplate', 'extension' => 'css', 'deps' => '', 'media' => 'screen', 'page' => 'product'),                  // ProductViewTemplate css.
-                    array('handle' => 'product_js', 'src' => '/scripts/pages/product', 'extension' => 'js', 'deps' => '', 'media' => 'screen', 'page' => 'product'),
+                    array('handle' => 'zoomit.jquery', 'src' => '/scripts/ZoomIt/zoomit.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),                   // ZoomIt image gallery js.
+                    array('handle' => 'cbcarousel.jquery', 'src' => '/scripts/ZoomIt/cbcarousel.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),           // ZoomIt image gallery js.
+                    array('handle' => 'zoomit', 'src' => '/scripts/ZoomIt/zoomit', 'extension' => 'css', 'deps' => '', 'media' => 'screen'),                                // ZoomIt image gallery css.
+                    array('handle' => 'product_css', 'src' => '/css/productViewTemplate', 'extension' => 'css', 'deps' => '', 'media' => 'screen', 'page' => 'product'),    // Product Template css.
+                    array('handle' => 'product_js', 'src' => '/scripts/pages/product', 'extension' => 'js', 'deps' => '', 'media' => 'screen', 'page' => 'product'),        // Product Template js.
                 ),
 
                 'back_end' => array(
