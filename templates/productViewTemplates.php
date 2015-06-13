@@ -35,6 +35,7 @@ abstract class productViewTemplates {
 
     }
 
+
     static private function _prepareProduct(&$product){
         // Clean our products HTML for display.
         $product->descriptionHTML        =     Utils::cleanDescriptionHTML(($product->descriptionHTML));
