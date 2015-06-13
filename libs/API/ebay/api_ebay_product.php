@@ -98,8 +98,9 @@ class ebay_ShoppingAPI extends ebayAdapter {
      *  @return     array
      *                  [result] -  OK/ERROR
      *                  [output]
-     *                          - OK - Products object.
+     *                          - OK - Products object. [as returned by _formatProductOutput()]
      *                          - ERROR - Error msg.
+     * @depends     class   Utils
      */
     public function getProduct(){
         // Create the XML request to be POSTed
@@ -170,7 +171,17 @@ class ebay_ShoppingAPI extends ebayAdapter {
             "output" => $itemDetailsProp
         );
     }
-    
+
+    /**
+     * @func getShippingCosts()
+     *  - Gets a specific product shipping details.
+     *  @return     array
+     *                  [result] -  OK/ERROR
+     *                  [output]
+     *                          - OK - shippingObject object. [as returned by _formatShippingCosts()]
+     *                          - ERROR - Error msg.
+     * @depends     class   Utils
+     */
     public function getShippingCosts(){
         // Create the XML request to be POSTed.
         $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
@@ -274,8 +285,8 @@ class ebay_ShoppingAPI extends ebayAdapter {
     /**
      * @func _formatProductOutput($productOutput)
      *  - Creates a "proper" product object to display in our product page.
-     * @param   object      $productOutput       - As returned by ebay's 'GetSingleItemRequest' XML API call.
-     * @return  object      $ObjProduct          - Product object.
+     * @param       object      $productOutput       - As returned by ebay's 'GetSingleItemRequest' XML API call.
+     * @return      object      $ObjProduct          - Product object.
      *                                              Array examples:
      *                                              $ObjProduct->variationSets["Color"]["Rose"] = "Link to image"
      *                                              $ObjProduct->variationSets["Color"]["Pink"] = "Link to image"
@@ -292,12 +303,11 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct->ID                     =     (string)  $productOutput->ItemID;
         $ObjProduct->title                  =     (string)  $productOutput->Title;
         $ObjProduct->subtitle               =     (string)  $productOutput->Subtitle;
-        $ObjProduct->descriptionHTML        =     Utils::cleanDescriptionHTML((string)  $productOutput->Description);
         $ObjProduct->storeLink              =     (string)  $productOutput->ViewItemURLForNaturalSearch;
         $ObjProduct->categoryText           =     (string)  $productOutput->PrimaryCategoryName;
         $ObjProduct->price                  =     (string)  $productOutput->CurrentPrice;
         $ObjProduct->priceCurrency          =     (string)  $productOutput->CurrentPrice["currencyID"];
-        $ObjProduct->country                =     (string)  Utils::getCountryFromCode((string)$productOutput->Country);
+        $ObjProduct->country                =     (string)  $productOutput->Country;
         $ObjProduct->location               =     (string)  $productOutput->Location;
         $ObjProduct->quantityAvailable      =     (string)  $productOutput->Quantity;
         $ObjProduct->quantitySold           =     (string)  $productOutput->QuantitySold;
@@ -365,21 +375,27 @@ class ebay_ShoppingAPI extends ebayAdapter {
             }
 
             // Get our actual variations and their details.
+            $varIndex = 0;
             foreach($productOutput->Variations->Variation as $variation){
-                $ObjProduct->variations[(string)$variation->SKU] = array(
+                $ObjProduct->variations[$varIndex] = array(
                     "SKU"           =>  (string)    $variation->SKU,
-                    "startPrice"    =>  (string)    $variation->StartPrice,
+                    "price"         =>  (string)    $variation->StartPrice,
+                    "priceCurrency" =>  (string)    $variation->StartPrice["currencyID"],
                     "quantity"      =>  (string)    $variation->Quantity,
-                    "quanitySold"   =>  (string)    $variation->SellingStatus->QuantitySold
+                    "quantitySold"  =>  (string)    $variation->SellingStatus->QuantitySold
                 );
                 // Associate our variation with it's SET(s).
                 foreach($variation->VariationSpecifics->NameValueList as $variationSet){
-                    $ObjProduct->variations[(string)$variation->SKU]["setInfo"][(string)$variationSet->Name] = (string)$variationSet->Value;
+                    $ObjProduct->variations[$varIndex]["setInfo"][(string)$variationSet->Name] = (string)$variationSet->Value;
                 }
+                $varIndex++;
             }
 
 
         }
+
+        // Add this last cause it's freakin' annoying on debug.
+        $ObjProduct->descriptionHTML        =     (string)  $productOutput->Description;
 
         return $ObjProduct;
     }
@@ -393,18 +409,25 @@ class ebay_ShoppingAPI extends ebayAdapter {
 
         foreach ($shippingObject->InternationalShippingServiceOption as $option){
             $ObjShipping->shippingOptions[] = array(
-                "shippingServiceName"                   =>  (string)    $option->ShippingServiceName,
-                "shippingServiceAdditionalCost"         =>  (string)    $option->ShippingServiceAdditionalCost,
-                "shippingServiceAdditionalCostCurrency" =>  (string)    $option->ShippingServiceAdditionalCost["currencyID"],
-                "shippingServiceCost"                   =>  (string)    $option->ShippingServiceCost,
-                "shippingServiceCostCurrency"           =>  (string)    $option->ShippingServiceCost["currencyID"],
-                "shippingServicePriority"               =>  (string)    $option->ShippingServicePriority,
-                "estimatedDeliveryMinTime"              =>  (string)    $option->EstimatedDeliveryMinTime,
-                "estimatedDeliveryMaxTime"              =>  (string)    $option->EstimatedDeliveryMaxTime,
-                "importCharge"                          =>  (string)    $option->ImportCharge,
-                "importChargeCurrency"                  =>  (string)    $option->ImportCharge["currencyID"],
-                "shippingInsuranceCost"                 =>  (string)    $option->ShippingInsuranceCost,
-                "shippingInsuranceCostCurrency"         =>  (string)    $option->ShippingInsuranceCost["currencyID"],
+                "name"                      =>  (string)    $option->ShippingServiceName,
+                "priority"                  =>  (string)    $option->ShippingServicePriority,                               // int.
+                "deliveryMin"               =>  array(
+                    "date"  =>      ebay_Utils::getDeliveryTime((string)$option->EstimatedDeliveryMinTime),                 // Date in the format - "D. M."
+                    "days"  =>      ebay_Utils::getDeliveryTimeDiff((string)$option->EstimatedDeliveryMinTime),             // Date in the format - "D. M."
+                ),
+                "deliveryMax"               =>  array(
+                    "date"  =>      ebay_Utils::getDeliveryTime((string)$option->EstimatedDeliveryMaxTime),                 // Date in the format - "D. M."
+                    "days"  =>      ebay_Utils::getDeliveryTimeDiff((string)$option->EstimatedDeliveryMaxTime),             // Date in the format - "D. M."
+                ),
+                // All price modifiers:
+                "price"                     =>  (string)    $option->ShippingServiceCost,                                   // int. [same for all]
+                "priceCurrency"             =>  (string)    $option->ShippingServiceCost["currencyID"],                     // 3 letters ID. [same for all]
+                "additional"                =>  (string)    $option->ShippingServiceAdditionalCost,
+                "additionalCurrency"        =>  (string)    $option->ShippingServiceAdditionalCost["currencyID"],
+                "duty"                      =>  (string)    $option->ImportCharge,
+                "dutyCurrency"              =>  (string)    $option->ImportCharge["currencyID"],
+                "insurance"                 =>  (string)    $option->ShippingInsuranceCost,
+                "insuranceCurrency"         =>  (string)    $option->ShippingInsuranceCost["currencyID"],
             );
         }
 

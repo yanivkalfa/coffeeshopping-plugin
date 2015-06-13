@@ -12,12 +12,13 @@ abstract class CSCons {
                 "json",
                 "css",
             ),
+
+
             'errorCategories' => array(
                 "API",
                 "frontEnd",
                 "backEnd",
             ),
-
             'errorSubCategories' => array(
                 "ebay",
                 "aliexp",
@@ -42,12 +43,15 @@ abstract class CSCons {
                 "5" => "Failed to get the requested item(s) details",
                 "6" => "Failed to get the search results",
             ),
+
+
             'req_scripts' => array(
 
                 'front_end' => array(
-                    array('handle' => 'zoomit.jquery', 'src' => '/scripts/ZoomIt/zoomit.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),   // ZoomIt image gallery js.
+                    array('handle' => 'zoomit.jquery', 'src' => '/scripts/ZoomIt/zoomit.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),           // ZoomIt image gallery js.
                     array('handle' => 'cbcarousel.jquery', 'src' => '/scripts/ZoomIt/cbcarousel.jquery', 'extension' => 'js', 'deps' => '', 'media' => 'screen'),   // ZoomIt image gallery js.
-                    array('handle' => 'zoomit', 'src' => '/scripts/ZoomIt/zoomit', 'extension' => 'css', 'deps' => '', 'media' => 'screen')                 // ZoomIt image gallery css.
+                    array('handle' => 'zoomit', 'src' => '/scripts/ZoomIt/zoomit', 'extension' => 'css', 'deps' => '', 'media' => 'screen'),                        // ZoomIt image gallery css.
+                    array('handle' => 'productview', 'src' => '/css/productViewTemplate', 'extension' => 'css', 'deps' => '', 'media' => 'screen')                  // ProductViewTemplate css.
                 ),
 
                 'back_end' => array(
@@ -336,6 +340,54 @@ abstract class CSCons {
                 'YE' => 'Yemen',
                 'ZM' => 'Zambia',
                 'ZW' => 'Zimbabwe',
+            ),
+            "currencyNames" => array(
+                'USD' => "US Dollar",
+                'GBP' => "Pound Sterling",
+                'JPY' => "Japanese Yen",
+                'EUR' => "European Euro",
+                'AUD' => "Australian Dollar",
+                'CAD' => "Canadian Dollar",
+                'DKK' => "Denmark Krone",
+                'NOK' => "Norway Krone",
+                'ZAR' => "South Africa Rand",
+                'SEK' => "Sweden Krona",
+                'CHF' => "Switzerland Franc",
+                'JOD' => "Jordan Dinar",
+                'LBP' => "Lebanon Pound",
+                'EGP' => "Egypt Pound",
+                'HKD' => "Hong Kong Dollar",
+                'CNY' => "Chinese Yuan Renminbi",
+                'INR' => "Indian Rupee",
+                'SGD' => "Singapore Dollar",
+                'ILS' => "Israeli Shekel",
+                'THB' => "Thai Baht",
+                'CZK' => "Czech Koruna",
+                'BGN' => "Bulgarian Lev",
+                'HUF' => "Hungarian Forint",
+                'PLN' => "Polish Zloty",
+                'ROM' => "Romanian Leu",
+                'HRK' => "Croatian Kuna",
+                'RUN' => "Russian Rouble",
+                'TRY' => "Turkish Lira",
+                'BRL' => "Brasilian Real",
+                'IDR' => "Indonesian Rupiah",
+                'KRW' => "South Korean Won",
+                'MXN' => "Mexican Peso",
+                'MYR' => "Malaysian Ringgit",
+                'NZD' => "New Zealand Dollar",
+                'PHP' => "Philippine Peso",
+            ),
+            "currencySymbols" => array(
+                'USD' => "$",
+                'GBP' => "&pound;",
+                'JPY' => "&yen;",
+                'EUR' => "&euro;",
+                'AUD' => "A$",
+                'CAD' => "C$",
+                'HKD' => "HK$",
+                'ILS' => "&#8362;",
+                'RUN' => "руб"
             )
         );
         return isset($constants[$consName]) ? $constants[$consName] : false ;

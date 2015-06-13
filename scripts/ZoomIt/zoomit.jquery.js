@@ -30,8 +30,8 @@
 			zoomAreaOpacity		: .5, // zoomed area opacity
 			zoomDistance		: 10, // distance of the zoomer from the trigger
 			// full image multipliers based on small preview image size
-			multiplierX			: 2, // how much of the big image width will be displayed
-			multiplierY			: 2, // how much of the big image height will be displayed
+			multiplierX			: 1.25, // how much of the big image width will be displayed
+			multiplierY			: 1.5, // how much of the big image height will be displayed
 			// events
 			init				: function(){},
 			zoom				: function(){},
@@ -72,7 +72,10 @@
 				options.close.call(self, {});
 			});
 
-			$(window).resize( set_small_size );// reset positions on window resize
+			$(window).resize( function(){
+                set_small_size();
+                reset_preview_area();
+            });// reset positions on window resize
 			options.init.call(self, {});
 			return self;
 		}
@@ -80,6 +83,10 @@
 		var startZoom = function(){
 			var elems = get_preview_areas(), // returns object with keys zoomer and preview containing elements needed to create the zoom
 				sizes = get_small_size();
+
+            // Check if we have enough room on page to display the zoom.
+            console.log($(document).width(),"-", (sizes.width+options.zoomDistance), "<", options.multiplierX*sizes.width+options.zoomDistance);
+            if ($(document).width()-(sizes.width+options.zoomDistance) < options.multiplierX*sizes.width+options.zoomDistance ){return;}
 
 			$(elems.zoomer).show().css({
 				'top' : sizes.zTop,
@@ -297,6 +304,10 @@
 			};
 			$.data( smallImg[0], 'elems', data );
 		}
+
+        var reset_preview_area = function(){
+
+        }
 
 		// helper function to return element that highlights the zoomed area
 		var get_preview_areas = function(){

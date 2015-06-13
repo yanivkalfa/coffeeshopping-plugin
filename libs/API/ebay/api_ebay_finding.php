@@ -7,9 +7,9 @@
  */
 class ebay_FindingAPI extends ebayAdapter {
     // API variables
-    public $endpoint;               // The eBay Finding API address
-    public $searchOptions;          // To hold our options.
-    public $headers;                // Holds our communication headers.
+    public  $endpoint,              // The eBay Finding API address
+            $searchOptions,         // To hold our options.
+            $headers;               // Holds our communication headers.
 
 
     // Basic construct function.
@@ -32,14 +32,14 @@ class ebay_FindingAPI extends ebayAdapter {
         $this->_setDefaultHeaders();
     }
 
-    /*
+    /**
      * @func _setSearchQuery()
      *  - Sets our searching query.
      */
     public function _setSearchQuery($searchQuery){
         $this->searchOptions->searchQuery = $searchQuery;
     }
-    /*
+    /**
      * @func _setSearchOptions()
      *  - Sets our searching options.
      */
@@ -49,7 +49,7 @@ class ebay_FindingAPI extends ebayAdapter {
         }
     }
 
-    /*
+    /**
      * @func _setDefaultHeaders()
      *  - Resets our headers to the default API headers.
      */
@@ -65,7 +65,7 @@ class ebay_FindingAPI extends ebayAdapter {
             );
     }
 
-    /*
+    /**
      * @func _setSandbox()
      *  - Sets our search to use the ebay sandbox url.
      */
@@ -73,7 +73,7 @@ class ebay_FindingAPI extends ebayAdapter {
         $this->endpoint = "http://svcs.sandbox.ebay.com/services/search/FindingService/v1";
     }
 
-    /*
+    /**
      * @func _setLive()
      *  - Sets our search to use the ebay live url.
      */

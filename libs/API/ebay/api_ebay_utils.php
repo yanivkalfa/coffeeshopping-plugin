@@ -38,9 +38,17 @@ abstract class ebay_Utils{
     }
 
     static public function getDeliveryTime($time){
+        if (strtotime($time)==false){return $time;}
         $regexp = "/T.+/i";
         $replace = "";
-        return preg_replace($regexp, $replace, $time, 1);
+        $date = new DateTime(preg_replace($regexp, $replace, $time, 1));
+        return $date->format("M. jS");
+    }
+
+    static public function getDeliveryTimeDiff($time){
+        $now = date_create();
+        $datetime = date_create($time);
+        return date_diff($now, $datetime)->format('%a days');
     }
 }
 

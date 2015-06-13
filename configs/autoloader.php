@@ -14,4 +14,5 @@ $classes = array(
     'ebayAdapter' => '/libs/API/ebay/',
     'productSearch' => '/libs/API/',
     'productView' => '/libs/API/',
+    'currencyExchange' => '/libs/',
 );

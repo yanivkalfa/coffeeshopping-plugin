@@ -47,7 +47,7 @@
 			correction		= 0;
 		
 		if( 0 == options.visibleItems ){
-			options.visibleItems = defaultOptions.visibleItems;
+			options.visibleItems = totalItems;
 		}
 		
 		// reset visibleItems parameter to number of items if option exceeds total items
@@ -277,13 +277,15 @@
 			$(navFwd).css({'opacity':0, 'right':-50});
 			
 			// carousel hover shows/hides navigation
+            if (options.visibleItems != totalItems){
 			$(self).mouseenter(function(){
 				$(navBack).stop().animate({'opacity':1, 'left' : 2},{queue:false, duration:200});
 				$(navFwd).stop().animate({'opacity':1, 'right' : 2},{queue:false, duration:200});
 			}).mouseleave(function(){
 				$(navBack).stop().animate({'opacity':0, 'left' : -50},{queue:false, duration:200});
 				$(navFwd).stop().animate({'opacity':0, 'right' : -50},{queue:false, duration:200});
-			})			
+			})
+            }
 		}
 		
 		this.gotoIndex = function( index ){
