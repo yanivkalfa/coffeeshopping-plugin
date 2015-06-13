@@ -57,12 +57,21 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
 
     }else{
         // Output the search results template.
-        $scope = array(
-            "searchResults" => $result["output"]
-        );
-        Utils::getTemplate('search', $scope);
+        $productPageLink = get_page_link(get_option("cs_product_p_id"));
+        if (!$productPageLink){
+            Utils::adminPreECHO("Can't get product page id", "searchTemplate() ERROR:: ");
+            $scope = array(
+                "errorsText" => Utils::getErrorCode("templateLoader", "productSearch", "searchAPI", "8")
+            );
+            Utils::getTemplate('searchError', $scope);
 
-
+        }else{
+            $scope = array(
+                "productPageLink" => $productPageLink,
+                "searchResults" => $result["output"]
+            );
+            Utils::getTemplate('search', $scope);
+        }
     }
 }else{
     Utils::adminPreECHO("No search value was specified, \$_GET[\"search-product\"]='".$_GET["search-product"]."'", "searchLoader() ERROR:: ");

@@ -33,10 +33,15 @@ class searchWidget extends WP_Widget {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         }
 
-        $searchFormAction = (!empty($instance['searchformaction'])) ? $instance['searchformaction'] : '/search';
+        $searchPageLink = get_page_link(get_option("cs_search_p_id"));
+        if (!$searchPageLink){
+            Utils::adminPreECHO("Can't get search page link", "searchWidget.php ERROR:: ");
+            echo Utils::getErrorCode("frontEnd", "widget", "searchWidget", "7");
+            return;
+        }
         ?>
 
-        <form role="search" method="get" id="searchform" class="form-inline" action="<?php echo esc_url( home_url( $searchFormAction ) ); ?>">
+        <form role="search" method="get" id="searchform" class="form-inline" action="<?php echo esc_url( home_url( $searchPageLink ) ); ?>">
             <input type="text" name="search-product" id="search-product" class="searchinput" placeholder="<?php esc_attr_e( 'Search', 'rt_gantry_wp_lang' ); ?>" value="<?php echo wp_kses( get_query_var('search-product'), null ); ?>"/>
 
             <input type="submit" class="btn btn-primary" id="searchsubmit" value="<?php esc_attr_e( 'Search', 'rt_gantry_wp_lang' ); ?>" />
@@ -56,17 +61,11 @@ class searchWidget extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-        $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'text_domain' );
-        $searchFormAction = ! empty( $instance['searchformaction'] ) ? $instance['searchformaction'] : __( 'Form action', 'text_domain' );
-
+        $title = ! empty( $instance['title'] ) ? $instance['title'] : __( '', 'text_domain' );
         ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'searchformaction' ); ?>"><?php _e( 'Form action:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'searchformaction' ); ?>" name="<?php echo $this->get_field_name( 'searchformaction' ); ?>" type="text" value="<?php echo esc_attr( $searchFormAction ); ?>">
         </p>
     <?php
     }

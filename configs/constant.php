@@ -23,6 +23,7 @@ abstract class CSCons {
                 "aliexp",
                 "productView",
                 "productSearch",
+                "widget",
             ),
             'errorSubCategoryTypes' => array(
                 "getSearch",
@@ -32,6 +33,7 @@ abstract class CSCons {
                 "getShippingCosts",
                 "searchAPI",
                 "searchALL",
+                "searchWidget"
             ),
             'errorCodesHandler' => array(
                 "0" => "Improper search string",
@@ -41,6 +43,8 @@ abstract class CSCons {
                 "4" => "It seems like this item's listing is inactive",
                 "5" => "Failed to get the requested item(s) details",
                 "6" => "Failed to get the search results",
+                "7"  => "Can't get search page link",
+                "8"  => "Can't get product page link",
             ),
 
             'pages' => array(
