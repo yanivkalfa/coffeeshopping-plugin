@@ -49,11 +49,9 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
 
     // error checking
     if ($result["result"]=="ERROR"){
-        $errorsText = "";
-
         Utils::adminPreECHO("productSearch::searchALL(...) failed!", "searchLoader() ERROR:: ");
         $scope = array(
-            "errorsText" => $errorsText
+            "errorsText" => $result["output"]
         );
         Utils::getTemplate('searchError', $scope);
 
