@@ -23,7 +23,6 @@
  *  \wp-content\themes\rt_gantry_wp\html\layouts\
  *  \wp-content\themes\rt_gantry_wp
  */
-
 if (
             (isset($_GET["view-product"]) && !empty($_GET["view-product"]))
             &&
@@ -44,10 +43,30 @@ if (
 
             // Output results if we have any proper ones, else display errors.
             if ($result["result"] == "ERROR") {
+                // Couldn't get the product.
                 echo productView::displayError($result["output"]);
+
             } else {
-                echo productView::constructResults($result["output"]);
+                $scope = array();
+                $scope['product'] = $result["output"];
+                $scope['exchangeExtension'] = "Exch";
+                $scope['exchangeCurrency'] = "ILS";
+                productView::_addExchangeRates($scope['product'], $scope['exchangeCurrency'], $scope['exchangeExtension']);
+
+                $scope['itemPricing'] = array(
+                    "price" => $scope['product']->price,
+                    "priceCurrency" => $scope['product']->priceCurrency,
+                    "priceSymbol" => Utils::getCurrencySymbol($scope['product']->priceCurrency),
+                    "price".$scope['exchangeExtension'] => $scope['product']->{'price'.$scope['exchangeExtension']},
+                    "priceSymbol".$scope['exchangeExtension'] => Utils::getCurrencySymbol($scope['exchangeCurrency']),
+                    "exchextension" => $scope['exchangeExtension'],
+                );
+
+                echo Utils::getTemplate('product',$scope);
             }
+}else{
+    // No product or unknown store.
+    echo Utils::getTemplate('productError');
 }
 
 ?>

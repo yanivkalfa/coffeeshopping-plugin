@@ -17,6 +17,8 @@ define("IMAGES_DIR_PATH", dirname(plugin_dir_path(__FILE__))."images/");
 define("LIBS", BASE_ADDRESS.'/libs');
 define("CONFIGS", BASE_ADDRESS.'/configs');
 define("SERVICES",BASE_ADDRESS.'/services');
+define("TEMPLATE_DIR",BASE_ADDRESS.'/templates');
+define("THEME_DIR", get_template_directory());
 
 
 // run time configs
@@ -67,14 +69,14 @@ if(!class_exists('coffee_shopping'))
             /*
              * @ creating DBs on activation/deleting on deactivation
              * */
-            register_activation_hook(__FILE__, array($this, 'create_db_when_activate'));
-            register_deactivation_hook(__FILE__, array($this, 'delete_db_when_deactivate'));
+            register_activation_hook(__FILE__, array($this, 'pluginActivate'));
+            register_deactivation_hook(__FILE__, array($this, 'pluginDeactivate'));
 
             /*
              * @ changing how login works and making it so it wont redirect to(wp_login) if login fail
              * */
-            add_action( 'wp_login_failed', array($this, 'custom_login_fail') );
-            add_action( 'authenticate', array($this, 'custom_login_empty'));
+            //add_action( 'wp_login_failed', array($this, 'custom_login_fail') );
+            //add_action( 'authenticate', array($this, 'custom_login_empty'));
 
             /*
              * add action to register our widgets
@@ -83,6 +85,9 @@ if(!class_exists('coffee_shopping'))
 
         }
 
+        /**
+         * Removing top bar for users who aren't admins
+         */
         public function removeAdminBarForUsers(){
 
             if (!current_user_can('manage_options')) {
@@ -120,11 +125,10 @@ if(!class_exists('coffee_shopping'))
                 }
             }
 
+
             function autoLoader ($cName) {
                 global $classes;
                 if(!isset($classes[$cName])) return false;
-                //echo $cName.'<br>';
-                //echo BASE_ADDRESS .$classes[$cName] . $cName. ".php<br>";
                 include(BASE_ADDRESS .$classes[$cName] . $cName. ".php");
                 return true;
             }
@@ -133,6 +137,9 @@ if(!class_exists('coffee_shopping'))
             if(!session_id()){ session_start(); }
         }
 
+        /**
+         * Instantiate shopping car.
+         */
         public function instantiateCart(){
 
             if(!current_user_can('manage_options')){
@@ -152,7 +159,7 @@ if(!class_exists('coffee_shopping'))
 
 
         /*
-         * $ add some roles/capabilities\
+         * $ Add some roles/capabilities\
          * */
         public function dashboard_roles()
         {
@@ -179,7 +186,7 @@ if(!class_exists('coffee_shopping'))
         }
 
         /*
-         * @ changing how login works and making it so it wont redirect to(wp_login) if login fail
+         * @ Changing how login works and making it so it wont redirect to(wp_login) if login fail
          * */
         public function custom_login_fail( $username )
         {
@@ -203,7 +210,7 @@ if(!class_exists('coffee_shopping'))
         }
 
         /*
-         * @ changing how login works and making it so it wont redirect to(wp_login) if login fail
+         * @ Changing how login works and making it so it wont redirect to(wp_login) if login fail
          * */
         public function custom_login_empty()
         {
@@ -238,7 +245,7 @@ if(!class_exists('coffee_shopping'))
         }
 
         /**
-         * dequeue and deregister old jquery
+         * Dequeue and deregister old jquery
          */
         public function removeJquery(){
             wp_dequeue_script( 'jquery');
@@ -246,7 +253,7 @@ if(!class_exists('coffee_shopping'))
         }
 
         /**
-         * removing jquery - adding shared scripts and then fonrend scripts lastly adding constants. to constants.js
+         * Removing jquery - adding shared scripts and then fonrend scripts lastly adding constants. to constants.js
          */
         public function frontRegisterScripts()
         {
@@ -261,7 +268,7 @@ if(!class_exists('coffee_shopping'))
         }
 
         /**
-         * removing jquery - adding shared scripts and then backend scripts lastly adding constants to app.js.
+         * Removing jquery - adding shared scripts and then backend scripts lastly adding constants to app.js.
          */
         public function backRegisterScripts()
         {
@@ -276,7 +283,7 @@ if(!class_exists('coffee_shopping'))
         }
 
         /**
-         * taking an array of scripts handles iterating over it and
+         * Taking an array of scripts handles iterating over it and
          * register/queuing scripts and styles.
          *
          * @param {array} $scripts
@@ -303,7 +310,7 @@ if(!class_exists('coffee_shopping'))
         }
 
         /*
-         * @ create admin pages
+         * @ Create admin pages
          *
         */
         public function set_up_admin_menu()
@@ -321,12 +328,82 @@ if(!class_exists('coffee_shopping'))
             require (dirname(__FILE__).'/services/settings.php');
         }
 
+        /**
+         * Creating new templates
+         */
+        public function addTemplatesToTheme()
+        {
+            require_once(LIBS . '/Utils.php');
+            require_once(CONFIGS . '/constant.php');
+            $pages = CSCons::get('pages') ?: array();
+
+            @mkdir(THEME_DIR.'/cs_templates');
+            foreach($pages as $page){
+                Utils::file_str_replace(TEMPLATE_DIR.'/template-gantry.php', array('%%templateTitle%%','%%templateName%%'),array($page['title'], $page['name']), THEME_DIR.'/cs_templates' . '/template-'.$page['name'].'.php');
+
+                $fileName = THEME_DIR.'/html/layouts' . '/body_'.$page['name'].'.php';
+                Utils::deleteLocation($fileName);
+                Utils::file_str_replace(TEMPLATE_DIR.'/body_gantry.php', array('GantryLayoutBody_csClassName', '%%className%%'),array('GantryLayoutBody_'.$page['name'], $page['name']),  $fileName);
+            }
+        }
+
+        /**
+         * Remove cs_templates from theme.
+         */
+        public function removeTemplatesFromTheme()
+        {
+            $dst = THEME_DIR.'/cs_templates';
+            // deleting cs_templates
+            Utils::deleteLocation($dst);
+        }
+
+        /**
+         * Create pages.
+         */
+        public function createPages()
+        {
+            $pages = CSCons::get('pages') ?: array();
+            foreach($pages as $page){
+                $optionName = 'cs_'.$page['name'].'_p_id';
+                $post = get_post( get_option($optionName));
+
+                if(!isset($post->ID) || empty($post->ID))
+                {
+                    $my_post = array(
+                        'post_title'    => $page['title'],
+                        'post_status'   => 'publish',
+                        'post_author'   => 1,
+                        'post_name'     => $page['name'],
+                        'post_type'     => 'page',
+                        'page_template'     => 'cs_templates/template-'.$page['name'].'.php'
+                    );
+                    update_option($optionName,wp_insert_post( $my_post ) );
+                }
+            }
+        }
+
+        /**
+         * Remove pages.
+         */
+        public function removePages()
+        {
+            $pages = CSCons::get('pages') ?: array();
+            foreach($pages as $page){
+                $optionName = 'cs_'.$page['name'].'_p_id';
+                wp_delete_post( get_option($optionName), true);
+                update_option($optionName, false);
+            }
+        }
+
         /*
-         * @ on activation create Db and default page
+         * @ On activation create Db and default page
          *
         */
-        public function create_db_when_activate()
+        public function pluginActivate()
         {
+            $this->addTemplatesToTheme();
+            $this->createPages();
+
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
             global $wpdb;
@@ -421,8 +498,10 @@ if(!class_exists('coffee_shopping'))
         /*
         * @ on deactivation remove DB and pages
         */
-        public function delete_db_when_deactivate()
+        public function pluginDeactivate()
         {
+            $this->removePages();
+            $this->removeTemplatesFromTheme();
             /*
             global $wpdb;
 

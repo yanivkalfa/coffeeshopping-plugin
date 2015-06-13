@@ -2,6 +2,27 @@
 
 abstract class Utils{
 
+    /**
+     * @param String $templateName - template name
+     * @param Mixed $scope - $scope variable that will be available in the template.
+     * @param String $folder - in-case its in an inner folder.
+     * @param String $prefix - prefix
+     * @param String $suffix - suffix
+     * @return bool
+     */
+    static public function getTemplate($templateName, $scope = null, $folder = 'partials/', $prefix = '', $suffix = 'Template'){
+        $fileName = TEMPLATE_DIR . '/'.$folder.$prefix . $templateName . $suffix.'.php';
+
+        if(!file_exists($fileName)) {
+            return false;
+        }
+
+        // flatten scope.
+        if(is_array($scope)) extract($scope);
+        include($fileName);
+        return true;
+    }
+
     static public function pageEcho($echo){
         echo $echo;
     }
@@ -62,54 +83,119 @@ abstract class Utils{
         return -1;
     }
 
-	/*
-	* @ Uploading files to server.
-	* @ Accept: global FILES, string Location to save the file.
-	* @ Returns: fileName or false.
-	*/
-	static function uploadFile($file, $location){
-		if($file["size"] < 10120000){
-			if ($file["error"] > 0){
-				return false;
-			}else{
-				if (file_exists($location . $file["name"])){	
-					$tempfilename = $file["name"];
-					for ($i = 0; file_exists($location . $tempfilename); $i++) {
-	   					 $tempfilename = $i . $file["name"];
-					}
-					move_uploaded_file($file["tmp_name"], $location . $tempfilename);
-					clearstatcache();
-					return $tempfilename;
-	
-				}
+    /*
+    * @ Uploading files to server.
+    * @ Accept: global FILES, string Location to save the file.
+    * @ Returns: fileName or false.
+    */
+    static public function uploadFile($file, $location){
+        if($file["size"] < 10120000){
+            if ($file["error"] > 0){
+                return false;
+            }else{
+                if (file_exists($location . $file["name"])){
+                    $tempfilename = $file["name"];
+                    for ($i = 0; file_exists($location . $tempfilename); $i++) {
+                        $tempfilename = $i . $file["name"];
+                    }
+                    move_uploaded_file($file["tmp_name"], $location . $tempfilename);
+                    clearstatcache();
+                    return $tempfilename;
+
+                }
                 else
-				{
-					move_uploaded_file($file["tmp_name"], $location . $file["name"]);
-					clearstatcache();
-					return $file["name"];
-				}
-			}
-		}else{
-			return false;
-		}
-	}
-	
-	/*
-	* @ Delete files to server.
-	* @ Accept: string file name, string Location to save the file.
-	* @ Returns: fileName or false.
-	*/
-    static function deleteFile($fileName, $location){
-		$fullfilename = $location.$fileName;
-		if (file_exists($fullfilename)){
-			$fh = fopen($fullfilename, 'w') or die("can't open file");
-			fclose($fh);
-			unlink($fullfilename);
-			return true;
-		}else{
-			return false;
-		}
-	}
+                {
+                    move_uploaded_file($file["tmp_name"], $location . $file["name"]);
+                    clearstatcache();
+                    return $file["name"];
+                }
+            }
+        }else{
+            return false;
+        }
+    }
+
+    /*
+    * @ Delete files to server.
+    * @ Accept: string file name, string Location to save the file.
+    * @ Returns: fileName or false.
+    */
+    static public function deleteFile($fileName, $location){
+        $fullfilename = $location.$fileName;
+        if (file_exists($fullfilename)){
+            $fh = fopen($fullfilename, 'w') or die("can't open file");
+            fclose($fh);
+            unlink($fullfilename);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Deletes a file  or a folder recursively.
+     * @param String $path the path of the file or directory to delete.
+     * @return bool
+     */
+    static public function deleteLocation($path) {
+        if (is_dir($path) === true) {
+            $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::CHILD_FIRST);
+
+            foreach ($files as $file) {
+                if (in_array($file->getBasename(), array('.', '..')) !== true) {
+                    if ($file->isDir() === true) {
+                        rmdir($file->getPathName());
+                    }
+
+                    else if (($file->isFile() === true) || ($file->isLink() === true)) {
+                        unlink($file->getPathname());
+                    }
+                }
+            }
+
+            return rmdir($path);
+        } else if ((is_file($path) === true) || (is_link($path) === true)) {
+            return unlink($path);
+        }
+
+        return false;
+    }
+
+    /**
+     * Copy a file  or a folder recursively.
+     * @param String $src the source to copy from.
+     * @param String $dst the destination to copy to.
+     * @return bool
+     */
+    static public function copyLocation($src,$dst) {
+        $dir = opendir($src);
+        @mkdir($dst);
+        while(false !== ( $file = readdir($dir)) ) {
+            if (( $file != '.' ) && ( $file != '..' )) {
+                if ( is_dir($src . '/' . $file) ) {
+                    self::copyLocation($src . '/' . $file,$dst . '/' . $file);
+                }
+                else {
+                    copy($src . '/' . $file,$dst . '/' . $file);
+                }
+            }
+        }
+        closedir($dir);
+    }
+
+    static public function file_str_replace($pathToFile, $lookFor, $changeTo, $saveTo = false){
+        if(!isset($pathToFile) || !isset($lookFor) ||  !isset($changeTo)) return false;
+        $fileRead = file_get_contents($pathToFile);
+        if(is_array($lookFor)){
+            foreach($lookFor as $key => $pattern){
+                $fileRead = str_replace($lookFor[$key],$changeTo[$key],$fileRead);
+            }
+        }else{
+            $fileRead = str_replace($lookFor,$changeTo,$fileRead);
+        }
+        $saveTo = $saveTo ? $saveTo : $pathToFile;
+        return file_put_contents($saveTo,$fileRead);
+    }
 
     /**
      * @func get_url($url, $method = "get", $headers = array(), $data = "")

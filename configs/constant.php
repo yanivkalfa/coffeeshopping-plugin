@@ -12,8 +12,6 @@ abstract class CSCons {
                 "json",
                 "css",
             ),
-
-
             'errorCategories' => array(
                 "API",
                 "frontEnd",
@@ -44,6 +42,16 @@ abstract class CSCons {
                 "6" => "Failed to get the search results",
             ),
 
+            'pages' => array(
+                array('name' => 'cart', 'title'=> 'Cart'),
+                array('name' => 'product', 'title'=> 'Product'),
+                array('name' => 'search', 'title'=> 'Search'),
+                array('name' => 'checkout', 'title'=> 'Checkout'),
+                array('name' => 'home', 'title'=> 'Home'),
+                array('name' => 'myaccount', 'title'=> 'My Account'),
+                array('name' => 'register', 'title'=> 'Register'),
+                array('name' => 'login', 'title'=> 'Login'),
+            ),
 
             'req_scripts' => array(
 
