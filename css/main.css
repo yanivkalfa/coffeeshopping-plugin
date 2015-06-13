@@ -6,3 +6,13 @@
 .flright{float:right;}
 .flleft{float:left;}
 
+/* Search Widget BEGIN*/
+#search-product{
+    height:30px;
+    width: 300px;
+}
+.form-inline{
+    display: inline-block;
+    margin: 0px;
+}
+/* END Search Widget */

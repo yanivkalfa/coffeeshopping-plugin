@@ -61,7 +61,7 @@ abstract class CSCons {
                     array('handle' => 'cbcarousel.jquery',  'src' => '/scripts/ZoomIt/cbcarousel.jquery',   'extension' => 'js',    'deps' => '', 'media' => 'screen'),
                     array('handle' => 'zoomit',             'src' => '/scripts/ZoomIt/zoomit',              'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                     array('handle' => 'search_css',         'src' => '/css/searchTemplate',                 'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'search'),
-                    array('handle' => 'search_js',          'src' => '/scripts/pages/search',                'extension' => 'js',    'deps' => '', 'media' => 'screen', 'page' => 'search'),
+                    array('handle' => 'search_js',          'src' => '/scripts/pages/search',               'extension' => 'js',    'deps' => '', 'media' => 'screen', 'page' => 'search'),
                     array('handle' => 'product_css',        'src' => '/css/productViewTemplate',            'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
                     array('handle' => 'product_js',         'src' => '/scripts/pages/product',              'extension' => 'js',    'deps' => '', 'media' => 'screen', 'page' => 'product'),
                 ),

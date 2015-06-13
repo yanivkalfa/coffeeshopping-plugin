@@ -1,16 +1,3 @@
-/* Search Widget BEGIN*/
-#search-product{
-    height:30px;
-    width: 300px;
-}
-.form-inline{
-    display: inline-block;
-    margin: 0px;
-}
-
-
-/* END Search Widget */
-
 /* Search Page BEGIN*/
 .searchresultsul{}
 .searchresultentry{
