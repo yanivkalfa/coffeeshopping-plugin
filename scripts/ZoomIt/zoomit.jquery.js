@@ -15,7 +15,7 @@
 				$(this).jqZoomIt(options);
 			});
 			return this;
-		}
+		};
 
 		var defaults = {
 			mouseEvent			: 'mouseenter', // click, mouseenter, mouseover
@@ -50,7 +50,7 @@
 		// bail out
 		if( '' == bigImg || 0 == smallImg.length ){
 			return false;
-		}
+		};
 
 		// start the plugin
 		var initialize = function(){
@@ -72,20 +72,16 @@
 				options.close.call(self, {});
 			});
 
-			$(window).resize( function(){
-                set_small_size();
-                reset_preview_area();
-            });// reset positions on window resize
+			$(window).resize(reset_preview_area);// reset positions on window resize
 			options.init.call(self, {});
 			return self;
-		}
+		};
 
 		var startZoom = function(){
 			var elems = get_preview_areas(), // returns object with keys zoomer and preview containing elements needed to create the zoom
 				sizes = get_small_size();
 
             // Check if we have enough room on page to display the zoom.
-            console.log($(document).width(),"-", (sizes.width+options.zoomDistance), "<", options.multiplierX*sizes.width+options.zoomDistance);
             if ($(document).width()-(sizes.width+options.zoomDistance) < options.multiplierX*sizes.width+options.zoomDistance ){return;}
 
 			$(elems.zoomer).show().css({
@@ -218,7 +214,7 @@
 					'height' : dh
 				});
 			});
-		}
+		};
 
 		var closeZoom = function(){
 			var elems = get_preview_areas();
@@ -227,7 +223,7 @@
 				'left': -5000
 			});
 			$(elems.preview).hide();
-		}
+		};
 
 		// set small image size
 		var set_small_size = function(){
@@ -260,12 +256,12 @@
 
 			$.data( smallImg[0], 'size', data );
 			return data;
-		}
+		};
 
 		// helper function to get small image size stored on element
 		var get_small_size = function(){
 			return $.data( smallImg[0], 'size' );
-		}
+		};
 
 		// creates an element that overlaps the image to highlight the area being zoomed
 		var add_preview_area = function(){
@@ -303,16 +299,22 @@
 				'preview' 	: dragger
 			};
 			$.data( smallImg[0], 'elems', data );
-		}
-
-        var reset_preview_area = function(){
-
-        }
+		};
 
 		// helper function to return element that highlights the zoomed area
 		var get_preview_areas = function(){
 			return $.data( smallImg[0], 'elems');
-		}
+		};
+
+        var reset_preview_area = function(){
+            closeZoom();
+            $.data( self, 'loaded', false );
+            var elems = get_preview_areas();
+            $(elems.zoomer).remove();
+            $(elems.preview).remove();
+            set_small_size();
+            add_preview_area();
+        };
 
 		/**
 		 * Verifies if browser has touch capabilities. Testing isn't bullet proof, you're encouraged
@@ -324,7 +326,7 @@
 				return options.is_touch;
 			}
 			return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
-		}
+		};
 
 		return initialize();
 	}
