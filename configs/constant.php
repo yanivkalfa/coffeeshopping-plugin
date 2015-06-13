@@ -57,12 +57,14 @@ abstract class CSCons {
             'req_scripts' => array(
 
                 'front_end' => array(
-                    array('handle' => 'zoomit.jquery',      'src' => '/scripts/ZoomIt/zoomit.jquery',       'extension' => 'js',    'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'cbcarousel.jquery',  'src' => '/scripts/ZoomIt/cbcarousel.jquery',   'extension' => 'js',    'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'zoomit',             'src' => '/scripts/ZoomIt/zoomit',              'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'jquery_zoomit_js',          'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'js',    'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'jquery_zoomit.css',         'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'jquery_cbcarousel_js',      'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'js',    'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'jquery_cbcarousel_css',     'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+
                     array('handle' => 'search_css',         'src' => '/css/searchTemplate',                 'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'search'),
                     array('handle' => 'search_js',          'src' => '/scripts/pages/search',               'extension' => 'js',    'deps' => '', 'media' => 'screen', 'page' => 'search'),
-                    array('handle' => 'product_css',        'src' => '/css/productViewTemplate',            'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
+                    array('handle' => 'product_css',        'src' => '/css/productTemplate',            'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
                     array('handle' => 'product_js',         'src' => '/scripts/pages/product',              'extension' => 'js',    'deps' => '', 'media' => 'screen', 'page' => 'product'),
                 ),
 
@@ -78,6 +80,9 @@ abstract class CSCons {
                     /* jquery.ui */
                     array('handle' => 'jquery_ui_js', 'src' =>  'bower_components/jquery.ui/dist/jquery-ui', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
                     array('handle' => 'jquery_ui_css', 'src' => 'bower_components/jquery.ui/dist/jquery-ui', 'extension' => 'css', 'deps' => '', 'media' => 'screen'),
+
+                    /* jquery.tinyPubSub */
+                    array('handle' => 'jquery_tinyPubSub_js', 'src' => 'bower_components/jquery.tinyPubSub/jquery.tinyPubSub', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
 
                     /* dragula */
                     array('handle' => 'dragula_js', 'src' =>  'bower_components/dragula.js/dist/dragula.min', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),

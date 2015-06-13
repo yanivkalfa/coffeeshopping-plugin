@@ -9,6 +9,9 @@
     "moment": "~2.10.3",
     "bootstrap": "~3.3.4",
     "lodash": "~3.8.0",
-    "dragula.js": "~1.6.0"
+    "dragula.js": "~1.6.0",
+    "jquery.tinyPubSub": "~1.0.0",
+    "jquery.cbCarousel": "~1.0.0",
+    "jquery.zoomIt": "~1.0.0"
   }
 }
