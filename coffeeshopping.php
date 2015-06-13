@@ -290,12 +290,19 @@ if(!class_exists('coffee_shopping'))
          */
         public function registerScripts($scripts)
         {
+            global $pagename;
             foreach($scripts as $singleHeader)
             {
                 $handle = $singleHeader['handle'];
                 $src = plugins_url($singleHeader['src'].'.'.$singleHeader['extension'], __FILE__);
                 $deps = isset($singleHeader['deps']) ? $singleHeader['deps'] : '';
                 $ver = false;
+                $page = isset($singleHeader['page']) ? $singleHeader['page'] : false;
+
+                if($page && $page !== $pagename){
+                    continue;
+                }
+
                 if($singleHeader['extension'] == 'js')
                 {
                     wp_register_script( $handle, $src, $deps, $ver );
