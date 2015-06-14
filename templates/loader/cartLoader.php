@@ -1,0 +1,2 @@
+<?php
+Utils::getTemplate('cart');

@@ -1,7 +1,6 @@
 <?php
 
-class Product {
-    public $ID;
+class Product extends BasicCartObject {
     public $cart_id;
     public $unique_store_id;
     public $store;
@@ -66,6 +65,12 @@ class Product {
     public function setQuantity($quantity){
         if($quantity < 0 || !is_int($quantity)) return false;
         return $this->quantity = $quantity;
+    }
+
+    public function getObjectAsArray(){
+        $object = $this->getAsArray();
+        $object['price_modifiers'] = $this->getChildrenAsArray($object['price_modifiers']);
+        return $object;
     }
 
 }

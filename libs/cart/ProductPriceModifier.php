@@ -1,6 +1,6 @@
 <?php
 
-class ProductPriceModifier {
+class ProductPriceModifier extends BasicCartObject {
     public $name;
     public $nameAs;
     public $value;
@@ -12,5 +12,9 @@ class ProductPriceModifier {
             $this->nameAs = $ProductPriceModifier['nameAs'];
             $this->value = $ProductPriceModifier['value'];
         }
+    }
+
+    public function getObjectAsArray(){
+        return $this->getAsArray();
     }
 }

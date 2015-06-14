@@ -1,7 +1,6 @@
 <?php
 
-class Address {
-    public $ID;
+class Address extends BasicCartObject {
     public $city;
     public $house;
     public $apt;
@@ -18,7 +17,5 @@ class Address {
             $this->postcode = $address['postcode'];
             $this->phone_number = $address['phone_number'];
         }
-
-
     }
 }

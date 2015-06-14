@@ -1,4 +1,23 @@
-.cart-head-wrap{}
+
+.cart-head-wrap{
+    height:40px;
+    width:48px;
+    background:url('images/shoppingCart.png');
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    color: orange;
+    font-weight: bold;
+}
+
+.cart-head-wrap:hover{
+    color: #000000;
+}
+
+.cart-head-item-count{
+    margin-right:17px;
+}
+
 .cart-head-total{}
-.cart-head-item-count{}
+
 .cart-head-currency{}

@@ -26,10 +26,20 @@ class myCartWidget extends WP_Widget {
      */
     public function widget( $args, $instance ) {
         echo $args['before_widget'];
+
+        $cartHeadPageLink = get_permalink(get_option("cs_cart_p_id"));
+        if (!$cartHeadPageLink){
+            Utils::adminPreECHO("Can't get search page link", "cartHead.php ERROR:: ");
+            echo Utils::getErrorCode("frontEnd", "widget", "cartHead", "7");
+            return;
+        }
+
         $cart =  $_SESSION['cart']->getStats();
-        $cart['page'] = isset($instance['page']) ? $instance['page'] : 'cart';
+        $cart['page'] = $cartHeadPageLink;
         Utils::getTemplate('cartHead', $cart);
         echo $args['after_widget'];
+
+
     }
 
     /**
@@ -38,15 +48,7 @@ class myCartWidget extends WP_Widget {
      *
      * @param array $instance Previously saved values from database.
      */
-    public function form( $instance ) {
-        $page = ! empty( $instance['page'] ) ? $instance['page'] : __( 'Cart Page', 'text_domain' );
-    ?>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php _e( 'Cart Page:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'page' ); ?>" name="<?php echo $this->get_field_name( 'page' ); ?>" type="text" value="<?php echo esc_attr( $page ); ?>">
-        </p>
-    <?php
-    }
+    public function form( $instance ) {}
 
     /**
      * Sanitize widget form values as they are saved.
@@ -57,12 +59,7 @@ class myCartWidget extends WP_Widget {
      *
      * @return array Updated safe values to be saved.
      */
-    public function update( $new_instance, $old_instance ) {
-        $instance = array();
-        $instance['page'] = ( ! empty( $new_instance['page'] ) ) ? strip_tags( $new_instance['page'] ) : '';
-
-        return $instance;
-    }
+    public function update( $new_instance, $old_instance ) {}
 
 } // class myCartWidget
 

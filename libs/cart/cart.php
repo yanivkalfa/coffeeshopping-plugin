@@ -1,7 +1,6 @@
 <?php
 
 class Cart extends Collection{
-    public $ID;
     public $user_id;
     public $deliver_to;
     public $address_id;

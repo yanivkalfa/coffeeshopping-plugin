@@ -1,6 +1,6 @@
 <?php
 
-class Collection {
+class Collection extends BasicCartObject{
     public $unique;
     public $prop;
     public $colName;
