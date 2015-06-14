@@ -5,10 +5,10 @@
     ?>
     <li>
         <?php echo $API;?> Search Results:
-        <ul>
+        <ul class="searchresultsstore nolistbull">
             <?php
             foreach ($items as $item) {
-                $productPageLink = $productPageLink . "?view-product=" . $item->ID . "&store=" . $API;
+                $productPageLink = $productPageLink . "?view-product=" . $item["ID"] . "&store=" . $API;
                 $scope = array(
                     "item" => $item,
                     "productPageLink" => $productPageLink
