@@ -1,3 +1,5 @@
+<div id="addProduct">add product</div>
+<div id="saveCart">save product</div>
 <?php
 /**
 * Created by PhpStorm.

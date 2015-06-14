@@ -15,15 +15,15 @@ class Product {
     public function __construct($product=NULL){
 
         if(is_array($product)) {
-            $this->ID = $product['ID'];
-            $this->cart_id = $product['cart_id'];
+            $this->ID = isset($product['ID']) ? $product['ID'] : null;
+            $this->cart_id = isset($product['cart_id']) ? $product['cart_id'] : null;
             $this->unique_store_id = $product['unique_store_id'];
-            $this->store = $product['store'];
-            $this->img = $product['img'];
-            $this->title = $product['title'];
-            $this->price = (float)$product['price'];
-            $this->status = $product['status'];
-            $this->quantity = (int)$product['quantity'];
+            $this->store = isset($product['store']) ? $product['store'] : null;
+            $this->img = isset($product['img']) ? $product['img'] : null;
+            $this->title = isset($product['title']) ? $product['title'] : null;
+            $this->price = (float)isset($product['price']) ? $product['price'] : 0;
+            $this->status = isset($product['status']) ? $product['status'] : null;
+            $this->quantity = (int)isset($product['quantity']) ? $product['quantity'] : 1;
 
             if($product['price_modifiers'] && count($product['price_modifiers'])){
                 if(is_array($product['price_modifiers'][0])){
@@ -38,10 +38,6 @@ class Product {
         }
     }
 
-    public function getPrice(){
-        return $this->price + $this->sumPriceModifiers();
-    }
-
     public function sumPriceModifiers (){
         $sum = 0;
         foreach($this->price_modifiers as $key => $PPD){
@@ -51,12 +47,25 @@ class Product {
         return $sum;
     }
 
+    public function getPrice(){
+        return $this->price + $this->sumPriceModifiers();
+    }
+
     public function getPriceAfterQuantity(){
         return $this->getPrice() * $this->quantity;
     }
 
     public function getPriceModifiers(){
         return $this->price_modifiers;
+    }
+
+    public function getQuantity(){
+        return $this->quantity;
+    }
+
+    public function setQuantity($quantity){
+        if($quantity < 0 || !is_int($quantity)) return false;
+        return $this->quantity = $quantity;
     }
 
 }

@@ -75,7 +75,9 @@ abstract class Utils{
             Utils::preEcho($item, '<br>property: '.$prop.'<br>$item: ');
             Utils::preEcho($srch, '<br>$srch: ');
             Utils::preEcho($srch[$prop], '<br>$srch[$prop]: ');
+            Utils::preEcho($item[$prop], '<br>$item[$prop]: ');
             */
+
 
             if($prop && $item[$prop] && ($item[$prop] === $srch[$prop] || $item[$prop] === $srch)) return $i;
             if($item === $srch) return $i;
