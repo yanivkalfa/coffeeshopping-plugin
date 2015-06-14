@@ -266,20 +266,25 @@ class ebay_FindingAPI extends ebayAdapter {
         }
 
         $ObjSearch->item = array();
+        $index = 0;
         foreach ($searchOutput->searchResult->item as $item){
-            $ObjSearch->item[]  = array(
+            $ObjSearch->item[$index]  = array(
                 "ID"            =>          (string)$item->itemId,
                 "image"         =>          (string)$item->galleryURL,
                 "title"         =>          (string)$item->title,
                 "subtitle"      =>          (string)$item->subtitle,
-                "price"         =>          (string)$item->sellingStatus->convertedCurrentPrice,
-                "priceCurrency" =>          (string)$item->sellingStatus->convertedCurrentPrice["currencyId"],
+                "price"         =>          (string)$item->sellingStatus->currentPrice,
+                "priceCurrency" =>          (string)$item->sellingStatus->currentPrice["currencyId"],
                 "shippingType"  =>          (string)$item->shippingInfo->shippingType,
                 "locationInfo"  =>          (string)$item->location,
                 "isTopSeller"   =>          (string)$item->topRatedListing,
                 "categoryText"  =>          (string)$item->primaryCategory->categoryName,
                 "conditionText" =>          (string)$item->condition->conditionDisplayName
             );
+            // get exchange rates:
+            Utils::addExchangeKeys($ObjSearch->item[$index],  Array("price"), $this->exchSuff, $this->exchCurrency);
+
+            $index++;
         }
         return $ObjSearch;
     }

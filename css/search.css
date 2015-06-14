@@ -3,19 +3,39 @@
 .searchresultentry{
     display: block;
     width: 100%;
+    height: 255px;
+    border-bottom: 1px solid #ddd;
+}
+/* Per API results <li> */
+.searchresultsli{
+    background-color: #fff;
+    padding: 15px;
+    border: solid 1px #bbb;
+    border-radius: 5px;
+}
+
+/* Image Div */
+#imgdivcont{
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+    float:left;
 }
 .imgdiv{
     border: 1px solid #ddd;
     margin: 10px 20px 10px 20px;
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 225px;
     display: inline-block;
-    float:left;
 }
 .imgdiv img{
     max-height: 225px !important;
+    min-width: 225px !important;
+}
+
+/* Details Div */
+#detailsdivcont{
+    display: inline-block;
+    width: 70%;
+    vertical-align: top;
 }
 .catspan{
     font-size: 12px;
@@ -24,11 +44,33 @@
     padding-right: 30px;
 }
 .minidetails{
-    width: 25%;
+    width: 30%;
     display: inline-block;
+    vertical-align: top;
+    margin-left:1%;
+    text-align: center;
 }
-.viewproductdiv{
-    width: 15%;
-    display: inline-block;
+.pricediv{
+    text-align: initial;
 }
+.topratedsellerimg{
+    background-image: url("images/topratedseller.png");
+    width: 80px;
+    height:19px;
+    display:inline-block;
+}
+
+.ebay-storeimg{
+    display:inline-block;
+    background-image: url("images/ebay-searchresult.png.gif");
+    width: 108px !important;
+    height:45px !important;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+#paginationdivcont .pagelink{display:inline-block;}
+#paginationdivcont .pageback{}
+#paginationdivcont .pagenext{}
+
 /* END Search Page*/

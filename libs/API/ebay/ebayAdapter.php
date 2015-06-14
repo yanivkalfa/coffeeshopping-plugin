@@ -15,11 +15,17 @@
 
 class ebayAdapter {
     // API variables
-    public $appid;                  // Our appID.
+    public  $appid,                 // Our appID.
+            $exchCurrency,          // The website set exchange currency.
+            $exchSuff,              // The suffix for the exchange rates variables.
+            $exchanger;             // The currencyExchange class.
 
     // Basic construct function.
     public function __construct( ){
-        $this->appid = "coffeesh-b71a-4145-bb26-3a4b57d7a787";          // Get the appid from the DB.
+        // TODO:: // Get details from admin panel.
+        $this->appid = "coffeesh-b71a-4145-bb26-3a4b57d7a787";
+        $this->exchCurrency = "ILS";
+        $this->exchSuff = "Exch";
     }
 
     /**

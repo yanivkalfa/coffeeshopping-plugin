@@ -47,7 +47,7 @@ if (
                 $scope = array(
                     'errorsText' => Utils::getErrorCode("templateLoader", "productView", "getProduct", "2")
                 );
-                Utils::getTemplate('productError');
+                Utils::getTemplate('productError', $scope);
 
             } else {
                 // Load our template.
@@ -55,14 +55,14 @@ if (
                 $scope["product"]               = $result["output"];
                 $scope["exchangeCurrency"]      = "ILS";
                 $scope["exchangeExtension"]     = "Exch";
-                // Add our proper exchange rates.
-                productView::_addExchangeRates($result["output"], "ILS", "Exch");
+
                 $scope["itemPricing"] = array(
                         "price"                                         => $scope['product']->price,
                         "priceCurrency"                                 => $scope['product']->priceCurrency,
-                        "priceSymbol"                                   => Utils::getCurrencySymbol($scope['product']->priceCurrency),
+                        "priceSymbol"                                   => $scope['product']->priceSymbol,
                         "price".$scope['exchangeExtension']             => $scope['product']->{'price'.$scope['exchangeExtension']},
-                        "priceSymbol".$scope['exchangeExtension']       => Utils::getCurrencySymbol($scope['exchangeCurrency']),
+                        "priceCurrency".$scope['exchangeExtension']     => $scope['product']->{'priceCurrency'.$scope['exchangeExtension']},
+                        "priceSymbol".$scope['exchangeExtension']       => $scope['product']->{'priceSymbol'.$scope['exchangeExtension']},
                         "exchextension"                                 => $scope['exchangeExtension'],
                 );
 

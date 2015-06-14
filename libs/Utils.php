@@ -18,7 +18,7 @@ abstract class Utils{
         }
 
         // flatten scope.
-        if(is_array($scope)) extract($scope);
+        if(is_array($scope)) extract($scope, EXTR_OVERWRITE);
         include($fileName);
         return true;
     }
@@ -253,6 +253,31 @@ abstract class Utils{
     static public function getCurrencySymbol($currency){
         $currencySymbols = CSCons::get('currencySymbols') ?: NULL;
         return isset($currencySymbols[$currency]) ? $currencySymbols[$currency] : $currency;
+    }
+
+    /**
+     * @func addExchangeKeys(&$mixed, $keys, $exchSuff, $exchCurrency)
+     *  - Add exchange keys to a given array/object.
+     * @param   mixed     $mixed        - The array/object to temper with.
+     * @param   array     $keys         - The key we are exchanging (must have a $key.'Currency' key to hold it's currencyID.
+     * @param   string    $exchSuff     - The new key suffix.
+     * @param   string    $exchCurrency - The currency to convert to.
+     */
+    static public function addExchangeKeys(&$mixed, $keys, $exchSuff, $exchCurrency){
+        $exchanger = new currencyExchange();
+        foreach($keys as $key){
+            if (is_object($mixed)){
+                $mixed->{$key."Symbol"}             =  Utils::getCurrencySymbol($mixed->{$key."Currency"});
+                $mixed->{$key.$exchSuff}            =  $exchanger->exchangeRateConvert($mixed->{$key."Currency"}, $mixed->{$key}, $exchCurrency);
+                $mixed->{$key."Currency".$exchSuff} =  $exchCurrency;
+                $mixed->{$key."Symbol".$exchSuff}   =  Utils::getCurrencySymbol($exchCurrency);
+            }else{
+                $mixed[$key."Symbol"]               =  Utils::getCurrencySymbol($mixed[$key."Currency"]);
+                $mixed[$key.$exchSuff]              =  $exchanger->exchangeRateConvert($mixed[$key."Currency"], $mixed[$key], $exchCurrency);
+                $mixed[$key."Currency".$exchSuff]   =  $exchCurrency;
+                $mixed[$key."Symbol".$exchSuff]     =  Utils::getCurrencySymbol($exchCurrency);
+            }
+        }
     }
 
     // Remove any "restricted extensions" links from given $html.

@@ -69,32 +69,6 @@ abstract class productView {
             "output" => $result["output"]
         );
     }
-
-    static public function _addExchangeRates(&$product, $exchCurrency = "ILS", $priceExtension = "Exch"){
-        $exchanger = new currencyExchange();
-
-        // Add exchanged price.
-        $product->{'price'.$priceExtension} = $exchanger->exchangeRateConvert($product->priceCurrency, $product->price, $exchCurrency);
-
-        // Add exchanged prices to all shipping options:
-        $costsArray = Array("price", "additional", "duty", "insurance");
-        foreach ($product->shippingDetails->shippingOptions as $shippingOptKey => $shippingOpts){
-            foreach($costsArray as $key){
-                // Get the converted price for each entry.
-                $product->shippingDetails->shippingOptions[$shippingOptKey][$key.$priceExtension] =
-                    $exchanger->exchangeRateConvert($shippingOpts[$key."Currency"], $shippingOpts[$key], $exchCurrency);
-                // Get the conversion symbol for each entry.
-                $product->shippingDetails->shippingOptions[$shippingOptKey][$key."Symbol"] = Utils::getCurrencySymbol($shippingOpts[$key."Currency"]);
-            }
-        }
-
-        // Add exchanged prices to all variants
-        foreach($product->variations as $varName => $variant){
-            $product->variations[$varName]["price".$priceExtension] = $exchanger->exchangeRateConvert($product->priceCurrency, $variant["price"], $exchCurrency);
-            $product->variations[$varName]["priceSymbol"] = Utils::getCurrencySymbol($product->priceCurrency);
-        }
-
-    }
 }
 
 ?>
