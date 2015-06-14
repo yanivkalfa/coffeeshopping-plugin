@@ -33,7 +33,7 @@ class searchWidget extends WP_Widget {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         }
 
-        $searchPageLink = get_page_link(get_option("cs_search_p_id"));
+        $searchPageLink = get_permalink(get_option("cs_search_p_id"));
         if (!$searchPageLink){
             Utils::adminPreECHO("Can't get search page link", "searchWidget.php ERROR:: ");
             echo Utils::getErrorCode("frontEnd", "widget", "searchWidget", "7");
@@ -41,7 +41,7 @@ class searchWidget extends WP_Widget {
         }
         ?>
 
-        <form role="search" method="get" id="searchform" class="form-inline" action="<?php echo esc_url( home_url( $searchPageLink ) ); ?>">
+        <form role="search" method="get" id="searchform" class="form-inline" action="<?php echo esc_url( $searchPageLink ); ?>">
             <input type="text" name="search-product" id="search-product" class="searchinput" placeholder="<?php esc_attr_e( 'Search', 'rt_gantry_wp_lang' ); ?>" value="<?php echo wp_kses( get_query_var('search-product'), null ); ?>"/>
 
             <input type="submit" class="btn btn-primary" id="searchsubmit" value="<?php esc_attr_e( 'Search', 'rt_gantry_wp_lang' ); ?>" />

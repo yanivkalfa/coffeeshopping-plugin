@@ -42,7 +42,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
         //array('name' => 'Condition','value' => array('1000', '1500', '1750', '2000'),'paramName' => 'name','paramValue' => 'value'),
     );
     // Our sorting order
-    $searchOpts["sortOrder"] = "PricePlusShippingLowest";
+    $searchOpts["sortOrder"] = "BestMatch";
     // Our mode (sandbox/live)
     $sandbox = false;
 
@@ -59,7 +59,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
 
     }else{
         // Output the search results template.
-        $productPageLink = get_page_link(get_option("cs_product_p_id"));
+        $productPageLink = get_permalink(get_option("cs_product_p_id"));
         if (!$productPageLink){
             Utils::adminPreECHO("Can't get product page id", "searchTemplate() ERROR:: ");
             $scope = array(

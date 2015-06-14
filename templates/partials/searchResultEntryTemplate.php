@@ -1,13 +1,13 @@
 <li id="<?php echo $item["ID"];?>" class="searchresultentry">
 
     <div class="imgdiv">
-        <a href="<?php echo $productPageLink;?>" class="imglink">
+        <a href="<?php echo esc_url($productPageLink);?>" class="imglink">
             <img height="196" width="225" src="<?php echo $item["image"];?>" alt="<?php echo $item["title"];?>">
         </a>
     </div>
 
     <h3 class="titlediv">
-        <a href="<?php echo $productPageLink;?>" class="" title="<?php echo $item["title"];?>">
+        <a href="<?php echo esc_url($productPageLink);?>" class="" title="<?php echo $item["title"];?>">
             <strong><?php echo $item["title"];?></strong>
         </a>
         <span class="catspan">Category: <?php echo $item["categoryText"];?></span>
@@ -49,7 +49,7 @@
             <img class="" src="" height="19px" width="122px" alt="@$API">
         </li>
         <li>
-            <a href="<?php echo $productPageLink;?>"><input type="button" value="View details"></a>
+            <a href="<?php echo esc_url($productPageLink);?>"><input type="button" value="View details"></a>
         </li>
     </ul>
 </li>
