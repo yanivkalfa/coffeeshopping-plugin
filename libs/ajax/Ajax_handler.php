@@ -23,7 +23,6 @@ class Ajax_handler {
         global $methods;
         if(!isset($methods[$methodName])) return false;
 
-        $method = isset($methods[$methodName]['method']) ? $methods[$methodName]['method'] : null;
         $protected = isset($methods[$methodName]['protected']) ? $methods[$methodName]['protected'] : null;
         $req_capabilities = isset($methods[$methodName]['req_capabilities']) ? $methods[$methodName]['req_capabilities'] : null;
 
@@ -77,8 +76,25 @@ class Ajax_handler {
 		exit;
 	}
 
-    public function doSomeSome($post){
-        return $post;
+    public function addProduct($post){
+        $product = json_decode($post['product'], true);
+        $_SESSION['cart']->add(new Product($product));
+
+        return array(
+            'success' => true,
+            'msg' => $_SESSION['cart']->getStats()
+        );
     }
+
+    public function saveCart(){
+        CartDatabaseHelper::saveCart();
+
+        return array(
+            'success' => true,
+            'msg' => 'Cart saved successfully'
+        );
+    }
+
+
 }
 $ajax_handler = new ajax_handler();

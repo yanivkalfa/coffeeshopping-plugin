@@ -8,6 +8,7 @@ class ClassLoader{
 
     public function loadClasses(){
         $pluginFolder = dirname(dirname(__FILE__));
+        require_once $pluginFolder.'/libs/ajax/Ajax_handler.php';
         require_once $pluginFolder.'/libs/cart/Collection.php';
         require_once $pluginFolder.'/libs/cart/address.php';
         require_once $pluginFolder.'/libs/cart/ProductPriceModifier.php';

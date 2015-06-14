@@ -20,7 +20,7 @@ class Cart extends Collection{
             }
         }
 
-        $colOpts = array( 'collection' => $prdc, 'colName' => 'products'  );
+        $colOpts = array( 'collection' => $prdc, 'colName' => 'products', 'prop'=> 'unique_store_id'  );
         parent::__construct($colOpts);
 
         if(is_array($cart)){
@@ -58,6 +58,17 @@ class Cart extends Collection{
         return true;
     }
 
+    public function add ($item, $prop = false){
+        $index = $this->indexOf($item, $prop? : $this->prop);
+        if($index > -1) {
+            $product = $this->get()[$index];
+            $product->setQuantity($product->getQuantity()+1);
+            return true;
+        }
+
+        return $this->{$this->colName}[] = $item;
+    }
+
 
     public function setAddress($address){
         $this->address = $address;
@@ -72,7 +83,12 @@ class Cart extends Collection{
         return $total;
     }
 
-
+    public function getStats(){
+        return array(
+            'total' => $this->getTotal(),
+            'productCount' => count($this->get())
+        );
+    }
 }
 
 /*

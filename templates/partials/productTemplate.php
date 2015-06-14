@@ -7,7 +7,6 @@
 
 <script language="javascript" type="text/javascript">
     // Set some vars.
-    if(!window.$ns) window.$ns = {};
     $ns.itemPricing = <?php echo json_encode($itemPricing);?>;
     $ns.shippingOpts = <?php echo json_encode($product->shippingDetails->shippingOptions);?>;
     $ns.selectedShipping = 0; // proper indexes start from 0.

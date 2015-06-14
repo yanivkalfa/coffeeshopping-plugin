@@ -26,10 +26,9 @@ class myCartWidget extends WP_Widget {
      */
     public function widget( $args, $instance ) {
         echo $args['before_widget'];
-        if ( ! empty( $instance['title'] ) ) {
-            echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
-        }
-        echo __( 'THIS IS MY FEATURED PRODUCTS WIDGET', 'text_domain' );
+        $cart =  $_SESSION['cart']->getStats();
+        $cart['page'] = isset($instance['page']) ? $instance['page'] : 'cart';
+        Utils::getTemplate('cartHead', $cart);
         echo $args['after_widget'];
     }
 
@@ -40,11 +39,11 @@ class myCartWidget extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-        $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'text_domain' );
-        ?>
+        $page = ! empty( $instance['page'] ) ? $instance['page'] : __( 'Cart Page', 'text_domain' );
+    ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+            <label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php _e( 'Cart Page:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'page' ); ?>" name="<?php echo $this->get_field_name( 'page' ); ?>" type="text" value="<?php echo esc_attr( $page ); ?>">
         </p>
     <?php
     }
@@ -60,7 +59,7 @@ class myCartWidget extends WP_Widget {
      */
     public function update( $new_instance, $old_instance ) {
         $instance = array();
-        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['page'] = ( ! empty( $new_instance['page'] ) ) ? strip_tags( $new_instance['page'] ) : '';
 
         return $instance;
     }

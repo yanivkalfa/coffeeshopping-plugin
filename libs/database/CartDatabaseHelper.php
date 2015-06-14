@@ -60,17 +60,17 @@ abstract class CartDatabaseHelper {
         // turning the cart class into an array.
         $cart = (array)$_SESSION['cart'];
 
-        echo '$cart';
-        Utils::preEcho($cart);
+            //echo '$cart';
+            //Utils::preEcho($cart);
         // checking if we have an id, if we do it means we are editing if we don't its a new cart.
         if(empty($cart['ID'])){
-            echo '<br>new<br>';
+                //echo '<br>new<br>';
             // inserting new address and using the id for cart's address_id
             $cart['address_id'] = self::insertItem((array)$cart['address'], 'cs_addresses');
             // inserting new cart keeping the cartId
             $cartId = self::insertItem(Utils::arrayPluck($cart, $keep), 'cs_carts');
         }else{
-            echo '<br>edit<br>';
+                //echo '<br>edit<br>';
             // else we are updating excising cart.
             // updating address - since we already have the id in the cart no need to change that.
             self::updateItem((array)$cart['address'], 'cs_addresses');
@@ -79,21 +79,22 @@ abstract class CartDatabaseHelper {
             $cartId = self::updateItem(Utils::arrayPluck($cart, $keep), 'cs_carts');
         }
 
-        echo '$cartId';
-        Utils::preEcho($cartId);
+            //echo '$cartId';
+            //Utils::preEcho($cartId);
 
         // checking if we got cartid from previous insert or update,
         // and if original cart id is set which mean we are editing - so we delete all products related to the cart.
         if($cartId !== false && !empty($cart['ID'])){
-            echo 'deleted : <br>';
+                //echo 'deleted : <br>';
             $deleted =  self::deleteItem(array('cart_id' => $cartId), 'cs_cart_products');
-            Utils::preEcho($deleted);
+                //Utils::preEcho($deleted);
         }
 
-        echo '$products';
+            //echo '$products';
         // iterating over cart product.
         foreach($_SESSION['cart']->get() as $key => $product){
-            Utils::preEcho($product);
+                //echo 'a product'."\n";
+                //Utils::preEcho($product);
             // creating a new array from the product class
             $productArr = (array)$product;
 
@@ -102,6 +103,8 @@ abstract class CartDatabaseHelper {
 
             // serializing price_modifiers for later use
             $productArr['price_modifiers'] = serialize($productArr['price_modifiers']);
+
+                //Utils::preEcho($productArr);
 
             //inserting product to db
             self::insertItem($productArr, 'cs_cart_products');

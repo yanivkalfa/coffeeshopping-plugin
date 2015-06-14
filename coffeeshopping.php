@@ -141,8 +141,8 @@ if(!class_exists('coffee_shopping'))
          * Instantiate shopping car.
          */
         public function instantiateCart(){
-
-            if(!current_user_can('manage_options')){
+            //unset($_SESSION['cart']);
+            if(!is_admin()){
                 if(!isset($_SESSION['cart'])){
                     $savedCart = NULL;
                     if(is_user_logged_in()){
@@ -155,6 +155,8 @@ if(!class_exists('coffee_shopping'))
                     $_SESSION['cart'] = new Cart($savedCart, $address, $products);
                 }
             }
+
+            //Utils::preEcho($_SESSION['cart']);
         }
 
 
@@ -262,9 +264,17 @@ if(!class_exists('coffee_shopping'))
             $this->registerScripts(CSCons::get('req_scripts')['front_end']);
 
             $main_js_namespace = array(
-                'ajaxURL' => admin_url('admin-ajax.php')
+                'ajaxURL' => admin_url('admin-ajax.php'),
+                'data' => array(
+                    'action' => '',
+                    'method' => '',
+                    'post' => ''
+                ),
+                'events' => array(
+                    'CART_UPDATE' => 'CART_UPDATE'
+                )
             );
-            wp_localize_script('constants.js','$ns',$main_js_namespace);
+            wp_localize_script('util_js','$ns',$main_js_namespace);
         }
 
         /**
@@ -277,9 +287,14 @@ if(!class_exists('coffee_shopping'))
             $this->registerScripts(CSCons::get('req_scripts')['back_end']);
 
             $main_js_namespace = array(
-                'ajaxURL' => admin_url('admin-ajax.php')
+                'ajaxURL' => admin_url('admin-ajax.php'),
+                'data' => array(
+                    'action' => '',
+                    'method' => '',
+                    'post' => ''
+                )
             );
-            wp_localize_script('app.js','$ns',$main_js_namespace);
+            wp_localize_script('util_js','$ns',$main_js_namespace);
         }
 
         /**
