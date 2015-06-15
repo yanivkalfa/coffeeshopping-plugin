@@ -10,6 +10,7 @@ class Product extends BasicCartObject {
     public $price;
     public $status;
     public $quantity;
+    public $store_link;
 
     public function __construct($product=NULL){
 
@@ -23,6 +24,7 @@ class Product extends BasicCartObject {
             $this->price = (float)isset($product['price']) ? $product['price'] : 0;
             $this->status = isset($product['status']) ? $product['status'] : null;
             $this->quantity = (int)isset($product['quantity']) ? $product['quantity'] : 1;
+            $this->store_link = isset($product['store_link']) ? $product['store_link'] : null;
 
             if($product['price_modifiers'] && count($product['price_modifiers'])){
                 if(is_array($product['price_modifiers'][0])){
@@ -47,11 +49,19 @@ class Product extends BasicCartObject {
     }
 
     public function getPrice(){
-        return $this->price + $this->sumPriceModifiers();
+        return $this->price;
     }
 
     public function getPriceAfterQuantity(){
         return $this->getPrice() * $this->quantity;
+    }
+
+    public function getCalculatedPrice(){
+        return $this->price + $this->sumPriceModifiers();
+    }
+
+    public function getCalculatedPriceAfterQuantity(){
+        return $this->getCalculatedPrice() * $this->quantity;
     }
 
     public function getPriceModifiers(){

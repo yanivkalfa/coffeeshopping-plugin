@@ -34,7 +34,6 @@ class Cart extends Collection{
         }
 
         $this->address = $address;
-
     }
 
     public function generateRandomId($randId = ''){
@@ -82,11 +81,37 @@ class Cart extends Collection{
         return $total;
     }
 
+    public function getCalculatedTotal(){
+        $total = 0;
+        $products = $this->get();
+        foreach($products as $product){
+            $total += $product->getCalculatedPriceAfterQuantity();
+        }
+        return $total;
+    }
+
+
     public function getStats(){
         return array(
             'total' => $this->getTotal(),
             'productCount' => count($this->get())
         );
+    }
+
+    public function getAggregatedPriceModifiers(){
+        $modifiers = array();
+        foreach($this->get() as $key => $product){
+            foreach($product->getPriceModifiers() as $mKey => $modifier){
+                if(!isset($modifiers[$modifier->name])) {
+                    $modifiers[$modifier->name] = new ProductPriceModifier((array)$modifier);
+                    $modifiers[$modifier->name]->value = $modifier->value * $product->getQuantity();
+                }else{
+                    $modifiers[$modifier->name]->value += $modifier->value * $product->getQuantity();
+                }
+            }
+        }
+
+        return array_values($modifiers);
     }
 }
 

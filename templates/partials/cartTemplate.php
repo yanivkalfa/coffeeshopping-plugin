@@ -6,41 +6,67 @@
 </script>
 
 <div class="cart row col-lg-12 col-el-12">
-    <div class="controls col-lg-12 col-el-12">
-        <span class="col-lg-2 col-el-2">Update Cart</span>
-        <span class="col-lg-2 col-el-2">Empty Cart</span>
-        <span class="col-lg-2 col-el-2">button tree</span>
-        <span class="col-lg-2 col-el-2">button four</span>
+    <?php foreach($_SESSION['cart']->get() as $key => $product) : ?>
+        <div class="col-lg-12 col-el-12 cart-border pb-10">
+            <div class="col-lg-12 col-el-12 cart-padding ">
+                <div class="col-lg-3 col-el-3 cart-product-part">
+                    <span class="cart-product-image"><img src="<?php echo $product->img; ?>"></span>
+                </div>
+                <div class="col-lg-4 col-el-4 cart-product-part">
+                    <div class="col-lg-12 col-el-12">
+                        <span class="cart-product-title"><a href="<?php echo $product->store_link; ?>"><?php echo $product->title; ?></a></span>
+                    </div>
+                    <div class="col-lg-12 col-el-12">
+                        <span class="cart-product-store"><?php echo $product->store; ?></span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-el-3 cart-product-part">
+                    <span class="cart-product-quantity">
+                        <span class="col-lg-5 col-el-5 cart-product-quantity">Quantity:</span>
+                        <span class="col-lg-5 col-el-5"><input type="text" id="quantity" class="product-quantity form-control" value="<?php echo $product->quantity; ?>"/></span>
+                    </span>
+                    <span class="display-none cart-product-update btn btn-primary">Update</span>
+                </div>
+                <div class="col-lg-2 col-el-2 cart-product-part">
+                    <span class="cart-product-price"><?php echo $product->getPriceAfterQuantity(); ?></span>
+                </div>
+            </div>
+            <div class="col-lg-12 col-el-12 controls">
+                <div class="col-lg-2 col-el-2 pull-right">
+                    <span class="cart-product-remove btn btn-primary" data-product-key="{unique_store_id: '<?php echo $product->unique_store_id; ?>'}> ">Remove item</span>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+
+    <div class="col-lg-12 col-el-12 mt-15">
+        <div class="cart-totals row col-lg-7 col-el-7 pull-right cart-border cart-padding">
+
+
+            <div class="col-lg-3 col-el-3"></div>
+            <div class="col-lg-9 col-el-9">
+                <div class="row">
+                    <div class="col-lg-8 col-el-8 text-align-right">Subtotal</div>
+                    <div class="col-lg-4 col-el-4"><?php echo $_SESSION['cart']->getTotal(); ?></div>
+                </div>
+                <?php foreach($_SESSION['cart']->getAggregatedPriceModifiers() as $key => $priceModifier) : ?>
+                <div class="row">
+                    <div class="col-lg-8 col-el-8 text-align-right"><?php echo $priceModifier->nameAs; ?></div>
+                    <div class="col-lg-4 col-el-4"><?php echo $priceModifier->value; ?></div>
+                </div>
+                <?php endforeach; ?>
+                <div class="row">
+                    <div class="col-lg-8 col-el-8 text-align-right">Total</div>
+                    <div class="col-lg-4 col-el-4"><?php echo $_SESSION['cart']->getCalculatedTotal(); ?></div>
+                </div>
+
+                <div class="row">
+                    <span class=" cart-product-continue-shopping btn btn-primary">Continue shopping</span>
+                    <span class=" cart-product-procced-checkout btn btn-primary">Proceed to checkout</span>
+                </div>
+            </div>
+
+
+        </div>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Image</th>
-                <th>Store</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total Price</th>
-                <th>Action</th>
-            </tr>
-
-        </thead>
-
-        <tbody>
-            <?php foreach($_SESSION['cart']->get() as $key => $product) : ?>
-            <tr>
-                <td><?php echo $product->title; ?></td>
-                <td><img src="<?php echo $product->img; ?>">?</td>
-                <td><?php echo $product->store; ?></td>
-                <td><?php echo $product->quantity; ?></td>
-                <td><?php echo $product->getPrice(); ?></td>
-                <td><?php echo $product->getPriceAfterQuantity(); ?></td>
-                <td>
-                    <span class="col-lg-2 col-el-2" data-product-key="{unique_store_id: '<?php echo $product->unique_store_id; ?>'}> ">X</span>
-                </td>
-            </tr>
-            <? endforeach; ?>
-        </tbody>
-    </table>
-
 </div>

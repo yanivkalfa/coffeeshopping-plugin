@@ -72,8 +72,10 @@ abstract class CSCons {
 
 
 
-                    array('handle' => 'cathead_css',               'src' => '/css/cartHead',                                        'extension' => 'css',   'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'cathead_js',                'src' => '/scripts/partials/cartHead',                           'extension' => 'js',    'deps' => '', 'media' => ''),
+                    array('handle' => 'carthead_css',               'src' => '/css/cartHead',                                        'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'carthead_js',                'src' => '/scripts/partials/cartHead',                           'extension' => 'js',    'deps' => '', 'media' => ''),
+                    array('handle' => 'cart_css',                   'src' => '/css/cart',                                            'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'cart_js',                    'src' => '/scripts/pages/cart',                                  'extension' => 'js',    'deps' => '', 'media' => ''),
                 ),
 
                 'back_end' => array(

@@ -1,0 +1,33 @@
+.cart-border{
+    border: 1px solid grey;
+}
+
+.cart-padding{
+    padding:10px;
+}
+.cart-product-row{
+    padding-bottom: 10px;
+}
+
+.cart-product-wrap{
+    padding:10px;
+}
+
+.cart-product-part{
+    height:140px;
+
+}
+.cart-product-image{
+    padding:10%;
+}
+
+.cart-product-image img{
+    height:100%;
+}
+
+.cart-product-title{}
+.cart-product-store{}
+.cart-product-quantity{}
+.cart-product-update{}
+.cart-product-price{}
+.cart-product-remove{}
