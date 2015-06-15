@@ -25,6 +25,11 @@
     height:100%;
 }
 
+.cart-product-details{
+    font-weight: bold;
+    font-size: 14px;
+}
+
 .cart-product-title{}
 .cart-product-store{}
 .cart-product-quantity{}

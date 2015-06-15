@@ -4,6 +4,7 @@ class ProductPriceModifier extends BasicCartObject {
     public $name;
     public $nameAs;
     public $value;
+    public $additional;
 
     public function __construct($ProductPriceModifier=NULL){
 
@@ -11,6 +12,7 @@ class ProductPriceModifier extends BasicCartObject {
             $this->name = $ProductPriceModifier['name'];
             $this->nameAs = $ProductPriceModifier['nameAs'];
             $this->value = $ProductPriceModifier['value'];
+            $this->additional = $ProductPriceModifier['additional'];
         }
     }
 

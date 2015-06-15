@@ -78,11 +78,47 @@ class Ajax_handler {
 
     public function addProduct($post){
         $product = json_decode($post['product'], true);
+        $extendCartUpdate = isset($post['extendCartUpdate']) ? json_decode($post['extendCartUpdate'], true) : false;
         $_SESSION['cart']->add(new Product($product));
 
         return array(
             'success' => true,
-            'msg' => $_SESSION['cart']->getStats()
+            'msg' => $_SESSION['cart']->getStats($extendCartUpdate)
+        );
+    }
+
+    public function removeProduct($post){
+        $product = json_decode($post['product'], true);
+        $extendCartUpdate = isset($post['extendCartUpdate']) ? json_decode($post['extendCartUpdate'], true) : false;
+        $_SESSION['cart']->remove($product);
+
+        return array(
+            'success' => true,
+            'msg' => $_SESSION['cart']->getStats($extendCartUpdate)
+        );
+    }
+
+    public function updateQuantity($post){
+        $product = json_decode($post['product'], true);
+        $quantity = json_decode($post['quantity'], true);
+        $extendCartUpdate = isset($post['extendCartUpdate']) ? json_decode($post['extendCartUpdate'], true) : false;
+        $product = $_SESSION['cart']->get($product);
+        if(!$product){
+            return array(
+                'success' => false,
+                'msg' => 'Error: Product was not found'
+            );
+        }
+        if(!$product->updateQuantity($quantity)){
+            return array(
+                'success' => false,
+                'msg' => 'Error: Quantity is either not an integer or not bigger then 0'
+            );
+        }
+
+        return array(
+            'success' => true,
+            'msg' => $_SESSION['cart']->getStats($extendCartUpdate)
         );
     }
 

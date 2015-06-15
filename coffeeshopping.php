@@ -155,7 +155,6 @@ if(!class_exists('coffee_shopping'))
                     $_SESSION['cart'] = new Cart($savedCart, $address, $products);
                 }
             }
-
             //Utils::preEcho($_SESSION['cart']);
         }
 
@@ -451,6 +450,9 @@ if(!class_exists('coffee_shopping'))
                 cart_id bigint(20) NOT NULL,
                 unique_store_id varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 store varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                store_link varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                selected_variant text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                selected_variant_sku varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 img varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 title varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 price_modifiers text CHARACTER SET utf8 COLLATE utf8_unicode_ci,

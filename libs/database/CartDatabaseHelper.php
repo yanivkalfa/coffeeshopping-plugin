@@ -30,6 +30,7 @@ abstract class CartDatabaseHelper {
         if($results = $wpdb->get_results("SELECT * FROM $table_name WHERE `cart_id` = '$cartId' ORDER BY `ID` ASC", ARRAY_A)) {
             foreach($results as $key => $modification) {
                 $results[$key]['price_modifiers'] = unserialize($modification['price_modifiers']);
+                $results[$key]['selected_variant'] = unserialize($modification['selected_variant']);
             }
         }
 
@@ -103,6 +104,9 @@ abstract class CartDatabaseHelper {
 
             // serializing price_modifiers for later use
             $productArr['price_modifiers'] = serialize($productArr['price_modifiers']);
+
+            // serializing selected_variant for later use
+            $productArr['selected_variant'] = serialize($productArr['selected_variant']);
 
                 //Utils::preEcho($productArr);
 
