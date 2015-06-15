@@ -4,6 +4,15 @@
     float: left;
     display:inline-block;
 }
+#toppicturepanel .zoomItcontainer .full-image > a{
+    width: 100%;
+}
+#toppicturepanel .zoomItcontainer .full-image > a > img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #productchoices{
 
 }
