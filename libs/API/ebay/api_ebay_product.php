@@ -301,10 +301,10 @@ class ebay_ShoppingAPI extends ebayAdapter {
      *                                              $ObjProduct->variationSets["Color"]["Pink"] = "Link to image"
      *                                              $ObjProduct->variationSets["Compatible Model"]["HTC"] = null; (false for 'isset()')
      *
-     *                                              $ObjProduct->variations[HQ7531]["SKU"] = HQ7531
-     *                                              $ObjProduct->variations[HQ7531]["startPrice"] = 12.3
-     *                                              $ObjProduct->variations[HQ7531]["setInfo"]["COLOR"] = "Rose"
-     *                                              $ObjProduct->variations[HQ7531]["setInfo"]["Compatible Model"] = "HTC"
+     *                                              $ObjProduct->variations[0]["SKU"] = HQ7531
+     *                                              $ObjProduct->variations[0]["startPrice"] = 12.3
+     *                                              $ObjProduct->variations[0]["setInfo"]["COLOR"] = "Rose"
+     *                                              $ObjProduct->variations[0]["setInfo"]["Compatible Model"] = "HTC"
      *
      */
     public function _formatProductOutput($productOutput){

@@ -53,6 +53,7 @@ class ebayAdapter {
         $matchAry = array(); // initialize array which will be filled in preg_match
         $pattern = "#P([0-9]{0,3}D)?T([0-9]?[0-9]H)?([0-9]?[0-9]M)?([0-9]?[0-9]S)#msiU";
         preg_match($pattern, $eBayTimeString, $matchAry);
+        if(count($matchAry)<5){return $eBayTimeString;}
 
         $days  = (int) $matchAry[1];
         $hours = (int) $matchAry[2];
@@ -82,6 +83,10 @@ class ebayAdapter {
             return '';
         }
     } // function
+
+    public function getPictureBySize($link, $size){
+        return ebay_Utils::getEbayPicture($link, $size);
+    }
 
 }
 // Require the extensions.

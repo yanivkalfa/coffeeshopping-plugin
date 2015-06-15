@@ -2,6 +2,13 @@
 
 abstract class Utils{
 
+    static public function getPictureBySize($API, $link, $size){
+        if (!Utils::API_Exists($API)){return false;}
+        $apiClass = $API."Adapter";
+        $API_Adapter = new $apiClass();
+        return $API_Adapter->getPictureBySize($link, $size);
+    }
+
     /**
      * @param String $templateName - template name
      * @param Mixed $scope - $scope variable that will be available in the template.

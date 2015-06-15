@@ -84,6 +84,12 @@ input[type="number"]{
     padding: 3px 15px;
     margin: 5px;
 }
+#buynowbuttondiv.cartremove{
+    background-color: #BE181E;
+    padding: 3px 5px;
+}
+
+
 #orderquantity{
     position:relative;
     top:3px;
@@ -96,7 +102,8 @@ input[type="number"]{
     background-color: rgb(232, 245, 227);
     border-radius: 3px;
     padding: 3px 10px;
-    font-size: 20px;
+    font-size: 22px;
+    vertical-align: sub;
     color: #333;
 }
 #pricingsumm{
@@ -109,6 +116,7 @@ input[type="number"]{
 #detailscontainer{
     width: 100%;
 }
+#detailscontainer #itemspecs .block{vertical-align: top;}
 
 #exchangeDisplayDiv{
     position:absolute;
@@ -140,6 +148,7 @@ input[type="number"]{
     top: -2px;
     left: -15px;
 }
+
 
 /*
             ++++ Product Page Responsiveness ++++

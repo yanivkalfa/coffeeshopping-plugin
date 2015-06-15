@@ -90,9 +90,56 @@ jQuery(document).ready( function(){
     // Scroll our details panel to the left to display contents in case of need.
     jQuery("#detailspaenl").scrollLeft(0);
 
+    // Handle 'Add to cart'
+    jQuery("#buynowbuttondiv").click(function(){
+        if (jQuery(this).data("addedtocart")==1){
+            jQuery(this).data("addedtocart", "0");
+            jQuery(this).html("Add to cart").removeClass("cartremove");
+            removeFromCart();
+        }else{
+            jQuery(this).data("addedtocart", "1");
+            addToCart();
+            jQuery(this).html("Remove from cart").addClass("cartremove");
+        }
+
+    });
+
     // ON-LOAD - get the defaults.
     updateShippingOpt();
     updateProductPrices();
+
+    function addToCart(){
+        var exchDetails = getProductPricesDetails($ns.exchExtension);
+        var product = {
+            unique_store_id : $ns.productID,
+            store : $ns.store,
+            img : $ns.productPic,
+            title : $ns.productTitle,
+            price : exchDetails["itemprice"],
+            quantity : jQuery("#orderquantity").val(),
+            price_modifiers : [
+                {name:'storeCommission', nameAs : 'Store Commission', value : exchDetails["storeprice"]},
+                {name:'PayPalFees', nameAs : 'PayPal Fees', value : exchDetails["paypalprice"]},
+                {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"]}
+            ],
+            selected_var : getCurrentVarSel(),
+            selected_var_SKU: $ns.variations[$ns.selectedVariant]["SKU"]
+        };
+
+        $ns.data.action = 'ajax_handler';
+        $ns.data.method = 'addProduct';
+        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(product));
+
+        var data = $ns.Utils.getData();
+        if(data.success){
+            console.log(data);
+            $.publish($ns.events.CART_UPDATE, data.msg);
+            jQuery("#buynowbuttondiv").data("addedtocart", "1");
+        }
+    }
+    function removeFromCart(){
+
+    }
 
     function toggleID(togg, id, e){
         e.preventDefault();

@@ -6,6 +6,7 @@
 <!-- all variables comes from Utils::getTemplate -->
 
 <script language="javascript" type="text/javascript">
+
     // Set some vars.
     $ns.itemPricing = <?php echo json_encode($itemPricing);?>;
     $ns.shippingOpts = <?php echo json_encode($product->shippingDetails->shippingOptions);?>;
@@ -16,6 +17,10 @@
     $ns.exchExtension = "<?php echo $exchangeExtension; ?>";
     $ns.exchSymbol = "<?php echo Utils::getCurrencySymbol($exchangeCurrency);?>";
     $ns.exchCurrency = "<?php echo $exchangeCurrency;?>";
+    $ns.productID = "<?php echo $product->ID;?>";
+    $ns.productPic = "<?php echo (isset($product->pics[0]["picURL"])) ? $product->pics[0]["picURL"] : "" ;?>";
+    $ns.productTitle = "<?php echo $product->title;?>";
+    $ns.store = "<?php echo $store;?>";
 </script>
 
 <div class="productpagecontent">
@@ -39,8 +44,8 @@
                     <?php
                     $class = "visible";
                     foreach ($product->pics as $pic){
-                        $imgGallery = ebay_Utils::getEbayPicture($pic["picURL"], "400s");
-                        $imgBig = ebay_Utils::getEbayPicture($pic["picURL"], "1600s");
+                        $imgGallery = Utils::getPictureBySize($store, $pic["picURL"], "400s");
+                        $imgBig = Utils::getPictureBySize($store, $pic["picURL"], "1600s");
                         $assoc = (isset($pic["assoc"])&&!empty($pic["assoc"])) ? "data-assoc=\"".$pic["assoc"]."\"" : "";
                         $assocVal = (isset($pic["assocVal"])&&!empty($pic["assocVal"])) ? "data-assocval=\"".$pic["assocVal"]."\"" : "";
                         ?>
@@ -54,7 +59,7 @@
                     <ul class="gallery-thumbnails">
                         <?php
                         foreach ($product->pics as $pic){
-                            $imgThumb = ebay_Utils::getEbayPicture($pic["picURL"], "64s");
+                            $imgThumb = Utils::getPictureBySize($store, $pic["picURL"], "64s");
                             $assoc = (isset($pic["assoc"])&&!empty($pic["assoc"])) ? "data-assoc=\"".$pic["assoc"]."\"" : "";
                             $assocVal = (isset($pic["assocVal"])&&!empty($pic["assocVal"])) ? "data-assocval=\"".$pic["assocVal"]."\"" : "";
                             ?>

@@ -55,6 +55,7 @@ if (
                 $scope["product"]               = $result["output"];
                 $scope["exchangeCurrency"]      = "ILS";
                 $scope["exchangeExtension"]     = "Exch";
+                $scope["store"]                 = $store;
 
                 $scope["itemPricing"] = array(
                         "price"                                         => $scope['product']->price,
