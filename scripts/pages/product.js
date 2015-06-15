@@ -70,7 +70,10 @@ jQuery(document).ready( function(){
 
     // Handle our quantity changes.
     jQuery("#orderquantity").change(function(e){
-        updateQuantity();
+        $ns.Utils.onProductQuantityChange(jQuery("#orderquantity"),
+            jQuery("#quantityavail").html(),
+            parseInt($ns.variations[$ns.selectedVariant]["quantity"])
+        );
         updateProductPrices();
     });
 
@@ -123,8 +126,8 @@ jQuery(document).ready( function(){
                 {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"]}
             ],
             selected_var : getCurrentVarSel(),
-            selected_var_SKU: '',//$ns.variations[$ns.selectedVariant].SKU,
-            storelink: $ns.storeLink
+            selected_var_SKU: $ns.variations[$ns.selectedVariant]["SKU"],
+            store_link: $ns.storeLink
         };
 
         $ns.data.action = 'ajax_handler';
@@ -268,23 +271,6 @@ jQuery(document).ready( function(){
                     jQuery(this).hide();
                 }
             });
-        }
-    }
-
-    function updateQuantity(){
-        var jqRef = jQuery("#orderquantity");
-        var quantityavail = jQuery("#quantityavail").html();
-        if ($ns.selectedVariant != 0){
-            quantityavail = parseFloat($ns.variations[$ns.selectedVariant]["quantity"]);
-        }
-        if (jqRef.val() < 1){
-            jqRef.effect("highlight", 1500);
-            jqRef.val(quantityavail);
-            return;
-        }
-        if(jqRef.val() > quantityavail){
-            jqRef.effect("highlight", 1500);
-            jqRef.val(quantityavail);
         }
     }
 
