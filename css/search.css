@@ -60,15 +60,6 @@
     display:inline-block;
 }
 
-.ebay-storeimg{
-    display:inline-block;
-    background: url("images/ebay-searchresult.gif") no-repeat;
-    width: 108px !important;
-    height:45px !important;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-}
-
 #paginationdivcont .pagelink{
     display: inline-block;
     width: 6%;

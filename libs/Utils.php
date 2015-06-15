@@ -2,6 +2,10 @@
 
 abstract class Utils{
 
+    static public function getAPILogoClass($API){
+        return $API."-storeimg";
+    }
+
     static public function getPictureBySize($API, $link, $size){
         if (!Utils::API_Exists($API)){return false;}
         $apiClass = $API."Adapter";

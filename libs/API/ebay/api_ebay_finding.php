@@ -271,6 +271,7 @@ class ebay_FindingAPI extends ebayAdapter {
             $ObjSearch->item[$index]  = array(
                 "ID"            =>          (string)$item->itemId,
                 "image"         =>          (string)$item->galleryURL,
+                "storeLink"     =>          (string)$item->viewItemURL,
                 "title"         =>          (string)$item->title,
                 "subtitle"      =>          (string)$item->subtitle,
                 "price"         =>          (string)$item->sellingStatus->currentPrice,

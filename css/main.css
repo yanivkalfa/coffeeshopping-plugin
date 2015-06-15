@@ -6,21 +6,6 @@
 .flright{float:right;}
 .flleft{float:left;}
 
-/* Search Widget BEGIN*/
-#search-product{
-    height:30px;
-    width: 300px;
-}
-.form-inline{
-    display: inline-block;
-    margin: 0;
-}
-
-.display-none {
-    display: none !important;
-}
-
-
 .pt-5{ padding-top:5px;}
 .pb-5{ padding-bottom:5px;}
 .pl-5{ padding-left:5px;}
@@ -50,4 +35,31 @@
 .text-align-right{ text-align: right}
 .text-align-left{ text-align: left}
 
+/* Search Widget BEGIN*/
+#search-product{
+    height:30px;
+    width: 300px;
+}
+.form-inline{
+    display: inline-block;
+    margin: 0;
+}
 /* END Search Widget */
+
+.display-none {
+    display: none !important;
+}
+
+/*
+        Store logos, specific img+sizes - copyrighted!
+*/
+.ebay-storeimg{
+    display:inline-block;
+    background: url("images/ebay-searchresult.gif") no-repeat;
+    width: 108px !important;
+    height:45px !important;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+

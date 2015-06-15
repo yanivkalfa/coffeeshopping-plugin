@@ -123,7 +123,8 @@ jQuery(document).ready( function(){
                 {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"]}
             ],
             selected_var : getCurrentVarSel(),
-            selected_var_SKU: $ns.variations[$ns.selectedVariant]["SKU"]
+            selected_var_SKU: $ns.variations[$ns.selectedVariant]["SKU"],
+            storelink: $ns.storeLink
         };
 
         $ns.data.action = 'ajax_handler';

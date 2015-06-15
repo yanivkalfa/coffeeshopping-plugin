@@ -52,12 +52,13 @@
             </ul>
             <ul class="viewproductdiv nolistbull minidetails">
                 <li>
-                    <div class="<?php echo $API;?>-storeimg"></div>
-                </li>
-                <li>
-                    <a href="<?php echo esc_url($productPageLink);?>">View details</a>
+                    <a href="<?php echo $item["storeLink"];?>" title="View on <?php echo $API;?>" target="_blank"><div class="<?php echo Utils::getAPILogoClass($API);?>"></div></a>
                 </li>
             </ul>
         </div>
+    </div>
+
+    <div id="entryfooterdiv">
+        <a href="<?php echo esc_url($productPageLink);?>">View details</a>
     </div>
 </li>

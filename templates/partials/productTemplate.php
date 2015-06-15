@@ -20,6 +20,7 @@
     $ns.productID = "<?php echo $product->ID;?>";
     $ns.productPic = "<?php echo (isset($product->pics[0]["picURL"])) ? $product->pics[0]["picURL"] : "" ;?>";
     $ns.productTitle = "<?php echo $product->title;?>";
+    $ns.storeLink = "<?php echo $product->storeLink;?>";
     $ns.store = "<?php echo $store;?>";
 </script>
 
@@ -76,6 +77,7 @@
         </div>
 
         <div id="productchoices">
+            <a href="<?php echo $product->storeLink;?>" title="View on <?php echo $store;?>" target="_blank"><div class="<?php echo Utils::getAPILogoClass($store);?> flleft"></div></a>
             <h3>
                 <?php Utils::pageEcho("Make your order"); ?>
                 <?php echo $product->topRatedItem ? " top-rated-item " : "";?>

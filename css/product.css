@@ -79,6 +79,7 @@ input[type="number"]{
 
 
 #buynowbuttondiv{
+    cursor:pointer;
     background-color: #0654ba;
     color: white;
     padding: 3px 15px;
