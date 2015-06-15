@@ -12,6 +12,12 @@ jQuery(document).ready( function(){
     }
 
     function renderCartSummery(data){
+        if(!data.productCount){
+            $('.no-products').removeClass('display-none');
+            $('.has-products').addClass('display-none');
+            return;
+        }
+
         $('.cart-total').html(data.total);
         $('.cart-calculated-total').html(data.calculatedTotal);
         $('.aggregated-price-modifier').html('');
@@ -25,16 +31,18 @@ jQuery(document).ready( function(){
         });
     }
 
+    function checkProductAvia(){}
+
     $ns.data.action = 'ajax_handler';
 
-    $('.product-quantity').on('keypress',  function(){
+    $('.product-quantity').on('change',  function(){
         $(this).parents('.cart-product-part').find('.cart-product-update').removeClass('display-none');
     });
 
     $('.cart-product-update').on('click',  function(){
         var product, quantity;
         product = getProductId(this);
-        quantity = $('.product-quantity').val();
+        quantity =  $(this).parents('.cart-product-part').find('.product-quantity').val();
         if(!product || _.isNaN(parseInt(quantity))) return false;
 
         $ns.data.method = 'updateQuantity';
@@ -44,6 +52,7 @@ jQuery(document).ready( function(){
         if(data.success){
             console.log(data);
             $.publish($ns.events.CART_UPDATE, data.msg);
+            $(this).addClass('display-none');
             renderCartSummery(data.msg);
         }
     });

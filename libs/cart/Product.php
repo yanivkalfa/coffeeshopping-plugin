@@ -22,13 +22,15 @@ class Product extends BasicCartObject {
             $this->unique_store_id = $product['unique_store_id'];
             $this->store = isset($product['store']) ? $product['store'] : null;
             $this->store_link = isset($product['store_link']) ? $product['store_link'] : null;
-            $this->selected_variant = isset($product['selected_variant']) ? $product['selected_variant'] : null;
+            $this->selected_variant = isset($product['selected_variant']) ? $product['selected_variant'] : array();
             $this->selected_variant_sku = isset($product['selected_variant_sku']) ? $product['selected_variant_sku'] : null;
             $this->img = isset($product['img']) ? $product['img'] : null;
             $this->title = isset($product['title']) ? $product['title'] : null;
             $this->price = (float)isset($product['price']) ? $product['price'] : 0;
             $this->status = isset($product['status']) ? $product['status'] : null;
             $this->quantity = (int)isset($product['quantity']) ? $product['quantity'] : 1;
+            $this->available_quantity = (int)isset($product['available_quantity']) ? $product['available_quantity'] : 1;
+            $this->order_limit = (int)isset($product['order_limit']) ? $product['order_limit'] : 1;
 
             if($product['price_modifiers'] && count($product['price_modifiers'])){
                 if(is_array($product['price_modifiers'][0])){

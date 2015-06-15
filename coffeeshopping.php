@@ -459,6 +459,8 @@ if(!class_exists('coffee_shopping'))
                 price float(20) NOT NULL,
                 status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 quantity int(10) NOT NULL,
+                available_quantity int(10) NOT NULL,
+                order_limit int(10) NOT NULL,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);
