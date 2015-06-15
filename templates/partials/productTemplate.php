@@ -14,7 +14,7 @@
     $ns.selectedShipping = 0; // proper indexes start from 0.
     $ns.variationSets = <?php echo json_encode($product->variationSets);?>;
     $ns.variations = <?php echo json_encode($product->variations);?>;
-    $ns.selectedVariant = 0; // default search result.
+    $ns.selectedVariant = -1; // default search result.
     $ns.exchExtension = "<?php echo $exchangeExtension; ?>";
     $ns.exchSymbol = "<?php echo Utils::getCurrencySymbol($exchangeCurrency);?>";
     $ns.exchCurrency = "<?php echo $exchangeCurrency;?>";
@@ -22,7 +22,7 @@
     $ns.productPic = "<?php echo (isset($product->pics[0]["picURL"])) ? $product->pics[0]["picURL"] : "" ;?>";
     $ns.productTitle = "<?php echo $product->title;?>";
     $ns.storeLink = "<?php echo $product->storeLink;?>";
-    $ns.maxItemsOrder = "<?php echo $product->maxItemsOrder;?>";
+    $ns.maxItemsOrder = "<?php echo (isset($product->maxItemsOrder)) ? $product->maxItemsOrder : 1;?>";
     $ns.store = "<?php echo $store;?>";
 </script>
 
