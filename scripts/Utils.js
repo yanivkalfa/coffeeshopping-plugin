@@ -26,31 +26,34 @@
     };
 
     Utils.prototype.onProductQuantityChange = function(selector, availableQuantity, orderLimit){
+        var limitsArr = [], productLimit = 0, inputVal;
 
-        if (selector.val() < 1){
+        inputVal = parseInt(selector.val());
+        inputVal = _.isNaN(inputVal) ? 1 : inputVal ;
+        if (inputVal < 1){
             selector.effect("highlight", 1500);
             selector.val(1);
             return false;
         }
 
-        var limitsArr = [], productLimit = 0;
-        availableQuantity = _.isNaN(parseInt(availableQuantity));
-        if(!availableQuantity) {
+        availableQuantity = parseInt(availableQuantity);
+        if(!_.isNaN(availableQuantity) && availableQuantity !== 0) {
             limitsArr.push(availableQuantity);
         }
 
-        orderLimit = _.isNaN(parseInt(orderLimit));
-        if(!orderLimit) {
+        orderLimit = parseInt(orderLimit);
+        if(!_.isNaN(orderLimit) && orderLimit !== 0) {
             limitsArr.push(orderLimit);
         }
-
-        if(!limitsArr.length) {
-            productLimit = Math.min.apply(this,limitsArr);
+        
+        if(limitsArr.length) {
+            productLimit = Math.min.apply(Math,limitsArr);
         }
 
-        if(productLimit > 0 && parseInt(selector.val()) > productLimit){
+        if(productLimit > 0 && inputVal > productLimit){
             selector.effect("highlight", 1500);
             selector.val(productLimit);
+            return inputVal != productLimit;
         }
         return true;
     };

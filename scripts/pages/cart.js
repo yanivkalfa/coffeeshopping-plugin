@@ -1,14 +1,14 @@
 jQuery(document).ready( function(){
 
-    function getProductId(selector){
+    function getProduct(selector){
         var parent, product;
         parent = $(selector).parents('.cart-product');
         if(!parent.length) return false;
 
         product = parent.data('product-key') || false;
-        if(!product) return false;
+        if(!product || _.isEmpty(product)) return false;
 
-        return {unique_store_id : product.toString()};
+        return product;
     }
 
     function renderCartSummery(data){
@@ -31,22 +31,26 @@ jQuery(document).ready( function(){
         });
     }
 
-    function checkProductAvia(){}
-
     $ns.data.action = 'ajax_handler';
 
     $('.product-quantity').on('change',  function(){
-        $(this).parents('.cart-product-part').find('.cart-product-update').removeClass('display-none');
+        var product;
+        product = getProduct(this);
+        var changed = $ns.Utils.onProductQuantityChange(jQuery(this), product.available_quantity, product.order_limit );
+
+        if(changed){
+            $(this).parents('.cart-product-part').find('.cart-product-update').removeClass('display-none');
+        }
     });
 
     $('.cart-product-update').on('click',  function(){
         var product, quantity;
-        product = getProductId(this);
+        product = getProduct(this);
         quantity =  $(this).parents('.cart-product-part').find('.product-quantity').val();
         if(!product || _.isNaN(parseInt(quantity))) return false;
 
         $ns.data.method = 'updateQuantity';
-        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(product)) + '&quantity=' + quantity + '&extendCartUpdate=true';
+        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(_.pick(product,['unique_store_id']))) + '&quantity=' + quantity + '&extendCartUpdate=true';
 
         var data = $ns.Utils.getData();
         if(data.success){
@@ -58,11 +62,11 @@ jQuery(document).ready( function(){
     });
 
     $('.cart-product-remove').on('click',  function(){
-        var product = getProductId(this);
+        var product = getProduct(this);
         if(!product) return false;
 
         $ns.data.method = 'removeProduct';
-        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(product)) + '&extendCartUpdate=true';
+        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(_.pick(product,['unique_store_id']))) + '&extendCartUpdate=true';
 
         var data = $ns.Utils.getData();
         if(data.success){
@@ -74,10 +78,10 @@ jQuery(document).ready( function(){
     });
 
     $('.cart-save').on('click',  function(){
-        var id = getProductId(this);
+        var id = getProduct(this);
 
         $ns.data.method = 'addProduct';
-        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(product));
+        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(_.pick(product,['unique_store_id'])));
 
         var data = $ns.Utils.getData();
         if(data.success){

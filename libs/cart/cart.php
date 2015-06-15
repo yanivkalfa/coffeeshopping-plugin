@@ -60,7 +60,7 @@ class Cart extends Collection{
         $index = $this->indexOf($item, $prop? : $this->prop);
         if($index > -1) {
             $product = $this->get()[$index];
-            $product->setQuantity($product->getQuantity()+1);
+            $product->updateQuantity($product->getQuantity()+1);
             return true;
         }
 

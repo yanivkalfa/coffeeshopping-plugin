@@ -70,10 +70,7 @@ jQuery(document).ready( function(){
 
     // Handle our quantity changes.
     jQuery("#orderquantity").change(function(e){
-        $ns.Utils.onProductQuantityChange(jQuery("#orderquantity"),
-            jQuery("#quantityavail").html(),
-            parseInt($ns.variations[$ns.selectedVariant]["quantity"])
-        );
+        $ns.Utils.onProductQuantityChange(jQuery("#orderquantity"), getAvailableQuantity(), $ns.orderLimit );
         updateProductPrices();
     });
 
@@ -126,8 +123,10 @@ jQuery(document).ready( function(){
                 {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"]}
             ],
             selected_var : getCurrentVarSel(),
-            selected_var_SKU: $ns.variations[$ns.selectedVariant]["SKU"],
-            store_link: $ns.storeLink
+            selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant]["SKU"] : "",
+            store_link: $ns.storeLink,
+            available_quantity: getAvailableQuantity(),
+            order_limit: $ns.orderLimit
         };
 
         $ns.data.action = 'ajax_handler';
@@ -167,7 +166,7 @@ jQuery(document).ready( function(){
                 originalPrice = parseFloat($ns.itemPricing["price"]).toFixed(2);
                 exchangePrice = parseFloat($ns.itemPricing["price" + $ns.exchExtension]).toFixed(2);
                 originalCurrSymbol = $ns.itemPricing["priceSymbol"];
-                if ($ns.selectedVariant != 0){
+                if ($ns.selectedVariant != -1){
                     originalPrice = parseFloat($ns.variations[$ns.selectedVariant]["price"]).toFixed(2);
                     exchangePrice = parseFloat($ns.variations[$ns.selectedVariant]["price" + $ns.exchExtension]).toFixed(2);
                     originalCurrSymbol = $ns.variations[$ns.selectedVariant]["priceSymbol"];
@@ -204,17 +203,17 @@ jQuery(document).ready( function(){
         //console.log(search);
         var itemfound = 0;
         Object.keys($ns.variations).forEach(function(key){
-            if (itemfound!=0){return false;}
+            if (itemfound!=0){return -1;}
             var available = true;
             Object.keys(search).forEach(function(searchkey){
                 if ($ns.variations[key]["setInfo"][searchkey] != search[searchkey]) {
                     available = false;
-                    return false;
+                    return -1;
                 }
             });
             if (available==true){
                 itemfound = key;
-                return false;
+                return -1;
             }
         });
 
@@ -272,6 +271,14 @@ jQuery(document).ready( function(){
                 }
             });
         }
+    }
+
+    function getAvailableQuantity(){
+        var quantitylimit = parseInt(jQuery("#quantityavail").html());
+        if ($ns.selectedVariant != -1){
+            quantitylimit = parseInt($ns.variations[$ns.selectedVariant]["quantity"]);
+        }
+        return quantitylimit;
     }
 
     function updateShippingOpt(){
@@ -349,7 +356,7 @@ jQuery(document).ready( function(){
         // Get item pricing details.
         var itemprice           = parseFloat( $ns.itemPricing["price" + pricetype] );
         // If we have a specific variant use it's details.
-        if ($ns.selectedVariant!=0){
+        if ($ns.selectedVariant!=-1){
             // set variation details.
             itemprice           = parseFloat( $ns.variations[$ns.selectedVariant]["price" + pricetype] );
         }

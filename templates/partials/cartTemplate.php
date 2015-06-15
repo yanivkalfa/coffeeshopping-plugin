@@ -7,7 +7,7 @@
 
 <div class="<?php echo (count($_SESSION['cart']->get())) ? '' : 'display-none'; ?> cart has-products row col-lg-12 col-el-12">
     <?php foreach($_SESSION['cart']->get() as $key => $product) : ?>
-        <div class="cart-product col-lg-12 col-el-12 cart-border pb-10 mb-15" data-product-key="<?php echo $product->unique_store_id; ?>">
+        <div class="cart-product col-lg-12 col-el-12 cart-border pb-10 mb-15" data-product-key="<?php echo htmlentities(json_encode($product)); ?>">
             <div class="col-lg-12 col-el-12 cart-padding ">
                 <div class="col-lg-3 col-el-3 cart-product-part">
                     <span class="cart-product-image"><img src="<?php echo $product->img; ?>"></span>
