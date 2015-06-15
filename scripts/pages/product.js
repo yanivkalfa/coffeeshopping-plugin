@@ -70,7 +70,7 @@ jQuery(document).ready( function(){
 
     // Handle our quantity changes.
     jQuery("#orderquantity").change(function(e){
-        updateQuantity();
+        $ns.Utils.onProductQuantityChange(jQuery("#orderquantity"), getAvailableQuantity(), $ns.orderLimit );
         updateProductPrices();
     });
 
@@ -274,26 +274,11 @@ jQuery(document).ready( function(){
     }
 
     function getAvailableQuantity(){
-        var quantitylimit = jQuery("#quantityavail").html();
+        var quantitylimit = parseInt(jQuery("#quantityavail").html());
         if ($ns.selectedVariant != -1){
             quantitylimit = parseInt($ns.variations[$ns.selectedVariant]["quantity"]);
         }
         return quantitylimit;
-    }
-
-    function updateQuantity(){
-        var jqRef = jQuery("#orderquantity");
-        var quantitylimit = getAvailableQuantity();
-        if (quantitylimit > $ns.orderLimit){quantitylimit = $ns.orderLimit;}
-        if (jqRef.val() < 1){
-            jqRef.effect("highlight", 1500);
-            jqRef.val(1);
-            return;
-        }
-        if(parseInt(jqRef.val()) > parseInt(quantitylimit)){
-            jqRef.effect("highlight", 1500);
-            jqRef.val(quantitylimit);
-        }
     }
 
     function updateShippingOpt(){

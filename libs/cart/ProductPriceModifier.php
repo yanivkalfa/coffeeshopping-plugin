@@ -4,13 +4,15 @@ class ProductPriceModifier extends BasicCartObject {
     public $name;
     public $nameAs;
     public $value;
+    public $additional;
 
     public function __construct($ProductPriceModifier=NULL){
 
         if(is_array($ProductPriceModifier)) {
-            $this->name = $ProductPriceModifier['name'];
-            $this->nameAs = $ProductPriceModifier['nameAs'];
-            $this->value = $ProductPriceModifier['value'];
+            $this->name = isset($ProductPriceModifier['name']) ? $ProductPriceModifier['name'] : '';
+            $this->nameAs = isset($ProductPriceModifier['name']) ? $ProductPriceModifier['name'] : '';
+            $this->value = isset($ProductPriceModifier['value']) ? $ProductPriceModifier['value'] : 0;
+            $this->additional = isset($ProductPriceModifier['additional']) ? $ProductPriceModifier['additional'] : 0;
         }
     }
 

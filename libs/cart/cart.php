@@ -60,7 +60,7 @@ class Cart extends Collection{
         $index = $this->indexOf($item, $prop? : $this->prop);
         if($index > -1) {
             $product = $this->get()[$index];
-            $product->setQuantity($product->getQuantity()+1);
+            $product->updateQuantity($product->getQuantity()+1);
             return true;
         }
 
@@ -91,11 +91,25 @@ class Cart extends Collection{
     }
 
 
-    public function getStats(){
-        return array(
-            'total' => $this->getTotal(),
-            'productCount' => count($this->get())
-        );
+    public function getStats($extended = false){
+        $productCount = 0;
+        foreach($this->get() as $key => $product){
+            $productCount += $product->getQuantity();
+        }
+        if($extended){
+            return array(
+                'total' => $this->getTotal(),
+                'calculatedTotal' => $this->getCalculatedTotal(),
+                'productCount' => $productCount,
+                'aggregatedPriceModifiers' => $this->getAggregatedPriceModifiers(),
+            );
+        }else{
+            return array(
+                'total' => $this->getTotal(),
+                'productCount' => $productCount
+            );
+        }
+
     }
 
     public function getAggregatedPriceModifiers(){

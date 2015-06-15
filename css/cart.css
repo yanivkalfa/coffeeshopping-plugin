@@ -25,6 +25,16 @@
     height:100%;
 }
 
+.cart-product-details{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type="number"].product-quantity{
+    padding:0 5px;
+    height:30px;
+}
+
 .cart-product-title{}
 .cart-product-store{}
 .cart-product-quantity{}

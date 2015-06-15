@@ -4,13 +4,15 @@ class Product extends BasicCartObject {
     public $cart_id;
     public $unique_store_id;
     public $store;
+    public $store_link;
+    public $selected_variant;
+    public $selected_variant_sku;
     public $img;
     public $title;
     public $price_modifiers = array();
     public $price;
     public $status;
     public $quantity;
-    public $store_link;
 
     public function __construct($product=NULL){
 
@@ -19,12 +21,16 @@ class Product extends BasicCartObject {
             $this->cart_id = isset($product['cart_id']) ? $product['cart_id'] : null;
             $this->unique_store_id = $product['unique_store_id'];
             $this->store = isset($product['store']) ? $product['store'] : null;
+            $this->store_link = isset($product['store_link']) ? $product['store_link'] : null;
+            $this->selected_variant = isset($product['selected_variant']) ? $product['selected_variant'] : array();
+            $this->selected_variant_sku = isset($product['selected_variant_sku']) ? $product['selected_variant_sku'] : null;
             $this->img = isset($product['img']) ? $product['img'] : null;
             $this->title = isset($product['title']) ? $product['title'] : null;
             $this->price = (float)isset($product['price']) ? $product['price'] : 0;
             $this->status = isset($product['status']) ? $product['status'] : null;
             $this->quantity = (int)isset($product['quantity']) ? $product['quantity'] : 1;
-            $this->store_link = isset($product['store_link']) ? $product['store_link'] : null;
+            $this->available_quantity = (int)isset($product['available_quantity']) ? $product['available_quantity'] : 1;
+            $this->order_limit = (int)isset($product['order_limit']) ? $product['order_limit'] : 1;
 
             if($product['price_modifiers'] && count($product['price_modifiers'])){
                 if(is_array($product['price_modifiers'][0])){
@@ -34,7 +40,6 @@ class Product extends BasicCartObject {
                 }else if(is_object($product['price_modifiers'][0])){
                     $this->price_modifiers = $product['price_modifiers'];
                 }
-
             }
         }
     }
@@ -72,7 +77,7 @@ class Product extends BasicCartObject {
         return $this->quantity;
     }
 
-    public function setQuantity($quantity){
+    public function updateQuantity($quantity){
         if($quantity < 0 || !is_int($quantity)) return false;
         return $this->quantity = $quantity;
     }
