@@ -132,6 +132,15 @@ abstract class productSearch {
         }
 
     }
+
+    static public function _addExchangeRates(&$ObjSearch, $exchCurrency = "ILS", $priceExtension = "Exch"){
+        $exchanger = new currencyExchange();
+        foreach($ObjSearch->items as $API => $items){
+            foreach($ObjSearch->items[$API] as $item){
+                $ObjSearch->items[$API][$item]["price".$priceExtension] = $exchanger->exchangeRateConvert($item['priceCurrency'], $item['price'], $exchCurrency);
+            }
+        }
+    }
 }
 
 /* ------------------- DEAD OR UNUSED CODE ---------------- */

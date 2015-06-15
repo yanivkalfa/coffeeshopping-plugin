@@ -3,19 +3,39 @@
 .searchresultentry{
     display: block;
     width: 100%;
+    height: 255px;
+    border-bottom: 1px solid #ddd;
+}
+/* Per API results <li> */
+.searchresultsli{
+    background-color: #fff;
+    padding: 15px;
+    border: solid 1px #bbb;
+    border-radius: 5px;
+}
+
+/* Image Div */
+#imgdivcont{
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+    float:left;
 }
 .imgdiv{
     border: 1px solid #ddd;
     margin: 10px 20px 10px 20px;
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 225px;
     display: inline-block;
-    float:left;
 }
 .imgdiv img{
     max-height: 225px !important;
+    min-width: 225px !important;
+}
+
+/* Details Div */
+#detailsdivcont{
+    display: inline-block;
+    width: 70%;
+    vertical-align: top;
 }
 .catspan{
     font-size: 12px;
@@ -24,11 +44,88 @@
     padding-right: 30px;
 }
 .minidetails{
-    width: 25%;
+    width: 30%;
     display: inline-block;
+    vertical-align: top;
+    margin-left:1%;
+    text-align: center;
 }
-.viewproductdiv{
-    width: 15%;
+.pricediv{
+    text-align: initial;
+}
+.topratedsellerimg{
+    background: url("images/topratedseller.png") no-repeat;
+    width: 80px;
+    height:19px;
+    display:inline-block;
+}
+
+.ebay-storeimg{
+    display:inline-block;
+    background: url("images/ebay-searchresult.gif") no-repeat;
+    width: 108px !important;
+    height:45px !important;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+#paginationdivcont .pagelink{
     display: inline-block;
+    width: 6%;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 3px;
 }
+#paginationdivcont .pagelink:hover{
+    border-color: #62C0FA;
+    cursor:pointer;
+}
+#paginationdivcont .pagelink.currpage{
+    border-color: #9EBEA1;
+    background-color:#E8F5E3;
+}
+#paginationdivcont .pageback{
+    height:22px;
+    background: url("images/backarrow.png") no-repeat center;
+}
+#paginationdivcont .pagenext{
+    height:22px;
+    background: url("images/nextarrow.png") no-repeat center;
+}
+
+#perpageselect {
+    display:inline-block;
+    padding: 0px;
+    margin: 0px;
+    width: 41px;
+    text-align: center;
+}
+#perpageselect:hover{
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+#perpageselect .perpageopts{
+    display: none;
+    position: absolute;
+    list-style: none outside none;
+    text-align: center;
+}
+
+#perpageselect:hover .perpageopts{
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    width: 40px;
+}
+#perpageselect .perpageopt{
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background:#fff;
+}
+#perpageselect .perpageopt:hover{
+    border: 1px solid #62C0FA;
+    cursor:pointer;
+}
+
 /* END Search Page*/

@@ -1,55 +1,63 @@
 <li id="<?php echo $item["ID"];?>" class="searchresultentry">
 
-    <div class="imgdiv">
-        <a href="<?php echo esc_url($productPageLink);?>" class="imglink">
-            <img height="196" width="225" src="<?php echo $item["image"];?>" alt="<?php echo $item["title"];?>">
-        </a>
+    <div id="imgdivcont">
+        <div class="imgdiv">
+            <a href="<?php echo esc_url($productPageLink);?>" class="imglink">
+                <img src="<?php echo $item["image"];?>" alt="<?php echo $item["title"];?>">
+            </a>
+        </div>
     </div>
 
-    <h3 class="titlediv">
-        <a href="<?php echo esc_url($productPageLink);?>" class="" title="<?php echo $item["title"];?>">
-            <strong><?php echo $item["title"];?></strong>
-        </a>
-        <span class="catspan">Category: <?php echo $item["categoryText"];?></span>
-    </h3>
+    <div id="detailscont">
+        <div id="detailstopcont">
+            <h3 class="titlediv">
+                <a href="<?php echo esc_url($productPageLink);?>" class="" title="<?php echo $item["title"];?>">
+                    <strong><?php echo $item["title"];?></strong>
+                </a>
+                <span class="catspan">Category: <?php echo $item["categoryText"];?></span>
+            </h3>
 
-    <div class="subtitlediv">
-        <?php echo $item["subtitle"];?>
-    </div>
+            <div class="subtitlediv">
+                <?php echo $item["subtitle"];?>
+            </div>
+        </div>
 
-    <ul class="pricediv nolistbull minidetails">
-        <li class="itemcondition">
-            <span class="">Condition: <?php echo $item["conditionText"];?></span>
-        </li>
-        <li class="buyprice">
+        <div id="detailsdivcont">
+            <ul class="pricediv nolistbull minidetails">
+                <li class="itemcondition">
+                    <span class="">Condition: <?php echo $item["conditionText"];?></span>
+                </li>
+                <li class="buyprice">
                 <span class="bold">
-                        Price: <b><?php echo $item["priceCurrency"];?></b> <?php echo $item["price"];?>
+                        Price: <b><?php echo $item["priceSymbol".$exchangeExtension];?></b><?php echo $item["price".$exchangeExtension];?>
                 </span>
-        </li>
-        <li class="shippinginfo">
+                </li>
+                <li class="shippinginfo">
                 <span class="shipp">
                     <span>
                         Shipping: <span class="bfsp"><?php echo $item["shippingType"];?></span>
                     </span>
                 </span>
-        </li>
-    </ul>
-    <ul class="locationdiv nolistbull minidetails">
-        <li>
-            From <?php echo $item["locationInfo"];?>
-        </li>
-        <li>
-            <?php if ($item["isTopSeller"]) { ?>
-                <img class="" src="" height="19px" width="122px" alt="Top Seller">
-            <?php }; ?>
-        </li>
-    </ul>
-    <ul class="viewproductdiv nolistbull">
-        <li>
-            <img class="" src="" height="19px" width="122px" alt="@$API">
-        </li>
-        <li>
-            <a href="<?php echo esc_url($productPageLink);?>"><input type="button" value="View details"></a>
-        </li>
-    </ul>
+                </li>
+            </ul>
+            <ul class="locationdiv nolistbull minidetails">
+                <li>
+                    From <?php echo $item["locationInfo"];?>
+                </li>
+                <li>
+                    <?php if ($item["isTopSeller"]) { ?>
+                        <div class="topratedsellerimg"></div>
+                    <?php }; ?>
+                </li>
+            </ul>
+            <ul class="viewproductdiv nolistbull minidetails">
+                <li>
+                    <div class="<?php echo $API;?>-storeimg"></div>
+                </li>
+                <li>
+                    <a href="<?php echo esc_url($productPageLink);?>">View details</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </li>

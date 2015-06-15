@@ -9,7 +9,7 @@
 */
 
 /*
- * TODO: construct the paging links and per-page display dropdown.
+ * TODO: Fix conflict -> AvailableTo=IL retrieves WorldWide results with IL excluded.
  */
 
 // Handle our search calls.
@@ -21,6 +21,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     $searchOpts = array();
     // Handle pagination
     $searchOpts["pageToGet"] = (isset($_GET["pg"]) && !empty($_GET["pg"])) ? (int)$_GET["pg"] : 1;
+    $searchOpts["entriesPerPage"] = (isset($_GET["ppg"]) && !empty($_GET["ppg"])) ? (int)$_GET["ppg"] : 10;
 
     /*
      * For future advanced search
@@ -41,6 +42,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
         array('name' => 'PaymentMethod', 'value' => 'PayPal'),
         //array('name' => 'Condition','value' => array('1000', '1500', '1750', '2000'),'paramName' => 'name','paramValue' => 'value'),
     );
+
     // Our sorting order
     $searchOpts["sortOrder"] = "BestMatch";
     // Our mode (sandbox/live)
@@ -59,8 +61,8 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
 
     }else{
         // Output the search results template.
-        $productPageLink = get_permalink(get_option("cs_product_p_id"));
-        if (!$productPageLink){
+        $productPage = get_permalink(get_option("cs_product_p_id"));
+        if (!$productPage){
             Utils::adminPreECHO("Can't get product page id", "searchTemplate() ERROR:: ");
             $scope = array(
                 "errorsText" => Utils::getErrorCode("templateLoader", "productSearch", "searchAPI", "8")
@@ -69,9 +71,12 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
 
         }else{
             $scope = array(
-                "productPageLink" => $productPageLink,
+                "productPage" => $productPage,
                 "searchResults" => $result["output"]
             );
+            $scope["exchangeCurrency"]      = "ILS";
+            $scope["exchangeExtension"]     = "Exch";
+            $scope["searchVal"]             = $_GET["search-product"];
             Utils::getTemplate('search', $scope);
         }
     }

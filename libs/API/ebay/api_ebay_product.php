@@ -220,7 +220,16 @@ class ebay_ShoppingAPI extends ebayAdapter {
                 'result' => "ERROR",
                 "output" => Utils::getErrorCode("API", "ebay", "getShippingCosts", "2")
             );
+
+        }elseif(!isset($shippingDetails->ShippingDetails->InternationalShippingServiceOption)){
+            // No error but EMPTY results -> doesn't ship to IL.
+            Utils::adminPreECHO("There are no 'InternationalShippingServiceOption' options available.", "getShippingCosts() ERROR:: ");
+            return array(
+                'result' => "ERROR",
+                "output" => Utils::getErrorCode("API", "ebay", "getShippingCosts", "2")
+            );
         }
+
 
         // Returns a proper shipping details object.
         return array(
@@ -307,6 +316,9 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct->categoryText           =     (string)  $productOutput->PrimaryCategoryName;
         $ObjProduct->price                  =     (string)  $productOutput->CurrentPrice;
         $ObjProduct->priceCurrency          =     (string)  $productOutput->CurrentPrice["currencyID"];
+        // Get exchange rates.
+        Utils::addExchangeKeys($ObjProduct, array("price"), $this->exchSuff, $this->exchCurrency);
+
         $ObjProduct->country                =     (string)  $productOutput->Country;
         $ObjProduct->location               =     (string)  $productOutput->Location;
         $ObjProduct->quantityAvailable      =     (string)  $productOutput->Quantity;
@@ -378,12 +390,15 @@ class ebay_ShoppingAPI extends ebayAdapter {
             $varIndex = 0;
             foreach($productOutput->Variations->Variation as $variation){
                 $ObjProduct->variations[$varIndex] = array(
-                    "SKU"           =>  (string)    $variation->SKU,
-                    "price"         =>  (string)    $variation->StartPrice,
-                    "priceCurrency" =>  (string)    $variation->StartPrice["currencyID"],
-                    "quantity"      =>  (string)    $variation->Quantity,
-                    "quantitySold"  =>  (string)    $variation->SellingStatus->QuantitySold
+                    "SKU"                           =>  (string)    $variation->SKU,
+                    "price"                         =>  (string)    $variation->StartPrice,
+                    "priceCurrency"                 =>  (string)    $variation->StartPrice["currencyID"],
+                    "quantity"                      =>  (string)    $variation->Quantity,
+                    "quantitySold"                  =>  (string)    $variation->SellingStatus->QuantitySold
                 );
+                // get exchange rates:
+                Utils::addExchangeKeys($ObjProduct->variations[$varIndex], array("price"), $this->exchSuff, $this->exchCurrency);
+
                 // Associate our variation with it's SET(s).
                 foreach($variation->VariationSpecifics->NameValueList as $variationSet){
                     $ObjProduct->variations[$varIndex]["setInfo"][(string)$variationSet->Name] = (string)$variationSet->Value;
@@ -407,8 +422,9 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjShipping->internationalInsuranceCostCurrency    =   (string)    $shippingObject->InternationalInsuranceCost["currencyID"];
         $ObjShipping->internationalInsuranceOption          =   (string)    $shippingObject->InternationalInsuranceOption;
 
+        $index = 0;
         foreach ($shippingObject->InternationalShippingServiceOption as $option){
-            $ObjShipping->shippingOptions[] = array(
+            $ObjShipping->shippingOptions[$index] = array(
                 "name"                      =>  (string)    $option->ShippingServiceName,
                 "priority"                  =>  (string)    $option->ShippingServicePriority,                               // int.
                 "deliveryMin"               =>  array(
@@ -420,8 +436,8 @@ class ebay_ShoppingAPI extends ebayAdapter {
                     "days"  =>      ebay_Utils::getDeliveryTimeDiff((string)$option->EstimatedDeliveryMaxTime),             // Date in the format - "D. M."
                 ),
                 // All price modifiers:
-                "price"                     =>  (string)    $option->ShippingServiceCost,                                   // int. [same for all]
-                "priceCurrency"             =>  (string)    $option->ShippingServiceCost["currencyID"],                     // 3 letters ID. [same for all]
+                "price"                     =>  (string)    $option->ShippingServiceCost,                                       // int. [same for all]
+                "priceCurrency"             =>  (string)    $option->ShippingServiceCost["currencyID"],                         // 3 letters ID. [same for all]
                 "additional"                =>  (string)    $option->ShippingServiceAdditionalCost,
                 "additionalCurrency"        =>  (string)    $option->ShippingServiceAdditionalCost["currencyID"],
                 "duty"                      =>  (string)    $option->ImportCharge,
@@ -429,6 +445,10 @@ class ebay_ShoppingAPI extends ebayAdapter {
                 "insurance"                 =>  (string)    $option->ShippingInsuranceCost,
                 "insuranceCurrency"         =>  (string)    $option->ShippingInsuranceCost["currencyID"],
             );
+            // get exchange rates:
+            Utils::addExchangeKeys($ObjShipping->shippingOptions[$index],  Array("price", "additional", "duty", "insurance"), $this->exchSuff, $this->exchCurrency);
+
+            $index++;
         }
 
         return $ObjShipping;
