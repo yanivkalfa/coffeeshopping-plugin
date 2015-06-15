@@ -22,7 +22,7 @@
     $ns.productPic = "<?php echo (isset($product->pics[0]["picURL"])) ? $product->pics[0]["picURL"] : "" ;?>";
     $ns.productTitle = "<?php echo $product->title;?>";
     $ns.storeLink = "<?php echo $product->storeLink;?>";
-    $ns.maxItemsOrder = "<?php echo $product->maxItemsOrder;?>";
+    $ns.maxItemsOrder = "<?php echo (isset($product->maxItemsOrder)) ? $product->maxItemsOrder : 1;?>";
     $ns.store = "<?php echo $store;?>";
 </script>
 
