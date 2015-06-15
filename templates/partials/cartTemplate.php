@@ -14,20 +14,20 @@
     </div>
     <table>
         <thead>
-            <tr>
-                <th>Title</th>
-                <th>Image</th>
-                <th>Store</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total Price</th>
-                <th>Action</th>
-            </tr>
+        <tr>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Store</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+            <th>Action</th>
+        </tr>
 
         </thead>
 
         <tbody>
-            <?php foreach($_SESSION['cart']->get() as $key => $product) : ?>
+        <?php foreach($_SESSION['cart']->get() as $key => $product){ ?>
             <tr>
                 <td><?php echo $product->title; ?></td>
                 <td><img src="<?php echo $product->img; ?>">?</td>
@@ -39,7 +39,7 @@
                     <span class="col-lg-2 col-el-2" data-product-key="{unique_store_id: '<?php echo $product->unique_store_id; ?>'}> ">X</span>
                 </td>
             </tr>
-            <? endforeach; ?>
+        <?php } ?>
         </tbody>
     </table>
 

@@ -21,6 +21,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     $searchOpts = array();
     // Handle pagination
     $searchOpts["pageToGet"] = (isset($_GET["pg"]) && !empty($_GET["pg"])) ? (int)$_GET["pg"] : 1;
+    $searchOpts["entriesPerPage"] = (isset($_GET["ppg"]) && !empty($_GET["ppg"])) ? (int)$_GET["ppg"] : 10;
 
     /*
      * For future advanced search
