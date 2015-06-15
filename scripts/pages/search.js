@@ -10,44 +10,6 @@
 // in out case the cart header subscribes to cart update event. and addProduct/saveCart publish to that channel.
 
 $(document).ready(function(){
-    $('#addProduct').click(function(){
 
-        // shlomer this is all the product details we need.
-        var product = {
-            unique_store_id : "1",
-            store : 'eBay',
-            img : 'whatEverMotherFUcker.jpg',
-            title : 'A Product',
-            price : 31,
-            quantity : 2,
-            price_modifiers : [
-                {name:'storeCommission', nameAs : 'Store Commission', value : 5},
-                {name:'PayPalFees', nameAs : 'PayPal Fees', value : 17},
-                {name:'shippingCosts', nameAs : 'Shipping Costs', value : 2}
-            ]
-        };
-
-        $ns.data.action = 'ajax_handler';
-        $ns.data.method = 'addProduct';
-        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(product));
-
-        var data = $ns.Utils.getData();
-        if(data.success){
-            console.log(data);
-            $.publish($ns.events.CART_UPDATE, data.msg);
-        }
-    });
-
-    $('#saveCart').click(function(){
-
-        $ns.data.action = 'ajax_handler';
-        $ns.data.method = 'saveCart';
-
-        var data = $ns.Utils.getData();
-        if(data.success){
-            console.log(data);
-            $.publish($ns.events.CART_UPDATE, data.msg);
-        }
-    });
 
 });
