@@ -124,7 +124,9 @@ jQuery(document).ready( function(){
             ],
             selected_var : getCurrentVarSel(),
             selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant]["SKU"] : "",
-            store_link: $ns.storeLink
+            store_link: $ns.storeLink,
+            available_quantity: getAvailableQuantity(),
+            order_limit: $ns.orderLimit
         };
 
         $ns.data.action = 'ajax_handler';
@@ -271,13 +273,18 @@ jQuery(document).ready( function(){
         }
     }
 
-    function updateQuantity(){
-        var jqRef = jQuery("#orderquantity");
+    function getAvailableQuantity(){
         var quantitylimit = jQuery("#quantityavail").html();
         if ($ns.selectedVariant != -1){
             quantitylimit = parseInt($ns.variations[$ns.selectedVariant]["quantity"]);
         }
-        if (quantitylimit > $ns.maxItemsOrder){quantitylimit = $ns.maxItemsOrder;}
+        return quantitylimit;
+    }
+
+    function updateQuantity(){
+        var jqRef = jQuery("#orderquantity");
+        var quantitylimit = getAvailableQuantity();
+        if (quantitylimit > $ns.orderLimit){quantitylimit = $ns.orderLimit;}
         if (jqRef.val() < 1){
             jqRef.effect("highlight", 1500);
             jqRef.val(1);

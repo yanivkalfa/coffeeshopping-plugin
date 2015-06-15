@@ -22,7 +22,7 @@
     $ns.productPic = "<?php echo (isset($product->pics[0]["picURL"])) ? $product->pics[0]["picURL"] : "" ;?>";
     $ns.productTitle = "<?php echo $product->title;?>";
     $ns.storeLink = "<?php echo $product->storeLink;?>";
-    $ns.maxItemsOrder = "<?php echo (isset($product->maxItemsOrder)) ? $product->maxItemsOrder : 1;?>";
+    $ns.orderLimit = "<?php echo (isset($product->orderLimit)) ? $product->orderLimit : 1;?>";
     $ns.store = "<?php echo $store;?>";
 </script>
 
@@ -234,7 +234,7 @@
             <div class="inline">
                 <div class="inline header">Quantity:</div>
                 <?php
-                $maxQuantity = (intval($product->quantityAvailable) > intval($product->maxItemsOrder) && intval($product->maxItemsOrder) > 0) ? intval($product->maxItemsOrder) : intval($product->quantityAvailable);
+                $maxQuantity = (intval($product->quantityAvailable) > intval($product->orderLimit) && intval($product->orderLimit) > 0) ? intval($product->orderLimit) : intval($product->quantityAvailable);
                 ?>
                 <div class="inline"><input id="orderquantity" type="number" max="<?php Utils::pageEcho($maxQuantity);?>" min="1" value="1" /></div>
             </div>

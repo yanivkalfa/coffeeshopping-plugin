@@ -328,7 +328,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct->listingType            =     (string)  $productOutput->ListingType;            // If 'AuctionWithBIN' -> Rush buy before someone bids. [our types: AuctionWithBIN,FixedPrice,StoreInventory]
         $ObjProduct->handlingTime           =     (string)  $productOutput->HandlingTime;           // Number of days until shipment - int.
         $ObjProduct->conditionText          =     (string)  $productOutput->ConditionDisplayName;
-        $ObjProduct->maxItemsOrder          =     (string)  $productOutput->QuantityThreshold;      // How many items can you order at once.
+        $ObjProduct->orderLimit             =     (string)  $productOutput->QuantityThreshold;      // How many items can you order at once.
         $ObjProduct->topRatedItem           =     (string)  $productOutput->TopRatedListing;
 
         $ObjProduct->sellerInfo             =     array(
