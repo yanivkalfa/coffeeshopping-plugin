@@ -14,7 +14,7 @@
     $ns.selectedShipping = 0; // proper indexes start from 0.
     $ns.variationSets = <?php echo json_encode($product->variationSets);?>;
     $ns.variations = <?php echo json_encode($product->variations);?>;
-    $ns.selectedVariant = 0; // default search result.
+    $ns.selectedVariant = -1; // default search result.
     $ns.exchExtension = "<?php echo $exchangeExtension; ?>";
     $ns.exchSymbol = "<?php echo Utils::getCurrencySymbol($exchangeCurrency);?>";
     $ns.exchCurrency = "<?php echo $exchangeCurrency;?>";
