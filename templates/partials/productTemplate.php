@@ -1,7 +1,8 @@
 <?php
 /**
- * TODO: details not in use: $product->>> handlingTime, timeLeft, availableTill, storeLink.
+ * TODO: details not in use: $product->>> handlingTime, timeLeft, availableTill.
  */
+
 ?>
 <!-- all variables comes from Utils::getTemplate -->
 
@@ -21,6 +22,7 @@
     $ns.productPic = "<?php echo (isset($product->pics[0]["picURL"])) ? $product->pics[0]["picURL"] : "" ;?>";
     $ns.productTitle = "<?php echo $product->title;?>";
     $ns.storeLink = "<?php echo $product->storeLink;?>";
+    $ns.maxItemsOrder = "<?php echo $product->maxItemsOrder;?>";
     $ns.store = "<?php echo $store;?>";
 </script>
 
