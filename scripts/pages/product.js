@@ -102,7 +102,7 @@ jQuery(document).ready( function(){
     updateProductPrices();
 
     function addToCart(){
-        var exchDetails = getProductPricesDetails($ns.exchExtension);
+        var exchDetails = getProductPricesDetails($ns.exchExtension, 1);
         var product = {
             unique_store_id : $ns.productID,
             store : $ns.store,
@@ -325,15 +325,16 @@ jQuery(document).ready( function(){
         });
     }
 
-    function getProductPricesDetails(pricetype){
+    function getProductPricesDetails(pricetype, orderquantity){
         // Make sure the user have chosen his shipping option before we go on.
         if ($ns.selectedShipping==-1){
             jQuery("#shippmentdiv").effect("highlight", 1500);
             return [];
         }
 
-        // Set default value.
+        // Set default values.
         pricetype = (typeof pricetype !== 'undefined') ? pricetype : "";
+        orderquantity = (typeof orderquantity !== 'undefined') ? orderquantity : parseInt( jQuery("#orderquantity").val() );
 
         // Load these from admin panel.
         var paypalcomm = parseFloat(3.5/100);
@@ -352,7 +353,6 @@ jQuery(document).ready( function(){
             // set variation details.
             itemprice           = parseFloat( $ns.variations[$ns.selectedVariant]["price" + pricetype] );
         }
-        var orderquantity       = parseFloat( jQuery("#orderquantity").val() );
 
         // Make some calcs.
         // Sum our shipping costs.
