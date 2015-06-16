@@ -82,7 +82,7 @@
             <a href="<?php echo $product->storeLink;?>" title="View on <?php echo $store;?>" target="_blank"><div class="<?php echo Utils::getAPILogoClass($store);?> flleft"></div></a>
             <h3>
                 <?php Utils::pageEcho("Make your order"); ?>
-                <?php echo $product->topRatedItem ? " top-rated-item " : "";?>
+                <?php echo $product->topRatedItem ? "<div title=\"Top rated product!\" class=\"topratedproductimg flleft\"></div>" : "";?>
                 :
             </h3>
             <div id="itemcondition">
