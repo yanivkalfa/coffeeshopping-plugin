@@ -46,6 +46,10 @@ jQuery(document).ready( function(){
     });
     // Load our carousel.
     var m = jQuery('.galleryContainer').CB_CarouseljQ({
+        options: {
+            visibleItems: 10,
+            threshold: -15
+        },
         change: function(s, obj){
             jQuery(obj).children("a").click();
         }
@@ -109,7 +113,7 @@ jQuery(document).ready( function(){
             price_modifiers : [
                 {name:'storeCommission', nameAs : 'Store Commission', value : exchDetails["storeprice"]},
                 {name:'PayPalFees', nameAs : 'PayPal Fees', value : exchDetails["paypalprice"]},
-                {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"]}
+                {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"], additional: parseInt($ns.shippingOpts[$ns.selectedShipping].additional)||0}
             ],
             selected_var : getCurrentVarSel(),
             selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant]["SKU"] : "",

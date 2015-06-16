@@ -9,32 +9,37 @@
 abstract class ebay_Utils{
 
     static public function getEbayPicture($link, $size){
-      // s- square, w-wide.
-      $sizes = array(
-          "42s"           => "13",
-          "64s"           => "14",
-          "80s"             => "17",
-          "125s"           => "15",
-          "150s"           => "7",
-          "200s"          => "2",
-          "300s"            => "8",
-          "400s"          => "1",
-          "500s"           => "12",
-          "600s"           => "20",
-          "800s"          => "3",
-          "960s"           => "59",
-          "1200s"           => "45",
-          "1600s"           => "10",
 
-          "100w"           => "5",
-          "200w"           => "9",
-          "310w"           => "11",
-          "400w"           => "16",
-          "640w"          => "4",
+        // h - height, w - width, wh - either, fb - fit-box, exactsize, original.
+        $sizes = array(
+            "400h"          => "1",
+            "200h"          => "2",
+            "800h"          => "3",
+            "480h"          => "4",
+            "75h"           => "5",
+
+            "42w"           => "13",
+            "60w"           => "28",
+            "300w"          => "29",
+
+            "60wh"           => "22",
+            "64wh"           => "14",
+            "70wh"           => "6",
+            "80wh"           => "17",
+            "150wh"           => "7",
+            "400wh"           => "19",
+            "500wh"           => "12",
+
+            "200x150"           => "9",
+            "original"           => "10",
+            "310x90"           => "11",
+            "400x300"         => "16",
+
+            "125x225fb"           => "15",
       );
-      $regexp = "/\\$\\_\\d+\\.JPG.+/i";
-      $replace = "\$_".$sizes[$size].".JPG";
-      return preg_replace($regexp, $replace, $link, 1);
+        $regexp = "/\\$\\_\\d+\\.JPG.+/i";
+        $replace = "\$_".$sizes[$size].".JPG";
+        return preg_replace($regexp, $replace, $link, 1);
     }
 
     static public function getDeliveryTime($time){
