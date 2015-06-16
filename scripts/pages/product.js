@@ -124,7 +124,7 @@ jQuery(document).ready( function(){
             price_modifiers : [
                 {name:'storeCommission', nameAs : 'Store Commission', value : exchDetails["storeprice"]},
                 {name:'PayPalFees', nameAs : 'PayPal Fees', value : exchDetails["paypalprice"]},
-                {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"], additional: parseInt($ns.shippingOpts[$ns.selectedShipping].additional)||0}
+                {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"], additional: parseInt($ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension])||0}
             ],
             selected_var : getCurrentVarSel(),
             selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant]["SKU"] : "",
@@ -132,6 +132,9 @@ jQuery(document).ready( function(){
             available_quantity: getAvailableQuantity(),
             order_limit: $ns.orderLimit
         };
+
+        console.log(product);
+        return;
 
         $ns.data.action = 'ajax_handler';
         $ns.data.method = 'addProduct';
