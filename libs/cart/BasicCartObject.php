@@ -20,4 +20,28 @@ class BasicCartObject{
         $object['address'] = $this->address->getAsArray();
         return $object;
     }
+
+    public function checkLimitation($quantity, $available_quantity, $order_limit){
+
+        $productLimit = 0;
+        $limitsArr = [];
+
+        if($available_quantity > 0){
+            $limitsArr[] = $available_quantity;
+        }
+
+        if($order_limit > 0){
+            $limitsArr[] = $order_limit;
+        }
+
+        if(count($limitsArr)){
+            $productLimit = min($limitsArr);
+        }
+
+        if($productLimit > 0 && $quantity > $productLimit){
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -91,18 +91,7 @@ jQuery(document).ready( function(){
     jQuery("#detailspaenl").scrollLeft(0);
 
     // Handle 'Add to cart'
-    jQuery("#buynowbuttondiv").click(function(){
-        if (jQuery(this).data("addedtocart")==1){
-            jQuery(this).data("addedtocart", "0");
-            jQuery(this).html("Add to cart").removeClass("cartremove");
-            removeFromCart();
-        }else{
-            jQuery(this).data("addedtocart", "1");
-            addToCart();
-            jQuery(this).html("Remove from cart").addClass("cartremove");
-        }
-
-    });
+    jQuery("#buynowbuttondiv").click(addToCart);
 
     // ON-LOAD - get the defaults.
     updateShippingOpt();
@@ -137,7 +126,6 @@ jQuery(document).ready( function(){
         if(data.success){
             console.log(data);
             $.publish($ns.events.CART_UPDATE, data.msg);
-            jQuery("#buynowbuttondiv").data("addedtocart", "1");
         }
     }
     function removeFromCart(){

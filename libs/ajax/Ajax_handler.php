@@ -79,7 +79,12 @@ class Ajax_handler {
     public function addProduct($post){
         $product = json_decode($post['product'], true);
         $extendCartUpdate = isset($post['extendCartUpdate']) ? json_decode($post['extendCartUpdate'], true) : false;
-        $_SESSION['cart']->add(new Product($product));
+        if(!$_SESSION['cart']->add(new Product($product))){
+            return array(
+                'success' => false,
+                'msg' => 'Couldn\'t add the product to cart'
+            );
+        }
 
         return array(
             'success' => true,
@@ -112,7 +117,7 @@ class Ajax_handler {
         if(!$product->updateQuantity($quantity)){
             return array(
                 'success' => false,
-                'msg' => 'Error: Quantity is either not an integer or not bigger then 0'
+                'msg' => 'Error: Could not update product\'s quantity'
             );
         }
 

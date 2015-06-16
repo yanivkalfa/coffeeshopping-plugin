@@ -57,11 +57,13 @@ class Cart extends Collection{
     }
 
     public function add ($item, $prop = false){
+        if(!$this->checkLimitation($item->quantity, $item->available_quantity, $item->order_limit)){
+            return false;
+        }
         $index = $this->indexOf($item, $prop? : $this->prop);
         if($index > -1) {
             $product = $this->get()[$index];
-            $product->updateQuantity($product->getQuantity()+1);
-            return true;
+            return $product->updateQuantity($product->getQuantity()+1);
         }
 
         return $this->{$this->colName}[] = $item;
@@ -118,9 +120,9 @@ class Cart extends Collection{
             foreach($product->getPriceModifiers() as $mKey => $modifier){
                 if(!isset($modifiers[$modifier->name])) {
                     $modifiers[$modifier->name] = new ProductPriceModifier((array)$modifier);
-                    $modifiers[$modifier->name]->value = $modifier->value * $product->getQuantity();
+                    $modifiers[$modifier->name]->value = $modifier->getModifierValue($product->getQuantity());
                 }else{
-                    $modifiers[$modifier->name]->value += $modifier->value * $product->getQuantity();
+                    $modifiers[$modifier->name]->value += $modifier->getModifierValue($product->getQuantity());
                 }
             }
         }

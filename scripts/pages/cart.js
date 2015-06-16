@@ -38,7 +38,7 @@ jQuery(document).ready( function(){
         product = getProduct(this);
         var changed = $ns.Utils.onProductQuantityChange(jQuery(this), product.available_quantity, product.order_limit );
 
-        if(changed){
+        if(product.quantity !== changed){
             $(this).parents('.cart-product-part').find('.cart-product-update').removeClass('display-none');
         }
     });
@@ -56,9 +56,9 @@ jQuery(document).ready( function(){
         if(data.success){
             console.log(data);
             $.publish($ns.events.CART_UPDATE, data.msg);
-            $(this).addClass('display-none');
             renderCartSummery(data.msg);
         }
+        $(this).addClass('display-none');
     });
 
     $('.cart-product-remove').on('click',  function(){

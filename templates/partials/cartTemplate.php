@@ -14,11 +14,11 @@
                 </div>
                 <div class="col-lg-4 col-el-4 cart-product-part">
                     <div class="col-lg-12 col-el-12">
-                        <span class="cart-product-title"><a href="<?php echo $product->store_link; ?>"><?php echo $product->title; ?></a></span>
+                        <span class="cart-product-title"><a href="<?php echo Utils::getProductPageLink($product->unique_store_id, $product->store) ; ?>"><?php echo $product->title; ?></a></span>
                     </div>
                     <div class="col-lg-12 col-el-12">
                         <span class="cart-product-details">Store: </span>
-                        <span class="cart-product-store"><?php echo $product->store; ?></span>
+                        <span class="cart-product-store"><a href="<?php echo $product->store_link; ?>"><?php echo $product->store; ?></a></span>
                     </div>
 
                     <?php foreach($product->selected_variant as $variantName => $variantValue) : ?>
@@ -31,7 +31,7 @@
                 <div class="col-lg-3 col-el-3 cart-product-part">
                     <span class="cart-product-quantity">
                         <span class="col-lg-5 col-el-5 cart-product-quantity">Quantity:</span>
-                        <span class="col-lg-6 col-el-6"><input type="number" id="quantity" class="product-quantity form-control" value="<?php echo $product->quantity; ?>"/></span>
+                        <span class="col-lg-6 col-el-6"><input type="number" min="1" max="<?php echo $product->order_limit; ?>" id="quantity" class="product-quantity form-control" value="<?php echo $product->quantity; ?>"/></span>
                     </span>
                     <span class="display-none cart-product-update btn btn-primary">Update</span>
                 </div>

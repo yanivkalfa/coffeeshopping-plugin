@@ -79,7 +79,13 @@ class Product extends BasicCartObject {
 
     public function updateQuantity($quantity){
         if($quantity < 0 || !is_int($quantity)) return false;
-        return $this->quantity = $quantity;
+
+        if(!$this->checkLimitation($quantity, $this->available_quantity, $this->order_limit)){
+            return false;
+        }
+
+        $this->quantity = $quantity;
+        return true;
     }
 
     public function getObjectAsArray(){

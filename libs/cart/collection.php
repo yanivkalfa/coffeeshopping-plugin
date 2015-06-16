@@ -30,7 +30,7 @@ class Collection extends BasicCartObject{
     public function remove ($item, $prop = false){
         $index = $this->indexOf($item, $prop? : $this->prop);
         if($index <= -1) return false;
-        unset($this->{$this->colName}[$index]);
+        array_splice($this->{$this->colName}, $index,1);
         return $this->{$this->colName};
     }
 

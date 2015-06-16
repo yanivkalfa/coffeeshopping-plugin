@@ -19,4 +19,14 @@ class ProductPriceModifier extends BasicCartObject {
     public function getObjectAsArray(){
         return $this->getAsArray();
     }
+
+    public function getModifierValue($quantity){
+        if(!$quantity) return 0;
+        if($this->additional){
+           return $this->value + ($this->additional*$quantity-1);
+        }else{
+            return $this->value * $quantity;
+        }
+
+    }
 }
