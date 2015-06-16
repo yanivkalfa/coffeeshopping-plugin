@@ -119,15 +119,15 @@ jQuery(document).ready( function(){
             store : $ns.store,
             img : $ns.productPic,
             title : $ns.productTitle,
-            price : exchDetails.itemprice,
+            price : exchDetails["itemprice"],
             quantity : jQuery("#orderquantity").val(),
             price_modifiers : [
-                {name:'storeCommission', nameAs : 'Store Commission', value : exchDetails.storeprice},
-                {name:'PayPalFees', nameAs : 'PayPal Fees', value : exchDetails.paypalprice},
-                {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails.shippingprice, additional: parseInt($ns.shippingOpts[$ns.selectedShipping].additional)||0}
+                {name:'storeCommission', nameAs : 'Store Commission', value : exchDetails["storeprice"]},
+                {name:'PayPalFees', nameAs : 'PayPal Fees', value : exchDetails["paypalprice"]},
+                {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"], additional: parseInt($ns.shippingOpts[$ns.selectedShipping].additional)||0}
             ],
             selected_var : getCurrentVarSel(),
-            selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant].SKU : "",
+            selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant]["SKU"] : "",
             store_link: $ns.storeLink,
             available_quantity: getAvailableQuantity(),
             order_limit: $ns.orderLimit
@@ -167,20 +167,20 @@ jQuery(document).ready( function(){
 
         switch (jqRef.attr("id")) {
             case "itemprice":
-                originalPrice = parseFloat($ns.itemPricing.price).toFixed(2);
+                originalPrice = parseFloat($ns.itemPricing["price"]).toFixed(2);
                 exchangePrice = parseFloat($ns.itemPricing["price" + $ns.exchExtension]).toFixed(2);
-                originalCurrSymbol = $ns.itemPricing.priceSymbol;
+                originalCurrSymbol = $ns.itemPricing["priceSymbol"];
                 if ($ns.selectedVariant != -1){
-                    originalPrice = parseFloat($ns.variations[$ns.selectedVariant].price).toFixed(2);
+                    originalPrice = parseFloat($ns.variations[$ns.selectedVariant]["price"]).toFixed(2);
                     exchangePrice = parseFloat($ns.variations[$ns.selectedVariant]["price" + $ns.exchExtension]).toFixed(2);
-                    originalCurrSymbol = $ns.variations[$ns.selectedVariant].priceSymbol;
+                    originalCurrSymbol = $ns.variations[$ns.selectedVariant]["priceSymbol"];
                 }
                 break;
 
             case "shippingprice":
-                originalPrice = parseFloat($ns.shippingOpts[$ns.selectedShipping].price).toFixed(2);
+                originalPrice = parseFloat($ns.shippingOpts[$ns.selectedShipping]["price"]).toFixed(2);
                 exchangePrice = parseFloat($ns.shippingOpts[$ns.selectedShipping]["price" + $ns.exchExtension]).toFixed(2);
-                originalCurrSymbol = $ns.shippingOpts[$ns.selectedShipping].priceSymbol;
+                originalCurrSymbol = $ns.shippingOpts[$ns.selectedShipping]["priceSymbol"];
                 break;
         }
         var exchangeRate = parseFloat(exchangePrice/originalPrice).toFixed(2);
@@ -210,7 +210,7 @@ jQuery(document).ready( function(){
             if (itemfound!=0){return -1;}
             var available = true;
             Object.keys(search).forEach(function(searchkey){
-                if ($ns.variations[key].setInfo[searchkey] != search[searchkey]) {
+                if ($ns.variations[key]["setInfo"][searchkey] != search[searchkey]) {
                     available = false;
                     return -1;
                 }
@@ -247,8 +247,8 @@ jQuery(document).ready( function(){
         $ns.selectedVariant       = searchVariation(varArr);
 
         // Set variation details.
-        jQuery("#quantityavail").html(parseFloat( $ns.variations[$ns.selectedVariant].quantity).toFixed(0));
-        jQuery("#quantitysold").html(parseFloat( $ns.variations[$ns.selectedVariant].quantitySold).toFixed(0));
+        jQuery("#quantityavail").html(parseFloat( $ns.variations[$ns.selectedVariant]["quantity"]).toFixed(0));
+        jQuery("#quantitysold").html(parseFloat( $ns.variations[$ns.selectedVariant]["quantitySold"]).toFixed(0));
 
         // Set our variation pricing.
         updateProductPrices();
@@ -280,7 +280,7 @@ jQuery(document).ready( function(){
     function getAvailableQuantity(){
         var quantitylimit = parseInt(jQuery("#quantityavail").html());
         if ($ns.selectedVariant != -1){
-            quantitylimit = parseInt($ns.variations[$ns.selectedVariant].quantity);
+            quantitylimit = parseInt($ns.variations[$ns.selectedVariant]["quantity"]);
         }
         return quantitylimit;
     }
@@ -288,33 +288,33 @@ jQuery(document).ready( function(){
     function updateShippingOpt(){
         // Set the description text:
         var shippingDet = [];
-        if ($ns.shippingOpts[$ns.selectedShipping].deliveryMin.date){
+        if ($ns.shippingOpts[$ns.selectedShipping]["deliveryMin"]["date"]){
             shippingDet.push("Estimated delivery " +
                 "<b>" +
-                $ns.shippingOpts[$ns.selectedShipping].deliveryMin.date +
+                $ns.shippingOpts[$ns.selectedShipping]["deliveryMin"]["date"] +
                 "</b> and <b>" +
-                $ns.shippingOpts[$ns.selectedShipping].deliveryMax.date +
+                $ns.shippingOpts[$ns.selectedShipping]["deliveryMax"]["date"] +
                 "</b>" +
                 " <span id=\"shippingdays\">(" +
-                $ns.shippingOpts[$ns.selectedShipping].deliveryMin.days +
+                $ns.shippingOpts[$ns.selectedShipping]["deliveryMin"]["days"] +
                 "-" +
-                $ns.shippingOpts[$ns.selectedShipping].deliveryMax.days +
+                $ns.shippingOpts[$ns.selectedShipping]["deliveryMax"]["days"] +
                 ") </span>"
             );
         }else{
             shippingDet.push("Estimated delivery varies for items shipped from an international location");
         }
-        if ($ns.shippingOpts[$ns.selectedShipping].additional){
-            if ($ns.shippingOpts[$ns.selectedShipping].additional=="0.0"){
+        if ($ns.shippingOpts[$ns.selectedShipping]["additional"]){
+            if ($ns.shippingOpts[$ns.selectedShipping]["additional"]=="0.0"){
                 shippingDet.push("FREE Shipping for additional items!");
             }else {
                 shippingDet.push("Additional item cost: " + $ns.exchSymbol + parseFloat($ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension]).toFixed(2));
             }
         }
-        if ($ns.shippingOpts[$ns.selectedShipping].insurance){
+        if ($ns.shippingOpts[$ns.selectedShipping]["insurance"]){
             shippingDet.push("Shipping insurance cost: " + $ns.exchSymbol + parseFloat($ns.shippingOpts[$ns.selectedShipping]["insurance" + $ns.exchExtension]).toFixed(2));
         }
-        if ($ns.shippingOpts[$ns.selectedShipping].duty){
+        if ($ns.shippingOpts[$ns.selectedShipping]["duty"]){
             shippingDet.push("Import duty cost: " + $ns.exchSymbol + parseFloat($ns.shippingOpts[$ns.selectedShipping]["duty" + $ns.exchExtension]).toFixed(2));
         }
         // Display the shipping details.
@@ -378,17 +378,17 @@ jQuery(document).ready( function(){
         var allitemsprice = itemprice*orderquantity;
         var outputArr = [];
         // Single item price, before any modifiers.
-        outputArr.itemprice = itemprice;
+        outputArr["itemprice"] = itemprice;
         // Total shipping costs - shipping+(additional*quantity)+duty+insurance.
-        outputArr.shippingprice = shippingprice;
+        outputArr["shippingprice"] = shippingprice;
         // Store comminsion * item price + shipping costs. [if lower then minimum, set to minimum].
-        outputArr.storeprice = (storecomm*(allitemsprice+shippingprice)>minstorecomm) ? storecomm*(allitemsprice+shippingprice) : minstorecomm;
+        outputArr["storeprice"] = (storecomm*(allitemsprice+shippingprice)>minstorecomm) ? storecomm*(allitemsprice+shippingprice) : minstorecomm;
         // Paypal comminsion * item price + shipping costs + store commision.
-        outputArr.paypalprice = paypalcomm*(allitemsprice+shippingprice+outputArr.storeprice);
+        outputArr["paypalprice"] = paypalcomm*(allitemsprice+shippingprice+outputArr["storeprice"]);
         // Final price = item(s) price + shipping + paypal + store.
-        outputArr.finalPrice = allitemsprice+shippingprice+outputArr.paypalprice+outputArr.storeprice;
+        outputArr["finalPrice"] = allitemsprice+shippingprice+outputArr["paypalprice"]+outputArr["storeprice"];
         // Total price per item = final price/quantity.
-        outputArr.totalprice = outputArr.finalPrice/orderquantity;
+        outputArr["totalprice"] = outputArr["finalPrice"]/orderquantity;
 
         return outputArr;
     }
