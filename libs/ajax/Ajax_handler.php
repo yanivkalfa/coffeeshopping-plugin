@@ -136,6 +136,15 @@ class Ajax_handler {
         );
     }
 
+    public function clearCart(){
+        unset($_SESSION['cart']);
+
+        return array(
+            'success' => true,
+            'msg' => 'Cleared cart successfully.'
+        );
+    }
+
 
 }
 $ajax_handler = new ajax_handler();

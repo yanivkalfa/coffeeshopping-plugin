@@ -23,7 +23,12 @@ class ProductPriceModifier extends BasicCartObject {
     public function getModifierValue($quantity){
         if(!$quantity) return 0;
         if($this->additional){
-           return $this->value + ($this->additional*$quantity-1);
+            if($quantity > 1) {
+                return $this->value + $this->additional*($quantity-1);
+            }else{
+                return $this->value;
+            }
+
         }else{
             return $this->value * $quantity;
         }
