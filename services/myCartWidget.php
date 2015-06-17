@@ -27,19 +27,18 @@ class myCartWidget extends WP_Widget {
     public function widget( $args, $instance ) {
         echo $args['before_widget'];
 
-        $cartHeadPageLink = get_permalink(get_option("cs_cart_p_id"));
-        if (!$cartHeadPageLink){
-            Utils::adminPreECHO("Can't get search page link", "cartHead.php ERROR:: ");
-            echo Utils::getErrorCode("frontEnd", "widget", "cartHead", "7");
+        $myCartWidgetPageLink = get_permalink(get_option("cs_cart_p_id"));
+        if (!$myCartWidgetPageLink){
+            Utils::adminPreECHO("Can't get search page link", "myCartWidget.php ERROR:: ");
+            echo Utils::getErrorCode("frontEnd", "widget", "myCartWidget", "7");
             return;
         }
 
         $cart =  $_SESSION['cart']->getStats();
-        $cart['page'] = $cartHeadPageLink;
-        Utils::getTemplate('cartHead', $cart);
+        $cart['page'] = $myCartWidgetPageLink;
+        Utils::getTemplate('myCartWidget', $cart);
+
         echo $args['after_widget'];
-
-
     }
 
     /**

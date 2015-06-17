@@ -47,7 +47,7 @@
                     <?php
                     $class = "visible";
                     foreach ($product->pics as $pic){
-                        $imgGallery = Utils::getPictureBySize($store, $pic["picURL"], "400wh");
+                        $imgGallery = Utils::getPictureBySize($store, $pic["picURL"], "500wh");
                         $imgBig = Utils::getPictureBySize($store, $pic["picURL"], "original");
                         $assoc = (isset($pic["assoc"])&&!empty($pic["assoc"])) ? "data-assoc=\"".$pic["assoc"]."\"" : "";
                         $assocVal = (isset($pic["assocVal"])&&!empty($pic["assocVal"])) ? "data-assocval=\"".$pic["assocVal"]."\"" : "";

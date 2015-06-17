@@ -1,0 +1,17 @@
+/* Search Widget BEGIN*/
+#searchwidgetcont{
+    display: inline-block;
+    width:100%;
+    margin-bottom:0px;
+}
+#searchwidgetdiv{
+    display:block;
+}
+#searchwidgetinput{
+    height:42px;
+    width: 75%;
+}
+#searchwidgetbutton{
+    height:42px;
+}
+/* END Search Widget */

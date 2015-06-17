@@ -1,0 +1,35 @@
+.rt-block.widget_mycartwidget1{
+    padding:0px;
+    margin:0px;
+}
+.cartwidgetcontainer, .cartimage, .cartcount{
+    display:inline-block;
+}
+.cartimage{
+    float: left;
+    margin-top: 5px;
+}
+.cartcount{
+    margin-left: 6px;
+}
+.cart-head-wrap{
+    height:28px;
+    width:25px;
+    background:url('images/shoppingCart.png') no-repeat;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.cart-head-item-count{
+    display: inline-block;
+    padding: 5px;
+    color:orange;
+    text-align: center;
+    line-height: 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+}
+.cart-head-item-count:hover{
+    color: #000;
+}

@@ -45,6 +45,7 @@
                 </div>
             </div>
         </div>
+
     <?php endforeach; ?>
 
     <div class="col-lg-12 col-el-12 mt-15">

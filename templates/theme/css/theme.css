@@ -1,0 +1,19 @@
+/*
+        Theme design
+*/
+.widget_logowidget.rt-block{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -15px;
+}
+#websitelogo{
+    /*background: url("../templates/theme/css/images/website-logo.png") no-repeat;*/
+    display:inline-block;
+}
+
+.widget_searchwidget.rt-block{margin-bottom:0px;padding-bottom: 0px;}
+.gf-menu{
+    width:80%;
+}

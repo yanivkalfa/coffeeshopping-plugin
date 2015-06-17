@@ -33,7 +33,8 @@ abstract class CSCons {
                 "getShippingCosts",
                 "searchAPI",
                 "searchALL",
-                "searchWidget"
+                "searchWidget",
+	            "myCartWidget"
             ),
             'errorCodesHandler' => array(
                 "0" => "Improper search string",
@@ -45,6 +46,7 @@ abstract class CSCons {
                 "6" => "Failed to get the search results",
                 "7"  => "Can't get search page link",
                 "8"  => "Can't get product page link",
+	            "9"  => "Widget failed to load."
             ),
 
             'pages' => array(
@@ -71,11 +73,13 @@ abstract class CSCons {
                     array('handle' => 'product_js',                'src' => '/scripts/pages/product',                               'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
 
 
-
-                    array('handle' => 'carthead_css',               'src' => '/css/cartHead',                                        'extension' => 'css',   'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'carthead_js',                'src' => '/scripts/partials/cartHead',                           'extension' => 'js',    'deps' => '', 'media' => ''),
+	                array('handle' => 'searchWidget_css',           'src' => '/css/searchWidget',                                    'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'myCartWidget_css',           'src' => '/css/myCartWidget',                                    'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'myCartWidget_js',            'src' => '/scripts/partials/myCartWidget',                       'extension' => 'js',    'deps' => '', 'media' => ''),
                     array('handle' => 'cart_css',                   'src' => '/css/cart',                                            'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                     array('handle' => 'cart_js',                    'src' => '/scripts/pages/cart',                                  'extension' => 'js',    'deps' => '', 'media' => ''),
+
+	                array('handle' => 'theme_css',                  'src' => '/templates/theme/css/theme',                           'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),
 
                 'back_end' => array(
