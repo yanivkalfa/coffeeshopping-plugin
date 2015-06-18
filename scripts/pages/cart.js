@@ -39,7 +39,7 @@ jQuery(document).ready( function(){
         var changed = $ns.Utils.onProductQuantityChange(jQuery(this), product.available_quantity, product.order_limit );
 
         if(product.quantity !== changed){
-            $(this).parents('.cart-product-part').find('.cart-product-update').removeClass('display-none');
+            $(this).parents('.cartitemdetails').find('.cart-product-update').removeClass('display-none');
         }
     });
 

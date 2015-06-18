@@ -105,7 +105,8 @@ input[type="number"]{
 #itemprice, #shippingprice{
     border-bottom: dashed 1px #2698de;
 }
-#finalPrice{display: inline-block;
+#finalPrice{
+    display: inline-block;
     border: 1px solid #ddd;
     background-color: rgb(232, 245, 227);
     border-radius: 3px;

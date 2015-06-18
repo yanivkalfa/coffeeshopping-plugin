@@ -39,6 +39,11 @@ if(!class_exists('coffee_shopping'))
             */
             add_action( 'init', array($this, 'removeAdminBarForUsers') );
 
+	        /*
+	         * @ Admin in english (cause hebrew stinks there).
+	         */
+	        add_filter('locale', array($this, 'set_admin_language'));
+
             /*
             * @ include classes
             */
@@ -416,6 +421,16 @@ if(!class_exists('coffee_shopping'))
             }
         }
 
+	    /**
+	     *  Set admin language to english.
+	     */
+	    public function set_admin_language($lang){
+		    if(is_admin()){
+			    return 'en_US';
+		    }else{
+			    return $lang;
+		    }
+	    }
         /*
          * @ On activation create Db and default page
          *
