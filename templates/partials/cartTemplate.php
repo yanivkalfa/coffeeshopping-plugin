@@ -7,14 +7,10 @@
 
 <div id="cartcontainer" class="<?php echo (count($_SESSION['cart']->get())) ? '' : 'display-none'; ?> cart has-products">
 
-	<?php foreach($_SESSION['cart']->get() as $key => $product){ ?>
-		<div class="cartitemsdiv">
+	<?php $cart = $_SESSION['cart']->get(); foreach($cart as $key => $product){ ?>
+		<div class="cartitemsdiv<?php echo ($key==count($cart)-1) ? " lastitem": "";?>">
 
 			<div class="cart-product" data-product-key="<?php echo htmlentities(json_encode($product)); ?>">
-
-				<div class="cartitemimg inline">
-					<a href="<?php echo Utils::getProductPageLink($product->unique_store_id, $product->store) ; ?>"><img src="<?php echo Utils::getPictureBySize($product->store, $product->img, "150wh"); ?>"></a>
-				</div>
 
 				<div class="cartitemdetailsdiv inline">
 					<div class="cartitemtitle">
@@ -68,6 +64,9 @@
 
 				</div>
 
+				<div class="cartitemimg inline">
+					<a href="<?php echo Utils::getProductPageLink($product->unique_store_id, $product->store) ; ?>"><img src="<?php echo Utils::getPictureBySize($product->store, $product->img, "150wh"); ?>"></a>
+				</div>
 
 			</div>
 

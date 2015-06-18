@@ -1,15 +1,11 @@
-#cartcontainer{
-    background: #fff;
-    padding:10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    box-shadow: 4px 4px 1px #eee;
-}
+#cartcontainer{}
 .cartitemsdiv{
     padding: 10px;
     border: 1px solid #aaa;
+    border-bottom: none;
+}
+.cartitemsdiv.lastitem{
+     border-bottom: 1px solid #aaa;
 }
 .cart-product{
     height:160px;
@@ -19,7 +15,7 @@
 .cartitemimg{
     width:30%;
     position:relative;
-    float:left;
+    float:right;
     height:100%;
 }
 .cartitemimg > a > img {
