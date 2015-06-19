@@ -115,7 +115,7 @@ jQuery(document).ready( function(){
                 {name:'PayPalFees', nameAs : 'PayPal Fees', value : exchDetails["paypalprice"]},
                 {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"], additional: parseInt($ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension])||0}
             ],
-            selected_var : getCurrentVarSel(),
+            selected_variant : getCurrentVarSel(),
             selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant]["SKU"] : "",
             store_link: $ns.storeLink,
             available_quantity: getAvailableQuantity(),
@@ -213,7 +213,7 @@ jQuery(document).ready( function(){
     }
 
     function getCurrentVarSel(){
-        var varArr = [];
+        var varArr = {};
         jQuery(".varset").each(function(){
             varArr[jQuery(this).data("name")] = jQuery(this).val();
         });

@@ -39,6 +39,10 @@
     display: none !important;
 }
 
+.clearFix {
+    clear:both;
+}
+
 /*
         Store logos, specific img+sizes - copyrighted!
 */
