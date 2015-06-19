@@ -1,6 +1,6 @@
 <div id="userlogincont" class="inline">
     <div id="userlogintitle">
-
+        <h4>Login details:</h4>
     </div>
 	<div id="userloginphone">
         <input id="loginphone" type="tel" name="loginphone"/>
