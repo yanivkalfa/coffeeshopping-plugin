@@ -103,6 +103,7 @@ jQuery(document).ready( function(){
 
     function addToCart(){
         var exchDetails = getProductPricesDetails($ns.exchExtension, 1);
+        console.log(getCurrentVarSel());
         var product = {
             unique_store_id : $ns.productID,
             store : $ns.store,
@@ -213,7 +214,7 @@ jQuery(document).ready( function(){
     }
 
     function getCurrentVarSel(){
-        var varArr = [];
+        var varArr = {};
         jQuery(".varset").each(function(){
             varArr[jQuery(this).data("name")] = jQuery(this).val();
         });
@@ -231,7 +232,7 @@ jQuery(document).ready( function(){
         var assocVal        = jqRef.val();
 
         // Get our current variant.
-        var varArr = []; varArr[assocName] = assocVal;
+        var varArr = {}; varArr[assocName] = assocVal;
         $ns.selectedVariant       = searchVariation(varArr);
 
         // Set variation details.
@@ -255,7 +256,7 @@ jQuery(document).ready( function(){
         for (i = nextIndex; i < Object.keys($ns.variationSets).length; i++){
             // Test all options of this set.
             jQuery("#varset_" + i + " > option").show().each(function(){
-                var varArr = [];
+                var varArr = {};
                 varArr[variationsArr[i]] = jQuery(this).html();
                 // If we don't have an item with this specific option - hide it.
                 if (searchVariation(varArr) == 0) {
@@ -364,7 +365,7 @@ jQuery(document).ready( function(){
 
         // Calc item cost by order quantity.
         var allitemsprice = itemprice*orderquantity;
-        var outputArr = [];
+        var outputArr = {};
         // Single item price, before any modifiers.
         outputArr["itemprice"] = itemprice;
         // Total shipping costs - shipping+(additional*quantity)+duty+insurance.
