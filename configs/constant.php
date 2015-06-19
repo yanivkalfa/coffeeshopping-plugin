@@ -63,10 +63,13 @@ abstract class CSCons {
             'req_scripts' => array(
 
                 'front_end' => array(
-                    array('handle' => 'jquery_zoomit_js',          'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'js',    'deps' => '', 'media' => ''),
-                    array('handle' => 'jquery_zoomit.css',         'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'css',   'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'jquery_cbcarousel_js',      'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'js',    'deps' => '', 'media' => ''),
-                    array('handle' => 'jquery_cbcarousel_css',     'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'jquery_intl-tel-input_js',  'src' => 'bower_components/intl-tel-input/build/js/intlTelInput.min',    'extension' => 'js',     'deps' => '', 'media' => ''),
+                    array('handle' => 'jquery_intl-tel-input_css', 'src' => 'bower_components/intl-tel-input/build/css/intlTelInput',       'extension' => 'css',    'deps' => '', 'media' => 'screen'),
+
+                    array('handle' => 'jquery_zoomit_js',          'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
+                    array('handle' => 'jquery_zoomit.css',         'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
+                    array('handle' => 'jquery_cbcarousel_js',      'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
+                    array('handle' => 'jquery_cbcarousel_css',     'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
                     array('handle' => 'search_css',                'src' => '/css/search',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'search'),
                     array('handle' => 'search_js',                 'src' => '/scripts/pages/search',                                'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'search'),
                     array('handle' => 'product_css',               'src' => '/css/product',                                         'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
@@ -78,6 +81,10 @@ abstract class CSCons {
                     array('handle' => 'myCartWidget_js',            'src' => '/scripts/partials/myCartWidget',                       'extension' => 'js',    'deps' => '', 'media' => ''),
                     array('handle' => 'cart_css',                   'src' => '/css/cart',                                            'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                     array('handle' => 'cart_js',                    'src' => '/scripts/pages/cart',                                  'extension' => 'js',    'deps' => '', 'media' => ''),
+
+                    array('handle' => 'login_css',                   'src' => '/css/login',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'login_js',                    'src' => '/scripts/pages/login',                                'extension' => 'js',    'deps' => '', 'media' => ''),
+                    array('handle' => 'numericInput_js',             'src' => '/scripts/numericInput',                               'extension' => 'js',    'deps' => '', 'media' => ''),
 
 	                array('handle' => 'theme_css',                  'src' => '/templates/theme/css/theme',                           'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),

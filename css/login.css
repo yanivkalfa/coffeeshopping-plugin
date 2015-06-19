@@ -1,0 +1,9 @@
+
+#userloginphone, #userloginpassword{margin-bottom: 5px;}
+#userloginphone .intl-tel-input, #loginpassword{
+    direction: ltr;
+}
+
+#loginphone, #loginpassword{height: 30px;}
+
+#userloginbutton{width: 100%;}
