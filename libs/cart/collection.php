@@ -47,7 +47,7 @@ class Collection extends BasicCartObject{
         $index = $this->indexOf($item, $prop? : $this->prop);
         if($index <= -1) return false;
         return $this->{$this->colName}[$index];
-      }
+    }
 
     public function indexOf ($item = false, $prop = false){
         if(!$item) return false;

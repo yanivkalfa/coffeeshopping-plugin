@@ -84,7 +84,7 @@ abstract class CSCons {
 
                     array('handle' => 'login_css',                   'src' => '/css/login',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                     array('handle' => 'login_js',                    'src' => '/scripts/pages/login',                                'extension' => 'js',    'deps' => '', 'media' => ''),
-                    array('handle' => 'numericInput_js',             'src' => '/scripts/numericInput',                               'extension' => 'js',    'deps' => '', 'media' => ''),
+                    array('handle' => 'numericInput_js',             'src' => 'bower_components/jquery.numericInput/jquery.numericInput','extension' => 'js',    'deps' => '', 'media' => ''),
 
 	                array('handle' => 'theme_css',                  'src' => '/templates/theme/css/theme',                           'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),

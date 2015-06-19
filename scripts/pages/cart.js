@@ -66,7 +66,7 @@ jQuery(document).ready( function(){
         if(!product) return false;
 
         $ns.data.method = 'removeProduct';
-        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(_.pick(product,['unique_store_id']))) + '&extendCartUpdate=true';
+        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(product)) + '&extendCartUpdate=true';
 
         var data = $ns.Utils.getData();
         if(data.success){

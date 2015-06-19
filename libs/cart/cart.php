@@ -61,6 +61,7 @@ class Cart extends Collection{
             return false;
         }
         $index = $this->indexOf($item, $prop? : $this->prop);
+
         if($index > -1) {
             $product = $this->get()[$index];
             return $product->updateQuantity($product->getQuantity()+1);
@@ -68,7 +69,6 @@ class Cart extends Collection{
 
         return $this->{$this->colName}[] = $item;
     }
-
 
     public function setAddress($address){
         $this->address = $address;
@@ -128,6 +128,33 @@ class Cart extends Collection{
         }
 
         return array_values($modifiers);
+    }
+
+    public function productExist($newItem, $savedItem, $index){
+        $newItem =(array)$newItem;
+        return $newItem['selected_variant'] === $savedItem->selected_variant ? $index : -1;
+    }
+
+    public function indexOf ($item = false, $prop = false){
+        if(!$item) return false;
+
+        // has unique property
+        if($prop) {
+            // get the item index in the collection;
+            $index = Utils::indexOf($this->{$this->colName}, $item, $prop);
+
+            // if we have index we check product variation match, no match we return -1 match return the product index.
+            return $index > -1 ? $this->productExist($item, $this->{$this->colName}[$index], $index) : -1;
+        }
+
+        // No unique property checking by value
+        $index = array_search( $this->{$this->colName}, $item );
+
+        // array_search return item index or false, we turn it to index of -1
+        $index = $index === false ? -1 : $index;
+
+        // if we have index we check product variation match, no match we return -1 match return the product index.
+        return $index > -1 ? $this->productExist($item, $this->{$this->colName}[$index], $index) : -1;
     }
 }
 

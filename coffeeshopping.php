@@ -80,8 +80,8 @@ if(!class_exists('coffee_shopping'))
             /*
              * @ changing how login works and making it so it wont redirect to(wp_login) if login fail
              * */
-            //add_action( 'wp_login_failed', array($this, 'custom_login_fail') );
-            //add_action( 'authenticate', array($this, 'custom_login_empty'));
+            add_action( 'wp_login_failed', array($this, 'custom_login_fail') );
+            add_action( 'authenticate', array($this, 'custom_login_empty'));
 
             /*
              * add action to register our widgets
@@ -108,6 +108,10 @@ if(!class_exists('coffee_shopping'))
                 }
                 add_filter('wp_head','remove_admin_bar_style_frontend', 99);
             }
+        }
+
+        public function remove_read_caps(){
+            //add_action( 'admin_init', 'remove_read_caps' );
         }
 
         /*
@@ -169,7 +173,10 @@ if(!class_exists('coffee_shopping'))
          * */
         public function dashboard_roles()
         {
+            //remove_cap( 'subscriber', 'read' );
 
+            global $wp_roles; // global class wp-includes/capabilities.php
+            $wp_roles->remove_cap( 'subscriber', 'read' );
             /*
             add_role(
                 'dashboard_user',
@@ -196,23 +203,7 @@ if(!class_exists('coffee_shopping'))
          * */
         public function custom_login_fail( $username )
         {
-            /*
-            $referrer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : "";
-            if ( !empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') )
-            {
-                if ( !strstr($referrer,'?login=failed') )
-                {
-                    wp_redirect( $referrer . '?login=failed' );
-                }
-                else
-                {
-                    wp_redirect( $referrer );
-                }
-                exit;
-            }
-            */
-
-            wp_redirect( site_url().'/user_login.php?status=failed' );
+            wp_redirect( site_url().'/login?status=failed' );
         }
 
         /*
@@ -220,21 +211,7 @@ if(!class_exists('coffee_shopping'))
          * */
         public function custom_login_empty()
         {
-            /*
-            $referrer = get_home_url();
-            if ( strstr($referrer,get_home_url()) && $user==null )
-            {
-                if ( !strstr($referrer,'?login=empty') )
-                {
-                    wp_redirect( $referrer . '?login=empty' );
-                }
-                else
-                {
-                    wp_redirect( $referrer );
-                }
-            }
-            */
-            wp_redirect( site_url().'/user_login.php?status=empty' );
+            wp_redirect( site_url().'/login?status=empty' );
         }
 
         // Register our widgets.
