@@ -63,10 +63,6 @@ abstract class CSCons {
             'req_scripts' => array(
 
                 'front_end' => array(
-                    //array('handle' => 'jquery_intl_tel_input_js',  'src' => 'bower_components/intl-tel-input/build/js/intlTelInput',    'extension' => 'js',     'deps' => '', 'media' => ''),
-                    //array('handle' => 'jquery_intl_tel_input_Utils_js',  'src' => 'bower_components/intl-tel-input/lib/libphonenumber/src/utils',    'extension' => 'js',     'deps' => array('jquery_intl_tel_input_js'), 'media' => ''),
-                    //array('handle' => 'jquery_intl-tel-input_css', 'src' => 'bower_components/intl-tel-input/build/css/intlTelInput',       'extension' => 'css',    'deps' => '', 'media' => 'screen'),
-
                     array('handle' => 'jquery_zoomit_js',          'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
                     array('handle' => 'jquery_zoomit.css',         'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
                     array('handle' => 'jquery_cbcarousel_js',      'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
