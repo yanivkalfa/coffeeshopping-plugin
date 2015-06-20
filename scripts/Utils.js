@@ -3,14 +3,15 @@
 
     function Utils (){}
 
-    Utils.prototype.getData = function(){
-        var data = false;
+    Utils.prototype.getData = function(method, url, params, dataType, cache){
+        var data = {};
         $.ajax({
-            url: $ns.ajaxURL,
-            type: "post",
+            url: url || $ns.ajaxURL,
+            type:method || "post",
             async: false,
-            dataType:'json',
-            data:$ns.data,
+            dataType: dataType || 'json',
+            data: params || $ns.data,
+            cache: cache || true,
             success: function (resp, status) {
                 if(status === 'success'){
                     return data =  resp;
@@ -59,4 +60,26 @@
     };
 
     $ns.Utils = new Utils();
+
+
+    $.fn.serializeObject = function()
+    {
+        var obj = {};
+        var arr = this.serializeArray();
+        $.each(arr, function() {
+            if (obj[this.name] !== undefined) {
+                if (!obj[this.name].push) {
+                    obj[this.name] = [obj[this.name]];
+                }
+                obj[this.name].push(this.value || '');
+            } else {
+                obj[this.name] = this.value || '';
+            }
+        });
+        return obj;
+    };
+
+    $.validator.addMethod("phoneIL", function(value, element, param) {
+        return this.optional(element) || window.intlTelInputUtils.isValidNumber(value, param);
+    }, "Please specify a valid phone number.");
 })(jQuery);

@@ -1,18 +1,25 @@
 <form id="loginform" action="/wp-login.php" method="post">
-    <div id="userlogincont" class="inline">
+    <div class="inline">
+        <?php if(isset($_GET['status']) && $_GET['status'] == 'failed') { ?>
+            <div class="alert-warning">Login Failed</div>
+        <?php } ?>
+
         <div id="userlogintitle">
             <h4>Login details:</h4>
         </div>
-        <div id="userloginphone">
-            <input id="loginphone" type="tel" name="log"/>
+        <div class="form-group form-ltr">
+            <label>Phone Number *</label>
+            <input type="text" class="form-control" name="log" />
         </div>
-        <div id="userloginpassword">
-            <input id="loginpassword" type="password" name="pwd" />
+        <div class="form-group form-ltr">
+            <label>Password *</label>
+            <input type="password" class="form-control" name="pwd" />
         </div>
 
-        <input name="redirect_to" value="<?php echo site_url() ?>/myaccount/" type="hidden">
-        <button id="userloginbutton" type="submit" class="btn btn-primary disabled">Login</button>&nbsp;
-
+        <div class="form-group form-ltr">
+            <input name="redirect_to" value="<?php echo site_url() ?>/myaccount/" type="hidden">
+            <input type="submit" class="btn btn-primary form-control full-width-button" value="Login" />
+        </div>
     </div>
 
 </form>

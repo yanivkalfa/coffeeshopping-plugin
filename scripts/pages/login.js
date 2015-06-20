@@ -3,35 +3,54 @@
  */
 
 jQuery(document).ready( function() {
-    var telInput = $("#loginphone"),
-        passInput = $("#loginpassword"),
-        submitbutton = $("#userloginbutton");
+    $ns.Utils.getData(
+        'get',
+        "/wp-content/plugins/coffeeshopping-plugin/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
+        {},
+        'script',
+        true
+    );
+    var form = $('#loginform');
+    var errorMessages = {
+        log: {
+            phoneIL: 'Please specify correct Israel phone number'
+        },
+        pwd: {
+            number: 'Must be a number',
+            maxlength: 'password must be {0} digit long',
+            minlength: 'password must be {0} digit long'
+        }
+    };
+    errorMessages = $.extend({}, errorMessages, $ns.errorMessages || {});
 
-    telInput.intlTelInput({
-        onlyCountries: ["il"],
-        utilsScript: "/wp-content/plugins/coffeeshopping-plugin/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
-    });
 
-    // on blur: validate
-    telInput.blur(function() {
-        if ($.trim(telInput.val())) {
-            if (telInput.intlTelInput("isValidNumber")) {
-                submitbutton.html("Login");
-                submitbutton.removeClass("disabled");
-            } else {
-                telInput.addClass("error");
-                submitbutton.html("Invalid Phone#");
-                submitbutton.addClass("disabled");
+
+    form.validate({
+        rules: {
+            log: {
+                required:true,
+                phoneIL: 'il'
+            },
+            pwd: {
+                required:true,
+                number: true,
+                maxlength: 4,
+                minlength: 4
             }
+        },
+        messages: {
+            log: {
+                phoneIL: errorMessages.log.number
+            },
+            pwd: {
+                number: errorMessages.pwd.number,
+                maxlength: jQuery.validator.format(errorMessages.pwd.maxlength),
+                minlength: jQuery.validator.format(errorMessages.pwd.minlength)
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
         }
     });
-
-    // on keydown: reset
-    telInput.keydown(function() {
-        telInput.removeClass("error");
-    });
-
-    // Password validator.
-    passInput.numericInput({allowFloat: false, allowNegative: false, limitInput: 4});
 
 });

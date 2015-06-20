@@ -7,13 +7,14 @@
     "jquery.tinyPubSub": "~1.0.0",
     "jquery.cbCarousel": "~1.1.0",
     "jquery.zoomIt": "~1.1.1",
-    "jquery.numericInput": "~1.0.1",
+    "jquery.numericInput": "~1.1.1",
     "es5-shim": "^4.0.0",
     "font-awesome": "~4.2.0",
     "moment": "~2.10.3",
     "bootstrap": "~3.3.4",
     "lodash": "~3.8.0",
     "dragula.js": "~1.6.0",
-    "intl-tel-input": "~6.0.0"
+    "intl-tel-input": "~6.0.0",
+    "jquery-validation": "~1.13.1"
   }
 }

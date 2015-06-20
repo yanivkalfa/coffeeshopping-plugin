@@ -63,8 +63,9 @@ abstract class CSCons {
             'req_scripts' => array(
 
                 'front_end' => array(
-                    array('handle' => 'jquery_intl-tel-input_js',  'src' => 'bower_components/intl-tel-input/build/js/intlTelInput.min',    'extension' => 'js',     'deps' => '', 'media' => ''),
-                    array('handle' => 'jquery_intl-tel-input_css', 'src' => 'bower_components/intl-tel-input/build/css/intlTelInput',       'extension' => 'css',    'deps' => '', 'media' => 'screen'),
+                    //array('handle' => 'jquery_intl_tel_input_js',  'src' => 'bower_components/intl-tel-input/build/js/intlTelInput',    'extension' => 'js',     'deps' => '', 'media' => ''),
+                    //array('handle' => 'jquery_intl_tel_input_Utils_js',  'src' => 'bower_components/intl-tel-input/lib/libphonenumber/src/utils',    'extension' => 'js',     'deps' => array('jquery_intl_tel_input_js'), 'media' => ''),
+                    //array('handle' => 'jquery_intl-tel-input_css', 'src' => 'bower_components/intl-tel-input/build/css/intlTelInput',       'extension' => 'css',    'deps' => '', 'media' => 'screen'),
 
                     array('handle' => 'jquery_zoomit_js',          'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
                     array('handle' => 'jquery_zoomit.css',         'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
@@ -82,9 +83,11 @@ abstract class CSCons {
                     array('handle' => 'cart_css',                   'src' => '/css/cart',                                            'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                     array('handle' => 'cart_js',                    'src' => '/scripts/pages/cart',                                  'extension' => 'js',    'deps' => '', 'media' => ''),
 
-                    array('handle' => 'login_css',                   'src' => '/css/login',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'login_js',                    'src' => '/scripts/pages/login',                                'extension' => 'js',    'deps' => '', 'media' => ''),
-                    array('handle' => 'numericInput_js',             'src' => 'bower_components/jquery.numericInput/jquery.numericInput','extension' => 'js',    'deps' => '', 'media' => ''),
+                    array('handle' => 'login_css',                   'src' => '/css/login',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'login'),
+                    array('handle' => 'login_js',                    'src' => '/scripts/pages/login',                                'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'login'),
+
+                    array('handle' => 'register_css',                   'src' => '/css/register',                                     'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'register'),
+                    array('handle' => 'register_js',                    'src' => '/scripts/pages/register',                           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'register'),
 
 	                array('handle' => 'theme_css',                  'src' => '/templates/theme/css/theme',                           'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),
@@ -103,7 +106,11 @@ abstract class CSCons {
                     array('handle' => 'jquery_ui_css', 'src' => 'bower_components/jquery.ui/dist/jquery-ui', 'extension' => 'css', 'deps' => '', 'media' => 'screen'),
 
                     /* jquery tiny pubsub*/
-                    array('handle' => 'jquery_tiny_pubsub', 'src' =>  'bower_components/jquery.tinyPubSub/jquery.tinyPubSub', 'extension' => 'js', 'deps' => '', 'media' => ''),
+                    array('handle' => 'jquery_tiny_pubsub', 'src' =>  'bower_components/jquery.tinyPubSub/jquery.tinyPubSub', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
+
+                    /* jquery.ui */
+                    array('handle' => 'jquery_validate', 'src' => 'bower_components/jquery-validation/dist/jquery.validate', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
+                    array('handle' => 'jquery_validate_methods', 'src' => 'bower_components/jquery-validation/dist/additional-methods', 'extension' => 'js', 'deps' => array('jquery_validate'), 'media' => ''),
 
                     /* dragula */
                     array('handle' => 'dragula_js', 'src' =>  'bower_components/dragula.js/dist/dragula.min', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
