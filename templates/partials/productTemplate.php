@@ -90,7 +90,7 @@
                 <div class="inline"><?php Utils::pageEcho($product->conditionText);?></div>
             </div>
 
-            <div id="itemvariations">
+            <div id="itemvariations" data-hasvars="<?php echo (count($product->variationSets)>0)?"1":"0";?>">
                 <?php
                 $varSetCnt = 0;
                 foreach ($product->variationSets as $setName => $setVars){
@@ -99,7 +99,7 @@
                         <div class="inline header"><?php Utils::pageEcho($setName);?>:</div>
                         <div class="inline">
                             <select id="varset_<?php echo $varSetCnt;?>" name="varset_<?php echo $varSetCnt;?>" class="varset" data-name="<?php echo $setName;?>">
-                                <option>Select <?php echo $setName;?></option>
+                                <option value="setSelectHead">Select <?php echo $setName;?></option>
                                 <?php
                                 foreach ($setVars as $variation => $variationIMG){
                                     ?>

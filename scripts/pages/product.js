@@ -102,6 +102,11 @@ jQuery(document).ready( function(){
     updateProductPrices();
 
     function addToCart(){
+        if (jQuery("#itemvariations").data("hasvars")==1 && $ns.selectedVariant==-1){
+            jQuery(".varset").effect("highlight", 1500);
+            return false;
+        }
+
         var exchDetails = getProductPricesDetails($ns.exchExtension, 1);
         console.log(getCurrentVarSel());
         var product = {
@@ -193,7 +198,8 @@ jQuery(document).ready( function(){
     // Searches for a specific variation set options. Returns 0 or Variation KEY
     // @param array Array(variation set name => value);
     function searchVariation(search){
-        //console.log(search);
+        console.log(search);
+        if (search)
         var itemfound = 0;
         Object.keys($ns.variations).forEach(function(key){
             if (itemfound!=0){return -1;}
@@ -209,6 +215,7 @@ jQuery(document).ready( function(){
                 return -1;
             }
         });
+        console.log(itemfound);
 
         return itemfound;
     }
@@ -216,6 +223,7 @@ jQuery(document).ready( function(){
     function getCurrentVarSel(){
         var varArr = {};
         jQuery(".varset").each(function(){
+            if (jQuery(this).val()=="setSelectHead"){return {};}
             varArr[jQuery(this).data("name")] = jQuery(this).val();
         });
         return varArr;
