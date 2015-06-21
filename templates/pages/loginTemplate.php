@@ -10,7 +10,7 @@
         <?php } ?>
 
         <div id="userlogintitle">
-            <h4>Login details:</h4>
+            <h2>Login details:</h2>
         </div>
         <div class="form-group form-ltr">
             <label>Phone Number *</label>
