@@ -12,6 +12,14 @@
 
             <div class="cart-product" data-product-key="<?php echo htmlentities(json_encode($product)); ?>">
 
+                <div class="cartitemimgdiv inline">
+                    <div class="cartitemimg inline">
+                        <a href="<?php echo Utils::getProductPageLink($product->unique_store_id, $product->store) ; ?>">
+                            <img src="<?php echo Utils::getPictureBySize($product->store, $product->img, "150wh"); ?>">
+                        </a>
+                    </div>
+                </div>
+
                 <div class="cartitemdetailsdiv inline">
                     <div class="cartitemtitle">
                         <h4>
@@ -21,9 +29,10 @@
 
                     <div class="cartitemvariants">
                         <?php foreach($product->selected_variant as $variantName => $variantValue) : ?>
-                            <div class="col-lg-12 col-el-12">
-                                <span class="cart-product-details"><?php echo ucfirst($variantName); ?> : </span>
-                                <span class="cart-product-variant"><?php echo $variantValue; ?></span>
+                            <div>
+                                <div class="cart-product-variant inline header"><?php echo ucfirst($variantName); ?>: </div>
+                                <div class="cart-product-details inline detail"><?php echo $variantValue; ?> </div>
+
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -46,32 +55,26 @@
                             </div>
                         </div>
 
-                        <div class="cartitemdetailquantity">
+                        <div class="display-none cart-product-update">
                             <div class="inline detail"></div>
                             <div class="inline detail">
-                                <a class="display-none cart-product-update">[Update]</a>
+                                <a>[Update]</a>
                             </div>
 
                         </div>
 
-                        <div class="cartitemdetailquantity">
+                        <div class="cartitemdetailtotal">
                             <div class="inline header">
                                 Total price:
                             </div>
                             <div class="inline detail">
-                                <span class="cart-product-price"><?php echo $product->getPriceAfterQuantity(); ?></span>
+                                <div class="cart-product-price"><?php echo $product->getPriceAfterQuantity(); ?></div>
                             </div>
-                            <span class="cart-product-remove btn btn-primary">Remove item</span>
+                            <div class="cart-product-remove btn btn-primary">Remove item</div>
                         </div>
 
                     </div>
 
-                </div>
-
-                <div class="cartitemimg inline">
-                    <a href="<?php echo Utils::getProductPageLink($product->unique_store_id, $product->store) ; ?>">
-                        <img src="<?php echo Utils::getPictureBySize($product->store, $product->img, "150wh"); ?>">
-                    </a>
                 </div>
 
             </div>
@@ -84,21 +87,21 @@
     <div id="carttotalsdiv">
         <div class="cart-totals">
             <div class="cart-subtotal">
-                <div class="inline header">Subtotal</div>
+                <div class="inline header">Subtotal:</div>
                 <div id="cart-total" class="inline detail"><?php echo $_SESSION['cart']->getTotal(); ?></div>
             </div>
 
             <div id="aggregated-price-modifier">
-                <?php foreach ( $_SESSION['cart']->getAggregatedPriceModifiers() as $key => $aggregatedPriceModifier ) : ?>
+                <?php foreach ( $_SESSION['cart']->getAggregatedPriceModifiers() as $key => $aggregatedPriceModifier ){ ?>
                     <div class="cart-<?php echo $aggregatedPriceModifier->name; ?>">
                         <div class="inline header"><?php echo $aggregatedPriceModifier->nameAs; ?></div>
                         <div class="inline detail cart-total"><?php echo $aggregatedPriceModifier->value; ?></div>
                     </div>
-                <?php endforeach; ?>
+                <?php } ?>
             </div>
 
             <div class="cart-subtotal">
-                <div class="inline header">Total</div>
+                <div class="inline header">Total:</div>
                 <div id="cart-calculated-total" class="inline detail"><?php echo $_SESSION['cart']->getCalculatedTotal(); ?></div>
             </div>
 

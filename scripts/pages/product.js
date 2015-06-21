@@ -84,8 +84,16 @@ jQuery(document).ready( function(){
     }).mouseout(function(){
         jQuery("#exchangeDisplayDiv").hide();
     });
+    // Non specifics info popups.
+    jQuery(".popupinfo").mouseover(function() {
+        displayCustomInfoPopUp(jQuery(this));
+    }).mouseout(function(){
+        jQuery("#infoPopUpDisplayDiv").hide();
+    });
+
 
     // Handle togglers.
+    jQuery("#infoPopUpDisplayDiv").hide();
     jQuery("#exchangeDisplayDiv").hide();
     jQuery("#quicksummary").hide();
     jQuery("#orderdetailstogg").click(function(e){toggleID(this, "#quicksummary", e)});
@@ -108,34 +116,32 @@ jQuery(document).ready( function(){
         }
 
         var exchDetails = getProductPricesDetails($ns.exchExtension, 1);
-        console.log(getCurrentVarSel());
+        var varArr = getCurrentVarSel();
         var product = {
             unique_store_id : $ns.productID,
             store : $ns.store,
-            img : $ns.productPic,
+            img : getSelectedVariantImage(varArr),
             title : $ns.productTitle,
             price : exchDetails["itemprice"],
             quantity : jQuery("#orderquantity").val(),
             price_modifiers : [
-                {name:'storeCommission', nameAs : 'Store Commission', value : exchDetails["storeprice"]},
+                //{name:'storeCommission', nameAs : 'Store Commission', value : exchDetails["storeprice"]},
                 {name:'PayPalFees', nameAs : 'PayPal Fees', value : exchDetails["paypalprice"]},
                 {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"], additional: parseInt($ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension])||0}
             ],
-            selected_variant : getCurrentVarSel(),
+            selected_variant : varArr,
             selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant]["SKU"] : "",
             store_link: $ns.storeLink,
             available_quantity: getAvailableQuantity(),
             order_limit: $ns.orderLimit
         };
 
-        console.log('adding: ', product);
         $ns.data.action = 'ajax_handler';
         $ns.data.method = 'addProduct';
         $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(product));
 
         var data = $ns.Utils.getData();
         if(data.success){
-            console.log(data);
             $.publish($ns.events.CART_UPDATE, data.msg);
         }
     }
@@ -196,35 +202,50 @@ jQuery(document).ready( function(){
         }).show();
     }
 
-    // Searches for a specific variation set options. Returns 0 or Variation KEY
+    function displayCustomInfoPopUp(owner){
+        var attachTo = owner,
+            InfoControl = jQuery("#infoPopUpDisplayDiv");
+
+        if (InfoControl.is(":visible")){return;}
+
+        jQuery("#PopUpInfotitle").html(attachTo.data("popup-title"));
+        jQuery("#PopUpInfocontent").html(attachTo.data("popup-content"));
+        jQuery("#PopUpInfofooter").html(attachTo.data("popup-footer"));
+
+        // Show popup and place it above our elems.
+        var position = attachTo.position();
+        InfoControl.css({
+            top:    position.top   -    InfoControl.height(),
+            left:   position.left  -    InfoControl.width()+attachTo.width()+40
+        }).show();
+    }
+
+    // Searches for a specific variation set options. Returns -1 or Variation KEY
     // @param array Array(variation set name => value);
     function searchVariation(search){
-        console.log(search);
-        if (search)
-        var itemfound = 0;
-        Object.keys($ns.variations).forEach(function(key){
-            if (itemfound!=0){return -1;}
-            var available = true;
-            Object.keys(search).forEach(function(searchkey){
+        if (Object.keys(search).length<jQuery(".varset").length){return -1}
+        var itemfound = -1;
+        _.forEach(Object.keys($ns.variations), function(key){
+            var matched = -1;
+            _.forEach(Object.keys(search), function(searchkey){
+                matched = key;
                 if ($ns.variations[key]["setInfo"][searchkey] != search[searchkey]) {
-                    available = false;
-                    return -1;
+                    matched = -1;
+                    return false;
                 }
             });
-            if (available==true){
-                itemfound = key;
-                return -1;
+            if (matched!=-1){
+                itemfound = matched;
+                return false;
             }
         });
-        console.log(itemfound);
-
         return itemfound;
     }
 
     function getCurrentVarSel(){
         var varArr = {};
         jQuery(".varset").each(function(){
-            if (jQuery(this).val()=="setSelectHead"){return {};}
+            if (jQuery(this).val()==""){return false;}
             varArr[jQuery(this).data("name")] = jQuery(this).val();
         });
         return varArr;
@@ -236,26 +257,42 @@ jQuery(document).ready( function(){
         $ns.selectedVariant       = searchVariation(varArr);
     }
 
+    function getSelectedVariantImage(varArr){
+        var image = "";
+        _.forEach(Object.keys(varArr), function(key){
+            var value = varArr[key];
+
+            if (typeof $ns.variationSets[key][value] !== 'undefined'){
+                image = $ns.variationSets[key][value];
+                return false;
+            }
+        });
+        return image;
+    }
+
     function updateSelectedVariant(jqRef){
         var assocName       = jqRef.data("name");
         var assocVal        = jqRef.val();
-
-        // Get our current variant.
-        var varArr = {}; varArr[assocName] = assocVal;
-        $ns.selectedVariant       = searchVariation(varArr);
-
-        // Set variation details.
-        jQuery("#quantityavail").html(parseFloat( $ns.variations[$ns.selectedVariant]["quantity"]).toFixed(0));
-        jQuery("#quantitysold").html(parseFloat( $ns.variations[$ns.selectedVariant]["quantitySold"]).toFixed(0));
-
-        // Set our variation pricing.
-        updateProductPrices();
-
+        var imgElem         = jQuery(".gallery-thumbnails .item > a[data-assoc=\"" + assocName + "\"][data-assocval=\"" + assocVal + "\"]");
         // Sets the picture for our variation (if available).
-        jQuery(".gallery-thumbnails .item > a[data-assoc=\"" + assocName + "\"][data-assocval=\"" + assocVal + "\"]").click();
+        imgElem.click();
 
         // Set the variation available sets.
         updateVariationSets(assocName);
+
+        // Get our current variant.
+        var varArr = getCurrentVarSel();
+        $ns.selectedVariant       = searchVariation(varArr);
+
+        // If we have a proper selected variant.
+        if ($ns.selectedVariant!=-1) {
+            // Set variation details.
+            jQuery("#quantityavail").html(parseFloat($ns.variations[$ns.selectedVariant]["quantity"]).toFixed(0));
+            jQuery("#quantitysold").html(parseFloat($ns.variations[$ns.selectedVariant]["quantitySold"]).toFixed(0));
+
+            // Set our variation pricing.
+            updateProductPrices();
+        }
     }
 
     function updateVariationSets(currentSet){
@@ -380,7 +417,7 @@ jQuery(document).ready( function(){
         // Total shipping costs - shipping+(additional*quantity)+duty+insurance.
         outputArr["shippingprice"] = shippingprice;
         // Store comminsion * item price + shipping costs. [if lower then minimum, set to minimum].
-        outputArr["storeprice"] = (storecomm*(allitemsprice+shippingprice)>minstorecomm) ? storecomm*(allitemsprice+shippingprice) : minstorecomm;
+        // outputArr["storeprice"] = (storecomm*(allitemsprice+shippingprice)>minstorecomm) ? storecomm*(allitemsprice+shippingprice) : minstorecomm;
         // Paypal comminsion * item price + shipping costs + store commision.
         outputArr["paypalprice"] = paypalcomm*(allitemsprice+shippingprice+outputArr["storeprice"]);
         // Final price = item(s) price + shipping + paypal + store.

@@ -99,7 +99,7 @@
                         <div class="inline header"><?php Utils::pageEcho($setName);?>:</div>
                         <div class="inline">
                             <select id="varset_<?php echo $varSetCnt;?>" name="varset_<?php echo $varSetCnt;?>" class="varset" data-name="<?php echo $setName;?>">
-                                <option value="setSelectHead">Select <?php echo $setName;?></option>
+                                <option value="">Select <?php echo $setName;?></option>
                                 <?php
                                 foreach ($setVars as $variation => $variationIMG){
                                     ?>
@@ -185,7 +185,8 @@
                 </div>
                 <div>
                     <div class="inline header">Store comission:</div>
-                    <div id="storeprice" class="inline"></div>
+                    <div id="storeprice" class="inline popupinfo" data-popup-title="Store commission info" data-popup-content="Store commission will be calculated on checkout." data-popup-footer="*CoffeeShopping club members enjoy <br /> store commission discount!">
+                        (?)</div>
                 </div>
                 <div>
                     <div class="inline header">Paypal comission:</div>
@@ -219,8 +220,25 @@
                         'European Central Bank'
                     </div>
                 </div>
+                <div class="pop_bottom"></div>
+            </div>
+
+            <div id="infoPopUpDisplayDiv">
+                <div id="infoPopUpDisplayCont">
+                    <div id="PopUpInfotitle">
+
+                    </div>
+                    <div id="PopUpInfocontent">
+
+                    </div>
+                    <div id="PopUpInfofooter" align="center">
+
+                    </div>
+                </div>
                 <div id="pop_bottom"></div>
             </div>
+
+
         </div>
 
 

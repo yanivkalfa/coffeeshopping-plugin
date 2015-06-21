@@ -15,7 +15,7 @@ abstract class CartDatabaseHelper {
     public static function getCart($userId){
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_carts';
-        return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` NOT IN('paid', 'storage', 'at_store', 'delivered') ORDER BY `create_date` DESC", ARRAY_A);
+        return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` NOT IN('ordered', 'paid', 'storage', 'at_store', 'delivered') ORDER BY `create_date` DESC", ARRAY_A);
     }
 
     /**

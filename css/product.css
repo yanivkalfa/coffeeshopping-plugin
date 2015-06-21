@@ -102,8 +102,9 @@ input[type="number"]{
     position:relative;
     top:3px;
 }
-#itemprice, #shippingprice{
+#itemprice, #shippingprice, .popupinfo{
     border-bottom: dashed 1px #2698de;
+    cursor:pointer;
 }
 #finalPrice{
     display: inline-block;
@@ -157,6 +158,47 @@ input[type="number"]{
     top: -2px;
     left: -15px;
 }
+
+#infoPopUpDisplayDiv{
+    position:absolute;
+    display:block;
+    width:auto;
+    height:auto;
+}
+#infoPopUpDisplayCont{
+    display: block;
+    background-color: #fff;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 10px;
+    color: #333;
+}
+#PopUpInfotitle{
+    background: #D9E8FC;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding: 5px 0px;
+    text-align: center;
+}
+#PopUpInfofooter{
+    font-size:11px;
+    font-style:italic;
+    line-height: 14px;
+}
+.pop_bottom{
+    height: 24px;
+    background: url("images/boxcorner.png") no-repeat;
+    background-position: right;
+    position: relative;
+    top: -2px;
+    left: -15px;
+}
+
+
+
 
 /*
             ++++ Product Page Responsiveness ++++

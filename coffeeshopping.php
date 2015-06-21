@@ -151,7 +151,7 @@ if(!class_exists('coffee_shopping'))
          */
         public function instantiateCart(){
             //unset($_SESSION['cart']);
-            if(!is_admin()){
+            //if(!is_admin()){
                 if(!isset($_SESSION['cart'])){
                     $savedCart = NULL;
                     if(is_user_logged_in()){
@@ -163,7 +163,7 @@ if(!class_exists('coffee_shopping'))
 
                     $_SESSION['cart'] = new Cart($savedCart, $address, $products);
                 }
-            }
+            //}
             //Utils::preEcho($_SESSION['cart']);
         }
 
