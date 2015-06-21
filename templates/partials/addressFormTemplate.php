@@ -1,10 +1,4 @@
-<div class="form-group form-ltr">
-    <label>Use Saved Address</label>
-    <input type="checkbox" name="useSavedAddress" id="useSavedAddress" />
-</div>
-
-
-<div id="address" class="display-none">
+<div id="address">
     <h4>Your Address:</h4>
 
     <div class="form-group form-ltr">

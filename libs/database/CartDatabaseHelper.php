@@ -5,7 +5,6 @@
 
 abstract class CartDatabaseHelper {
 
-
     /**
      * getCart by user id
      *
@@ -16,6 +15,18 @@ abstract class CartDatabaseHelper {
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_carts';
         return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = 'saved' ORDER BY `create_date` DESC", ARRAY_A);
+    }
+
+    /**
+     * getAddress by addressId
+     *
+     * @param {number} $userId
+     * @return bool|array
+     */
+    public static function getAddress($addressId){
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'cs_addresses';
+        return $wpdb->get_row("SELECT * FROM $table_name WHERE `ID` = '$addressId'", ARRAY_A);
     }
 
     /**
