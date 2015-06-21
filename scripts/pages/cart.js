@@ -41,6 +41,7 @@ jQuery(document).ready( function(){
         if(product.quantity !== changed){
             $(this).parents('.cartitemdetails').find('.cart-product-update').removeClass('display-none');
         }
+
     });
 
     $('.cart-product-update').on('click',  function(){
