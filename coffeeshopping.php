@@ -437,6 +437,7 @@ if(!class_exists('coffee_shopping'))
                 return $lang;
             }
         }
+
         /*
          * @ On activation create Db and default page
          *

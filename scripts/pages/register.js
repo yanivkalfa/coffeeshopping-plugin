@@ -76,4 +76,20 @@ jQuery(document).ready( function() {
         }
     });
 
+    // fetching address rules
+    $ns.Utils.getData(
+        'get',
+        "/wp-content/plugins/coffeeshopping-plugin/scripts/partials/addressForm.js",
+        {},
+        'script',
+        true
+    );
+
+    // adding address rules to registeration.
+    for(var fieldName in $ns.addressRules){
+        if(!$ns.addressRules.hasOwnProperty(fieldName)) continue;
+        var input = form.find('[name="'+ fieldName +'"]');
+        input.rules( "add", $ns.addressRules[fieldName]);
+    }
+
 });

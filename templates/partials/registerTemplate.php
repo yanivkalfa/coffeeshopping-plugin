@@ -36,6 +36,8 @@
             <input type="password" class="form-control" name="cpwd" />
         </div>
 
+        <?php Utils::getTemplate('addressForm',$scope); ?>
+
         <div class="form-group form-ltr">
             <input id="userloginbutton" type="submit" class="btn btn-primary form-control full-width-button" value="Register" />
         </div>
