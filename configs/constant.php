@@ -59,6 +59,7 @@ abstract class CSCons {
                 array('name' => 'myaccount', 'title'=> 'My Account'),
                 array('name' => 'register', 'title'=> 'Register'),
                 array('name' => 'login', 'title'=> 'Login'),
+                array('name' => 'logout', 'title'=> 'Logout'),
             ),
 
             'req_scripts' => array(

@@ -156,6 +156,11 @@ class Cart extends Collection{
 
         return -1;
     }
+
+    public function clear(){
+        unset($_SESSION['cart']);
+        return true;
+    }
 }
 
 /*
