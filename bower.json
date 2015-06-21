@@ -13,7 +13,7 @@
     "bootstrap": "~3.3.4",
     "lodash": "~3.8.0",
     "dragula.js": "~1.6.0",
-    "intl-tel-input": "~6.0.0",
-    "jquery-validation": "~1.13.1"
+    "jquery-validation": "~1.13.1",
+    "google.phoneValidation": "~1.0.0"
   }
 }

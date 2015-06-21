@@ -3,30 +3,12 @@
  */
 
 jQuery(document).ready( function() {
-    $ns.Utils.getData(
-        'get',
-        "/wp-content/plugins/coffeeshopping-plugin/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
-        {},
-        'script',
-        true
-    );
-    var form, errorMessages, formAlert;
+    var form, formAlert;
 
     form = $('#registerForm');
     formAlert = $('#form-alert');
-    errorMessages = {
-        log: {
-            phoneIL: 'Please specify correct Israel phone number'
-        },
-        pwd: {
-            number: 'Must be a number',
-            maxlength: 'password must be {0} digit long',
-            minlength: 'password must be {0} digit long',
-            equalTo : 'Passwords does not match'
-        }
-    };
+    $ns.errorMessages = $ns.errorMessages || {};
 
-    errorMessages = $.extend({}, errorMessages, $ns.errorMessages || {});
     form.validate({
         rules: {
             log: {
@@ -50,19 +32,22 @@ jQuery(document).ready( function() {
         },
         messages: {
             log: {
-                phoneIL: errorMessages.log.number
+                required : $ns.errorMessages.required || 'This field is required',
+                phoneIL: $ns.errorMessages.phoneIL || 'Please specify correct Israel phone number'
             },
             pwd: {
-                number: errorMessages.pwd.number,
-                maxlength: jQuery.validator.format(errorMessages.pwd.maxlength),
-                minlength: jQuery.validator.format(errorMessages.pwd.minlength),
-                equalTo : 'does not equal'
+                required :  $ns.errorMessages.required || 'This field is required',
+                number: $ns.errorMessages.number || 'Must be a number',
+                maxlength: jQuery.validator.format($ns.errorMessages.maxLength || 'password must be {0} digit long'),
+                minlength: jQuery.validator.format($ns.errorMessages.minLength || 'password must be {0} digit long'),
+                equalTo : $ns.errorMessages.equalTo || 'does not equal'
             },
             cpwd: {
-                number: errorMessages.pwd.number,
-                maxlength: jQuery.validator.format(errorMessages.pwd.maxlength),
-                minlength: jQuery.validator.format(errorMessages.pwd.minlength),
-                equalTo : 'does not equal'
+                required :  $ns.errorMessages.required || 'This field is required',
+                number: $ns.errorMessages.number || 'Must be a number',
+                maxlength: jQuery.validator.format($ns.errorMessages.maxLength || 'password must be {0} digit long'),
+                minlength: jQuery.validator.format($ns.errorMessages.minLength || 'password must be {0} digit long'),
+                equalTo : $ns.errorMessages.equalTo || 'does not equal'
             }
         },
         submitHandler: function(form) {

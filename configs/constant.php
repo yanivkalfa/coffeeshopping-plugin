@@ -6,6 +6,7 @@
 abstract class CSCons {
 
     public static function get($consName){
+
         $constants = array(
             'descRestrictedExt' => array(
                 "js",
@@ -104,9 +105,12 @@ abstract class CSCons {
                     /* jquery tiny pubsub*/
                     array('handle' => 'jquery_tiny_pubsub', 'src' =>  'bower_components/jquery.tinyPubSub/jquery.tinyPubSub', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
 
-                    /* jquery.ui */
+                    /* jquery.validate */
                     array('handle' => 'jquery_validate', 'src' => 'bower_components/jquery-validation/dist/jquery.validate', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
                     array('handle' => 'jquery_validate_methods', 'src' => 'bower_components/jquery-validation/dist/additional-methods', 'extension' => 'js', 'deps' => array('jquery_validate'), 'media' => ''),
+
+                    /* google phone validation */
+                    array('handle' => 'google_phone_validation', 'src' => 'bower_components/google.phoneValidation/google.phoneValidation', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
 
                     /* dragula */
                     array('handle' => 'dragula_js', 'src' =>  'bower_components/dragula.js/dist/dragula.min', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
@@ -432,7 +436,17 @@ abstract class CSCons {
                 'HKD' => "HK$",
                 'ILS' => "&#8362;",
                 'RUN' => "руб"
-            )
+            ),
+            'errorMessages' => array(
+                'methodDoesNotExists' => 'Method does not exist',
+                'required' => 'This field is required',
+                'phoneIL' => 'Please specify correct Israel phone number',
+                'number' => 'Must be a number',
+                'maxLength' => 'password must be {0} digit long',
+                'minLength' => 'password must be {0} digit long',
+                'length' => 'Value length must be {0} digit long',
+                'equalTo' => 'Passwords does not match'
+            ),
         );
         return isset($constants[$consName]) ? $constants[$consName] : false ;
     }

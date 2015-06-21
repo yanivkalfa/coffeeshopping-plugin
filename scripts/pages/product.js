@@ -123,6 +123,7 @@ jQuery(document).ready( function(){
             order_limit: $ns.orderLimit
         };
 
+        console.log('adding: ', product);
         $ns.data.action = 'ajax_handler';
         $ns.data.method = 'addProduct';
         $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(product));

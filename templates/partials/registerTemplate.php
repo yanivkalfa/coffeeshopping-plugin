@@ -1,3 +1,8 @@
+<script language="javascript" type="text/javascript">
+    // Set some vars.
+    $ns.errorMessages = <?php echo json_encode($errorMessages);?>;
+</script>
+
 <form id="registerForm">
     <div class="inline">
         <div id="form-alert" class="display-none">Register successfully</div>

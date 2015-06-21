@@ -39,10 +39,10 @@ if(!class_exists('coffee_shopping'))
             */
             add_action( 'init', array($this, 'removeAdminBarForUsers') );
 
-	        /*
-	         * @ Admin in english (cause hebrew stinks there).
-	         */
-	        add_filter('locale', array($this, 'set_admin_language'));
+            /*
+             * @ Admin in english (cause hebrew stinks there).
+             */
+            add_filter('locale', array($this, 'set_admin_language'));
 
             /*
             * @ include classes
@@ -204,7 +204,7 @@ if(!class_exists('coffee_shopping'))
         public function custom_login_fail( $username )
         {
             /*
-            $referrer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : "";
+            $referrer = (isset($_GET['referrer'])) ? $_GET['referrer'] : "";
             if ( !empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') )
             {
                 if ( !strstr($referrer,'?login=failed') )
@@ -245,12 +245,12 @@ if(!class_exists('coffee_shopping'))
 
         // Register our widgets.
         public function register_coffeeshoppingwidgets() {
-	        require (dirname(__FILE__).'/services/templateLoaderWidget.php');
+            require (dirname(__FILE__).'/services/templateLoaderWidget.php');
             require (dirname(__FILE__).'/services/searchWidget.php');
             require (dirname(__FILE__).'/services/featuredProductsWidget.php');
             require (dirname(__FILE__).'/services/myCartWidget.php');
-	        register_widget( 'templateLoaderWidget' );
-	        register_widget( 'searchWidget' );
+            register_widget( 'templateLoaderWidget' );
+            register_widget( 'searchWidget' );
             register_widget( 'featuredProductsWidget' );
             register_widget( 'myCartWidget' );
 
@@ -427,16 +427,16 @@ if(!class_exists('coffee_shopping'))
             }
         }
 
-	    /**
-	     *  Set admin language to english.
-	     */
-	    public function set_admin_language($lang){
-		    if(is_admin()){
-			    return 'en_US';
-		    }else{
-			    return $lang;
-		    }
-	    }
+        /**
+         *  Set admin language to english.
+         */
+        public function set_admin_language($lang){
+            if(is_admin()){
+                return 'en_US';
+            }else{
+                return $lang;
+            }
+        }
         /*
          * @ On activation create Db and default page
          *
@@ -458,7 +458,7 @@ if(!class_exists('coffee_shopping'))
                 address_id bigint(20) NOT NULL,
                 payment_method varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 purchase_location varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-                status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'ordered',
                 create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE KEY cuunique (`ID`)
                 );";
@@ -582,75 +582,5 @@ if(!class_exists('coffee_shopping'))
 }
 
 $coffee_shopping = new coffee_shopping();
-
-
-
-
-/*
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'cs_cart_products';
-
-            $priceMod = array(
-                array(
-                    'name' => 'storeCommission',
-                    'nameAs' => 'Store commission',
-                    'value' => 3,
-                ),
-                array(
-                    'name' => 'PayPalFees',
-                    'nameAs' => 'PayPal transaction fees',
-                    'value' => 5,
-                ),
-                array(
-                    'name' => 'PayPalDollarExchange',
-                    'nameAs' => 'PayPal dollar exchange fee',
-                    'value' => 9,
-                ),
-                array(
-                    'name' => 'shippingCosts',
-                    'nameAs' => 'Product Shipping cost',
-                    'value' => 6,
-                )
-            );
-            $wpdb->update($table_name,array('price_modifiers' => serialize($priceMod)),array( 'ID' => 1 ));
-
-            $priceMod = array(
-                array(
-                    'name' => 'storeCommission',
-                    'nameAs' => 'Store commission',
-                    'value' => 5,
-                ),
-                array(
-                    'name' => 'PayPalFees',
-                    'nameAs' => 'PayPal transaction fees',
-                    'value' => 12,
-                ),
-                array(
-                    'name' => 'shippingCosts',
-                    'nameAs' => 'Product Shipping cost',
-                    'value' => 8,
-                )
-            );
-            $wpdb->update($table_name,array('price_modifiers' => serialize($priceMod)),array( 'ID' => 2 ));
-
-            $priceMod = array(
-                array(
-                    'name' => 'PayPalFees',
-                    'nameAs' => 'PayPal transaction fees',
-                    'value' => 1,
-                ),
-                array(
-                    'name' => 'PayPalDollarExchange',
-                    'nameAs' => 'PayPal dollar exchange fee',
-                    'value' => 11,
-                ),
-                array(
-                    'name' => 'shippingCosts',
-                    'nameAs' => 'Product Shipping cost',
-                    'value' => 14,
-                )
-            );
-            $wpdb->update($table_name,array('price_modifiers' => serialize($priceMod)),array( 'ID' => 3 ));
-            */
 
 ?>

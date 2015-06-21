@@ -11,21 +11,21 @@ jQuery(document).ready( function(){
         return product;
     }
 
-    function renderCartSummery(data){
-        if(!data.productCount){
+    function renderCartSummery(data) {
+        if (!data.productCount) {
             $('.no-products').removeClass('display-none');
             $('.has-products').addClass('display-none');
             return;
         }
+        $('#cart-total').html(data.total);
+        $('#cart-calculated-total').html(data.calculatedTotal);
+        $('#aggregated-price-modifier').html('');
 
-        $('.cart-total').html(data.total);
-        $('.cart-calculated-total').html(data.calculatedTotal);
-        $('.aggregated-price-modifier').html('');
-        _.forEach(data.aggregatedPriceModifiers, function(aggregatedPriceModifier) {
-            $('.aggregated-price-modifier').append(
-                $('<div>').attr('class', 'row').append(
-                    $('<div>').attr('class', 'col-lg-8 col-el-8 text-align-right').html(aggregatedPriceModifier.nameAs),
-                    $('<div>').attr('class', 'col-lg-4 col-el-4').html(aggregatedPriceModifier.value)
+        _.forEach(data.aggregatedPriceModifiers, function (aggregatedPriceModifier) {
+            $('#aggregated-price-modifier').append(
+                $('<div>').attr('class', 'cart-' + aggregatedPriceModifier.name).append(
+                    $('<div>').attr('class', 'inline header').html(aggregatedPriceModifier.nameAs),
+                    $('<div>').attr('class', 'inline detail').html(aggregatedPriceModifier.value)
                 )
             );
         });
@@ -46,11 +46,11 @@ jQuery(document).ready( function(){
     $('.cart-product-update').on('click',  function(){
         var product, quantity;
         product = getProduct(this);
-        quantity =  $(this).parents('.cart-product-part').find('.product-quantity').val();
+        quantity =  $(this).parents('.cartitemdetails').find('.product-quantity').val();
         if(!product || _.isNaN(parseInt(quantity))) return false;
 
         $ns.data.method = 'updateQuantity';
-        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(_.pick(product,['unique_store_id']))) + '&quantity=' + quantity + '&extendCartUpdate=true';
+        $ns.data.post = 'product=' + encodeURIComponent(JSON.stringify(product)) + '&quantity=' + quantity + '&extendCartUpdate=true';
 
         var data = $ns.Utils.getData();
         if(data.success){
@@ -72,7 +72,7 @@ jQuery(document).ready( function(){
         if(data.success){
             console.log(data);
             $.publish($ns.events.CART_UPDATE, data.msg);
-            $(this).parents('.cart-product').remove();
+            $(this).parents('.cartitemsdiv').remove();
             renderCartSummery(data.msg);
         }
     });

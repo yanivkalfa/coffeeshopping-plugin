@@ -3,28 +3,8 @@
  */
 
 jQuery(document).ready( function() {
-    $ns.Utils.getData(
-        'get',
-        "/wp-content/plugins/coffeeshopping-plugin/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
-        {},
-        'script',
-        true
-    );
     var form = $('#loginform');
-    var errorMessages = {
-        log: {
-            phoneIL: 'Please specify correct Israel phone number'
-        },
-        pwd: {
-            number: 'Must be a number',
-            maxlength: 'password must be {0} digit long',
-            minlength: 'password must be {0} digit long'
-        }
-    };
-    errorMessages = $.extend({}, errorMessages, $ns.errorMessages || {});
-
-
-
+    $ns.errorMessages = $ns.errorMessages || {};
     form.validate({
         rules: {
             log: {
@@ -40,12 +20,14 @@ jQuery(document).ready( function() {
         },
         messages: {
             log: {
-                phoneIL: errorMessages.log.number
+                required : $ns.errorMessages.required || 'This field is required',
+                phoneIL: $ns.errorMessages.phoneIL || 'Please specify correct Israel phone number'
             },
             pwd: {
-                number: errorMessages.pwd.number,
-                maxlength: jQuery.validator.format(errorMessages.pwd.maxlength),
-                minlength: jQuery.validator.format(errorMessages.pwd.minlength)
+                required :  $ns.errorMessages.required || 'This field is required',
+                number: $ns.errorMessages.number || 'Must be a number',
+                maxlength: jQuery.validator.format($ns.errorMessages.maxLength || 'password must be {0} digit long'),
+                minlength: jQuery.validator.format($ns.errorMessages.minLength || 'password must be {0} digit long')
             }
         },
         submitHandler: function(form) {

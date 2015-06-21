@@ -61,6 +61,12 @@ abstract class CartDatabaseHelper {
         // turning the cart class into an array.
         $cart = (array)$_SESSION['cart'];
 
+        // getting current user id
+        $user = wp_get_current_user();
+
+        // setting user id
+        $cart['user_id'] = isset($cart['user_id']) && $cart['user_id'] > 0 ? $cart['user_id'] : $user->ID;
+
             //echo '$cart';
             //Utils::preEcho($cart);
         // checking if we have an id, if we do it means we are editing if we don't its a new cart.
@@ -108,16 +114,21 @@ abstract class CartDatabaseHelper {
             // serializing selected_variant for later use
             $productArr['selected_variant'] = serialize($productArr['selected_variant']);
 
-                //Utils::preEcho($productArr);
+                Utils::preEcho($productArr);
 
             //inserting product to db
-            self::insertItem($productArr, 'cs_cart_products');
+            $inserted = self::insertItem($productArr, 'cs_cart_products');
+
+            Utils::preEcho($inserted, 'inserted');
+
         }
 
 
 
         // un setting session cart so next time used comes in it will either create a new cart(in-case he completed the previous cart or use this cart)
         unset($_SESSION['cart']);
+
+        return $cartId;
     }
 
 

@@ -1,3 +1,8 @@
+<script language="javascript" type="text/javascript">
+    // Set some vars.
+    $ns.errorMessages = <?php echo json_encode($errorMessages);?>;
+</script>
+
 <form id="loginform" action="/wp-login.php" method="post">
     <div class="inline">
         <?php if(isset($_GET['status']) && $_GET['status'] == 'failed') { ?>
@@ -17,7 +22,7 @@
         </div>
 
         <div class="form-group form-ltr">
-            <input name="redirect_to" value="<?php echo site_url() ?>/myaccount/" type="hidden">
+            <input name="redirect_to" value="<?php echo site_url(). ($referrer ? $referrer : '' ) ?>" type="hidden">
             <input type="submit" class="btn btn-primary form-control full-width-button" value="Login" />
         </div>
     </div>

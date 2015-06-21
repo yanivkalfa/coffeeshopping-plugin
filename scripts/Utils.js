@@ -80,6 +80,6 @@
     };
 
     $.validator.addMethod("phoneIL", function(value, element, param) {
-        return this.optional(element) || window.intlTelInputUtils.isValidNumber(value, param);
+        return this.optional(element) || phoneValidation.isValidNumber(value, param);
     }, "Please specify a valid phone number.");
 })(jQuery);

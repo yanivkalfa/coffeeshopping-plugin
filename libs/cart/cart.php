@@ -130,31 +130,31 @@ class Cart extends Collection{
         return array_values($modifiers);
     }
 
-    public function productExist($newItem, $savedItem, $index){
+    public function productExist($newItem, $savedItem){
         $newItem =(array)$newItem;
-        return $newItem['selected_variant'] === $savedItem->selected_variant ? $index : -1;
+        return $newItem['selected_variant'] === $savedItem->selected_variant;
     }
 
     public function indexOf ($item = false, $prop = false){
-        if(!$item) return false;
+        if(!$item) return -1;
 
-        // has unique property
-        if($prop) {
-            // get the item index in the collection;
-            $index = Utils::indexOf($this->{$this->colName}, $item, $prop);
+        $filtered = array_filter($this->{$this->colName}, function($saved)use($item) {
+            $saved = (array)$saved;
+            $item =(array)$item;
+            return $saved[$this->prop] === $item[$this->prop];
+        });
 
-            // if we have index we check product variation match, no match we return -1 match return the product index.
-            return $index > -1 ? $this->productExist($item, $this->{$this->colName}[$index], $index) : -1;
+        if(!count($filtered)) return -1;
+
+
+        foreach($filtered as $index => $savedItem){
+            $exist = $this->productExist($item, $savedItem);
+            if($exist){
+                return $index;
+            }
         }
 
-        // No unique property checking by value
-        $index = array_search( $this->{$this->colName}, $item );
-
-        // array_search return item index or false, we turn it to index of -1
-        $index = $index === false ? -1 : $index;
-
-        // if we have index we check product variation match, no match we return -1 match return the product index.
-        return $index > -1 ? $this->productExist($item, $this->{$this->colName}[$index], $index) : -1;
+        return -1;
     }
 }
 

@@ -80,21 +80,15 @@ class Ajax_handler {
     public function registerNewUser($post){
         $user = json_decode($post['user'], true);
 
-        /*
-        if(!$error = Utils::validateFormInput($user['log'], 'phoneIL')){
-            return array(
-                'success' => false,
-                'msg' => array('errorName' => $error['errorName'], 'errorMsg' => $error['errorMsg'],)
-            );
+        $error = FormValidators::validateFormInput($user['log'], 'phoneIL');
+        if(is_array($error)){
+            return array( 'success' => false, 'msg' => $error );
         }
 
-        if(!$error = Utils::validateFormInput($user['pwd'], 'numeric', array('minLength' => 4), array('maxLength' => 4))){
-            return array(
-                'success' => false,
-                'msg' => array('errorName' => $error['errorName'], 'errorMsg' => $error['errorMsg'],)
-            );
+        $error = FormValidators::validateFormInput($user['pwd'], 'number', array('minLength' => 4), array('maxLength' => 4));
+        if(is_array($error)){
+            return array( 'success' => false, 'msg' => $error );
         }
-        */
 
         $userData = array(
             'user_login'  =>  $user['log'],
