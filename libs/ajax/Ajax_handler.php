@@ -181,10 +181,8 @@ class Ajax_handler {
 
         return array(
             'success' => true,
-            'msg' => 'Cleared cart successfully.'
+            'msg' => $_SESSION['cart']->getStats()
         );
     }
-
-
 }
 $ajax_handler = new ajax_handler();

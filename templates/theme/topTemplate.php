@@ -6,9 +6,8 @@
     </span>
     <?php } else {
         $user = wp_get_current_user();
-        $logout = wp_logout_url( site_url() );
         ?>
-        <span> Hey <?php echo $user->user_nicename ?> <a href="<?php echo $logout; ?>">Logout</a></span>
+        <span> Hey <?php echo $user->user_nicename ?> <a href="/logout/">Logout</a></span>
 
     <?php }?>
      |

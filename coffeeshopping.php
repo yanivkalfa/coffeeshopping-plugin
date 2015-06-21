@@ -150,20 +150,19 @@ if(!class_exists('coffee_shopping'))
          * Instantiate shopping car.
          */
         public function instantiateCart(){
-            //unset($_SESSION['cart']);
-            //if(!is_admin()){
-                if(!isset($_SESSION['cart'])){
-                    $savedCart = NULL;
-                    if(is_user_logged_in()){
-                        $current_user = wp_get_current_user();
-                        $savedCart = CartDatabaseHelper::getCart($current_user->ID);
-                    }
-                    $products = isset($savedCart['ID']) ? CartDatabaseHelper::getCartProduct($savedCart['ID']) : NULL;
-                    $address = isset($savedCart['ID']) ? new Address(CartDatabaseHelper::getCartAddress($savedCart['ID'])) :  new Address();
 
-                    $_SESSION['cart'] = new Cart($savedCart, $address, $products);
+            //unset($_SESSION['cart']);
+            if(!isset($_SESSION['cart']) || (isset($_SESSION['cart']) && $_SESSION['cart']->ID)){
+                $savedCart = NULL;
+                if(is_user_logged_in()){
+                    $current_user = wp_get_current_user();
+                    $savedCart = CartDatabaseHelper::getCart($current_user->ID);
                 }
-            //}
+                $products = isset($savedCart['ID']) ? CartDatabaseHelper::getCartProduct($savedCart['ID']) : NULL;
+                $address = isset($savedCart['ID']) ? new Address(CartDatabaseHelper::getCartAddress($savedCart['ID'])) :  new Address();
+
+                $_SESSION['cart'] = new Cart($savedCart, $address, $products);
+            }
             //Utils::preEcho($_SESSION['cart']);
         }
 
@@ -457,9 +456,9 @@ if(!class_exists('coffee_shopping'))
                 user_id bigint(20) NOT NULL,
                 deliver_to varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 address_id bigint(20) NOT NULL,
-                payment_method varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                payment_method varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'saved',
                 purchase_location varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-                status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'ordered',
+                status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'saved',
                 create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE KEY cuunique (`ID`)
                 );";

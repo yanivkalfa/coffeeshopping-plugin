@@ -1,0 +1,1 @@
+<div>You've logged out successfully</div>
