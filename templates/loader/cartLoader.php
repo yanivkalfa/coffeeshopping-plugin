@@ -1,2 +1,2 @@
 <?php
-Utils::getTemplate('cart');
+Utils::getTemplate('cart', '', 'pages');

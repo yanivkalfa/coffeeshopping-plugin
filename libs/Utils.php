@@ -21,7 +21,8 @@ abstract class Utils{
      * @param String $suffix - suffix
      * @return bool
      */
-    static public function getTemplate($templateName, $scope = null, $folder = 'partials/', $prefix = '', $suffix = 'Template'){
+    static public function getTemplate($templateName, $scope = null, $folder = '', $prefix = '', $suffix = 'Template'){
+        $folder = isset($folder) && !empty($folder) ? $folder.'/' : 'partials/';
         $fileName = TEMPLATE_DIR . '/'.$folder.$prefix . $templateName . $suffix.'.php';
 
         if(!file_exists($fileName)) {

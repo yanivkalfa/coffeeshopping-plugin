@@ -11,5 +11,5 @@ $scope = array(
     'referrer' => '/'.(isset($_GET['referrer']) ? $_GET['referrer'] : 'myaccount').'/'
 );
 
-Utils::getTemplate('login', $scope);
+Utils::getTemplate('login', $scope, 'pages');
 ?>

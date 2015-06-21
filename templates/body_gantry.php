@@ -56,7 +56,7 @@ class GantryLayoutBody_csClassName extends GantryBodyLayout
 						<div id="rt-mainbody">
 							<div class="component-content">
 								<?php
-                                Utils::getTemplate('%%className%%','','loader/', '', 'Loader');
+                                Utils::getTemplate('%%className%%','','loader', '', 'Loader');
 								?>
 							</div>
 						</div>

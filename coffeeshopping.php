@@ -240,7 +240,7 @@ if(!class_exists('coffee_shopping'))
                     wp_redirect( $referrer );
                 }
             }*/
-            //wp_redirect( site_url().'/wp-login.php' );
+            wp_redirect( site_url().'/login?status=empty' );
         }
 
         // Register our widgets.

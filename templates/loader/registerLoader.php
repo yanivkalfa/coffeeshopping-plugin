@@ -7,5 +7,5 @@
  */
 
 $scope = array('errorMessages' => CSCons::get('errorMessages') ?: array());
-Utils::getTemplate('register', $scope);
+Utils::getTemplate('register', $scope, 'pages');
 ?>

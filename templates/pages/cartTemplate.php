@@ -104,7 +104,7 @@
 
             <div class="carttotals-actions">
                 <span class="cart-continue-shopping btn btn-primary">Continue shopping</span>
-                <a href="/checkout/" class="cart-save btn btn-primary">Save Cart</a>
+                <a href="/checkout/" class="cart-save btn btn-primary">Checkout</a>
                 <!-- <span class=" cart-product-procced-checkout btn btn-primary">Proceed to checkout</span>  -->
             </div>
         </div>
@@ -113,9 +113,7 @@
 </div>
 
 <div class="<?php echo (count($_SESSION['cart']->get())) ? 'display-none' : ''; ?> no-products row col-lg-12 col-el-12 cart-border cart-padding">
-    Your shopping cart is empty, but it doesn't have to be.<br>
-    There are lots of great deals and one-of-a-kind items just waiting for you.<br>
-    Start shopping, and look for the "Add to cart" button. You can add several items to your cart from different sellers and pay for them all at once.
+    <?php Utils::getTemplate('emptyCartError'); ?>
 </div>
 
 <div class="clearFix"></div>

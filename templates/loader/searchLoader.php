@@ -75,7 +75,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
             $scope["exchangeCurrency"]      = "ILS";
             $scope["exchangeExtension"]     = "Exch";
             $scope["searchVal"]             = $_GET["search-product"];
-            Utils::getTemplate('search', $scope);
+            Utils::getTemplate('search', $scope, 'pages');
         }
     }
 }else{

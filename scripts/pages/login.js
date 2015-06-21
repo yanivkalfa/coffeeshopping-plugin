@@ -3,6 +3,7 @@
  */
 
 jQuery(document).ready( function() {
+    /*
     var form = $('#loginform');
     $ns.errorMessages = $ns.errorMessages || {};
     form.validate({
@@ -34,5 +35,6 @@ jQuery(document).ready( function() {
             form.submit();
         }
     });
+    */
 
 });

@@ -11,7 +11,7 @@ if(is_user_logged_in()){
     $scope = array(
         'orderId' => CartDatabaseHelper::saveCart()
     );
-    Utils::getTemplate('checkout',$scope);
+    Utils::getTemplate('checkout',$scope, 'pages');
 }else{
     Utils::getTemplate('loginOrRegister',$scope);
 }

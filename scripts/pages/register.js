@@ -76,6 +76,7 @@ jQuery(document).ready( function() {
         }
     });
 
+    /*
     // fetching address rules
     $ns.Utils.getData(
         'get',
@@ -91,5 +92,6 @@ jQuery(document).ready( function() {
         var input = form.find('[name="'+ fieldName +'"]');
         input.rules( "add", $ns.addressRules[fieldName]);
     }
+    */
 
 });

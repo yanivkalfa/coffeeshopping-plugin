@@ -67,7 +67,7 @@ if (
                         "exchextension"                                 => $scope['exchangeExtension'],
                 );
 
-                Utils::getTemplate('product',$scope);
+                Utils::getTemplate('product',$scope, 'pages');
             }
 }else{
     // No product or unknown store.
