@@ -322,10 +322,17 @@ abstract class Utils{
         return $return;
     }
 
+    static public function toArray($value){
+        if(!isset($value) || empty($value)) return array();
+        return is_array($value) ? $value : array($value);
+    }
+
     static public function getProductPageLink($ID, $store){
         $productPage = get_permalink(get_option("cs_product_p_id"));
         return $productPage."?view-product=" . $ID . "&store=" . $store;
     }
+
+
 }
 
 ?>

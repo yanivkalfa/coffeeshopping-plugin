@@ -3,35 +3,36 @@
  */
 
 jQuery(document).ready( function() {
-    var telInput = $("#loginphone"),
-        passInput = $("#loginpassword"),
-        submitbutton = $("#userloginbutton");
-
-    telInput.intlTelInput({
-        onlyCountries: ["il"],
-        utilsScript: "/wp-content/plugins/coffeeshopping-plugin/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
-    });
-
-    // on blur: validate
-    telInput.blur(function() {
-        if ($.trim(telInput.val())) {
-            if (telInput.intlTelInput("isValidNumber")) {
-                submitbutton.html("Login");
-                submitbutton.removeClass("disabled");
-            } else {
-                telInput.addClass("error");
-                submitbutton.html("Invalid Phone#");
-                submitbutton.addClass("disabled");
+    var form = $('#loginform');
+    $ns.errorMessages = $ns.errorMessages || {};
+    form.validate({
+        rules: {
+            log: {
+                required:true,
+                phoneIL: 'il'
+            },
+            pwd: {
+                required:true,
+                number: true,
+                maxlength: 4,
+                minlength: 4
             }
+        },
+        messages: {
+            log: {
+                required : $ns.errorMessages.required || 'This field is required',
+                phoneIL: $ns.errorMessages.phoneIL || 'Please specify correct Israel phone number'
+            },
+            pwd: {
+                required :  $ns.errorMessages.required || 'This field is required',
+                number: $ns.errorMessages.number || 'Must be a number',
+                maxlength: jQuery.validator.format($ns.errorMessages.maxLength || 'password must be {0} digit long'),
+                minlength: jQuery.validator.format($ns.errorMessages.minLength || 'password must be {0} digit long')
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
         }
     });
-
-    // on keydown: reset
-    telInput.keydown(function() {
-        telInput.removeClass("error");
-    });
-
-    // Password validator.
-    passInput.numericInput({allowFloat: false, allowNegative: false, limitInput: 4});
 
 });

@@ -4,15 +4,16 @@
   "dependencies": {
     "jquery": "~2.1.4",
     "jquery.ui": "~1.11.4",
+    "jquery.tinyPubSub": "~1.0.0",
+    "jquery.cbCarousel": "~1.1.0",
+    "jquery.zoomIt": "~1.1.1",
     "es5-shim": "^4.0.0",
     "font-awesome": "~4.2.0",
     "moment": "~2.10.3",
     "bootstrap": "~3.3.4",
     "lodash": "~3.8.0",
     "dragula.js": "~1.6.0",
-    "jquery.tinyPubSub": "~1.0.0",
-    "jquery.cbCarousel": "~1.1.0",
-    "jquery.zoomIt": "~1.1.1",
-    "intl-tel-input": "~6.0.0"
+    "jquery-validation": "~1.13.1",
+    "google.phoneValidation": "~1.0.0"
   }
 }

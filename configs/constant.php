@@ -6,6 +6,7 @@
 abstract class CSCons {
 
     public static function get($consName){
+
         $constants = array(
             'descRestrictedExt' => array(
                 "js",
@@ -63,9 +64,6 @@ abstract class CSCons {
             'req_scripts' => array(
 
                 'front_end' => array(
-                    array('handle' => 'jquery_intl-tel-input_js',  'src' => 'bower_components/intl-tel-input/build/js/intlTelInput.min',    'extension' => 'js',     'deps' => '', 'media' => ''),
-                    array('handle' => 'jquery_intl-tel-input_css', 'src' => 'bower_components/intl-tel-input/build/css/intlTelInput',       'extension' => 'css',    'deps' => '', 'media' => 'screen'),
-
                     array('handle' => 'jquery_zoomit_js',          'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
                     array('handle' => 'jquery_zoomit.css',         'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
                     array('handle' => 'jquery_cbcarousel_js',      'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
@@ -82,9 +80,11 @@ abstract class CSCons {
                     array('handle' => 'cart_css',                   'src' => '/css/cart',                                            'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                     array('handle' => 'cart_js',                    'src' => '/scripts/pages/cart',                                  'extension' => 'js',    'deps' => '', 'media' => ''),
 
-                    array('handle' => 'login_css',                   'src' => '/css/login',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'login_js',                    'src' => '/scripts/pages/login',                                'extension' => 'js',    'deps' => '', 'media' => ''),
-                    array('handle' => 'numericInput_js',             'src' => '/scripts/numericInput',                               'extension' => 'js',    'deps' => '', 'media' => ''),
+                    array('handle' => 'login_css',                   'src' => '/css/login',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'login'),
+                    array('handle' => 'login_js',                    'src' => '/scripts/pages/login',                                'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'login'),
+
+                    array('handle' => 'register_css',                   'src' => '/css/register',                                     'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'register'),
+                    array('handle' => 'register_js',                    'src' => '/scripts/pages/register',                           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'register'),
 
 	                array('handle' => 'theme_css',                  'src' => '/templates/theme/css/theme',                           'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),
@@ -103,7 +103,14 @@ abstract class CSCons {
                     array('handle' => 'jquery_ui_css', 'src' => 'bower_components/jquery.ui/dist/jquery-ui', 'extension' => 'css', 'deps' => '', 'media' => 'screen'),
 
                     /* jquery tiny pubsub*/
-                    array('handle' => 'jquery_tiny_pubsub', 'src' =>  'bower_components/jquery.tinyPubSub/jquery.tinyPubSub', 'extension' => 'js', 'deps' => '', 'media' => ''),
+                    array('handle' => 'jquery_tiny_pubsub', 'src' =>  'bower_components/jquery.tinyPubSub/jquery.tinyPubSub', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
+
+                    /* jquery.validate */
+                    array('handle' => 'jquery_validate', 'src' => 'bower_components/jquery-validation/dist/jquery.validate', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
+                    array('handle' => 'jquery_validate_methods', 'src' => 'bower_components/jquery-validation/dist/additional-methods', 'extension' => 'js', 'deps' => array('jquery_validate'), 'media' => ''),
+
+                    /* google phone validation */
+                    array('handle' => 'google_phone_validation', 'src' => 'bower_components/google.phoneValidation/google.phoneValidation', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
 
                     /* dragula */
                     array('handle' => 'dragula_js', 'src' =>  'bower_components/dragula.js/dist/dragula.min', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
@@ -429,7 +436,17 @@ abstract class CSCons {
                 'HKD' => "HK$",
                 'ILS' => "&#8362;",
                 'RUN' => "руб"
-            )
+            ),
+            'errorMessages' => array(
+                'methodDoesNotExists' => 'Method does not exist',
+                'required' => 'This field is required',
+                'phoneIL' => 'Please specify correct Israel phone number',
+                'number' => 'Must be a number',
+                'maxLength' => 'password must be {0} digit long',
+                'minLength' => 'password must be {0} digit long',
+                'length' => 'Value length must be {0} digit long',
+                'equalTo' => 'Passwords does not match'
+            ),
         );
         return isset($constants[$consName]) ? $constants[$consName] : false ;
     }

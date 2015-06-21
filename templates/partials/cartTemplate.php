@@ -8,13 +8,15 @@
 <div id="cartcontainer" class="<?php echo (count($_SESSION['cart']->get())) ? '' : 'display-none'; ?> cart has-products">
 
     <?php $cart = $_SESSION['cart']->get(); foreach($cart as $key => $product){ ?>
-        <div class="cartitemsdiv<?php echo ($key==count($cart)-1) ? " lastitem": "";?>">
+        <div class="cartitemsdiv <?php echo ($key==count($cart)-1) ? "lastitem": "";?>">
 
             <div class="cart-product" data-product-key="<?php echo htmlentities(json_encode($product)); ?>">
 
                 <div class="cartitemdetailsdiv inline">
                     <div class="cartitemtitle">
-                        <h4><a href="<?php echo Utils::getProductPageLink($product->unique_store_id, $product->store) ; ?>"><?php echo $product->title; ?></a></h4>
+                        <h4>
+                            <a href="<?php echo Utils::getProductPageLink($product->unique_store_id, $product->store) ; ?>"><?php echo $product->title; ?></a>
+                        </h4>
                     </div>
 
                     <div class="cartitemvariants">
@@ -29,7 +31,9 @@
                     <div class="cartitemdetails inline">
 
                         <div class="cartitemdetailstore">
-                            <a href="<?php echo $product->store_link;?>" title="View on <?php echo $product->store;?>" target="_blank"><div class="<?php echo Utils::getAPILogoClass($product->store);?>"></div></a>
+                            <a href="<?php echo $product->store_link;?>" title="View on <?php echo $product->store;?>" target="_blank">
+                                <div class="<?php echo Utils::getAPILogoClass($product->store);?>"></div>
+                            </a>
                         </div>
 
 
@@ -65,7 +69,9 @@
                 </div>
 
                 <div class="cartitemimg inline">
-                    <a href="<?php echo Utils::getProductPageLink($product->unique_store_id, $product->store) ; ?>"><img src="<?php echo Utils::getPictureBySize($product->store, $product->img, "150wh"); ?>"></a>
+                    <a href="<?php echo Utils::getProductPageLink($product->unique_store_id, $product->store) ; ?>">
+                        <img src="<?php echo Utils::getPictureBySize($product->store, $product->img, "150wh"); ?>">
+                    </a>
                 </div>
 
             </div>
@@ -79,24 +85,26 @@
         <div class="cart-totals">
             <div class="cart-subtotal">
                 <div class="inline header">Subtotal</div>
-                <div class="inline detail cart-total"><?php echo $_SESSION['cart']->getTotal(); ?></div>
+                <div id="cart-total" class="inline detail"><?php echo $_SESSION['cart']->getTotal(); ?></div>
             </div>
 
-            <?php foreach ( $_SESSION['cart']->getAggregatedPriceModifiers() as $key => $aggregatedPriceModifier ) : ?>
-                <div class="cart-<?php echo $aggregatedPriceModifier->name; ?>">
-                    <div class="inline header"><?php echo $aggregatedPriceModifier->nameAs; ?></div>
-                    <div class="inline detail cart-total"><?php echo $aggregatedPriceModifier->value; ?></div>
-                </div>
-            <?php endforeach; ?>
+            <div id="aggregated-price-modifier">
+                <?php foreach ( $_SESSION['cart']->getAggregatedPriceModifiers() as $key => $aggregatedPriceModifier ) : ?>
+                    <div class="cart-<?php echo $aggregatedPriceModifier->name; ?>">
+                        <div class="inline header"><?php echo $aggregatedPriceModifier->nameAs; ?></div>
+                        <div class="inline detail cart-total"><?php echo $aggregatedPriceModifier->value; ?></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
 
             <div class="cart-subtotal">
                 <div class="inline header">Total</div>
-                <div class="inline detail cart-total"><?php echo $_SESSION['cart']->getCalculatedTotal(); ?></div>
+                <div id="cart-calculated-total" class="inline detail"><?php echo $_SESSION['cart']->getCalculatedTotal(); ?></div>
             </div>
 
             <div class="carttotals-actions">
                 <span class="cart-continue-shopping btn btn-primary">Continue shopping</span>
-                <span class="cart-save btn btn-primary">Save Cart</span>
+                <a href="/checkout/" class="cart-save btn btn-primary">Save Cart</a>
                 <!-- <span class=" cart-product-procced-checkout btn btn-primary">Proceed to checkout</span>  -->
             </div>
         </div>

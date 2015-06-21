@@ -76,6 +76,46 @@ class Ajax_handler {
 		exit;
 	}
 
+
+    public function registerNewUser($post){
+        $user = json_decode($post['user'], true);
+
+        $error = FormValidators::validateFormInput($user['log'], 'phoneIL');
+        if(is_array($error)){
+            return array( 'success' => false, 'msg' => $error );
+        }
+
+        $error = FormValidators::validateFormInput($user['pwd'], 'number', array('minLength' => 4), array('maxLength' => 4));
+        if(is_array($error)){
+            return array( 'success' => false, 'msg' => $error );
+        }
+
+        $userData = array(
+            'user_login'  =>  $user['log'],
+            'user_pass'   =>  $user['pwd'],
+            'user_nicename'   =>  $user['firstName'] . ' ' . $user['lastName'],
+            'first_name'   =>  $user['firstName'],
+            'last_name'   =>  $user['lastName'],
+            'role' => 'subscriber'
+        );
+
+        $user = wp_insert_user( $userData ) ;
+
+        if(isset($user->errors)){
+            foreach($user->errors as $key => $errors){
+                return array(
+                    'success' => false,
+                    'msg' => array('errorName' => $key, 'errorMsg' => $errors[0])
+                );
+            }
+        }
+
+        return array(
+            'success' => true,
+            'msg' => ''
+        );
+    }
+
     public function addProduct($post){
         $product = json_decode($post['product'], true);
         $extendCartUpdate = isset($post['extendCartUpdate']) ? json_decode($post['extendCartUpdate'], true) : false;

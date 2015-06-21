@@ -1,0 +1,2 @@
+<div>You've successfully save your cart, order ID: <?php echo $orderId; ?> </div>
+<div>You can visit your account to review your card, order status and general information <a href="/myaccount/">My Account</a></div>

@@ -14,8 +14,9 @@
 
 global $methods;
 $methods = array(
-    'addProduct' => array('protected' => true, 'req_capabilities' => ['manage_options', 'registered_member']),
-    'removeProduct' => array('protected' => true, 'req_capabilities' => ['manage_options', 'registered_member']),
-    'updateQuantity' => array('protected' => true, 'req_capabilities' => ['manage_options', 'registered_member']),
+    'registerNewUser' => array('protected' => false, 'req_capabilities' => []),
+    'addProduct' => array('protected' => false, 'req_capabilities' => []),
+    'removeProduct' => array('protected' => false, 'req_capabilities' => []),
+    'updateQuantity' => array('protected' => false, 'req_capabilities' => []),
     'saveCart' => array('protected' => true, 'req_capabilities' => ['manage_options', 'registered_member']),
 );

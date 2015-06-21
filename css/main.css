@@ -65,3 +65,45 @@
     box-shadow: 4px 4px 1px #eee;
 }
 
+.form-group {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="datetime"],
+.form-group input[type="datetime-local"],
+.form-group input[type="date"],
+.form-group input[type="month"],
+.form-group input[type="time"],
+.form-group input[type="week"],
+.form-group input[type="number"],
+.form-group input[type="email"],
+.form-group input[type="url"],
+.form-group input[type="search"],
+.form-group input[type="tel"],
+.form-group input[type="color"]{
+    height: 30px;
+}
+
+.form-group label.error {
+    position: absolute;
+    right: 100%;
+    width:auto;
+    max-width:none;
+    top: 0;
+    white-space: nowrap;
+    padding: 4px 10px;
+    background: gainsboro;
+    margin-right: 5px;
+    color: red;
+}
+
+.form-ltr{
+    direction: ltr;
+}
+
+.form-group .full-width-button {
+    width: 100%;
+}

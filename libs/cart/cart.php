@@ -61,6 +61,7 @@ class Cart extends Collection{
             return false;
         }
         $index = $this->indexOf($item, $prop? : $this->prop);
+
         if($index > -1) {
             $product = $this->get()[$index];
             return $product->updateQuantity($product->getQuantity()+1);
@@ -68,7 +69,6 @@ class Cart extends Collection{
 
         return $this->{$this->colName}[] = $item;
     }
-
 
     public function setAddress($address){
         $this->address = $address;
@@ -128,6 +128,33 @@ class Cart extends Collection{
         }
 
         return array_values($modifiers);
+    }
+
+    public function productExist($newItem, $savedItem){
+        $newItem =(array)$newItem;
+        return $newItem['selected_variant'] === $savedItem->selected_variant;
+    }
+
+    public function indexOf ($item = false, $prop = false){
+        if(!$item) return -1;
+
+        $filtered = array_filter($this->{$this->colName}, function($saved)use($item) {
+            $saved = (array)$saved;
+            $item =(array)$item;
+            return $saved[$this->prop] === $item[$this->prop];
+        });
+
+        if(!count($filtered)) return -1;
+
+
+        foreach($filtered as $index => $savedItem){
+            $exist = $this->productExist($item, $savedItem);
+            if($exist){
+                return $index;
+            }
+        }
+
+        return -1;
     }
 }
 
