@@ -74,6 +74,8 @@ jQuery(document).ready( function(){
             console.log(data);
             $.publish($ns.events.CART_UPDATE, data.msg);
             $(this).parents('.cartitemsdiv').remove();
+            $('#cartcontainer .cartitemsdiv:last').addClass("lastitem");
+            console.log($('#cartcontainer .cartitemsdiv:last'));
             renderCartSummery(data.msg);
         }
     });
