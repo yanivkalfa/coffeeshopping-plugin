@@ -89,7 +89,7 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 
         <div id="submitCheckout" class="form-group display-none">
             <input name="saveAddress" value="true" type="hidden">
-            <input type="submit" class="btn btn-primary form-control full-width-button" value="Save Details" />
+            <input type="submit" class="btn btn-primary form-control full-width-button" value="Checkout" />
         </div>
     </form>
 </div>
