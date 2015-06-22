@@ -53,7 +53,7 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                                                     <b><?php echo $address['full_name'];?></b>
                                                 </div>
                                                 <div class="inline">
-                                                    - (<i><?php echo $address['phone_number'];?></i>)
+                                                    - <i>(<?php echo $address['phone_number'];?>)</i>
                                                 </div>
                                             </div>
                                             <div class="addressDetails">
