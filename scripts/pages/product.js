@@ -419,9 +419,9 @@ jQuery(document).ready( function(){
         // Store comminsion * item price + shipping costs. [if lower then minimum, set to minimum].
         // outputArr["storeprice"] = (storecomm*(allitemsprice+shippingprice)>minstorecomm) ? storecomm*(allitemsprice+shippingprice) : minstorecomm;
         // Paypal comminsion * item price + shipping costs + store commision.
-        outputArr["paypalprice"] = paypalcomm*(allitemsprice+shippingprice+outputArr["storeprice"]);
+        outputArr["paypalprice"] = paypalcomm*(allitemsprice+shippingprice);//+outputArr["storeprice"]);
         // Final price = item(s) price + shipping + paypal + store.
-        outputArr["finalPrice"] = allitemsprice+shippingprice+outputArr["paypalprice"]+outputArr["storeprice"];
+        outputArr["finalPrice"] = allitemsprice+shippingprice+outputArr["paypalprice"];//+outputArr["storeprice"];
         // Total price per item = final price/quantity.
         outputArr["totalprice"] = outputArr["finalPrice"]/orderquantity;
 
