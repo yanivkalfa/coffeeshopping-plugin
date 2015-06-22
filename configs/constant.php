@@ -87,6 +87,9 @@ abstract class CSCons {
                     array('handle' => 'register_css',                   'src' => '/css/register',                                     'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'register'),
                     array('handle' => 'register_js',                    'src' => '/scripts/pages/register',                           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'register'),
 
+                    array('handle' => 'checkout_css',                   'src' => '/css/checkout',                                     'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'checkout'),
+                    array('handle' => 'checkout_js',                    'src' => '/scripts/pages/checkout',                           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
+
 	                array('handle' => 'theme_css',                  'src' => '/templates/theme/css/theme',                           'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),
 

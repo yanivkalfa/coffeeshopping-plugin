@@ -105,7 +105,7 @@ class Ajax_handler {
             foreach($user->errors as $key => $errors){
                 return array(
                     'success' => false,
-                    'msg' => array('errorName' => $key, 'errorMsg' => $errors[0])
+                    'msg' => array('name' => $key, 'errorMsg' => $errors[0])
                 );
             }
         }

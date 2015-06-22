@@ -6,9 +6,21 @@
 abstract class CartDatabaseHelper {
 
     /**
+     * getCartAddressId by user id
+     *
+     * @param {number} $cartId
+     * @return bool|array
+     */
+    public static function getCartAddressId($cartId){
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'cs_carts';
+        return $wpdb->get_row("SELECT `address_id` FROM $table_name WHERE `ID` = '$cartId'", ARRAY_A);
+    }
+
+    /**
      * getCart by user id
      *
-     * @param {number} $userId+
+     * @param {number} $userId
      * @return bool|array
      */
     public static function getCart($userId){

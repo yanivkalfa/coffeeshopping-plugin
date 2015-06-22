@@ -525,6 +525,7 @@ if(!class_exists('coffee_shopping'))
                 apt varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 postcode varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 phone_number bigint(20) NOT NULL,
+                full_name varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);

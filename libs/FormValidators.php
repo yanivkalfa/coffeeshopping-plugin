@@ -24,7 +24,7 @@ abstract class FormValidators{
             }
 
             if(!method_exists ( 'FormValidators' , $fnName )){
-                return array('errorName' => 'methodDoesNotExists', 'errorMsg' => $errorMessages['methodDoesNotExists']);
+                return array('name' => 'methodDoesNotExists', 'errorMsg' => $errorMessages['methodDoesNotExists']);
             }
 
 
@@ -58,7 +58,7 @@ abstract class FormValidators{
         $errorMessages = CSCons::get('errorMessages');
 
         if(!isset($value) || empty($value)){
-            return array('errorName' => 'isRequiredButEmpty', 'errorMsg' => $errorMessages['required']);
+            return array('name' => 'required', 'errorMsg' => $errorMessages['required']);
         }
 
         return true;
@@ -69,7 +69,7 @@ abstract class FormValidators{
 
         if(isset($length) && is_numeric($length)){
             if( strlen($value) !== $length){
-                return array('errorName' => 'valueLengthIsWrong', 'errorMsg' => self::format($errorMessages['length'], Utils::toArray($length)));
+                return array('name' => 'length', 'errorMsg' => self::format($errorMessages['length'], Utils::toArray($length)));
             }
         }
 
@@ -81,7 +81,7 @@ abstract class FormValidators{
 
         if(isset($length) && is_numeric($length)){
             if( strlen($value) < $length){
-                return array('errorName' => 'valueTooShort', 'errorMsg' => self::format($errorMessages['minLength'], Utils::toArray($length)));
+                return array('name' => 'minLength', 'errorMsg' => self::format($errorMessages['minLength'], Utils::toArray($length)));
             }
 
         }
@@ -94,7 +94,7 @@ abstract class FormValidators{
 
         if(isset($length) && is_numeric($length)){
             if( strlen($value) > $length){
-                return array('errorName' => 'valueTooLong', 'errorMsg' => self::format($errorMessages['maxLength'], Utils::toArray($length)));
+                return array('name' => 'maxLength', 'errorMsg' => self::format($errorMessages['maxLength'], Utils::toArray($length)));
             }
 
         }
@@ -106,7 +106,7 @@ abstract class FormValidators{
         $errorMessages = CSCons::get('errorMessages');
 
         if(!is_numeric($value)){
-            return array('errorName' => 'valueNoneNumber', 'errorMsg' => $errorMessages['number']);
+            return array('name' => 'number', 'errorMsg' => $errorMessages['number']);
         }
 
         return true;
@@ -116,7 +116,7 @@ abstract class FormValidators{
         $errorMessages = CSCons::get('errorMessages');
 
         if($value !== $equalTo){
-            return array('errorName' => 'notEqualTo', 'errorMsg' => $errorMessages['equalTo']);
+            return array('name' => 'equalTo', 'errorMsg' => $errorMessages['equalTo']);
         }
 
         return true;
@@ -126,7 +126,7 @@ abstract class FormValidators{
     static public function phoneIL($value){
         $errorMessages = CSCons::get('errorMessages');
 
-        $error  = array('errorName' => 'nonePhoneIL', 'errorMsg' => $errorMessages['phoneIL']);
+        $error  = array('name' => 'phoneIL', 'errorMsg' => $errorMessages['phoneIL']);
         if(is_array(self::number($value))){
             return $error;
         }
