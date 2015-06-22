@@ -1,0 +1,18 @@
+#reselect{cursor:pointer;}
+#shipToHome, #shipToStore{
+    border: 1px solid #ddd;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: #ddd 0px 0px 10px;
+    cursor:pointer;
+    vertical-align: top;
+}
+#shipToStore{margin-right:10px;}
+
+#newAddress label{display: inline-block;}
+
+#savedAddressTab{display:inline-block;}
+.addressradio{vertical-align: top;}
+.addressdets{margin-top: 3px;}
+
+#newAddressTab{display:inline-block;width: 200px;}

@@ -1,12 +1,20 @@
 <?php
 
+$checkoutPage = get_permalink(get_option("cs_checkout_p_id"));
+if (!$checkoutPage){Utils::adminPreECHO("Can't get checkout page id", "CheckoutLoader.php ERROR:: ");}
+$myAccountPage = get_permalink(get_option("cs_myAccount_p_id"));
+if (!$myAccountPage){Utils::adminPreECHO("Can't get register page id", "loginLoader.php ERROR:: ");}
+
+
 if(is_user_logged_in()){
 
     //if we saved cart and redirected with orderId
     if(isset($_GET['orderId']) && !empty($_GET['orderId'])){
         // create scope
         $scope = array(
-            'orderId' => $_GET['orderId']
+            'orderId' => $_GET['orderId'],
+            'checkoutPage' => $checkoutPage,
+            'myAccountPage' => $myAccountPage,
         );
         // loading checkout template
         Utils::getTemplate('checkout', $scope, 'pages');
@@ -23,7 +31,7 @@ if(is_user_logged_in()){
     if(isset($_POST['saveAddress'])){
         // checking if we have address_id else redirecting with form error
         if(!isset($_POST['address_id']) || empty($_POST['address_id'])) {
-            wp_redirect( site_url().'/checkout?formError=address_id' );
+            wp_redirect( $checkoutPage.'?formError=address_id' );
             return;
         }
 
@@ -31,12 +39,12 @@ if(is_user_logged_in()){
         if( $_POST['address_id'] === 'newAddress' &&
             (!isset($_POST['address']) || empty($_POST['address']))
         ) {
-            wp_redirect( site_url().'/checkout?formError=address' );
+            wp_redirect( $checkoutPage.'?formError=address' );
             return;
         }
 
 
-        // is address id shipToSote then $deliver_to is set to store id, and address is empty
+        // is address id shipToStore then $deliver_to is set to store id, and address is empty
         if($_POST['address_id'] === 'shipToStore') {
             $deliver_to = CartHelper::getCurrentStoreId();
             $address = false;
@@ -53,7 +61,7 @@ if(is_user_logged_in()){
         }
 
         // setting purchase_location to the store id.
-        $_SESSION['cart']->purchase_location = CartHelper::getCurrentStoreId();// need to change so it will check if it was done at home.
+        $_SESSION['cart']->purchase_location = CartHelper::getCurrentStoreId(); // TODO:: need to change so it will check if it was done at home.
 
         // setting deliver_to
         $_SESSION['cart']->deliver_to = $deliver_to;
@@ -67,7 +75,7 @@ if(is_user_logged_in()){
             $error = $address->validateAddress();
             // if we have errors reporting them
             if($error) {
-                wp_redirect( site_url().'/checkout?formError=address&field='.$error['name'] );
+                wp_redirect( $checkoutPage.'?formError=address&field='.$error['name'] );
                 return;
             }
             // set cart address
@@ -85,7 +93,7 @@ if(is_user_logged_in()){
         }
 
         // redirect to checkout with id.
-        wp_redirect( site_url().'/checkout?orderId='.$cartId );
+        wp_redirect( $checkoutPage.'?orderId='.$cartId );
         return;
     } else {
         // first stage of checkout - need to handle address.
@@ -101,9 +109,19 @@ if(is_user_logged_in()){
                 $scope['addresses'][$key] = CartDatabaseHelper::getAddress($address);
             }
         }
+
+        // Add our pages to the scope.
+        $scope['checkoutPage'] = $checkoutPage;
+        $scope['myAccountPage'] = $myAccountPage;
+
         Utils::getTemplate('checkout',$scope, 'pages');
     }
 }else{
+    $scope = array(
+        'referrer' => $checkoutPage,
+        'checkoutPage' => $checkoutPage,
+        'myAccountPage' => $myAccountPage,
+    );
     Utils::getTemplate('loginOrRegister',$scope);
 }
 

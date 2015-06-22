@@ -44,6 +44,18 @@
 }
 
 /*
+        Main body - ALL!
+*/
+#rt-mainbody{
+    background: #fff;
+    padding:10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    box-shadow: 4px 4px 1px #eee;
+}
+/*
         Store logos, specific img+sizes - copyrighted!
 */
 .ebay-storeimg{
@@ -55,21 +67,13 @@
     border-radius: 3px;
 }
 
-#rt-mainbody{
-    background: #fff;
-    padding:10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    box-shadow: 4px 4px 1px #eee;
-}
-
+/*
+        Forms:
+*/
 .form-group {
     position: relative;
     margin-bottom: 5px;
 }
-
 .form-group input[type="text"],
 .form-group input[type="password"],
 .form-group input[type="datetime"],
@@ -100,10 +104,11 @@
     color: red;
 }
 
-.form-ltr{
-    direction: ltr;
-}
-
 .form-group .full-width-button {
     width: 100%;
 }
+
+#addressform #addressHouseApt input{
+    display:inline-block; width: 49%;
+}
+#addressform #addressHouseApt #addressApt{float:left;}

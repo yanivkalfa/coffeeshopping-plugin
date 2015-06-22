@@ -3,6 +3,8 @@ jQuery(document).ready( function(){
 
 
     function reset(){
+        $('#submitCheckout').addClass('display-none');
+        $('#reselect').addClass('display-none');
         $('#shippingSelection').removeClass('display-none');
 
         $('#shippingContents').addClass('display-none');
@@ -10,7 +12,6 @@ jQuery(document).ready( function(){
         $('#shipToStoreTab').addClass('display-none');
 
         $('#newAddress').find('#newAddressTitle').html('Create New Address');
-        $('#reselect').data('is-new', null);
 
         $('#savedAddressTab').removeClass('display-none');
         $('#newAddressTab').addClass('display-none');
@@ -21,33 +22,37 @@ jQuery(document).ready( function(){
 
     $('#reselect').click(reset);
 
-    $('#shipToHome').click(function(){
+    $('.shipToHome').click(function(){
+        $('#reselect').removeClass('display-none');
         $('#shippingSelection').addClass('display-none');
-
-        $('#shippingContents').removeClass('display-none');
         $('#shipToHomeTab').removeClass('display-none');
+        // Internal toggler.
+        if ($('#newAddressTab').is(":visible")){
+            $('#newAddressTab').addClass('display-none');
+            $('#savedAddressTab').removeClass('display-none');
+        }else{
+            $('#shippingContents').removeClass('display-none');
+        }
+
+        $('#submitCheckout').removeClass('display-none');
     });
 
-    $('#shipToStore').click(function(){
+    $('.shipToStore').click(function(){
+        $('#reselect').removeClass('display-none');
         $('#shippingSelection').addClass('display-none');
         $('#shippingContents').removeClass('display-none');
         $('#shipToStoreTab').removeClass('display-none');
+        $('#submitCheckout').removeClass('display-none');
     });
 
 
-    $('#newAddress').click(function(){
-        if($(this).data('is-new')){
-            $('#savedAddressTab').removeClass('display-none');
-            $('#newAddressTab').addClass('display-none');
-            $(this).find('#newAddressTitle').html('Create New Address');
-            $(this).find('#newAddressField').prop("checked", false);
-            $(this).data('is-new', false);
-        }else{
+    $('#newAddressField').on("click", function(){
+        if($('#newAddressField').is(":checked")){
             $('#savedAddressTab').addClass('display-none');
             $('#newAddressTab').removeClass('display-none');
-            $(this).find('#newAddressTitle').html('Select From Saved Addresses');
-            $(this).find('#newAddressField').prop("checked", true);
-            $(this).data('is-new', true);
+        }else{
+            $('#savedAddressTab').removeClass('display-none');
+            $('#newAddressTab').addClass('display-none');
         }
     });
 

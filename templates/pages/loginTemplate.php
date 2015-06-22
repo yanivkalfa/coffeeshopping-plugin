@@ -12,16 +12,20 @@
         <div id="userlogintitle">
             <h2>Login details:</h2>
         </div>
-        <div class="form-group form-ltr">
-            <label>Phone Number *</label>
+        <div class="form-group">
+            <div>Phone Number *</div>
             <input type="text" class="form-control" name="log" />
         </div>
-        <div class="form-group form-ltr">
-            <label>Password *</label>
+        <div class="form-group">
+            <div>Password *</div>
             <input type="password" class="form-control" name="pwd" />
         </div>
 
-        <div class="form-group form-ltr">
+        <div class="form-group">
+            <div>Don't have an account? <a href="<?php echo $registerPage;?>">Register!</a></div>
+        </div>
+
+        <div class="form-group">
             <input name="redirect_to" value="<?php echo site_url(). ($referrer ? $referrer : '' ) ?>" type="hidden">
             <input type="submit" class="btn btn-primary form-control full-width-button" value="Login" />
         </div>

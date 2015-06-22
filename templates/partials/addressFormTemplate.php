@@ -1,26 +1,22 @@
-<div id="address">
-    <div class="form-group form-ltr">
-        <label>City *</label>
-        <input type="text" class="form-control" name="address[city]" />
+<div id="addressform">
+    <h4>Address:</h4>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Full Name *" name="address[full_name]" />
     </div>
-    <div class="form-group form-ltr">
-        <label>House Number *</label>
-        <input type="text" class="form-control" name="address[house]" />
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Phone Number *" name="address[phone_number]" />
     </div>
-    <div class="form-group form-ltr">
-        <label>Apartment Number *</label>
-        <input type="text" class="form-control" name="address[apt]" />
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="City *" name="address[city]" />
     </div>
-    <div class="form-group form-ltr">
-        <label>Postal Code *</label>
-        <input type="text" class="form-control" name="address[postcode]" />
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Street *" name="address[street]" />
     </div>
-    <div class="form-group form-ltr">
-        <label>Phone Number *</label>
-        <input type="text" class="form-control" name="address[phone_number]" />
+    <div id="addressHouseApt" class="form-group">
+        <input id="addressHouse" type="text" class="form-control" placeholder="House #*" name="address[house]" />
+        <input id="addressApt" type="text" class="form-control" placeholder="Apartment #*" name="address[apt]" />
     </div>
-    <div class="form-group form-ltr">
-        <label>Full Name *</label>
-        <input type="text" class="form-control" name="address[full_name]" />
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Postal Code *" name="address[postcode]" />
     </div>
 </div>

@@ -521,10 +521,11 @@ if(!class_exists('coffee_shopping'))
             $table = "CREATE TABLE $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 city varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                street varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 house varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 apt varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 postcode varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-                phone_number bigint(20) NOT NULL,
+                phone_number varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 full_name varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 UNIQUE KEY cuunique (`ID`)
                 );";

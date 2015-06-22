@@ -107,7 +107,7 @@
 
             <div class="carttotals-actions">
                 <span class="cart-continue-shopping btn btn-primary">Continue shopping</span>
-                <a href="/checkout/" class="cart-save btn btn-primary">Checkout</a>
+                <a href="<?php echo $checkoutPage;?>" class="cart-save btn btn-primary">Checkout</a>
                 <!-- <span class=" cart-product-procced-checkout btn btn-primary">Proceed to checkout</span>  -->
             </div>
         </div>
@@ -115,7 +115,7 @@
 
 </div>
 
-<div class="<?php echo (count($_SESSION['cart']->get())) ? 'display-none' : ''; ?> no-products row col-lg-12 col-el-12 cart-border cart-padding">
+<div class="<?php echo (count($_SESSION['cart']->get())) ? 'display-none' : ''; ?> no-products cart-border cart-padding">
     <?php Utils::getTemplate('emptyCartError'); ?>
 </div>
 
