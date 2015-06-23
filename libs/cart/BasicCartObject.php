@@ -17,7 +17,6 @@ class BasicCartObject{
     public function getObjectAsArray(){
         $object = $this->getAsArray();
         $object['products'] = $this->getChildrenAsArray($object['products']);
-        $object['address'] = $this->address->getAsArray();
         return $object;
     }
 
