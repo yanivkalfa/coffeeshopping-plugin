@@ -89,6 +89,7 @@ abstract class CSCons {
 
                     array('handle' => 'checkout_css',                   'src' => '/css/checkout',                                     'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'checkout'),
                     array('handle' => 'checkout_js',                    'src' => '/scripts/pages/checkout',                           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
+                    array('handle' => 'address_form_js',                    'src' => '/scripts/partials/addressForm',                           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
 
 	                array('handle' => 'theme_css',                  'src' => '/templates/theme/css/theme',                           'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),

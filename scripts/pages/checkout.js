@@ -1,30 +1,4 @@
 jQuery(document).ready( function(){
-
-    var addressRulesLoaded = false;
-
-    function loadAddressRules (){
-        return $ns.Utils.getAsyncData( 'get', "/wp-content/plugins/coffeeshopping-plugin/scripts/partials/addressForm.js", {}, 'script', true).then(
-            function(){
-                addressRulesLoaded = true;
-            },
-            function(){
-                addressRulesLoaded = false;
-            });
-
-    }
-
-
-    function addOrRemoveRules(method){
-        //form.valid();
-        for(var fieldName in $ns.addressRules){
-            if(!$ns.addressRules.hasOwnProperty(fieldName)) continue;
-            var input = form.find('[name="'+ fieldName +'"]');
-            input.rules( method, $ns.addressRules[fieldName]);
-        }
-    }
-
-
-
     var form, formAlert, hasSavedAddress;
     var submitCheckout, reselect, shippingSelection, shippingContents, shipToHomeTab, shipToStoreTab,
         savedAddressTab, newAddressTab, shipToHome, newAddressField, shipToStore, shipToStoreInput;
@@ -94,12 +68,15 @@ jQuery(document).ready( function(){
         });
 
         if(!hasSavedAddress){
-            loadAddressRules()
-                .then(function(){
-                    addOrRemoveRules('add');
-                }, console.log)
-        }else{
-            loadAddressRules();
+            addOrRemoveRules('add');
+        }
+    }
+    function addOrRemoveRules(method){
+        //form.valid();
+        for(var fieldName in $ns.addressRules){
+            if(!$ns.addressRules.hasOwnProperty(fieldName)) continue;
+            var input = form.find('[name="'+ fieldName +'"]');
+            input.rules( method, $ns.addressRules[fieldName]);
         }
     }
 
@@ -163,14 +140,7 @@ jQuery(document).ready( function(){
             method = 'remove';
         }
 
-        if(!addressRulesLoaded) {
-            loadAddressRules().then(
-                function(){
-                    addOrRemoveRules(method);
-                },console.log);
-        }else{
-            addOrRemoveRules(method);
-        }
+        addOrRemoveRules(method);
     });
 
 });
