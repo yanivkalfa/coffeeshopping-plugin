@@ -67,7 +67,7 @@ if(is_user_logged_in()){
                 wp_redirect( $checkoutPage.'?formError=address&field='.$error['field'].'&errName='.$error['name']);
                 return;
             }
-            
+
             // inserting new address to db
             $address_id = CartDatabaseHelper::insertItem((array)$address, 'cs_addresses');
 

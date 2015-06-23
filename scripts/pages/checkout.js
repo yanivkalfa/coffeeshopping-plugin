@@ -50,8 +50,10 @@ jQuery(document).ready( function(){
     if(form.length) {
         form[0].reset();
 
-        /*
         form.validate({
+            onkeyup : function(element){
+                $(element).valid()
+            },
             rules: {
                 address_id: {
                     required: true
@@ -99,7 +101,6 @@ jQuery(document).ready( function(){
         }else{
             loadAddressRules();
         }
-        */
     }
 
     function reset(){
@@ -162,7 +163,6 @@ jQuery(document).ready( function(){
             method = 'remove';
         }
 
-        /*
         if(!addressRulesLoaded) {
             loadAddressRules().then(
                 function(){
@@ -171,7 +171,6 @@ jQuery(document).ready( function(){
         }else{
             addOrRemoveRules(method);
         }
-        */
     });
 
 });

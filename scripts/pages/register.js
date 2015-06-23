@@ -10,6 +10,9 @@ jQuery(document).ready( function() {
     $ns.errorMessages = $ns.errorMessages || {};
 
     form.validate({
+        onkeyup : function(element){
+            $(element).valid()
+        },
         rules: {
             log: {
                 required:true,
