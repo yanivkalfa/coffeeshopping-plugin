@@ -439,6 +439,7 @@ if(!class_exists('coffee_shopping'))
 
         /*
          * @ On activation create Db and default page
+         * TODO:: Add a url to the google doc in here!
          *
         */
         public function pluginActivate()
@@ -531,7 +532,6 @@ if(!class_exists('coffee_shopping'))
                 );";
             dbDelta($table);
 
-
             $table_name = $wpdb->prefix . "cs_categories";
             $table = "CREATE TABLE $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
@@ -540,6 +540,17 @@ if(!class_exists('coffee_shopping'))
                 store varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 UNIQUE KEY cuunique (`ID`)
                 );";
+            dbDelta($table);
+
+            $table_name = $wpdb->prefix . "cs_stores";
+            $table = "CREATE TABLE $table_name (
+              ID int NOT NULL AUTO_INCREMENT,
+              name varchar(255) NOT NULL,
+              address varchar(255) NOT NULL,
+              lat float(10, 6) NOT NULL,
+              lng float(10, 6) NOT NULL,
+              UNIQUE KEY cuunique (`ID`)
+              );";
             dbDelta($table);
         }
 

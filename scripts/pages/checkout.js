@@ -1,7 +1,7 @@
 jQuery(document).ready( function(){
     var form, formAlert, hasSavedAddress;
     var submitCheckout, reselect, shippingSelection, shippingContents, shipToHomeTab, shipToStoreTab,
-        savedAddressTab, newAddressTab, shipToHome, newAddressField, shipToStore, shipToStoreInput;
+        savedAddressTab, newAddressTab, shipToHome, newAddressField, shipToStore, shipToStoreInput, latlocation, lnglocation;
 
     form = $('#addressForm');
     formAlert = $('#form-alert');
@@ -17,6 +17,8 @@ jQuery(document).ready( function(){
     newAddressField = $('#newAddressField');
     shipToStore = $('.shipToStore');
     shipToStoreInput = $('#shipToStoreInput');
+    latlocation = $("#lat-location");
+    lnglocation = $("#lng-location");
 
     hasSavedAddress = Boolean($('.saved-address').length);
     $ns.errorMessages = $ns.errorMessages || {};
@@ -71,6 +73,7 @@ jQuery(document).ready( function(){
             addOrRemoveRules('add');
         }
     }
+
     function addOrRemoveRules(method){
         //form.valid();
         for(var fieldName in $ns.addressRules){
@@ -142,5 +145,28 @@ jQuery(document).ready( function(){
 
         addOrRemoveRules(method);
     });
+
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+
+    function showPosition(position) {
+        latlocation.val(position.coords.latitude);
+        lnglocation.val(position.coords.longitude);
+    }
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                console.log("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                console.log("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                console.log("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                console.log("An unknown error occurred.");
+                break;
+        }
+    }
 
 });

@@ -13,12 +13,16 @@ if(is_user_logged_in()){
 
     //if we saved cart and redirected with orderId
     if(isset($_GET['orderId']) && !empty($_GET['orderId'])){
+        // Get closest store for payment.
+        $storedets = storeHelper::getClosestStore($_GET['lat'], $_GET['lng']);
         // create scope
         $scope = array(
             'orderId' => $_GET['orderId'],
             'checkoutPage' => $checkoutPage,
             'myAccountPage' => $myAccountPage,
         );
+
+
         // loading checkout template
         Utils::getTemplate('checkout', $scope, 'pages');
         return;
@@ -104,6 +108,7 @@ if(is_user_logged_in()){
         // redirect to checkout with id.
         wp_redirect( $checkoutPage.'?orderId='.$cartId );
         return;
+
     } else {
         // first stage of checkout - need to handle address.
 

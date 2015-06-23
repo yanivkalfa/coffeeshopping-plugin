@@ -16,4 +16,5 @@ $classes = array(
     'productView' => '/libs/API/',
     'currencyExchange' => '/libs/',
     'FormValidators' => '/libs/',
+    'storeHelper' => '/libs/',
 );
