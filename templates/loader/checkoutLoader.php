@@ -8,6 +8,9 @@ if (!$myAccountPage){Utils::adminPreECHO("Can't get register page id", "loginLoa
 
 if(is_user_logged_in()){
 
+    // getting current user id
+    $user = wp_get_current_user();
+
     //if we saved cart and redirected with orderId
     if(isset($_GET['orderId']) && !empty($_GET['orderId'])){
         // create scope
@@ -43,54 +46,60 @@ if(is_user_logged_in()){
             return;
         }
 
-
         // is address id shipToStore then $deliver_to is set to store id, and address is empty
         if($_POST['address_id'] === 'shipToStore') {
             $deliver_to = CartHelper::getCurrentStoreId();
             $address = false;
+            $address_id = '';
 
             // is address id newAddress then $deliver_to get the home flag, and the new address is used
         }else if($_POST['address_id'] === 'newAddress'){
             $deliver_to = 'home';
             $address = $_POST['address'];
-        }else{
 
-            // is address id and id then $deliver_to get the home flag, and we are fetching the address from the db.
-            $deliver_to = 'home';
-            $address = CartDatabaseHelper::getAddress($_POST['address_id']);
-        }
-
-        // setting purchase_location to the store id.
-        $_SESSION['cart']->purchase_location = CartHelper::getCurrentStoreId(); // TODO:: need to change so it will check if it was done at home.
-
-        // setting deliver_to
-        $_SESSION['cart']->deliver_to = $deliver_to;
-
-        // if new address
-        if($_POST['address_id'] === 'newAddress'){
             // instantiating new address
             $address = new Address($address);
 
             // validating the new address
             $error = $address->validateAddress();
             // if we have errors reporting them
-            if($error) {
-                wp_redirect( $checkoutPage.'?formError=address&field='.$error['name'] );
+            if(is_array($error)) {
+                wp_redirect( $checkoutPage.'?formError=address&field='.$error['field'].'&errName='.$error['name']);
                 return;
             }
-            // set cart address
-            $_SESSION['cart']->setAddress($address);
+            
+            // inserting new address to db
+            $address_id = CartDatabaseHelper::insertItem((array)$address, 'cs_addresses');
+
+            if($address_id){
+                // adding new address id to user meta.
+                add_user_meta($user->ID, 'address_id', $address_id);
+            }
+        }else{
+
+            // is address id and id then $deliver_to get the home flag, and we are fetching the address from the db.
+            $deliver_to = 'home';
+            $address_id = $_POST['address_id'];
         }
+
+        // set user id
+        $_SESSION['cart']->setUserId($user->ID);
+
+        // set purchase_location
+        $_SESSION['cart']->setPurchaseLocation(CartHelper::getCurrentStoreId()); // TODO:: need to change so it will check if it was done at home.
+
+        // set payment method
+        $_SESSION['cart']->setPaymentMethod('cash');// todo use different payement methods.
+
+         // setting deliver_to
+        $_SESSION['cart']->setDeliverTo($deliver_to);
+
+        // setting address id
+        $_SESSION['cart']->setAddressId($address_id);
+
 
         // save cart and kill session
         $cartId = CartDatabaseHelper::saveCart();
-
-        // if new address add it to user's saved session
-        if($_POST['address_id'] === 'newAddress') {
-            $address_id = CartDatabaseHelper::getCartAddressId($cartId);
-            $user = wp_get_current_user();
-            add_user_meta($user->ID, 'address_id', $address_id);
-        }
 
         // redirect to checkout with id.
         wp_redirect( $checkoutPage.'?orderId='.$cartId );
@@ -98,15 +107,15 @@ if(is_user_logged_in()){
     } else {
         // first stage of checkout - need to handle address.
 
-        // getting user
-        $user = wp_get_current_user();
-
         // getting saved addresses ids
         $addressesIds = get_user_meta($user->ID, 'address_id');
         if(isset($addressesIds) && !empty($addressesIds)){
             // getting saved address.
             foreach($addressesIds as $key => $address){
-                $scope['addresses'][$key] = CartDatabaseHelper::getAddress($address);
+                $address = CartDatabaseHelper::getAddress($address);
+                if(!empty($address)){
+                    $scope['addresses'][$key] = $address;
+                }
             }
         }
 

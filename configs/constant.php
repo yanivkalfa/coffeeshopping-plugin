@@ -449,7 +449,8 @@ abstract class CSCons {
                 'maxLength' => 'password must be {0} digit long',
                 'minLength' => 'password must be {0} digit long',
                 'length' => 'Value length must be {0} digit long',
-                'equalTo' => 'Passwords does not match'
+                'equalTo' => 'Passwords does not match',
+                'address_id' => 'You must select a shipping method'
             ),
         );
         return isset($constants[$consName]) ? $constants[$consName] : false ;

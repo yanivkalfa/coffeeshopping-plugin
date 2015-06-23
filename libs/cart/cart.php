@@ -8,9 +8,8 @@ class Cart extends Collection{
     public $purchase_location;
     public $status;
     public $create_date;
-    public $address;
 
-    public function __construct($cart = NULL, Address $address = NULL, $products = NULL) {
+    public function __construct($cart = NULL, $products = NULL) {
         $prdc = $products;
         if($products && count($products) && is_array($products[0])){
             $prdc = [];
@@ -33,8 +32,28 @@ class Cart extends Collection{
             $this->create_date = $cart['create_date'];
         }
 
-        $this->address = $address;
     }
+
+    public function setUserId($user_id){
+        $this->user_id = $user_id;
+    }
+
+    public function setDeliverTo($deliver_to){
+        $this->deliver_to = $deliver_to;
+    }
+
+    public function setAddressId($address_id){
+        $this->address_id = $address_id;
+    }
+
+    public function setPaymentMethod($payment_method){
+        $this->payment_method = $payment_method;
+    }
+
+    public function setPurchaseLocation($purchase_location){
+        $this->purchase_location = $purchase_location;
+    }
+
 
     public function generateRandomId($randId = ''){
 
@@ -68,10 +87,6 @@ class Cart extends Collection{
         }
 
         return $this->{$this->colName}[] = $item;
-    }
-
-    public function setAddress($address){
-        $this->address = $address;
     }
 
     public function getTotal(){

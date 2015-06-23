@@ -159,9 +159,9 @@ if(!class_exists('coffee_shopping'))
                     $savedCart = CartDatabaseHelper::getCart($current_user->ID);
                 }
                 $products = isset($savedCart['ID']) ? CartDatabaseHelper::getCartProduct($savedCart['ID']) : NULL;
-                $address = isset($savedCart['ID']) ? new Address(CartDatabaseHelper::getCartAddress($savedCart['ID'])) :  new Address();
+                //$address = isset($savedCart['ID']) ? new Address(CartDatabaseHelper::getCartAddress($savedCart['ID'])) :  new Address();
 
-                $_SESSION['cart'] = new Cart($savedCart, $address, $products);
+                $_SESSION['cart'] = new Cart($savedCart, $products);
             }
             //Utils::preEcho($_SESSION['cart']);
         }

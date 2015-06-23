@@ -1,43 +1,45 @@
 
 $ns.addressRules = {
-    city : {
+    'address[city]' : {
         required: true,
-        minlength: 2,
         messages: {
-            required: "Required input",
-            minlength: jQuery.validator.format($ns.errorMessages.maxLength || 'password must be {0} digit long')
+            required: "Required input"
         }
     },
-    house : {
+    'address[street]' : {
         required: true,
-        minlength: 2,
         messages: {
-            required: "Required input",
-            minlength: jQuery.validator.format($ns.errorMessages.maxLength || 'password must be {0} digit long')
+            required: "Required input"
         }
     },
-    apt : {
+    'address[house]' : {
         required: true,
-        minlength: 2,
         messages: {
-            required: "Required input",
-            minlength: jQuery.validator.format($ns.errorMessages.maxLength || 'password must be {0} digit long')
+            required: "Required input"
         }
     },
-    postcode : {
+    'address[apt]' : {
         required: true,
-        minlength: 2,
         messages: {
-            required: "Required input",
-            minlength: jQuery.validator.format($ns.errorMessages.maxLength || 'password must be {0} digit long')
+            required: "Required input"
         }
     },
-    phone_number : {
+    'address[postcode]' : {
         required: true,
-        minlength: 2,
         messages: {
-            required: "Required input",
-            minlength: jQuery.validator.format($ns.errorMessages.maxLength || 'password must be {0} digit long')
+            required: "Required input"
+        }
+    },
+    'address[phone_number]' : {
+        required: true,
+        messages: {
+            required: "Required input"
+        }
+    },
+    'address[full_name]' : {
+        required: true,
+        messages: {
+            required: "Required input"
         }
     }
 };

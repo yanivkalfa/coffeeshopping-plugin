@@ -14,7 +14,7 @@ abstract class CartDatabaseHelper {
     public static function getCartAddressId($cartId){
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_carts';
-        return $wpdb->get_row("SELECT `address_id` FROM $table_name WHERE `ID` = '$cartId'", ARRAY_A);
+        return $wpdb->get_var("SELECT `address_id` FROM $table_name WHERE `ID` = '$cartId'", ARRAY_A);
     }
 
     /**
@@ -84,47 +84,25 @@ abstract class CartDatabaseHelper {
         // turning the cart class into an array.
         $cart = (array)$_SESSION['cart'];
 
-        // getting current user id
-        $user = wp_get_current_user();
-
-        // setting user id
-        $cart['user_id'] = isset($cart['user_id']) && $cart['user_id'] > 0 ? $cart['user_id'] : $user->ID;
-
-            //echo '$cart';
-            //Utils::preEcho($cart);
         // checking if we have an id, if we do it means we are editing if we don't its a new cart.
         if(empty($cart['ID'])){
-                //echo '<br>new<br>';
-            // inserting new address and using the id for cart's address_id
-            $cart['address_id'] = self::insertItem((array)$cart['address'], 'cs_addresses');
             // inserting new cart keeping the cartId
             $cartId = self::insertItem(Utils::arrayPluck($cart, $keep), 'cs_carts');
         }else{
-                //echo '<br>edit<br>';
-            // else we are updating excising cart.
-            // updating address - since we already have the id in the cart no need to change that.
-            self::updateItem((array)$cart['address'], 'cs_addresses');
 
             // updating cart keeping the cartId
             $cartId = self::updateItem(Utils::arrayPluck($cart, $keep), 'cs_carts');
         }
 
-            //echo '$cartId';
-            //Utils::preEcho($cartId);
-
         // checking if we got cartid from previous insert or update,
         // and if original cart id is set which mean we are editing - so we delete all products related to the cart.
         if($cartId !== false && !empty($cart['ID'])){
-                //echo 'deleted : <br>';
             $deleted =  self::deleteItem(array('cart_id' => $cartId), 'cs_cart_products');
-                //Utils::preEcho($deleted);
         }
 
-            //echo '$products';
         // iterating over cart product.
         foreach($_SESSION['cart']->get() as $key => $product){
-                //echo 'a product'."\n";
-                //Utils::preEcho($product);
+
             // creating a new array from the product class
             $productArr = (array)$product;
 
@@ -137,16 +115,10 @@ abstract class CartDatabaseHelper {
             // serializing selected_variant for later use
             $productArr['selected_variant'] = serialize($productArr['selected_variant']);
 
-                Utils::preEcho($productArr);
-
             //inserting product to db
-            $inserted = self::insertItem($productArr, 'cs_cart_products');
-
-            Utils::preEcho($inserted, 'inserted');
+            self::insertItem($productArr, 'cs_cart_products');
 
         }
-
-
 
         // un setting session cart so next time used comes in it will either create a new cart(in-case he completed the previous cart or use this cart)
         unset($_SESSION['cart']);
@@ -199,19 +171,11 @@ abstract class CartDatabaseHelper {
 }
 
 
-
-
-
-
-
-
-/* ------------------- DEAD OR UNUSED CODE ---------------- */
 /*
- */
-/* ------------------- DEAD OR UNUSED CODE ---------------- */
+        // updating address - since we already have the id in the cart no need to change that.
+        self::updateItem((array)$cart['address'], 'cs_addresses');
+        // inserting new address and using the id for cart's address_id
 
-
-
-
+        */
 
 

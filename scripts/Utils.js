@@ -3,15 +3,15 @@
 
     function Utils (){}
 
-    Utils.prototype.getData = function(method, url, params, dataType, cache){
+    Utils.prototype.getData = function(){
         var data = {};
         $.ajax({
-            url: url || $ns.ajaxURL,
-            type:method || "post",
+            url: $ns.ajaxURL,
+            type:"post",
             async: false,
-            dataType: dataType || 'json',
-            data: params || $ns.data,
-            cache: cache || true,
+            dataType: 'json',
+            data: $ns.data,
+            cache: true,
             success: function (resp, status) {
                 if(status === 'success'){
                     return data =  resp;
@@ -24,6 +24,20 @@
             }
         });
         return data;
+    };
+
+    Utils.prototype.getAsyncData = function(method, url, params, dataType, cache){
+        var defer = jQuery.Deferred();
+        $.ajax({
+            url: url || $ns.ajaxURL,
+            type:method || "post",
+            dataType: dataType || 'json',
+            data: params || $ns.data,
+            cache: cache || true,
+            success: defer.resolve,
+            error : defer.reject
+        });
+        return defer.promise();
     };
 
     Utils.prototype.onProductQuantityChange = function(selector, availableQuantity, orderLimit){
