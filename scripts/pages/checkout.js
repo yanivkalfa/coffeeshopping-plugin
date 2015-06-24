@@ -1,7 +1,8 @@
 jQuery(document).ready( function(){
     var form, formAlert, hasSavedAddress;
     var submitCheckout, reselect, shippingSelection, shippingContents, shipToHomeTab, shipToStoreTab,
-        savedAddressTab, newAddressTab, shipToHome, newAddressField, shipToStore, shipToStoreInput, latlocation, lnglocation;
+        savedAddressTab, newAddressTab, shipToHome, newAddressField, shipToStore, shipToStoreInput,
+        map, infoWindow, mapdiv, latlocation, lnglocation;
 
     form = $('#addressForm');
     formAlert = $('#form-alert');
@@ -17,6 +18,7 @@ jQuery(document).ready( function(){
     newAddressField = $('#newAddressField');
     shipToStore = $('.shipToStore');
     shipToStoreInput = $('#shipToStoreInput');
+    mapdiv = $("#mapdiv");
     latlocation = $("#lat-location");
     lnglocation = $("#lng-location");
 
@@ -146,8 +148,8 @@ jQuery(document).ready( function(){
         addOrRemoveRules(method);
     });
 
+    // Get HTML5 Lat-Lng details.
     navigator.geolocation.getCurrentPosition(showPosition, showError);
-
     function showPosition(position) {
         latlocation.val(position.coords.latitude);
         lnglocation.val(position.coords.longitude);
@@ -167,6 +169,9 @@ jQuery(document).ready( function(){
                 console.log("An unknown error occurred.");
                 break;
         }
+        // TODO:: Use google API to get the coords. [https://developers.google.com/maps/documentation/geocoding/]
+        latlocation.val("");
+        lnglocation.val("");
     }
 
 });

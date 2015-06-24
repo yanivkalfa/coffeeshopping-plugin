@@ -2,6 +2,14 @@
 $shiptohome = plugins_url( '../../css/images/shiptohome.png', __FILE__ );
 $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 ?>
+
+<?php /*if (isset($mapsAPIKey) && !empty($mapsAPIKey)){?>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?language=he&region=IL&key=<?php echo $mapsAPIKey;?>"></script>
+    <script type="text/javascript">
+        $ns.store = <?php echo json_encode($store);?>;
+    </script>
+<?php }*/?>
+
 <?php if(isset($errorMessages)) {?>
     <script language="javascript" type="text/javascript">
         // Set some vars.
@@ -14,6 +22,28 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
     <div>You've successfully save your cart, order ID: <?php echo $orderId; ?> </div>
     <div>You can visit your account to review your card, order status and general information <a href="<?php echo $myAccountPage;?>">My Account</a></div>
     <div> more geo location crap !</div>
+
+    <?php if (isset($mapsAPIKey) && !empty($mapsAPIKey)){?>
+    <div id="mapcontdiv" style="width:640px; height:480px;">
+        <iframe
+            width="100%"
+            height="100%"
+            frameborder="0" style="border:0"
+            src="<?php
+            echo "https://www.google.com/maps/embed/v1/place?key=$mapsAPIKey";
+            echo "&zoom=15";
+            //echo "&center=".$store["lat"].",".$store["lng"];
+            echo "&language=he";
+            echo "&region=il";
+            echo "&attribution_source=CoffeeShopping Google Maps";
+            echo "&q=".urlencode($store["address"]);
+            ?>"
+            allowfullscreen>
+        </iframe>
+    </div>
+    <?php }?>
+
+
 <?php }else { ?>
     <div>
 

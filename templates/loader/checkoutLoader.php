@@ -4,7 +4,7 @@ $checkoutPage = get_permalink(get_option("cs_checkout_p_id"));
 if (!$checkoutPage){Utils::adminPreECHO("Can't get checkout page id", "CheckoutLoader.php ERROR:: ");}
 $myAccountPage = get_permalink(get_option("cs_myAccount_p_id"));
 if (!$myAccountPage){Utils::adminPreECHO("Can't get register page id", "loginLoader.php ERROR:: ");}
-
+$mapsAPIKey = "AIzaSyDJ-x2RfRCj_wjm0gPO-VW4ZEIheV1EWhE"; // TODO:: Get this thing loaded from the admin crap.
 
 if(is_user_logged_in()){
 
@@ -13,15 +13,19 @@ if(is_user_logged_in()){
 
     //if we saved cart and redirected with orderId
     if(isset($_GET['orderId']) && !empty($_GET['orderId'])){
-        // Get closest store for payment.
-        $storedets = storeHelper::getClosestStore($_GET['lat'], $_GET['lng']);
+        // Get store details for display.
+        $store = false;
+        if(isset($_GET['store']) && !empty($_GET['store'])){
+            $store = storeHelper::getStore($_GET['store']);
+        }
         // create scope
         $scope = array(
             'orderId' => $_GET['orderId'],
             'checkoutPage' => $checkoutPage,
             'myAccountPage' => $myAccountPage,
+            'store' => $store,
+            'mapsAPIKey' => $mapsAPIKey,
         );
-
 
         // loading checkout template
         Utils::getTemplate('checkout', $scope, 'pages');
@@ -105,8 +109,14 @@ if(is_user_logged_in()){
         // save cart and kill session
         $cartId = CartDatabaseHelper::saveCart();
 
+        // get the closest store if location is provided.
+        $store = false;
+        if(isset($_POST['lat']) && !empty($_POST['lat']) && isset($_POST['lng']) && !empty($_POST['lng'])){
+            $store = storeHelper::getClosestStore($_POST['lat'], $_POST['lng']);
+        }
+        $storeParam = $store ? "&store=".$store : "";
         // redirect to checkout with id.
-        wp_redirect( $checkoutPage.'?orderId='.$cartId );
+        wp_redirect( $checkoutPage.'?orderId='.$cartId.$storeParam );
         return;
 
     } else {
