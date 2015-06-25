@@ -4,7 +4,7 @@ $checkoutPage = get_permalink(get_option("cs_checkout_p_id"));
 if (!$checkoutPage){Utils::adminPreECHO("Can't get checkout page id", "CheckoutLoader.php ERROR:: ");}
 $myAccountPage = get_permalink(get_option("cs_myAccount_p_id"));
 if (!$myAccountPage){Utils::adminPreECHO("Can't get register page id", "loginLoader.php ERROR:: ");}
-$mapsAPIKey = "AIzaSyDJ-x2RfRCj_wjm0gPO-VW4ZEIheV1EWhE"; // TODO:: Get this thing loaded from the admin crap.
+
 
 if(is_user_logged_in()){
 
@@ -24,7 +24,6 @@ if(is_user_logged_in()){
             'checkoutPage' => $checkoutPage,
             'myAccountPage' => $myAccountPage,
             'store' => $store,
-            'mapsAPIKey' => $mapsAPIKey,
         );
 
         // loading checkout template

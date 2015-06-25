@@ -21,27 +21,54 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 <?php if(isset($orderId)) { ?>
     <div>You've successfully save your cart, order ID: <?php echo $orderId; ?> </div>
     <div>You can visit your account to review your card, order status and general information <a href="<?php echo $myAccountPage;?>">My Account</a></div>
-    <div> more geo location crap !</div>
+    <div>To complete the order, please, refer to one of our stores.</div>
 
-    <?php if (isset($mapsAPIKey) && !empty($mapsAPIKey)){?>
-    <div id="mapcontdiv" style="width:640px; height:480px;">
-        <iframe
-            width="100%"
-            height="100%"
-            frameborder="0" style="border:0"
-            src="<?php
-            echo "https://www.google.com/maps/embed/v1/place?key=$mapsAPIKey";
-            echo "&zoom=15";
-            //echo "&center=".$store["lat"].",".$store["lng"];
-            echo "&language=he";
-            echo "&region=il";
-            echo "&attribution_source=CoffeeShopping Google Maps";
-            echo "&q=".urlencode($store["address"]);
-            ?>"
-            allowfullscreen>
-        </iframe>
+
+
+    <div id="storeLocator">
+        <div id="mapcontdiv" class="inline">
+            <div class="storesTitle">
+                Closest store location:
+            </div>
+            <div id="mapdiv">
+                <div class="aStoreDiv">
+                    <div class="aStoreTitle">
+                        <div class="aStoreTitleName"><?php echo $store["name"];?></div>
+                        <i><div class="aStoreTitleAddress"><?php echo $store["address"];?></div></i>
+                    </div>
+                    <div class="aStoreImageDiv">
+                        <iframe id="mapiframe" class="aStoreImageDiv" width="100%" height="100%" frameborder="0" style="border:0" src="<?php echo storeHelper::getStoreGoogleMapsEmbed($store["address"]);?>" allowfullscreen></iframe>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="storescontdiv" class="inline">
+            <div class="storesTitle">
+                Our stores:
+            </div>
+            <?php
+            $allStores = storeHelper::getStores(array());
+            if ($allStores){
+                foreach($allStores as $aStore){
+                    ?>
+                    <div class="aStoreDiv" data-embed="<?php echo storeHelper::getStoreGoogleMapsEmbed($aStore["address"]);?>">
+                        <div class="aStoreTitle">
+                            <div class="aStoreTitleName"><?php echo $aStore["name"];?></div>
+                            <i><div class="aStoreTitleAddress"><?php echo $aStore["address"];?></div></i>
+                        </div>
+                        <div class="aStoreImageDiv">
+                            <img src="<?php echo storeHelper::getStoreMapImg($aStore);?>">
+                        </div>
+                    </div>
+
+                <?php
+                }
+            }
+            ?>
+
+        </div>
     </div>
-    <?php }?>
 
 
 <?php }else { ?>

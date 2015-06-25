@@ -2,7 +2,7 @@ jQuery(document).ready( function(){
     var form, formAlert, hasSavedAddress;
     var submitCheckout, reselect, shippingSelection, shippingContents, shipToHomeTab, shipToStoreTab,
         savedAddressTab, newAddressTab, shipToHome, newAddressField, shipToStore, shipToStoreInput,
-        map, infoWindow, mapdiv, latlocation, lnglocation;
+        mapiframe, mapNameDiv, mapAddressDiv, latlocation, lnglocation, aStoreLocation;
 
     form = $('#addressForm');
     formAlert = $('#form-alert');
@@ -18,9 +18,12 @@ jQuery(document).ready( function(){
     newAddressField = $('#newAddressField');
     shipToStore = $('.shipToStore');
     shipToStoreInput = $('#shipToStoreInput');
-    mapdiv = $("#mapdiv");
+    mapiframe = $("#mapiframe");
     latlocation = $("#lat-location");
     lnglocation = $("#lng-location");
+    aStoreLocation = $("#storescontdiv .aStoreDiv");
+    mapNameDiv = $("#mapdiv .aStoreTitleName");
+    mapAddressDiv = $("#mapdiv .aStoreTitleAddress");
 
     hasSavedAddress = Boolean($('.saved-address').length);
     $ns.errorMessages = $ns.errorMessages || {};
@@ -173,5 +176,12 @@ jQuery(document).ready( function(){
         latlocation.val("");
         lnglocation.val("");
     }
+
+    aStoreLocation.click(function(e){
+        mapiframe.attr("src", $(this).data("embed"));
+        mapNameDiv.html($(this).find(".aStoreTitleName").html());
+        mapAddressDiv.html($(this).find(".aStoreTitleAddress").html());
+
+    });
 
 });

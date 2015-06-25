@@ -16,3 +16,46 @@
 .addressdets{margin-top: 3px;}
 
 #newAddressTab{display:inline-block;width: 200px;}
+
+#mapcontdiv{
+    display: inline-block;
+    max-width:50%;
+    vertical-align: top;
+    box-shadow: #ddd 1px 1px 1px 1px;
+    margin-right: 10px;
+    padding: 10px;
+}
+#mapdiv{}
+#mapdiv .aStoreDiv .aStoreImageDiv{
+    width: 480px;
+    height: 457px;
+}
+#mapiframe{
+    margin: 0px;
+}
+
+#storescontdiv{
+    display: inline-block;
+    max-width:40%;
+    vertical-align: top;
+    box-shadow: #ddd 1px 1px 1px 1px;
+    margin-right: 10px;
+    padding: 10px;
+}
+.aStoreDiv{
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+.aStoreTitle{
+    background: #F5F5F5;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+#storescontdiv .aStoreDiv{
+    cursor:pointer;
+}

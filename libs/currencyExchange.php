@@ -75,9 +75,22 @@ class currencyExchange {
         // Check whether we have a recent copy of the data locally
         if (file_exists($cache)) {
             $fileAge = $now - filemtime($cache);
+
+            // Use our file.
+            $fileRead = file_get_contents($cache);
+
+            // Get exchange rate time:
+            if (preg_match("/time='([[:graph:]]+)'/", $fileRead, $timeMatch)==1){
+                // We got the time from out file, assume file is OK.
+                $this->exchangeRateTime = $timeMatch[1];
+            }else{
+                // our file is BAD.
+                $this->exchangeRateTime = false;
+            }
         }
+
         // Not in cache OR cache expired
-        if (($fileAge > $this->cacheTime) || !file_exists($cache)){
+        if (($fileAge > $this->cacheTime) || !file_exists($cache) || $this->exchangeRateTime==false){
             $fileRead = file_get_contents($this->exchangeSourceURL);
             $fh = fopen($cache, "w+");
             if (is_writable($cache)) {
@@ -85,15 +98,9 @@ class currencyExchange {
             }else{
                 die("File $cache is not WRITABLE - check folder permissions");
             }
-        }else{
-            // Use our file.
-            $fileRead = file_get_contents($cache);
         }
 
         // Parse our file:
-            // Get the time
-        preg_match("/time='([[:graph:]]+)'/", $fileRead, $timeMatch);
-        $this->exchangeRateTime = $timeMatch[1];
             // Get all currencies and rates.
         $regexp = "/currency=(?:'|\")([[:alpha:]]+)(?:'|\") rate=(?:'|\")([[:graph:]]+)(?:'|\")/i";
         preg_match_all($regexp, $fileRead, $matches, PREG_SET_ORDER);
