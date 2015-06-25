@@ -3,13 +3,6 @@ $shiptohome = plugins_url( '../../css/images/shiptohome.png', __FILE__ );
 $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 ?>
 
-<?php /*if (isset($mapsAPIKey) && !empty($mapsAPIKey)){?>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?language=he&region=IL&key=<?php echo $mapsAPIKey;?>"></script>
-    <script type="text/javascript">
-        $ns.store = <?php echo json_encode($store);?>;
-    </script>
-<?php }*/?>
-
 <?php if(isset($errorMessages)) {?>
     <script language="javascript" type="text/javascript">
         // Set some vars.
@@ -24,12 +17,8 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
     <div>To complete the order, please, refer to one of our stores.</div>
     <br />
     <?php
-    // create scope
-    $scope = array(
-        'store' => $store,
-    );
     // loading checkout template
-    Utils::getTemplate('storeLocator', $scope);
+    Utils::getTemplate('storeLocator');
     ?>
 
 <?php }else { ?>

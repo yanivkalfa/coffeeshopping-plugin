@@ -75,23 +75,24 @@ abstract class CSCons {
                     array('handle' => 'product_js',                'src' => '/scripts/pages/product',                               'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
 
 
-	                array('handle' => 'searchWidget_css',           'src' => '/css/searchWidget',                                    'extension' => 'css',   'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'myCartWidget_css',           'src' => '/css/myCartWidget',                                    'extension' => 'css',   'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'myCartWidget_js',            'src' => '/scripts/partials/myCartWidget',                       'extension' => 'js',    'deps' => '', 'media' => ''),
-                    array('handle' => 'cart_css',                   'src' => '/css/cart',                                            'extension' => 'css',   'deps' => '', 'media' => 'screen'),
-                    array('handle' => 'cart_js',                    'src' => '/scripts/pages/cart',                                  'extension' => 'js',    'deps' => '', 'media' => ''),
+	                array('handle' => 'searchWidget_css',          'src' => '/css/searchWidget',                'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'myCartWidget_css',          'src' => '/css/myCartWidget',                'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'myCartWidget_js',           'src' => '/scripts/partials/myCartWidget',   'extension' => 'js',    'deps' => '', 'media' => ''),
+                    array('handle' => 'cart_css',                  'src' => '/css/cart',                        'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'cart_js',                   'src' => '/scripts/pages/cart',              'extension' => 'js',    'deps' => '', 'media' => ''),
 
-                    array('handle' => 'login_css',                   'src' => '/css/login',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'login'),
-                    array('handle' => 'login_js',                    'src' => '/scripts/pages/login',                                'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'login'),
+                    array('handle' => 'login_css',                 'src' => '/css/login',                       'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'login'),
+                    array('handle' => 'login_js',                  'src' => '/scripts/pages/login',             'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'login'),
 
-                    array('handle' => 'register_css',                   'src' => '/css/register',                                     'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'register'),
-                    array('handle' => 'register_js',                    'src' => '/scripts/pages/register',                           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'register'),
+                    array('handle' => 'register_css',              'src' => '/css/register',                     'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'register'),
+                    array('handle' => 'register_js',               'src' => '/scripts/pages/register',           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'register'),
 
-                    array('handle' => 'checkout_css',                   'src' => '/css/checkout',                                     'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'checkout'),
-                    array('handle' => 'checkout_js',                    'src' => '/scripts/pages/checkout',                           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
-                    array('handle' => 'address_form_js',                    'src' => '/scripts/partials/addressForm',                           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
+                    array('handle' => 'checkout_css',              'src' => '/css/checkout',                      'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'checkout'),
+                    array('handle' => 'checkout_js',               'src' => '/scripts/pages/checkout',            'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
+                    array('handle' => 'address_form_js',           'src' => '/scripts/partials/addressForm',      'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
+                    array('handle' => 'storeLocator_js',           'src' => '/scripts/partials/storeLocator',     'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
 
-	                array('handle' => 'theme_css',                  'src' => '/templates/theme/css/theme',                           'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+	                array('handle' => 'theme_css',                 'src' => '/templates/theme/css/theme',         'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),
 
                 'back_end' => array(

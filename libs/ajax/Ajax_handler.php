@@ -184,5 +184,22 @@ class Ajax_handler {
             'msg' => $_SESSION['cart']->getStats()
         );
     }
+
+    public function getClosestStore($post){
+        $coords = json_decode($post["coords"], true);
+        $result = storeHelper::getClosestStore($coords["lat"],$coords["lng"]);
+
+        if ($result!==false){
+            return array(
+                'success' => true,
+                'msg' => array("ID" => $result)
+            );
+        }else{
+            return array(
+                'success' => false,
+                'msg' => ''
+            );
+        }
+    }
 }
 $ajax_handler = new ajax_handler();

@@ -13,17 +13,11 @@ if(is_user_logged_in()){
 
     //if we saved cart and redirected with orderId
     if(isset($_GET['orderId']) && !empty($_GET['orderId'])){
-        // Get store details for display.
-        $store = false;
-        if(isset($_GET['store']) && !empty($_GET['store'])){
-            $store = storeHelper::getStore($_GET['store']);
-        }
         // create scope
         $scope = array(
             'orderId' => $_GET['orderId'],
             'checkoutPage' => $checkoutPage,
             'myAccountPage' => $myAccountPage,
-            'store' => $store,
         );
 
         // loading checkout template
@@ -108,14 +102,8 @@ if(is_user_logged_in()){
         // save cart and kill session
         $cartId = CartDatabaseHelper::saveCart();
 
-        // get the closest store if location is provided.
-        $store = false;
-        if(isset($_POST['lat']) && !empty($_POST['lat']) && isset($_POST['lng']) && !empty($_POST['lng'])){
-            $store = storeHelper::getClosestStore($_POST['lat'], $_POST['lng']);
-        }
-        $storeParam = $store ? "&store=".$store : "";
         // redirect to checkout with id.
-        wp_redirect( $checkoutPage.'?orderId='.$cartId.$storeParam );
+        wp_redirect( $checkoutPage.'?orderId='.$cartId );
         return;
 
     } else {

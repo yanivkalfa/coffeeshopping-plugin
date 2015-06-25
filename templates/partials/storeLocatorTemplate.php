@@ -15,11 +15,11 @@
         <div id="mapdiv">
             <div class="aStoreDiv">
                 <div class="aStoreTitle">
-                    <div class="aStoreTitleName"><?php echo $store["name"];?></div>
-                    <i><div class="aStoreTitleAddress"><?php echo $store["address"];?></div></i>
+                    <div class="aStoreTitleName"></div>
+                    <i><div class="aStoreTitleAddress"></div></i>
                 </div>
                 <div class="aStoreImageDiv">
-                    <iframe id="mapiframe" class="aStoreImageDiv" width="100%" height="100%" frameborder="0" style="border:0" src="<?php echo storeHelper::getStoreGoogleMapsEmbed($store["address"]);?>" allowfullscreen></iframe>
+                    <iframe id="mapiframe" class="aStoreImageDiv" width="100%" height="100%" frameborder="0" style="border:0" src="" allowfullscreen></iframe>
 
                 </div>
             </div>
@@ -34,7 +34,12 @@
         if ($allStores){
             foreach($allStores as $aStore){
                 ?>
-                <div class="aStoreDiv" data-embed="<?php echo storeHelper::getStoreGoogleMapsEmbed($aStore["address"]);?>">
+                <div class="aStoreDiv"
+                     data-store-id="<?php echo $aStore["ID"];?>"
+                     data-embed="<?php echo storeHelper::getStoreGoogleMapsEmbed($aStore["address"]);?>"
+                     data-title-name="<?php esc_attr_e($aStore["name"]);?>"
+                     data-title-address="<?php esc_attr_e($aStore["address"]);?>"
+                    >
                     <div class="aStoreTitle">
                         <div class="aStoreTitleName"><?php echo $aStore["name"];?></div>
                         <i><div class="aStoreTitleAddress"><?php echo $aStore["address"];?></div></i>
