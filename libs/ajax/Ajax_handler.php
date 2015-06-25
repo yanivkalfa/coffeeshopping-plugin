@@ -78,29 +78,7 @@ class Ajax_handler {
 
 
     public function registerNewUser($post){
-        $user = json_decode($post['user'], true);
-
-        $error = FormValidators::validateFormInput($user['log'], 'phoneIL');
-        if(is_array($error)){
-            return array( 'success' => false, 'msg' => $error );
-        }
-
-        $error = FormValidators::validateFormInput($user['pwd'], 'number', array('minLength' => 4), array('maxLength' => 4));
-        if(is_array($error)){
-            return array( 'success' => false, 'msg' => $error );
-        }
-
-        $userData = array(
-            'user_login'  =>  $user['log'],
-            'user_pass'   =>  $user['pwd'],
-            'user_nicename'   =>  $user['firstName'] . ' ' . $user['lastName'],
-            'first_name'   =>  $user['firstName'],
-            'last_name'   =>  $user['lastName'],
-            'role' => 'subscriber'
-        );
-
-        $user = wp_insert_user( $userData ) ;
-
+        $user = userHelper::registerNewUser($post);
         if(isset($user->errors)){
             foreach($user->errors as $key => $errors){
                 return array(

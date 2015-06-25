@@ -53,8 +53,39 @@ class GantryLayoutBody_csClassName extends GantryBodyLayout
 
 					<?php if ($display_component) : ?>
 					<div class="rt-block">
+                        <?php
+                        $page = get_post();
+                        ?>
+                        <?php if (!empty($page->post_title)){?>
+                        <div id="mainbody-titlediv">
+                            <h2>
+                                <a href="<?php the_permalink(); ?>" title="<?php esc_attr_e( $page->post_title ); ?>">
+                                    <?php echo $page->post_title; ?>
+                                </a>
+
+                                <?php
+                                edit_post_link( __( 'Edit', 'rt_gantry_wp_lang' ), '<div class="edit-link flleft font-small">', '</div>' );
+                                ?>
+                            </h2>
+
+                        </div>
+                        <?php } ?>
 						<div id="rt-mainbody">
 							<div class="component-content">
+                                <?php if( function_exists( 'the_post_thumbnail' ) && has_post_thumbnail() ){ ?>
+                                    <div>
+                                        <?php the_post_thumbnail( 'gantryThumb', array( 'class' => 'rt-image ' ) ); ?>
+                                    </div>
+                                <?php } ?>
+
+                                <div class="post-content">
+                                    <?php
+                                    $content = apply_filters( 'the_content', $page->post_content );
+                                    $content = str_replace( ']]>', ']]&gt;', $content );
+                                    echo $content;
+                                    ?>
+                                </div>
+
 								<?php
                                 Utils::getTemplate('%%className%%','','loader', '', 'Loader');
 								?>

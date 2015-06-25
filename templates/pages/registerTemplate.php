@@ -17,16 +17,6 @@
         </div>
 
         <div class="form-group form-ltr">
-            <label>Password *</label>
-            <input type="password" class="form-control" name="pwd" />
-        </div>
-
-        <div class="form-group form-ltr">
-            <label>Confirm Password *</label>
-            <input type="password" class="form-control" name="cpwd" />
-        </div>
-
-        <div class="form-group form-ltr">
             <input id="userloginbutton" type="submit" class="btn btn-primary form-control full-width-button" value="Register" />
         </div>
     </div>

@@ -68,7 +68,7 @@ abstract class storeHelper{
      * @param   $ids    array   - The requested stores IDs in a flat array, if empty - gets all.
      * @return          mixed
      */
-    public static function getStores($ids){
+    public static function getStores($ids = array()){
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_stores';
         if (empty($ids)){

@@ -17,4 +17,5 @@ $classes = array(
     'currencyExchange' => '/libs/',
     'FormValidators' => '/libs/',
     'storeHelper' => '/libs/database/',
+    'userHelper' => '/libs/database/',
 );

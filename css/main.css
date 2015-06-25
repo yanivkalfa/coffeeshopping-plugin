@@ -37,6 +37,8 @@
 .va-textbottom{vertical-align: text-bottom;}
 .va-top{vertical-align: top;}
 
+.font-small{font-size:12px;}
+
 .display-none {
     display: none !important;
 }
@@ -48,6 +50,14 @@
 /*
         Main body - ALL!
 */
+#mainbody-titlediv{
+    background: #fff;
+    padding:10px;
+    border: 1px solid #ddd;
+    position:relative;
+    top:3px;
+}
+#mainbody-titlediv h2{margin:0px;}
 #rt-mainbody{
     background: #fff;
     padding:10px;
