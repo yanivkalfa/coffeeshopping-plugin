@@ -22,7 +22,7 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
     <div>You've successfully save your cart, order ID: <?php echo $orderId; ?> </div>
     <div>You can visit your account to review your card, order status and general information <a href="<?php echo $myAccountPage;?>">My Account</a></div>
     <div>To complete the order, please, refer to one of our stores.</div>
-
+    <br />
     <?php
     // create scope
     $scope = array(
