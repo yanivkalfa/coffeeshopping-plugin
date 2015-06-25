@@ -34,6 +34,8 @@
 
 .text-align-right{ text-align: right}
 .text-align-left{ text-align: left}
+.va-textbottom{vertical-align: text-bottom;}
+.va-top{vertical-align: top;}
 
 .display-none {
     display: none !important;

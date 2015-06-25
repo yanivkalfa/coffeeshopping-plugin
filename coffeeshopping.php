@@ -321,10 +321,12 @@ if(!class_exists('coffee_shopping'))
                 $src = plugins_url($singleHeader['src'].'.'.$singleHeader['extension'], __FILE__);
                 $deps = isset($singleHeader['deps']) ? $singleHeader['deps'] : '';
                 $ver = false;
-                $page = isset($singleHeader['page']) ? $singleHeader['page'] : false;
 
-                if($page && $page !== $pagename){
-                    continue;
+                if (isset($singleHeader['page'])){
+                    $page = (is_array($singleHeader['page'])) ? $singleHeader['page'] : array($singleHeader['page']);
+                    if (!in_array($pagename, $page)){
+                        continue;
+                    }
                 }
 
                 if($singleHeader['extension'] == 'js')
@@ -439,7 +441,7 @@ if(!class_exists('coffee_shopping'))
 
         /*
          * @ On activation create Db and default page
-         * TODO:: Add a url to the google doc in here!
+         * https://docs.google.com/spreadsheets/d/1i_vk_ftcvHzHuoeu5_vh08uMAqY9zkCbRBNsYzgbTZI/edit#gid=0
          *
         */
         public function pluginActivate()
@@ -483,6 +485,8 @@ if(!class_exists('coffee_shopping'))
                 quantity int(10) NOT NULL,
                 available_quantity int(10) NOT NULL,
                 order_limit int(10) NOT NULL,
+                delivery_min varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                delivery_max varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);

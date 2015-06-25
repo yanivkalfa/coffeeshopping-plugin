@@ -4,10 +4,18 @@
  * User: SK
  * Date: 6/25/2015
  * Time: 5:47 AM
+ * TODO:: Add store working hours to stores. [maybe varchar desc]
  */
 ?>
 
 <div id="storeLocator">
+    <div id="storeLocatorAddress">
+        <div class="inline textbottom">Search for a store close to:</div>
+        <div class="inline"><input id="storeLocateInput" type="text"/> </div>
+        <div class="inline va-top"><input id="storeLocateButton" type="button" value="Go!"/></div>
+        <div id="storeLocatorAddressErr" class="display-none">We couldn't find the provided address!</div>
+    </div>
+
     <div id="mapcontdiv" class="inline">
         <div class="storesTitle">
             Closest store location:

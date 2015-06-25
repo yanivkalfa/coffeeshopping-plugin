@@ -15,9 +15,9 @@ abstract class storeHelper{
      * @return          string  - URL to the image file.
      */
     public static function getStoreMapImg($store, $width = 200, $height = 200){
-        $path = dirname(__FILE__)."/../../css/images/";
+        $path = dirname(__FILE__)."/../../css/images/store-map-images/";
         $filename = 'storemapimage-'.$store["ID"].'-'.$width.'x'.$height.'.png';
-        $storeMapImage = plugins_url( '/../../css/images/'.$filename, __FILE__ );
+        $storeMapImage = plugins_url( '/../../css/images/store-map-images/'.$filename, __FILE__ );
         // Check if we have an image for that store
         if (file_exists($path.$filename)){return $storeMapImage;}
         // If we don't have the file - get it from google! :)

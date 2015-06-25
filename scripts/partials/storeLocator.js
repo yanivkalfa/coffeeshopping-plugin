@@ -4,36 +4,35 @@
 
 jQuery(document).ready( function(){
     // declare vars.
-    var mapiframe, mapNameDiv, mapAddressDiv, aStoreLocation;
+    var mapiframe, mapNameDiv, mapAddressDiv, aStoreLocation,
+        storeLocatorAddress, storeLocatorAddressErr, storeLocateInput, storeLocateButton;
 
     mapiframe = $("#mapiframe");
     mapNameDiv = $("#mapdiv .aStoreTitleName");
     mapAddressDiv = $("#mapdiv .aStoreTitleAddress");
     aStoreLocation = $("#storescontdiv .aStoreDiv");
 
+    storeLocatorAddress = $("#storeLocatorAddress");
+    storeLocatorAddressErr = $("#storeLocatorAddressErr");
+    storeLocateInput = $("#storeLocateInput");
+    storeLocateButton = $("#storeLocateButton");
+
+
     // Register events.
     aStoreLocation.click(function(e){
         displayStoreId($(this).data("store-id"));
-        getStorePosition(position)
+    });
+    storeLocateButton.click(function(e){
+        storeLocatorAddressErr.hide();
+        getGeocodeByAddress(storeLocateInput.val());
     });
 
     // Get HTML5 Lat-Lng details.
-
-    navigator.geolocation.getCurrentPosition(getStorePosition, showError);
-    function getStorePosition(position) {
-        $ns.data.action = 'ajax_handler';
-        $ns.data.method = 'getClosestStore';
-        var coords = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
-        $ns.data.post = 'coords=' + encodeURIComponent(JSON.stringify(coords));
-
-        var data = $ns.Utils.getData();
-        if(data.success){
-            console.log(data);
-            displayStoreId(data.msg.ID);
-        }
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(navigatorGetStorePosition, showError, {enableHighAccuracy:true, timeout:60000, maximumAge:600000});
+    }
+    function navigatorGetStorePosition(position) {
+        updateClosestStore(position.coords.latitude, position.coords.longitude);
     }
     function showError(error) {
         switch(error.code) {
@@ -50,7 +49,32 @@ jQuery(document).ready( function(){
                 console.log("An unknown error occurred.");
                 break;
         }
-        // TODO:: Use google API to get the coords. [https://developers.google.com/maps/documentation/geocoding/]
+    }
+
+    function getGeocodeByAddress(address){
+        var googleMapsGeo = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDJ-x2RfRCj_wjm0gPO-VW4ZEIheV1EWhE&region=IL&components=country:IL&address=" + encodeURIComponent(address);
+        var geocode = $ns.Utils.getExternalData(googleMapsGeo);
+        if ( typeof geocode == "object" && geocode.status=="OK"){
+            updateClosestStore(geocode.results[0].geometry.location.lat, geocode.results[0].geometry.location.lng);
+        }else{
+            storeLocatorAddressErr.show();
+        }
+    }
+
+    function updateClosestStore(lat, lng){
+        $ns.data.action = 'ajax_handler';
+        $ns.data.method = 'getClosestStore';
+        var coords = {
+            lat: lat,
+            lng: lng
+        };
+        $ns.data.post = 'coords=' + encodeURIComponent(JSON.stringify(coords));
+
+        var data = $ns.Utils.getData();
+        if(data.success){
+            console.log(data);
+            displayStoreId(data.msg.ID);
+        }
     }
 
     function displayStoreId(id){

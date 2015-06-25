@@ -60,6 +60,7 @@ abstract class CSCons {
                 array('name' => 'register', 'title'=> 'Register'),
                 array('name' => 'login', 'title'=> 'Login'),
                 array('name' => 'logout', 'title'=> 'Logout'),
+                array('name' => 'stores', 'title'=> 'Our Stores'),
             ),
 
             'req_scripts' => array(
@@ -84,15 +85,17 @@ abstract class CSCons {
                     array('handle' => 'login_css',                 'src' => '/css/login',                       'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'login'),
                     array('handle' => 'login_js',                  'src' => '/scripts/pages/login',             'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'login'),
 
-                    array('handle' => 'register_css',              'src' => '/css/register',                     'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'register'),
-                    array('handle' => 'register_js',               'src' => '/scripts/pages/register',           'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'register'),
+                    array('handle' => 'register_css',              'src' => '/css/register',                    'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'register'),
+                    array('handle' => 'register_js',               'src' => '/scripts/pages/register',          'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'register'),
 
-                    array('handle' => 'checkout_css',              'src' => '/css/checkout',                      'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'checkout'),
-                    array('handle' => 'checkout_js',               'src' => '/scripts/pages/checkout',            'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
-                    array('handle' => 'address_form_js',           'src' => '/scripts/partials/addressForm',      'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
-                    array('handle' => 'storeLocator_js',           'src' => '/scripts/partials/storeLocator',     'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
+                    array('handle' => 'checkout_css',              'src' => '/css/checkout',                    'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'checkout'),
+                    array('handle' => 'checkout_js',               'src' => '/scripts/pages/checkout',          'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
+                    array('handle' => 'address_form_js',           'src' => '/scripts/partials/addressForm',    'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
 
-	                array('handle' => 'theme_css',                 'src' => '/templates/theme/css/theme',         'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'storeLocator_js',           'src' => '/scripts/partials/storeLocator',   'extension' => 'js',    'deps' => '', 'media' => '', 'page' => array('checkout', 'stores')),
+                    array('handle' => 'storeLocator_css',          'src' => '/css/storeLocator',               'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => array('checkout', 'stores')),
+
+	                array('handle' => 'theme_css',                 'src' => '/templates/theme/css/theme',       'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),
 
                 'back_end' => array(

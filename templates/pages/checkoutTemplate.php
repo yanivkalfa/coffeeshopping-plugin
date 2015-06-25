@@ -12,13 +12,14 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 
 
 <?php if(isset($orderId)) { ?>
-    <div>You've successfully save your cart, order ID: <?php echo $orderId; ?> </div>
-    <div>You can visit your account to review your card, order status and general information <a href="<?php echo $myAccountPage;?>">My Account</a></div>
-    <div>To complete the order, please, refer to one of our stores.</div>
-    <br />
+
     <?php
+    $scope = array(
+        "orderId" => $orderId,
+        "myAccountPage" => $myAccountPage
+    );
     // loading checkout template
-    Utils::getTemplate('storeLocator');
+    Utils::getTemplate('checkoutDone', $scope);
     ?>
 
 <?php }else { ?>
