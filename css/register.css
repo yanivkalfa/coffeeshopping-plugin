@@ -1,0 +1,44 @@
+.registrationblock{
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #D5D5D5;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.phonearea{
+    position:relative;
+}
+.phonearea input.form-control{
+    text-align:center;
+    height: 40px;
+    font-size: 26px;
+    color: #333;
+}
+#inputvalidatorOK{
+    position:absolute;
+    top:5px;
+    right:10px;
+    height:32px;
+    width:32px;
+    background: url("images/ok.png");
+}
+
+#inputvalidatorERR{
+    position:absolute;
+    top:5px;
+    right:10px;
+    height:32px;
+    width:32px;
+    background: url("images/error.png");
+}
+
+#passwordfield{
+    font-size: 20px;
+    font-weight: bold;
+    background: #ddd;
+    color: #E40000;
+    padding: 7px;
+    margin: 10px;
+}

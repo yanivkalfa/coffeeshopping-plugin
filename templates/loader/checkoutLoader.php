@@ -129,10 +129,8 @@ if(is_user_logged_in()){
     }
 }else{
     $scope = array(
-        'referrer' => $checkoutPage,
-        'checkoutPage' => $checkoutPage,
-        'myAccountPage' => $myAccountPage,
+        'referrer' => $checkoutPage
     );
-    Utils::getTemplate('loginOrRegister',$scope);
+    Utils::getTemplate('checkoutLoginRequest',$scope);
 }
 

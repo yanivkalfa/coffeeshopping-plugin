@@ -40,6 +40,29 @@
         return defer.promise();
     };
 
+    Utils.prototype.getExternalData = function(url){
+        var data = {};
+        $.ajax({
+            url: url,
+            type:"post",
+            async: false,
+            dataType: 'json',
+            data: $ns.data,
+            cache: true,
+            success: function (resp, status) {
+                if(status === 'success'){
+                    return data =  resp;
+                }
+                console.log('Error happened with the request: ', resp);
+            },
+            error : function (resp) {
+                console.log('Error happened with the request: ', resp);
+                return false;
+            }
+        });
+        return data;
+    };
+
     Utils.prototype.onProductQuantityChange = function(selector, availableQuantity, orderLimit){
         var limitsArr = [], productLimit = 0, inputVal, prevVal;
 
@@ -71,29 +94,6 @@
             return productLimit;// && productLimit > 1);
         }
         return inputVal;
-    };
-
-    Utils.prototype.getExternalData = function(url){
-        var data = {};
-        $.ajax({
-            url: url,
-            type:"post",
-            async: false,
-            dataType: 'json',
-            data: $ns.data,
-            cache: true,
-            success: function (resp, status) {
-                if(status === 'success'){
-                    return data =  resp;
-                }
-                console.log('Error happened with the request: ', resp);
-            },
-            error : function (resp) {
-                console.log('Error happened with the request: ', resp);
-                return false;
-            }
-        });
-        return data;
     };
 
     $ns.Utils = new Utils();

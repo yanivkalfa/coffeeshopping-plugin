@@ -76,16 +76,54 @@ class Ajax_handler {
 		exit;
 	}
 
-
+    /**
+     * @param   $post
+     * @return  array
+     *          success -   bool    -   status.
+     *          msg     -   array   -   generatedPass, errorMsg
+     */
     public function registerNewUser($post){
+        // Register the user to the DB.
         $user = userHelper::registerNewUser($post);
-        if(isset($user->errors)){
-            foreach($user->errors as $key => $errors){
-                return array(
-                    'success' => false,
-                    'msg' => array('name' => $key, 'errorMsg' => $errors[0])
-                );
-            }
+        if(!$user["success"]){
+            // failed to register.
+            return array(
+                'success' => false,
+                'msg' => array('generatedPass' => 0, "errorMsg" => $user["msg"])
+            );
+        }else{
+            // Registration is OK, use our user array.
+            $user = $user["msg"];
+        }
+
+        // Prevent login if it's an admin.
+        if (is_super_admin()) {
+            return array(
+                'success'   => true,
+                'msg'       => array('generatedPass' => $user['user_pass'], 'errorMsg' => "prevent-login")
+            );
+        }
+
+        // All good - return pass.
+        return array(
+            'success'   => true,
+            'msg'       => array('generatedPass' => $user['user_pass'], 'errorMsg' => '')
+        );
+    }
+
+    public function userLogin($details){
+        $creds = array(
+            'user_login' => $details["login"],
+            'user_password' => $details["password"],
+            'remember' => true
+        );
+
+        $user = wp_signon($creds, false);
+        if (is_wp_error($user)){
+            return array(
+                'success' => false,
+                'msg' => $user->get_error_message()
+            );
         }
 
         return array(

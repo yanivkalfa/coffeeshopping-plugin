@@ -23,8 +23,13 @@ abstract class userHelper{
         );
 
         $user = wp_insert_user( $userData ) ;
+        if(is_wp_error($user)){
+            return array( 'success' => false, 'msg' => $user->get_error_message() );
+        }
 
-        return $user;
+        $userData["ID"] = $user;
+
+        return array( 'success' => true, 'msg' => $userData );
     }
 
     public static function generateUserPass(){

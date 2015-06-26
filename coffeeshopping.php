@@ -82,12 +82,29 @@ if(!class_exists('coffee_shopping'))
              * */
             add_action( 'wp_login_failed', array($this, 'custom_login_fail') );
             add_action( 'authenticate', array($this, 'custom_login_empty'));
+            add_filter( 'login_redirect', array($this, 'custom_login_redirect'), 10, 3);
 
             /*
              * add action to register our widgets
              */
             add_action( 'widgets_init', array($this, 'register_coffeeshoppingwidgets') );
 
+        }
+
+
+        public function custom_login_redirect($redirect_to, $request, $user) {
+            global $user;
+            if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+                //check for admins
+                if ( in_array( 'administrator', $user->roles ) ) {
+                    // redirect them to the default place
+                    return $redirect_to;
+                } else {
+                    return ($request)? $request : home_url();
+                }
+            } else {
+                return ($request)? $request : home_url();
+            }
         }
 
         /**
@@ -198,7 +215,7 @@ if(!class_exists('coffee_shopping'))
         }
 
         /*
-         * @ Changing how login works and making it so it wont redirect to(wp_login) if login fail
+         * @ Changing how login works and making it so it wont redirect to (wp_login) if login fail
          * */
         public function custom_login_fail( $username )
         {
@@ -222,7 +239,7 @@ if(!class_exists('coffee_shopping'))
         }
 
         /*
-         * @ Changing how login works and making it so it wont redirect to(wp_login) if login fail
+         * @ Changing how login works and making it so it wont redirect to (wp_login) if login fail
          * */
         public function custom_login_empty()
         {

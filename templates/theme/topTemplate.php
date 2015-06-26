@@ -11,16 +11,15 @@ if (!$storesPage){Utils::adminPreECHO("Can't get stores page id", "topTemplate.p
 ?>
 
 <div id="toptemplatecont" class="center">
-    <a href="<?php echo $storesPage;?>">
+
     <div class="inline">Stores:</div>
     <?php
     $storesArr = array();
     foreach(storeHelper::getStores() as $store){
-        $storesArr[] = '<div class="inline">'.$store["name"].'</div>';
+        $storesArr[] = '<a href="'.$storesPage.'"><div class="inline">'.$store["name"].'</div></a>';
     }
     echo implode(" | ", $storesArr);
     ?>
-    </a>
     |
     <?php if(!is_user_logged_in()) { ?>
         <span>
