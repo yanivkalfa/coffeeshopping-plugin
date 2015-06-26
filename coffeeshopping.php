@@ -91,6 +91,9 @@ if(!class_exists('coffee_shopping'))
 
         }
 
+        /**
+         * Redirects admins to the admin panel and users to where-ever.
+         */
         public function custom_login_redirect($redirect_to, $requested_redirect_to, $user) {
             global $user;
             if ( isset( $user->roles ) && is_array( $user->roles ) ) {
