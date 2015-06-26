@@ -91,19 +91,18 @@ if(!class_exists('coffee_shopping'))
 
         }
 
-
-        public function custom_login_redirect($redirect_to, $request, $user) {
+        public function custom_login_redirect($redirect_to, $requested_redirect_to, $user) {
             global $user;
             if ( isset( $user->roles ) && is_array( $user->roles ) ) {
                 //check for admins
                 if ( in_array( 'administrator', $user->roles ) ) {
                     // redirect them to the default place
-                    return $redirect_to;
+                    return admin_url();
                 } else {
-                    return ($request)? $request : home_url();
+                    return $requested_redirect_to ? $requested_redirect_to : home_url();
                 }
             } else {
-                return ($request)? $request : home_url();
+                return home_url();//(!empty($request)) ? $request : home_url();
             }
         }
 

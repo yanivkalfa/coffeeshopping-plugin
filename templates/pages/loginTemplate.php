@@ -26,7 +26,7 @@
         <?php } ?>
 
         <div class="form-group">
-            <input name="redirect_to" value="<?php echo site_url(). ($referrer ? $referrer : '' ) ?>" type="hidden">
+            <input name="redirect_to" value="<?php echo ($referrer ? $referrer : '' ) ?>" type="hidden">
             <input type="submit" class="btn btn-primary form-control full-width-button" value="Login" />
         </div>
     </div>
