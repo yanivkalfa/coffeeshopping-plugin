@@ -18,4 +18,3 @@ $scope = array(
 );
 
 Utils::getTemplate('login', $scope, 'pages');
-?>

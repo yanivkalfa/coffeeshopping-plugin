@@ -11,4 +11,3 @@ if(isset($_GET['referrer'])){
 }else{
     wp_redirect( site_url().'/logout?refresh=1'  );
 }
-?>

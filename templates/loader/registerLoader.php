@@ -8,4 +8,3 @@
 
 $scope = array('errorMessages' => CSCons::get('errorMessages') ?: array());
 Utils::getTemplate('register', $scope, 'pages');
-?>

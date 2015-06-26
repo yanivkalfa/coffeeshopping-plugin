@@ -13,7 +13,7 @@
     display:inline-block;
 }
 
-.widget_searchwidget.rt-block{margin-bottom:0px;padding-bottom: 0px;}
+.widget_searchwidget.rt-block{margin-bottom:0;padding-bottom: 0;}
 .gf-menu{
     width:80%;
 }

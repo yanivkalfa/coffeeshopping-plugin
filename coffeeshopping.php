@@ -102,8 +102,8 @@ if(!class_exists('coffee_shopping'))
                 // css override for the frontend
                 function remove_admin_bar_style_frontend() {
                     echo '<style type="text/css" media="screen">
-				html { margin-top: 0px !important; }
-				* html body { margin-top: 0px !important; }
+				html { margin-top: 0 !important; }
+				* html body { margin-top: 0 !important; }
 				</style>';
                 }
                 add_filter('wp_head','remove_admin_bar_style_frontend', 99);
@@ -430,6 +430,8 @@ if(!class_exists('coffee_shopping'))
 
         /**
          *  Set admin language to english.
+         * @param string $lang
+         * @return string
          */
         public function set_admin_language($lang){
             if(is_admin()){
@@ -599,5 +601,3 @@ if(!class_exists('coffee_shopping'))
 }
 
 $coffee_shopping = new coffee_shopping();
-
-?>

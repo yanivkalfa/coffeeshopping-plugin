@@ -87,4 +87,3 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     Utils::getTemplate('searchError', $scope);
 }
 
-?>

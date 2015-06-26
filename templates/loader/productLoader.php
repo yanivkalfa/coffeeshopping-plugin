@@ -76,5 +76,3 @@ if (
     );
     Utils::getTemplate('productError');
 }
-
-?>
