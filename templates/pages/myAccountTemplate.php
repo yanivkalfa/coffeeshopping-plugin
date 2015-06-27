@@ -2,10 +2,10 @@
 
 
     <div id="tabs-selector">
-        <div id="profile-selector" class="tabselector active" data-assoc="profile">Profile</div>
-        <div id="addresses-selector" class="tabselector" data-assoc="addresses">Addresses</div>
-        <div id="orders-selector" class="tabselector" data-assoc="orders">Orders</div>
-        <div id="history-selector" class="tabselector" data-assoc="history">History</div>
+        <div id="profile-selector" class="tabselector active" data-assoc="profile"><i class="fa fa-user"></i> Profile</div>
+        <div id="addresses-selector" class="tabselector" data-assoc="addresses"><i class="fa fa-building-o"></i> Addresses</div>
+        <div id="orders-selector" class="tabselector" data-assoc="orders"><i class="fa fa-shopping-cart"></i> Orders</div>
+        <div id="history-selector" class="tabselector" data-assoc="history"><i class="fa fa-history"></i> History</div>
     </div>
 
 
