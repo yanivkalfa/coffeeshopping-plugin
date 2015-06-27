@@ -40,9 +40,6 @@
     padding: 0px 10px;
     vertical-align: top;
 }
-#savedAddressTab{
-    box-shadow: #ddd 0px 0px 5px 1px;
-}
 
 #addressform{
     max-width: 290px;
