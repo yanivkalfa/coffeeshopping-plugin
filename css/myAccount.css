@@ -1,0 +1,54 @@
+#tabs-selector{
+    background: #419BDE;
+    padding: 7px 10px;
+}
+.tabselector{
+    width: 24%;
+    display: inline-block;
+    font-size: 28px;
+    text-transform: capitalize;
+    color: #136AA0;
+    background: #FFFFFF;
+    padding: 13px;
+    position: relative;
+    top: 7px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    font-style: italic;
+    cursor: pointer;
+}
+.tabselector.active{
+    cursor: default;
+    border-bottom: none;
+    top: 8px;
+    font-style: normal;
+}
+.tabdiv{
+    vertical-align: top;
+    box-shadow: #ddd 1px 1px 1px 1px;
+    padding: 10px;
+}
+.tabdiv > div {
+    padding: 0px 10px;
+}
+
+#newAddressTab, #savedAddressTab{
+    display:inline-block;
+    width:49%;
+    padding: 0px 10px;
+    vertical-align: top;
+}
+#savedAddressTab{
+    box-shadow: #ddd 0px 0px 5px 1px;
+}
+
+#addressform{
+    max-width: 290px;
+}
+
+#profileform .inline, #profileform .details{
+    width: 50%;
+    max-width: 180px;
+}

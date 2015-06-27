@@ -93,9 +93,12 @@ abstract class CSCons {
                     array('handle' => 'address_form_js',           'src' => '/scripts/partials/addressForm',    'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
 
                     array('handle' => 'storeLocator_js',           'src' => '/scripts/partials/storeLocator',   'extension' => 'js',    'deps' => '', 'media' => '', 'page' => array('checkout', 'stores')),
-                    array('handle' => 'storeLocator_css',          'src' => '/css/storeLocator',               'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => array('checkout', 'stores')),
+                    array('handle' => 'storeLocator_css',          'src' => '/css/storeLocator',                'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => array('checkout', 'stores')),
 
-	                array('handle' => 'theme_css',                 'src' => '/templates/theme/css/theme',       'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+                    array('handle' => 'myAccount_js',           'src' => '/scripts/pages/myAccount',   'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'myaccount'),
+                    array('handle' => 'myAccount_css',          'src' => '/css/myAccount',             'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'myaccount'),
+
+                    array('handle' => 'theme_css',                 'src' => '/templates/theme/css/theme',       'extension' => 'css',   'deps' => '', 'media' => 'screen'),
                 ),
 
                 'back_end' => array(

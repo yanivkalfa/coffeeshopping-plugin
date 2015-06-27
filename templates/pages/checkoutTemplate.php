@@ -52,33 +52,15 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                             <img src="<?php echo $shiptohome;?>" alt="Ship to home"/>
                         </div>
                         <div id="savedAddressTab">
-                            <?php if(isset($addresses) && !empty($addresses)) { ?>
-                                <div id="form-alert" class="display-none">Register successfully</div>
-                                <h4> Shipping to:</h4>
-                                <?php foreach($addresses as $address){ ?>
-                                    <div class="single-address saved-address">
-                                        <div class="inline addressradio">
-                                            <input type="radio" name="address_id" value="<?php echo $address['ID'];?>" id="addressradio_<?php echo $address['ID'];?>" />
-                                        </div>
-                                        <div class="inline addressdets">
-                                            <label for="addressradio_<?php echo $address['ID'];?>">
-                                                <div class="addressName">
-                                                    <div class="inline">
-                                                        <b><?php echo $address['full_name'];?></b>
-                                                    </div>
-                                                    <div class="inline">
-                                                        - <i>(<?php echo $address['phone_number'];?>)</i>
-                                                    </div>
-                                                </div>
-                                                <div class="addressDetails">
-                                                    <?php echo $address['street']." ".$address['house']."/".$address['apt'].", ".$address['city'].", ".$address['postcode'].".";?>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                            <?php } ?>
-                            <div id="newAddress" class="single-address <?php echo isset($address) ? '' : 'display-none'; ?>">
+                            <?php
+                                $scope = array(
+                                    'addresses' => $addresses,
+                                    'header' => "Shipping to:",
+                                    'actions' => false
+                                );
+                                Utils::getTemplate('shippingAddresses', $scope);
+                            ?>
+                            <div id="newAddress" class="single-address <?php echo isset($addresses) ? '' : 'display-none'; ?>">
                                 <div class="inline addressradio">
                                     <input type="radio" name="address_id" id="newAddressField" value="newAddress"/>
                                 </div>
@@ -89,7 +71,7 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                                 </label>
                             </div>
                         </div>
-                        <div id="newAddressTab" class="<?php echo isset($address) ? 'display-none' : ''; ?>">
+                        <div id="newAddressTab" class="<?php echo isset($addresses) ? 'display-none' : ''; ?>">
                             <?php Utils::getTemplate('addressForm'); ?>
                         </div>
 
