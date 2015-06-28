@@ -127,8 +127,12 @@ jQuery(document).ready( function(){
             quantity : jQuery("#orderquantity").val(),
             price_modifiers : [
                 //{name:'storeCommission', nameAs : 'Store Commission', value : exchDetails["storeprice"]},
-                {name:'PayPalFees', nameAs : 'PayPal Fees', value : exchDetails["paypalprice"]},
-                {name:'shippingCosts', nameAs : 'Shipping Costs', value : exchDetails["shippingprice"], additional: parseInt($ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension])||0}
+                {name:'PayPalFees', nameAs: 'PayPal Fees', value: exchDetails["paypalprice"],
+                    additional: parseFloat($ns.paypalcomm*$ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension]) || 0
+                },
+                {name:'shippingCosts', nameA : 'Shipping Costs', valu : exchDetails["shippingprice"],
+                    additional: parseFloat($ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension]) || 0
+                }
             ],
             selected_variant : varArr,
             selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant]["SKU"] : "",
@@ -386,10 +390,10 @@ jQuery(document).ready( function(){
         pricetype = (typeof pricetype !== 'undefined') ? pricetype : "";
         orderquantity = (typeof orderquantity !== 'undefined') ? orderquantity : parseInt( jQuery("#orderquantity").val() );
 
-        // Load these from admin panel.
-        var paypalcomm = parseFloat(3.5/100);
-        var storecomm = 10/100;
-        var minstorecomm = 5;
+        // Load these from admin panel;
+        //var storecomm = 10/100;
+        //var minstorecomm = 5
+;
         // Get shipping details.
         var shippingprice       = parseFloat( $ns.shippingOpts[$ns.selectedShipping]["price" + pricetype]);
         var shippingadditional  = parseFloat( $ns.shippingOpts[$ns.selectedShipping]["additional" + pricetype]);
@@ -419,12 +423,12 @@ jQuery(document).ready( function(){
         outputArr["itemprice"] = itemprice;
         // Total shipping costs - shipping+(additional*quantity)+duty+insurance.
         outputArr["shippingprice"] = shippingprice;
-        // Store comminsion * item price + shipping costs. [if lower then minimum, set to minimum].
-        // outputArr["storeprice"] = (storecomm*(allitemsprice+shippingprice)>minstorecomm) ? storecomm*(allitemsprice+shippingprice) : minstorecomm;
         // Paypal comminsion * item price + shipping costs + store commision.
-        outputArr["paypalprice"] = paypalcomm*(allitemsprice+shippingprice);//+outputArr["storeprice"]);
+        outputArr["paypalprice"] =$ns. paypalcomm*(allitemsprice+shippingprice);//+outputArr["storeprice"]);
         // Final price = item(s) price + shipping + paypal + store.
         outputArr["finalPrice"] = allitemsprice+shippingprice+outputArr["paypalprice"];//+outputArr["storeprice"];
+        // Store comminsion * finalPrice. [if lower then minimum, set to minimum].
+        // outputArr["storeprice"] = (storecomm*(outputArr["finalPrice"])>minstorecomm) ? storecomm*(outputArr["finalPrice"]) : minstorecomm;
         // Total price per item = final price/quantity.
         outputArr["totalprice"] = outputArr["finalPrice"]/orderquantity;
 

@@ -24,6 +24,7 @@
     $ns.storeLink = "<?php echo $product->storeLink;?>";
     $ns.orderLimit = "<?php echo (isset($product->orderLimit)) ? $product->orderLimit : 1;?>";
     $ns.store = "<?php echo $store;?>";
+    $ns.paypalcomm = <?php echo 3.5/100;?>;
 </script>
 
 <div class="productpagecontent">
