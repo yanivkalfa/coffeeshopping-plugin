@@ -98,7 +98,7 @@
                         Total price:
                     </div>
                     <div class="inline detail">
-                        <div class="cart-product-price"><?php echo $product->getPriceAfterQuantity(); ?></div>
+                        <div class="cart-product-price"><?php echo round($product->getPriceAfterQuantity(), 2).Utils::getCurrencySymbol("ILS"); ?></div>
                     </div>
                 </div>
 
