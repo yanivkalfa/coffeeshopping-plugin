@@ -1,6 +1,4 @@
 <div id="myaccountpagecontainer">
-
-
     <div id="tabs-selector">
         <div id="profile-selector" class="tabselector active" data-assoc="profile"><i class="fa fa-user"></i> Profile</div>
         <div id="addresses-selector" class="tabselector" data-assoc="addresses"><i class="fa fa-building-o"></i> Addresses</div>
@@ -24,7 +22,7 @@
 
         <div id="newAddressTab">
             <?php Utils::getTemplate('addressForm'); ?>
-            <input type="submit" name="submit" id="submit" class="button button-primary" value="Add address!">
+            <input type="submit" name="submit" id="submit" class="button button-primary" value="Add address">
         </div>
 
         <div id="savedAddressTab">
@@ -45,15 +43,10 @@
     <div id="orders-tab-div" class="tabdiv">
         <?php
         foreach($unfinishedCarts as $cart){
-
             $scope = array(
                 'cart' => $cart
             );
             Utils::getTemplate('cartDisplay', $scope);
-
-
-            //Utils::preEcho($cart, 'cart: ');
-            //Utils::preEcho($cart->get(), 'products: ');
         }
         ?>
     </div>
@@ -63,8 +56,10 @@
     <div id="history-tab-div" class="tabdiv">
         <?php
         foreach($delivered as $cart){
-            Utils::preEcho($cart, 'cart: ');
-            //Utils::preEcho($cart->get(), 'products: ');
+            $scope = array(
+                'cart' => $cart
+            );
+            Utils::getTemplate('cartDisplay', $scope);
         }
         ?>
     </div>
