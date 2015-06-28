@@ -42,26 +42,37 @@
                     <?php endforeach; ?>
                 </div>
 
-
                 <div class="cartitemdelivery inline">
-                    <div class="inline header">
-                        Estimated delivery:
-                    </div>
-                    <div class="inline detail">
-                        <?php echo $product->delivery_min. "-" .$product->delivery_max ;?>
-                    </div>
+                    <?php if ($product->status!="delivered"){ ?>
+                        <div class="inline header">
+                            Estimated delivery:
+                        </div>
+                        <div class="inline detail">
+                            <?php echo $product->delivery_min. "-" .$product->delivery_max ;?>
+                        </div>
+
+                    <?php }else{ ?>
+
+                        <div class="inline header">
+                            Delivered at:
+                        </div>
+                        <div class="inline detail">
+                            <?php echo $product->delivered_date;?>
+                        </div>
+
+                    <?php } ?>
                 </div>
 
                 <?php if ($status){ ?>
-
-                <div class="cartitemstatus inline">
-                    <div class="inline">
-                        <i class="fa fa-check-square-o fa-3x"></i> &nbsp;&nbsp;&nbsp;
-                        <i class="fa fa-ils fa-3x"></i> &nbsp;&nbsp;&nbsp;
-                        <i class="fa fa-truck fa-3x"></i> &nbsp;&nbsp;&nbsp;
-                        <i class="fa fa-cubes fa-3x"></i> &nbsp;&nbsp;&nbsp;
-                        <i class="fa fa-thumbs-up fa-3x"></i> &nbsp;&nbsp;&nbsp;
-                    </div>
+                <div class="cartitemstatusicons inline">
+                    <?php
+                    $scope = array(
+                        'statusArr' => array_keys(CSCons::get('productStatus')),
+                        'status' => $product->status,
+                        'size' => 3
+                    );
+                    Utils::getTemplate('statusIcons', $scope);
+                    ?>
                 </div>
                 <?php } ?>
 

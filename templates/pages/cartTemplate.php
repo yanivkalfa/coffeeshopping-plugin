@@ -14,7 +14,7 @@
             'product' => $product,
             'itemClass' => ($index==count($cart)-1) ? "lastitem": "",
             'actions' => true,
-            'status' => false
+            'status' => false,
         );
         Utils::getTemplate('cartItems',$scope);
     }

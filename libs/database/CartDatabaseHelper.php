@@ -132,7 +132,7 @@ abstract class CartDatabaseHelper {
     public static function saveCart() {
         if(!isset($_SESSION['cart'])) return false;
         // array that is used to filter the properties on cart class to fit the DB fields
-        $keep = array('ID','user_id','deliver_to','address_id','payment_method','payment_amount','purchase_location','status','note','create_date');
+        $keep = array('ID','user_id','deliver_to','address_id','payment_method','payment_amount','purchase_location','status','note','create_date', 'delivered_date');
         // turning the cart class into an array.
         $cart = (array)$_SESSION['cart'];
 

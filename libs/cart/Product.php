@@ -15,6 +15,7 @@ class Product extends BasicCartObject {
     public $quantity;
     public $delivery_min;
     public $delivery_max;
+    public $delivered_date;
 
     public function __construct($product=NULL){
 
@@ -36,7 +37,7 @@ class Product extends BasicCartObject {
             $this->order_limit = (int)isset($product['order_limit']) ? $product['order_limit'] : 1;
             $this->delivery_min = isset($product['delivery_min']) ? $product['delivery_min'] : null;
             $this->delivery_max = isset($product['delivery_max']) ? $product['delivery_max'] : null;
-
+            $this->delivered_date = isset($product['delivered_date']) ? $product['delivered_date'] : null;
 
             if($product['price_modifiers'] && count($product['price_modifiers'])){
                 if(is_array($product['price_modifiers'][0])){

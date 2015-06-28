@@ -58,3 +58,10 @@
     vertical-align: top;
     width: 70%;
 }
+.cartcontentblock .header{
+    font-weight:bold;
+    font-style: italic;
+}
+.cartorderstatusicons{margin: 10px 0px;}
+.cartitemstatusicons{margin: 10px 0px;}
+.cartstatusicons > .fa.done{color:#0066bb;}

@@ -10,6 +10,7 @@ class Cart extends Collection{
     public $status;
     public $note;
     public $create_date;
+    public $delivered_date;
 
     public function __construct($cart = NULL, $products = NULL) {
         $prdc = $products;
@@ -35,6 +36,7 @@ class Cart extends Collection{
             $this->status = isset($cart['status']) ?  $cart['status'] : $cartStatus['saved'] ;
             $this->note = isset($cart['note']) ? $cart['note'] : null;
             $this->create_date = isset($cart['create_date']) ? $cart['create_date'] : null;
+            $this->delivered_date = isset($cart['create_date']) ? $cart['create_date'] : null;
         }
 
     }

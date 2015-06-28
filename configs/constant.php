@@ -461,14 +461,14 @@ abstract class CSCons {
                 'address_id' => 'You must select a shipping method'
             ),
             'cartStatus' => array(
-                'saved' => 'saved',
+                'saved' => 'Saved to cart',
                 'paid' => 'paid',
                 'storage' => 'storage',
                 'at_store' => 'at_store',
                 'delivered' => 'delivered',
             ),
             'productStatus' => array(
-                'saved' => 'saved',
+                'saved' => 'Saved to cart',
                 'paid' => 'paid',
                 'storage' => 'storage',
                 'at_store' => 'at_store',
