@@ -53,7 +53,8 @@
         }else{
             ?>
 
-            <div>
+            <div class="emptytabdisplay">
+                <h2>No existing Orders!</h2>
                 <div> You don't have any orders in your account yet! </div>
                 <div> Stop wasting time, browse our site and make some orders!</div>
             </div>
@@ -78,7 +79,8 @@
         }else{
             ?>
 
-            <div>
+            <div class="emptytabdisplay">
+                <h2>Empty History!</h2>
                 <div> You don't have any order history yet! </div>
                 <div> Once an order have been delivered it will be moved here.</div>
             </div>
