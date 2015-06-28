@@ -62,9 +62,14 @@ input[type="number"]{
     border-radius: 3px;
 }
 
-#detailspaenl{
+#detailspanel{
     overflow: auto;
     overflow-y: hidden;
+}
+#productDescriptionIframe{
+    width: 100%;
+    height: 500px;
+    border: 0;
 }
 
 /*
