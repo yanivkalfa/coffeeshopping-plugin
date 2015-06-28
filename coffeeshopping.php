@@ -186,7 +186,7 @@ if(!class_exists('coffee_shopping'))
                 $_SESSION['cart'] = new Cart($savedCart, $products);
             }
 
-            Utils::preEcho($_SESSION['cart']);
+            //Utils::preEcho($_SESSION['cart']);
         }
 
 

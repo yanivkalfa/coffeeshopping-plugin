@@ -19,8 +19,8 @@
     window.location.href = href;
   };
 
-  window.getContent = function(){
-    return $ns.productContent;
+  window.setIframeHeight = function(height){
+    $('#productDescriptionIframe').height(height);
   };
 
   window.getJqueryUrl = function(){

@@ -51,7 +51,7 @@ jQuery(document).ready( function() {
                     userLogin(data.msg.generatedPass);
                 }
             }else {
-                setInputError()
+                setInputError();
                 if(data.msg){
                     failedRegistration(data.msg.errorMsg, 'alert-warning');
                 }else{

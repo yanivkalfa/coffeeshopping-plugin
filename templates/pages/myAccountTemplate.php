@@ -1,9 +1,11 @@
 <?php
 //$delivered
+/*
 foreach($unfinishedCarts as $cart){
     Utils::preEcho($cart, 'cart: ');
     Utils::preEcho($cart->get(), 'products: ');
 }
+*/
 ?>
 <div id="myaccountpagecontainer">
 
@@ -18,7 +20,7 @@ foreach($unfinishedCarts as $cart){
 
 
     <div id="profile-tab-div" class="tabdiv">
-        <?php Utils::getTemplate('profileForm', $scope); ?>
+        <?php Utils::getTemplate('profileForm', array('user' => $user)); ?>
 
         <input type="hidden" name="action" value="update">
         <input type="hidden" name="user_id" id="user_id" value="1">

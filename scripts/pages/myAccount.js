@@ -18,4 +18,26 @@ jQuery(document).ready( function(){
         jQuery(".tabdiv").hide();
         jQuery("#" + selected + "-tab-div").show();
     }
+
+  var form = $('#registerForm');
+  var data, errorMsg, errorType;
+  $ns.data.action = 'ajax_handler';
+  $ns.data.method = 'registerNewUser';
+  $ns.data.post = 'user=' + encodeURIComponent(JSON.stringify($(form).serializeObject()));
+  data = $ns.Utils.getData();
+  if(data.success){
+    successfullRegistration(data.msg.generatedPass);
+    if (data.msg.errorMsg!="prevent-login"){
+      userLogin(data.msg.generatedPass);
+    }
+  }else {
+    setInputError()
+    if(data.msg){
+      failedRegistration(data.msg.errorMsg, 'alert-warning');
+    }else{
+      failedRegistration('<span>There was a network error please try again</span>', 'alert-error');
+    }
+  }
+
+  form.reset();
 });

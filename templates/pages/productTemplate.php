@@ -27,6 +27,8 @@ function escapeJavaScriptText($string){
     $ns.orderLimit = "<?php echo (isset($product->orderLimit)) ? $product->orderLimit : 1;?>";
     $ns.store = "<?php echo $store;?>";
     $ns.paypalcomm = parseFloat(<?php echo 3.5/100;?>);
+
+    $ns.jqueryUrl = '<?php echo plugins_url( '../../bower_components/jquery/dist/jquery.min.js', __FILE__ ); ?>';
 </script>
 
 <div class="productpagecontent">
@@ -288,12 +290,8 @@ function escapeJavaScriptText($string){
 
         <hr>
         <div id="detailspanel">
-            <iframe id="productDescriptionIframe"></iframe>
+            <iframe id="productDescriptionIframe" src="<?php echo plugins_url( '../../templates/partials/productDescriptionTemplate.php?pid='.$product->ID, __FILE__ );?>"></iframe>
         </div>
-        <script type="text/javascript">
-            //document.getElementById('productDescriptionIframe').contentWindow.document.write("<?php //echo 0 ?>");
-            document.getElementById('productDescriptionIframe').contentWindow.document.write('<?php echo escapeJavaScriptText($product->descriptionHTML); ?>');
-        </script>
     </div>
 </div>
 Debug Output: [<a href="#" id="debugOutPutTogg">+</a>]

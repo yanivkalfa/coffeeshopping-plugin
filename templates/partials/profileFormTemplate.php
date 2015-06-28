@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: SK
- * Date: 6/27/2015
- * Time: 1:36 PM
- */
-
+global $current_user;
+get_currentuserinfo();
 ?>
-
 <div id="profileform">
     <h4>Profile details:</h4>
     <div>
@@ -15,7 +9,7 @@
             Account Phone #:
         </div>
         <div class="inline detail form-group">
-            0525975040
+            <?php echo $user->user_login; ?>
         </div>
     </div>
     <div>
@@ -23,7 +17,7 @@
             First Name:
         </div>
         <div class="inline detail form-group">
-            <input type="text" name="first_name" id="first_name" value="">
+            <input type="text" name="first_name" id="first_name" value="<?php echo $current_user->user_firstname; ?>">
         </div>
     </div>
 
@@ -32,7 +26,7 @@
             Last Name:
         </div>
         <div class="inline detail form-group">
-            <input type="text" name="last_name" id="last_name" value="">
+            <input type="text" name="last_name" id="last_name" value="<?php echo $current_user->user_lastname; ?>">
         </div>
     </div>
 
@@ -41,7 +35,7 @@
             E-mail:
         </div>
         <div class="inline detail form-group">
-            <input type="email" name="email" id="email" value="shlomikalfa@yahoo.com">
+            <input type="email" name="user_email" id="user_email" value="<?php echo $user->user_email; ?>">
         </div>
     </div>
 
