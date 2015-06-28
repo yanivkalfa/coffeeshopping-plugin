@@ -13,6 +13,8 @@ class Product extends BasicCartObject {
     public $price;
     public $status;
     public $quantity;
+    public $delivery_min;
+    public $delivery_max;
 
     public function __construct($product=NULL){
 
