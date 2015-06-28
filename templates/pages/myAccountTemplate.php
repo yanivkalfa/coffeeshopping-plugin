@@ -1,3 +1,10 @@
+<?php
+//$delivered
+foreach($unfinishedCarts as $cart){
+    Utils::preEcho($cart, 'cart: ');
+    Utils::preEcho($cart->get(), 'products: ');
+}
+?>
 <div id="myaccountpagecontainer">
 
 
@@ -30,7 +37,7 @@
         <div id="savedAddressTab">
             <?php
             $scope = array(
-                'addresses' => $addresses,
+                'addresses' => isset($addresses) ? $addresses : array(),
                 'header' => "Your addresses:",
                 'selectable' => false
             );

@@ -10,7 +10,7 @@ class ProductPriceModifier extends BasicCartObject {
 
         if(is_array($ProductPriceModifier)) {
             $this->name = isset($ProductPriceModifier['name']) ? $ProductPriceModifier['name'] : '';
-            $this->nameAs = isset($ProductPriceModifier['name']) ? $ProductPriceModifier['name'] : '';
+            $this->nameAs = isset($ProductPriceModifier['nameAs']) ? $ProductPriceModifier['nameAs'] : '';
             $this->value = isset($ProductPriceModifier['value']) ? $ProductPriceModifier['value'] : 0;
             $this->additional = isset($ProductPriceModifier['additional']) ? $ProductPriceModifier['additional'] : 0;
         }

@@ -13,6 +13,27 @@ class Collection extends BasicCartObject{
         $this->{$this->colName} = isset($col['collection']) ? $col['collection'] : [];
     }
 
+    public function generateRandomId($randId = ''){
+
+        if($this->isUnique($randId) && !empty($randId)){
+            return $randId;
+        }
+        $randId = '';
+        for($i = 0; $i<10; $i++){
+            $randId .= rand(1,100);
+        }
+        return $this->generateRandomId($randId);
+    }
+
+    public function isUnique ($uniqueProp){
+        $items = $this->get();
+        foreach($items as $item){
+            $item = (array)$item;
+            if($item[$this->prop] == $uniqueProp) return false;
+        }
+        return true;
+    }
+
     public function add ($item, $prop = false){
         if($this->unique){
             $index = $this->indexOf($item, $prop? : $this->prop);

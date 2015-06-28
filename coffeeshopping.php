@@ -172,16 +172,20 @@ if(!class_exists('coffee_shopping'))
 
             //unset($_SESSION['cart']);
             if(!isset($_SESSION['cart']) || (isset($_SESSION['cart']) && $_SESSION['cart']->ID)){
+                $cartStatus = CSCons::get('cartStatus') ?: array();
                 $savedCart = NULL;
                 if(is_user_logged_in()){
                     $current_user = wp_get_current_user();
                     $savedCart = CartDatabaseHelper::getCart($current_user->ID);
+                    if(isset($_SESSION['cart']) && $savedCart['status'] === $cartStatus['saved']) {
+                        return;
+                    }
                 }
                 $products = isset($savedCart['ID']) ? CartDatabaseHelper::getCartProduct($savedCart['ID']) : NULL;
-                //$address = isset($savedCart['ID']) ? new Address(CartDatabaseHelper::getCartAddress($savedCart['ID'])) :  new Address();
 
                 $_SESSION['cart'] = new Cart($savedCart, $products);
             }
+
             //Utils::preEcho($_SESSION['cart']);
         }
 
@@ -574,6 +578,7 @@ if(!class_exists('coffee_shopping'))
               address varchar(255) NOT NULL,
               lat float(10, 6) NOT NULL,
               lng float(10, 6) NOT NULL,
+              description varchar(255) NOT NULL,
               UNIQUE KEY cuunique (`ID`)
               );";
             dbDelta($table);

@@ -34,7 +34,13 @@ class myCartWidget extends WP_Widget {
             return;
         }
 
-        $cart =  $_SESSION['cart']->getStats();
+        $cart = array(
+            'productCount' => 0
+        );
+        if(isset($_SESSION['cart'])){
+            $cart =  $_SESSION['cart']->getStats();
+        }
+
         $cart['page'] = $myCartWidgetPageLink;
         Utils::getTemplate('myCartWidget', $cart);
 

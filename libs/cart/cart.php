@@ -22,14 +22,15 @@ class Cart extends Collection{
         parent::__construct($colOpts);
 
         if(is_array($cart)){
-            $this->ID = $cart['ID'];
-            $this->user_id = $cart['user_id'];
-            $this->deliver_to = $cart['deliver_to'];
-            $this->address_id = $cart['address_id'];
-            $this->payment_method = $cart['payment_method'];
-            $this->purchase_location = $cart['purchase_location'];
-            $this->status = $cart['status'];
-            $this->create_date = $cart['create_date'];
+            $cartStatus = CSCons::get('cartStatus') ?: array();
+            $this->ID = isset($cart['ID']) ? $cart['ID'] : null;
+            $this->user_id = isset($cart['user_id']) ? $cart['user_id'] : null;
+            $this->deliver_to = isset($cart['deliver_to']) ? $cart['deliver_to'] : null;
+            $this->address_id = isset($cart['address_id']) ? $cart['address_id'] : null;
+            $this->payment_method = isset($cart['payment_method']) ? $cart['payment_method'] : null;
+            $this->purchase_location = isset($cart['purchase_location']) ? $cart['purchase_location'] : null;
+            $this->status = isset($cart['status']) ?  $cart['status'] : $cartStatus['saved'] ;
+            $this->create_date = isset($cart['create_date']) ? $cart['create_date'] : null;
         }
 
     }
@@ -52,27 +53,6 @@ class Cart extends Collection{
 
     public function setPurchaseLocation($purchase_location){
         $this->purchase_location = $purchase_location;
-    }
-
-
-    public function generateRandomId($randId = ''){
-
-        if($this->isUnique($randId) && !empty($randId)){
-            return $randId;
-        }
-        $randId = '';
-        for($i = 0; $i<10; $i++){
-            $randId .= rand(1,100);
-        }
-        return $this->generateRandomId($randId);
-    }
-
-    public function isUnique ($id){
-        $products = $this->get();
-        foreach($products as $product){
-            if($product->id == $id) return false;
-        }
-        return true;
     }
 
     public function add ($item, $prop = false){
@@ -102,7 +82,7 @@ class Cart extends Collection{
         $total = 0;
         $products = $this->get();
         foreach($products as $product){
-            $total += $product->getCalculatedPriceAfterQuantity();
+            $total += $product->getCalculatedPrice();
         }
         return $total;
     }
@@ -153,15 +133,18 @@ class Cart extends Collection{
     public function indexOf ($item = false, $prop = false){
         if(!$item) return -1;
 
+        // created $filtered array with items with same unique store id.
         $filtered = array_filter($this->{$this->colName}, function($saved)use($item) {
             $saved = (array)$saved;
             $item =(array)$item;
             return $saved[$this->prop] === $item[$this->prop];
         });
 
+        // if $filtered array is empty meaning we did not find any item with same id.
         if(!count($filtered)) return -1;
 
-
+        // running over all the items with same if adn checking if the
+        // selected_variant arrays match if not meaning it is a new item
         foreach($filtered as $index => $savedItem){
             $exist = $this->productExist($item, $savedItem);
             if($exist){

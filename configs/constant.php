@@ -460,6 +460,13 @@ abstract class CSCons {
                 'equalTo' => 'Passwords does not match',
                 'address_id' => 'You must select a shipping method'
             ),
+            'cartStatus' => array(
+                'saved' => 'saved',
+                'paid' => 'paid',
+                'storage' => 'storage',
+                'at_store' => 'at_store',
+                'delivered' => 'delivered',
+            ),
         );
         return isset($constants[$consName]) ? $constants[$consName] : false ;
     }

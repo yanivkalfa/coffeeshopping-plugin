@@ -5,6 +5,59 @@
 
 abstract class CartDatabaseHelper {
 
+
+
+    public static function generateCart($carts){
+        foreach($carts as $key => $cart){
+            $products = self::getCartProduct($cart['ID']);
+            $carts[$key] = CartHelper::initCart($cart, $products);
+        }
+        return $carts;
+    }
+
+    /**
+     * getUnfinishedCarts by user id
+     *
+     * @param {number} $cartId
+     * @return bool|array
+     */
+    public static function getUnfinishedCarts($userId){
+        global $wpdb;
+        $cartStatus = CSCons::get('cartStatus') ?: array();
+        $table_name = $wpdb->prefix . 'cs_carts';
+        $currentCart = self::getCart($userId);
+        if($currentCart){
+            $currentCart = array($currentCart);
+        }else{
+            $currentCart = array();
+        }
+
+        $unfinishedCarts = $wpdb->get_results("SELECT * FROM $table_name
+                              WHERE `user_id` = '$userId' AND `status` NOT IN ('".$cartStatus['delivered']."', '".$cartStatus['saved']."')
+                              ORDER BY `status` ASC , `create_date` DESC", ARRAY_A);
+
+        if(!$unfinishedCarts){
+            $unfinishedCarts = array();
+        }
+        $carts = array_merge ($currentCart, $unfinishedCarts);
+        return self::generateCart($carts);
+    }
+
+    /**
+     * getDeliveredCarts by user id
+     *
+     * @param {number} $cartId
+     * @return bool|array
+     */
+    //".$cartStatus['saved']."
+    public static function getDeliveredCarts($userId){
+        global $wpdb;
+        $cartStatus = CSCons::get('cartStatus') ?: array();
+        $table_name = $wpdb->prefix . 'cs_carts';
+        $carts = $wpdb->get_results("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['delivered']."' ORDER BY `create_date` DESC", ARRAY_A);
+        return self::generateCart($carts);
+    }
+
     /**
      * getCartAddressId by user id
      *
@@ -25,8 +78,9 @@ abstract class CartDatabaseHelper {
      */
     public static function getCart($userId){
         global $wpdb;
+        $cartStatus = CSCons::get('cartStatus') ?: array();
         $table_name = $wpdb->prefix . 'cs_carts';
-        return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = 'saved' ORDER BY `create_date` DESC", ARRAY_A);
+        return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['saved']."' ORDER BY `create_date` DESC", ARRAY_A);
     }
 
     /**

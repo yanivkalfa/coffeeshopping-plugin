@@ -51,7 +51,7 @@
                                 Quantity:
                             </div>
                             <div class="inline detail">
-                                <input type="number" min="1" max="<?php echo $product->order_limit; ?>" id="quantity" class="product-quantity form-control" value="<?php echo $product->quantity; ?>"/>
+                                <input type="number" min="1" <?php echo $product->order_limit ? 'max="'.$product->order_limit.'"' : '';  ?> id="quantity" class="product-quantity form-control" value="<?php echo $product->quantity; ?>"/>
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@
                                 Total price:
                             </div>
                             <div class="inline detail">
-                                <div class="cart-product-price"><?php echo $product->getPriceAfterQuantity(); ?></div>
+                                <div class="cart-product-price"><?php echo $product->getCalculatedPrice(); ?></div>
                             </div>
                             <div class="cart-product-remove btn btn-primary">Remove item</div>
                         </div>
