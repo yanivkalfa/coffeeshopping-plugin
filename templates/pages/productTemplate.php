@@ -288,7 +288,6 @@ function escapeJavaScriptText($string){
 
         <hr>
         <div id="detailspanel">
-            <?php //echo $product->descriptionHTML;?>
             <iframe id="productDescriptionIframe"></iframe>
         </div>
         <script type="text/javascript">
