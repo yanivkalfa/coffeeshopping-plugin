@@ -19,6 +19,7 @@ class Product extends BasicCartObject {
     public function __construct($product=NULL){
 
         if(is_array($product)) {
+            $productStatus = CSCons::get('productStatus') ?: array();
             $this->ID = isset($product['ID']) ? $product['ID'] : null;
             $this->cart_id = isset($product['cart_id']) ? $product['cart_id'] : null;
             $this->unique_store_id = $product['unique_store_id'];
@@ -29,7 +30,7 @@ class Product extends BasicCartObject {
             $this->img = isset($product['img']) ? $product['img'] : null;
             $this->title = isset($product['title']) ? $product['title'] : null;
             $this->price = (float)isset($product['price']) ? $product['price'] : 0;
-            $this->status = isset($product['status']) ? $product['status'] : null;
+            $this->status = isset($product['status']) ? $product['status'] : $productStatus["saved"];
             $this->quantity = (int)isset($product['quantity']) ? $product['quantity'] : 1;
             $this->available_quantity = (int)isset($product['available_quantity']) ? $product['available_quantity'] : 1;
             $this->order_limit = (int)isset($product['order_limit']) ? $product['order_limit'] : 1;

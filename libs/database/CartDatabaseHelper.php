@@ -5,8 +5,6 @@
 
 abstract class CartDatabaseHelper {
 
-
-
     public static function generateCart($carts){
         foreach($carts as $key => $cart){
             $products = self::getCartProduct($cart['ID']);
@@ -120,10 +118,10 @@ abstract class CartDatabaseHelper {
      * @param {number} $cartId
      * @return bool|array
      */
-    public static function getCartAddress($cartId){
+    public static function getCartAddress($addressId){
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_addresses';
-        return $wpdb->get_row("SELECT * FROM $table_name WHERE `ID` = '$cartId'", ARRAY_A);
+        return $wpdb->get_row("SELECT * FROM $table_name WHERE `ID` = '$addressId'", ARRAY_A);
     }
 
     /**
@@ -134,7 +132,7 @@ abstract class CartDatabaseHelper {
     public static function saveCart() {
         if(!isset($_SESSION['cart'])) return false;
         // array that is used to filter the properties on cart class to fit the DB fields
-        $keep = array('ID','user_id','deliver_to','address_id','payment_method','purchase_location','status','create_date');
+        $keep = array('ID','user_id','deliver_to','address_id','payment_method','payment_amount','purchase_location','status','note','create_date');
         // turning the cart class into an array.
         $cart = (array)$_SESSION['cart'];
 

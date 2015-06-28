@@ -467,6 +467,13 @@ abstract class CSCons {
                 'at_store' => 'at_store',
                 'delivered' => 'delivered',
             ),
+            'productStatus' => array(
+                'saved' => 'saved',
+                'paid' => 'paid',
+                'storage' => 'storage',
+                'at_store' => 'at_store',
+                'delivered' => 'delivered',
+            ),
         );
         return isset($constants[$consName]) ? $constants[$consName] : false ;
     }

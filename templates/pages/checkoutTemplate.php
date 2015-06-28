@@ -83,8 +83,6 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 
             <div id="submitCheckout" class="form-group display-none">
                 <input name="saveAddress" value="true" type="hidden">
-                <input id="lat-location" name="lat" value="" type="hidden">
-                <input id="lng-location" name="lng" value="" type="hidden">
                 <input type="submit" class="btn btn-primary form-control full-width-button" value="Checkout" />
             </div>
         </form>

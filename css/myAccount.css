@@ -49,3 +49,12 @@
     width: 50%;
     max-width: 180px;
 }
+
+.cartcontentblock > .cartdetails {
+    vertical-align: top;
+    width: 29%;
+}
+.cartcontentblock > .cartproducts {
+    vertical-align: top;
+    width: 70%;
+}

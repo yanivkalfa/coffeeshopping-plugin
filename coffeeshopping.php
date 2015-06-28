@@ -484,9 +484,11 @@ if(!class_exists('coffee_shopping'))
                 user_id bigint(20) NOT NULL,
                 deliver_to varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 address_id bigint(20) NOT NULL,
-                payment_method varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'saved',
+                payment_method varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'cash',
+                payment_amount float(20) NOT NULL,
                 purchase_location varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'saved',
+                note varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE KEY cuunique (`ID`)
                 );";

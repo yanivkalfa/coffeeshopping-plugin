@@ -1,12 +1,3 @@
-<?php
-//$delivered
-/*
-foreach($unfinishedCarts as $cart){
-    Utils::preEcho($cart, 'cart: ');
-    Utils::preEcho($cart->get(), 'products: ');
-}
-*/
-?>
 <div id="myaccountpagecontainer">
 
 
@@ -52,13 +43,30 @@ foreach($unfinishedCarts as $cart){
 
 
     <div id="orders-tab-div" class="tabdiv">
+        <?php
+        foreach($unfinishedCarts as $cart){
 
+            $scope = array(
+                'cart' => $cart
+            );
+            Utils::getTemplate('cartDisplay', $scope);
+
+
+            //Utils::preEcho($cart, 'cart: ');
+            //Utils::preEcho($cart->get(), 'products: ');
+        }
+        ?>
     </div>
 
 
 
     <div id="history-tab-div" class="tabdiv">
-
+        <?php
+        foreach($delivered as $cart){
+            Utils::preEcho($cart, 'cart: ');
+            //Utils::preEcho($cart->get(), 'products: ');
+        }
+        ?>
     </div>
 
 
