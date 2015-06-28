@@ -67,6 +67,11 @@ if (
                         "exchextension"                                 => $scope['exchangeExtension'],
                 );
 
+                $scope['productDescScriptTags'] = '
+                <script src="'.plugins_url( '../../bower_components/jquery/dist/jquery.min.js', __FILE__ ).'"></script>
+                <script src="'.plugins_url( '../../script/partials/productDescription.js', __FILE__ ).'"></script>
+                ';
+
                 Utils::getTemplate('product',$scope, 'pages');
             }
 }else{

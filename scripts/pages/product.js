@@ -11,6 +11,23 @@
  $ns.exchCurrency = "<?php echo $exchangeCurrency;?>";
 * */
 
+/*
+* This section are function that are made available for the ifram.
+* */
+(function(){
+  window.navigateTo = function(href){
+    window.location.href = href;
+  };
+
+  window.getContent = function(){
+    return $ns.productContent;
+  };
+
+  window.getJqueryUrl = function(){
+    return $ns.jqueryUrl;
+  }
+})();
+
 jQuery(document).ready( function(){
     /*
      ZoomIt BEGIN/
