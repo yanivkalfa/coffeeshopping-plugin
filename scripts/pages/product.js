@@ -116,11 +116,12 @@ jQuery(document).ready( function(){
         }
 
         var exchDetails = getProductPricesDetails($ns.exchExtension, 1);
-        var varArr = getCurrentVarSel();
+        var varArr = ($ns.selectedVariant!=-1) ? getCurrentVarSel() : {};
+
         var product = {
             unique_store_id : $ns.productID,
             store : $ns.store,
-            img : getSelectedVariantImage(varArr),
+            img : ($ns.selectedVariant!=-1) ? getSelectedVariantImage(varArr) : $ns.productPic,
             title : $ns.productTitle,
             price : exchDetails["itemprice"],
             quantity : jQuery("#orderquantity").val(),
@@ -133,7 +134,9 @@ jQuery(document).ready( function(){
             selected_var_SKU: $ns.selectedVariant!=-1 ? $ns.variations[$ns.selectedVariant]["SKU"] : "",
             store_link: $ns.storeLink,
             available_quantity: getAvailableQuantity(),
-            order_limit: $ns.orderLimit
+            order_limit: $ns.orderLimit,
+            delivery_min: $ns.shippingOpts[$ns.selectedShipping]["deliveryMin"]["date"],
+            delivery_max: $ns.shippingOpts[$ns.selectedShipping]["deliveryMax"]["date"]
         };
 
         $ns.data.action = 'ajax_handler';
@@ -262,7 +265,7 @@ jQuery(document).ready( function(){
         _.forEach(Object.keys(varArr), function(key){
             var value = varArr[key];
 
-            if (typeof $ns.variationSets[key][value] !== 'undefined'){
+            if (typeof $ns.variationSets[key][value] == 'string'){
                 image = $ns.variationSets[key][value];
                 return false;
             }

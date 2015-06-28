@@ -13,6 +13,8 @@ class Product extends BasicCartObject {
     public $price;
     public $status;
     public $quantity;
+    public $delivery_min;
+    public $delivery_max;
 
     public function __construct($product=NULL){
 
@@ -31,6 +33,8 @@ class Product extends BasicCartObject {
             $this->quantity = (int)isset($product['quantity']) ? $product['quantity'] : 1;
             $this->available_quantity = (int)isset($product['available_quantity']) ? $product['available_quantity'] : 1;
             $this->order_limit = (int)isset($product['order_limit']) ? $product['order_limit'] : 1;
+            $this->delivery_min = isset($product['delivery_min']) ? $product['delivery_min'] : null;
+            $this->delivery_max = isset($product['delivery_max']) ? $product['delivery_max'] : null;
 
             if($product['price_modifiers'] && count($product['price_modifiers'])){
                 if(is_array($product['price_modifiers'][0])){
