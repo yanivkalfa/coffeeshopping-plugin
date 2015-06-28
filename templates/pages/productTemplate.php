@@ -2,7 +2,9 @@
 /**
  * TODO: details not in use: $product->>> handlingTime, timeLeft, availableTill.
  */
-
+function escapeJavaScriptText($string){
+    return str_replace("\n", '\n', str_replace('"', '\"', addcslashes(str_replace("\r", '', (string)$string), "\0..\37'\\")));
+}
 ?>
 <!-- all variables comes from Utils::getTemplate -->
 
@@ -24,7 +26,7 @@
     $ns.storeLink = "<?php echo $product->storeLink;?>";
     $ns.orderLimit = "<?php echo (isset($product->orderLimit)) ? $product->orderLimit : 1;?>";
     $ns.store = "<?php echo $store;?>";
-    $ns.paypalcomm = <?php echo 3.5/100;?>;
+    $ns.paypalcomm = parseFloat(<?php echo 3.5/100;?>);
 </script>
 
 <div class="productpagecontent">
@@ -285,9 +287,14 @@
         </div>
 
         <hr>
-        <div id="detailspaenl">
-            <?php echo $product->descriptionHTML;?>
+        <div id="detailspanel">
+            <?php //echo $product->descriptionHTML;?>
+            <iframe id="productDescriptionIframe"></iframe>
         </div>
+        <script type="text/javascript">
+            //document.getElementById('productDescriptionIframe').contentWindow.document.write("<?php //echo 0 ?>");
+            document.getElementById('productDescriptionIframe').contentWindow.document.write('<?php echo escapeJavaScriptText($product->descriptionHTML); ?>');
+        </script>
     </div>
 </div>
 Debug Output: [<a href="#" id="debugOutPutTogg">+</a>]
