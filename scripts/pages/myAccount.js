@@ -2,9 +2,11 @@
  * Created by SK on 6/27/2015.
  */
 jQuery(document).ready( function(){
-    var alertSelector,tabselector,profileForm, addressForm, savedAddresses;
+    var alertSelector,tabselector,profileForm, addressForm, savedAddresses,profileFormAlert,addressFormAlert;
     tabselector = jQuery(".tabselector");
     savedAddresses = $('#savedAddresses');
+    $ns.errorMessages = $ns.errorMessages || {};
+    $ns.warningMessages = $ns.warningMessages || {};
 
     function createAddressHtml(address){
         return $([
@@ -25,7 +27,7 @@ jQuery(document).ready( function(){
             '<div class="inline addressactions flleft">',
                 '<div class="inline removeaddress" data-address-id="' + address.ID + '">[X]</div>',
             '</div>',
-        '</div>',
+        '</div>'
         ].join(''));
     }
 
@@ -41,7 +43,12 @@ jQuery(document).ready( function(){
         toggleDisplayDiv();
     });
 
+    profileFormAlert = $('#profileForm-alert');
     savedAddresses.on("click", '.removeaddress', function(e){
+        if (!confirm($ns.warningMessages.delete || 'You are about to delete an address would you like to continue ?')) {
+            return false;
+        }
+
         var address_id, data;
         address_id = $(this).data('address-id');
 
@@ -53,10 +60,10 @@ jQuery(document).ready( function(){
             $(this).parents('.single-address').remove();
         }else {
             if(data.msg){
-                alertSelector.html(data.msg.errorMsg)
+                profileFormAlert.html(data.msg.errorMsg)
                     .removeClass('display-none alert-error alert-warning alert-success').addClass('alert-error');
             }else{
-                alertSelector.html('We were unable to communicate with the server')
+                profileFormAlert.html('We were unable to communicate with the server')
                     .removeClass('display-none alert-error alert-warning alert-success').addClass('alert-error');
             }
         }
@@ -70,8 +77,6 @@ jQuery(document).ready( function(){
     }
 
     profileForm = $('#profileForm');
-    alertSelector = $('#profileForm-alert');
-
     profileForm.on('submit', function(){
         var data;
         $ns.data.action = 'ajax_handler';
@@ -79,26 +84,22 @@ jQuery(document).ready( function(){
         $ns.data.post = 'user=' + encodeURIComponent(JSON.stringify(profileForm.serializeJSON()));
         data = $ns.Utils.getData();
         if(data.success){
-            alertSelector.html('')
-                .removeClass('display-none alert-error alert-warning alert-success').addClass('display-none');
+            profileFormAlert.html(data.msg)
+                .removeClass('display-none alert-error alert-warning alert-success').addClass('alert-success');
         }else {
             if(data.msg){
-                alertSelector.html(data.msg.errorMsg)
+                profileFormAlert.html(data.msg.errorMsg)
                     .removeClass('display-none alert-error alert-warning alert-success').addClass('alert-error');
             }else{
-                alertSelector.html('We were unable to communicate with the server')
+                profileFormAlert.html('We were unable to communicate with the server')
                     .removeClass('display-none alert-error alert-warning alert-success').addClass('alert-error');
             }
         }
         return false;
     });
 
-
-
     addressForm = $('#addressForm');
-    alertSelector = $('#addressForm-alert');
-    $ns.errorMessages = $ns.errorMessages || {};
-
+    addressFormAlert = $('#addressForm-alert');
     if(addressForm.length) {
         addressForm[0].reset();
 
@@ -118,14 +119,14 @@ jQuery(document).ready( function(){
                 if(data.success){
 
                     savedAddresses.append(createAddressHtml(data.msg));
-                    alertSelector.html('')
+                    addressFormAlert.html('')
                         .removeClass('display-none alert-error alert-warning alert-success').addClass('display-none');
                 }else {
                     if(data.msg){
-                        alertSelector.html(data.msg.errorMsg)
+                        addressFormAlert.html(data.msg.errorMsg)
                             .removeClass('display-none alert-error alert-warning alert-success').addClass('alert-error');
                     }else{
-                        alertSelector.html('We were unable to communicate with the server')
+                        addressFormAlert.html('We were unable to communicate with the server')
                             .removeClass('display-none alert-error alert-warning alert-success').addClass('alert-error');
                     }
                 }
