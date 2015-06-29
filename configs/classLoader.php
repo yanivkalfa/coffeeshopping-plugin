@@ -15,7 +15,7 @@ class ClassLoader{
         require_once $pluginFolder.'/libs/cart/Address.php';
         require_once $pluginFolder.'/libs/cart/ProductPriceModifier.php';
         require_once $pluginFolder.'/libs/cart/Product.php';
-        require_once $pluginFolder.'/libs/cart/cart.php';
+        require_once $pluginFolder.'/libs/cart/Cart.php';
 
     }
 }
