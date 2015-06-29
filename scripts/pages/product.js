@@ -143,11 +143,13 @@ jQuery(document).ready( function(){
             price : exchDetails["itemprice"],
             quantity : jQuery("#orderquantity").val(),
             price_modifiers : [
-                //{name:'storeCommission', nameAs : 'Store Commission', value : exchDetails["storeprice"]},
+                /*
+                {name:'storeCommission', nameAs : 'Store Commission', value : exchDetails["storeprice"]},
                 {name:'PayPalFees', nameAs: 'PayPal Fees', value: exchDetails["paypalprice"],
-                    additional: parseFloat($ns.paypalcomm*$ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension]) || 0
+                    additional: parseFloat($ns.paypalcomm * $ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension]) || 0
                 },
-                {name:'shippingCosts', nameA : 'Shipping Costs', valu : exchDetails["shippingprice"],
+                */
+                {name:'shippingCosts', nameAs: 'Shipping Costs', value: exchDetails["shippingprice"],
                     additional: parseFloat($ns.shippingOpts[$ns.selectedShipping]["additional" + $ns.exchExtension]) || 0
                 }
             ],
@@ -407,10 +409,10 @@ jQuery(document).ready( function(){
         pricetype = (typeof pricetype !== 'undefined') ? pricetype : "";
         orderquantity = (typeof orderquantity !== 'undefined') ? orderquantity : parseInt( jQuery("#orderquantity").val() );
 
-        // Load these from admin panel;
-        //var storecomm = 10/100;
-        //var minstorecomm = 5
-;
+        // Load these from admin panel:
+        // var storecomm = 10/100;
+        // var minstorecomm = 5;
+
         // Get shipping details.
         var shippingprice       = parseFloat( $ns.shippingOpts[$ns.selectedShipping]["price" + pricetype]);
         var shippingadditional  = parseFloat( $ns.shippingOpts[$ns.selectedShipping]["additional" + pricetype]);
