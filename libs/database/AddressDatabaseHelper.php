@@ -17,19 +17,13 @@ abstract class AddressDatabaseHelper extends SuperDatabaseHelper {
         return $wpdb->get_row("SELECT * FROM $table_name WHERE `ID` = '$addressId'", ARRAY_A);
     }
 
-    public static function addAddress(){
-        if(!$hasCart){
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'cs_addresses';
-            CartDatabaseHelper::deleteItem(array('ID' => $address_id), $table_name);
-        }
+    public static function addAddress($address){
+        if(!is_array($address)) return false;
+        return self::insertItem($address, 'cs_addresses');
     }
 
-    public static function deleteAddress(){
-        if(!$hasCart){
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'cs_addresses';
-            CartDatabaseHelper::deleteItem(array('ID' => $address_id), $table_name);
-        }
+    public static function deleteAddress($address_id){
+        if(!$address_id) return false;
+        return self::deleteItem(array('ID' => $address_id), 'cs_addresses');
     }
 }

@@ -15,7 +15,7 @@ if(is_user_logged_in()) {
     if(isset($addressesIds) && !empty($addressesIds)){
         // getting saved address.
         foreach($addressesIds as $key => $address){
-            $address = CartDatabaseHelper::getAddress($address);
+            $address = AddressDatabaseHelper::getAddress($address);
             if(!empty($address)){
                 $scope['addresses'][$key] = $address;
             }

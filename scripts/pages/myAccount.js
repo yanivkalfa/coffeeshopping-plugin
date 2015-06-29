@@ -2,7 +2,7 @@
  * Created by SK on 6/27/2015.
  */
 jQuery(document).ready( function(){
-    var alertSelector,tabselector,form, savedAddresses;
+    var alertSelector,tabselector,profileForm, addressForm, savedAddresses;
     tabselector = jQuery(".tabselector");
     savedAddresses = $('#savedAddresses');
 
@@ -69,15 +69,14 @@ jQuery(document).ready( function(){
         jQuery(showtab + "-tab-div").show();
     }
 
-    form = $('#profileForm');
+    profileForm = $('#profileForm');
     alertSelector = $('#profileForm-alert');
 
-
-    form.on('submit', function(){
+    profileForm.on('submit', function(){
         var data;
         $ns.data.action = 'ajax_handler';
         $ns.data.method = 'updateUserProfile';
-        $ns.data.post = 'user=' + encodeURIComponent(JSON.stringify($(form).serializeObject()));
+        $ns.data.post = 'user=' + encodeURIComponent(JSON.stringify(profileForm.serializeJSON()));
         data = $ns.Utils.getData();
         if(data.success){
             alertSelector.html('')
@@ -96,14 +95,14 @@ jQuery(document).ready( function(){
 
 
 
-    form = $('#addressForm');
+    addressForm = $('#addressForm');
     alertSelector = $('#addressForm-alert');
     $ns.errorMessages = $ns.errorMessages || {};
 
-    if(form.length) {
-        form[0].reset();
+    if(addressForm.length) {
+        addressForm[0].reset();
 
-        form.validate({
+        addressForm.validate({
             onkeyup : function(element){
                 $(element).valid()
             },
@@ -114,7 +113,7 @@ jQuery(document).ready( function(){
                 var data;
                 $ns.data.action = 'ajax_handler';
                 $ns.data.method = 'addAddress';
-                $ns.data.post = 'address=' + encodeURIComponent(JSON.stringify($(form).serializeJSON().address));
+                $ns.data.post = 'address=' + encodeURIComponent(JSON.stringify(addressForm.serializeJSON().address));
                 data = $ns.Utils.getData();
                 if(data.success){
 
@@ -130,6 +129,9 @@ jQuery(document).ready( function(){
                             .removeClass('display-none alert-error alert-warning alert-success').addClass('alert-error');
                     }
                 }
+
+                addressForm[0].reset();
+
                 return false;
             },
             invalidHandler: function (event, validator) {
@@ -159,7 +161,7 @@ jQuery(document).ready( function(){
         });
 
         $ns.Utils.getAsyncData($ns.addressUrl,'script', true).then(function(){
-            $ns.Utils.addOrRemoveRules('add', $ns.addressRules, form);
+            $ns.Utils.addOrRemoveRules('add', $ns.addressRules, addressForm);
         });
     }
 });

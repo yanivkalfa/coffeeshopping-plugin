@@ -84,7 +84,7 @@ class Ajax_handler {
      */
     public function registerNewUser($post){
         // Register the user to the DB.
-        $user = userHelper::registerNewUser($post);
+        $user = UserDatabaseHelper::registerNewUser($post);
         if(!$user["success"]){
             // failed to register.
             return array(
@@ -161,7 +161,7 @@ class Ajax_handler {
             );
         }
 
-        $address->ID = CartDatabaseHelper::insertItem((array)$address, 'cs_addresses');
+        $address->ID = AddressDatabaseHelper::addAddress((array)$address);
         if(!$address->ID) {
             return array(
                 'success' => false,
@@ -200,8 +200,9 @@ class Ajax_handler {
         }
 
         $hasCart = CartDatabaseHelper::getCartByAddressId($address_id);
-
-
+        if(!$hasCart){
+            AddressDatabaseHelper::deleteAddress($address_id);
+        }
 
         $deleted = delete_user_meta($user->ID, 'address_id', $address_id);
         if(!$deleted) {
@@ -309,7 +310,7 @@ class Ajax_handler {
 
     public function getClosestStore($post){
         $coords = json_decode($post["coords"], true);
-        $result = storeHelper::getClosestStore($coords["lat"],$coords["lng"]);
+        $result = StoreDatabaseHelper::getClosestStore($coords["lat"],$coords["lng"]);
 
         if ($result!==false){
             return array(

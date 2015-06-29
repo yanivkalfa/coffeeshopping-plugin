@@ -49,11 +49,11 @@ if (!$cartPage){Utils::adminPreECHO("Can't get cart page id", "cartDisplayTempla
             <?php
             if ($cart->deliver_to=="home"){
                 $scope = array(
-                    'address' => CartDatabaseHelper::getCartAddress($cart->address_id)
+                    'address' => AddressDatabaseHelper::getAddress($cart->address_id)
                 );
                 Utils::getTemplate('singleAddress', $scope);
             }else{
-                $store = storeHelper::getStore($cart->address_id);
+                $store = StoreDatabaseHelper::getStore($cart->address_id);
                 esc_attr_e($aStore["name"]).' - '.esc_attr_e($aStore["address"]);
             }
             ?>

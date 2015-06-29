@@ -90,6 +90,20 @@ if(!class_exists('coffee_shopping'))
              */
             add_action( 'widgets_init', array($this, 'register_coffeeshoppingwidgets') );
 
+            /*
+             * After logging re-instantiating cart
+             * */
+            add_filter( 'authenticate', array($this, 'afterLogin'),30, 3 );
+
+        }
+
+        public function afterLogin( $user, $username, $password ) {
+            $savedCart = CartDatabaseHelper::getCart($user->ID);
+            if(isset($_SESSION['cart']) && $savedCart) {
+                $_SESSION['cart']->clear();
+                CartHelper::instantiateCart($savedCart);
+            }
+            return $user;
         }
 
         /**
@@ -166,24 +180,7 @@ if(!class_exists('coffee_shopping'))
          * Instantiate shopping car.
          */
         public function instantiateCart(){
-
-            //unset($_SESSION['cart']);
-            if(!isset($_SESSION['cart']) || (isset($_SESSION['cart']) && $_SESSION['cart']->ID)){
-                $cartStatus = CSCons::get('cartStatus') ?: array();
-                $savedCart = NULL;
-                if(is_user_logged_in()){
-                    $current_user = wp_get_current_user();
-                    $savedCart = CartDatabaseHelper::getCart($current_user->ID);
-                    if(isset($_SESSION['cart']) && $savedCart['status'] === $cartStatus['saved']) {
-                        return;
-                    }
-                }
-                $products = isset($savedCart['ID']) ? CartDatabaseHelper::getCartProduct($savedCart['ID']) : NULL;
-
-                $_SESSION['cart'] = new Cart($savedCart, $products);
-            }
-
-            //Utils::preEcho($_SESSION['cart']);
+            CartHelper::instantiateCart();
         }
 
 
@@ -289,8 +286,8 @@ if(!class_exists('coffee_shopping'))
         public function frontRegisterScripts()
         {
             $this->removeJquery();
-            $this->registerScripts(CSCons::get('req_scripts')['shared']);
-            $this->registerScripts(CSCons::get('req_scripts')['front_end']);
+            $this->registerScripts(CSCons::get('reqScripts')['shared']);
+            $this->registerScripts(CSCons::get('reqScripts')['frontEnd']);
 
             $main_js_namespace = array(
                 'ajaxURL' => admin_url('admin-ajax.php'),
@@ -312,8 +309,8 @@ if(!class_exists('coffee_shopping'))
         public function backRegisterScripts()
         {
             $this->removeJquery();
-            $this->registerScripts(CSCons::get('req_scripts')['shared']);
-            $this->registerScripts(CSCons::get('req_scripts')['back_end']);
+            $this->registerScripts(CSCons::get('reqScripts')['shared']);
+            $this->registerScripts(CSCons::get('reqScripts')['backEnd']);
 
             $main_js_namespace = array(
                 'ajaxURL' => admin_url('admin-ajax.php'),

@@ -70,7 +70,7 @@ if(is_user_logged_in()){
             }
 
             // inserting new address to db
-            $address_id = CartDatabaseHelper::insertItem((array)$address, 'cs_addresses');
+            $address_id = AddressDatabaseHelper::addAddress((array)$address);
 
             if($address_id){
                 // adding new address id to user meta.
@@ -115,7 +115,7 @@ if(is_user_logged_in()){
         if(isset($addressesIds) && !empty($addressesIds)){
             // getting saved address.
             foreach($addressesIds as $key => $address){
-                $address = CartDatabaseHelper::getAddress($address);
+                $address = AddressDatabaseHelper::getAddress($address);
                 if(!empty($address)){
                     $scope['addresses'][$key] = $address;
                 }
