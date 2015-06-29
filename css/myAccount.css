@@ -47,8 +47,11 @@
 }
 
 #profileform .inline, #profileform .details{
-    width: 50%;
+    width: 49%;
     max-width: 180px;
+}
+#profileForm-alert, #addressForm-alert{
+    margin: 7px 0px;
 }
 
 .emptytabdisplay{

@@ -15,12 +15,12 @@
 
 
     <div id="profile-tab-div" class="tabdiv">
-        <form id="profileForm">
+        <form id="profileForm" class="inline">
             <?php Utils::getTemplate('profileForm', array('user' => $user)); ?>
 
             <input type="hidden" name="action" value="update">
             <input type="hidden" name="user_id" id="user_id" value="1">
-            <div id="profileForm-alert" class="display-none"></div>
+            <div id="profileForm-alert" class="display-none" align="center"></div>
             <input type="submit" name="submit" id="submit" class="button button-primary" value="Update Profile">
         </form>
     </div>
@@ -30,10 +30,10 @@
     <div id="addresses-tab-div" class="tabdiv">
 
         <div id="newAddressTab">
-            <form id="addressForm">
+            <form id="addressForm" class="inline">
                 <?php Utils::getTemplate('addressForm'); ?>
-                <div id="addressForm-alert" class="display-none"></div>
-                <input type="submit" name="submit" id="submit" class="button button-primary" value="Add address!">
+                <div id="addressForm-alert" class="display-none" align="center"></div>
+                <input type="submit" name="submit" id="submit" class="button button-primary" value="Add address">
             </form>
         </div>
 

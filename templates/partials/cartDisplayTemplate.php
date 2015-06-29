@@ -62,7 +62,7 @@ if (!$cartPage){Utils::adminPreECHO("Can't get cart page id", "cartDisplayTempla
 
         <div class="cartorderpayment">
             <div class="header">Payment details:</div>
-            <div><?php echo $cart->payment_method.' - '.round($cart->payment_amount, 2).Utils::getCurrencySymbol("ILS");?></div>
+            <div><?php echo $cart->payment_method.' - '.Utils::getCurrencySymbol("ILS").round($cart->payment_amount, 2);?></div>
         </div>
 
     </div>
