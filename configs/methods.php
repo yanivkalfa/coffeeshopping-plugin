@@ -15,10 +15,13 @@
 global $methods;
 $methods = array(
     'registerNewUser' => array('protected' => false, 'req_capabilities' => []),
+    'updateUserProfile' => array('protected' => true, 'req_capabilities' => ['manage_options', 'cs_member']),
+    'addAddress' => array('protected' => true, 'req_capabilities' => ['manage_options', 'cs_member']),
+    'removeAddress' => array('protected' => true, 'req_capabilities' => ['manage_options', 'cs_member']),
     'userLogin' => array('protected' => false, 'req_capabilities' => []),
     'addProduct' => array('protected' => false, 'req_capabilities' => []),
     'removeProduct' => array('protected' => false, 'req_capabilities' => []),
     'updateQuantity' => array('protected' => false, 'req_capabilities' => []),
     'getClosestStore' => array('protected' => false, 'req_capabilities' => []),
-    'saveCart' => array('protected' => true, 'req_capabilities' => ['manage_options', 'registered_member']),
+    'saveCart' => array('protected' => true, 'req_capabilities' => ['manage_options', 'cs_member']),
 );

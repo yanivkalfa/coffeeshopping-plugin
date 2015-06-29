@@ -40,10 +40,10 @@ jQuery(document).ready( function() {
             }
         },
         submitHandler: function(form) {
-            var data, errorMsg, errorType;
+            var data;
             $ns.data.action = 'ajax_handler';
             $ns.data.method = 'registerNewUser';
-            $ns.data.post = 'user=' + encodeURIComponent(JSON.stringify($(form).serializeObject()));
+            $ns.data.post = 'user=' + encodeURIComponent(JSON.stringify($(form).serializeJSON()));
             data = $ns.Utils.getData();
             if(data.success){
                 successfullRegistration(data.msg.generatedPass);

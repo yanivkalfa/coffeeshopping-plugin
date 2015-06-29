@@ -1,5 +1,5 @@
 jQuery(document).ready( function(){
-    var form, formAlert, hasSavedAddress;
+    var form, formAlert, hasSavedAddress, formRulesLoaded;
     var submitCheckout, reselect, shippingSelection, shippingContents, shipToHomeTab, shipToStoreTab,
         savedAddressTab, newAddressTab, shipToHome, newAddressField, shipToStore, shipToStoreInput;
 
@@ -18,8 +18,13 @@ jQuery(document).ready( function(){
     shipToStore = $('.shipToStore');
     shipToStoreInput = $('#shipToStoreInput');
 
+    formRulesLoaded = false;
     hasSavedAddress = Boolean($('.saved-address').length);
     $ns.errorMessages = $ns.errorMessages || {};
+
+    $ns.Utils.getAsyncData($ns.addressUrl,'script', true).then(function(){
+        formRulesLoaded = true;
+    });
 
     if(form.length) {
         form[0].reset();
@@ -68,16 +73,14 @@ jQuery(document).ready( function(){
         });
 
         if(!hasSavedAddress){
-            addOrRemoveRules('add');
-        }
-    }
-
-    function addOrRemoveRules(method){
-        //form.valid();
-        for(var fieldName in $ns.addressRules){
-            if(!$ns.addressRules.hasOwnProperty(fieldName)) continue;
-            var input = form.find('[name="'+ fieldName +'"]');
-            input.rules( method, $ns.addressRules[fieldName]);
+            if(!formRulesLoaded){
+                $ns.Utils.getAsyncData($ns.addressUrl,'script', true).then(function(){
+                    $ns.Utils.addOrRemoveRules('add', $ns.addressRules, form);
+                    formRulesLoaded = true;
+                });
+            }else{
+                $ns.Utils.addOrRemoveRules('add', $ns.addressRules, form);
+            }
         }
     }
 
@@ -141,6 +144,13 @@ jQuery(document).ready( function(){
             method = 'remove';
         }
 
-        addOrRemoveRules(method);
+        if(!formRulesLoaded){
+            $ns.Utils.getAsyncData($ns.addressUrl,'script', true).then(function(){
+                $ns.Utils.addOrRemoveRules(method, $ns.addressRules, form);
+                formRulesLoaded = true;
+            });
+        }else{
+            $ns.Utils.addOrRemoveRules(method, $ns.addressRules, form);
+        }
     });
 });

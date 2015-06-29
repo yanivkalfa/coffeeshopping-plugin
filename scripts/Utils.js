@@ -26,16 +26,15 @@
         return data;
     };
 
-    Utils.prototype.getAsyncData = function(method, url, params, dataType, cache){
+    Utils.prototype.getAsyncData = function(url, dataType, cache){
         var defer = jQuery.Deferred();
         $.ajax({
-            url: url || $ns.ajaxURL,
-            type:method || "post",
-            dataType: dataType || 'json',
-            data: params || $ns.data,
-            cache: cache || true,
+            url: url,
             success: defer.resolve,
-            error : defer.reject
+            complete: defer.resolve,
+            error : defer.reject,
+            dataType: dataType,
+            cache: cache
         });
         return defer.promise();
     };
@@ -96,25 +95,15 @@
         return inputVal;
     };
 
-    $ns.Utils = new Utils();
-
-
-    $.fn.serializeObject = function()
-    {
-        var obj = {};
-        var arr = this.serializeArray();
-        $.each(arr, function() {
-            if (obj[this.name] !== undefined) {
-                if (!obj[this.name].push) {
-                    obj[this.name] = [obj[this.name]];
-                }
-                obj[this.name].push(this.value || '');
-            } else {
-                obj[this.name] = this.value || '';
-            }
-        });
-        return obj;
+    Utils.prototype.addOrRemoveRules = function(method, rules, form){
+        for(var fieldName in $ns.addressRules){
+            if(!$ns.addressRules.hasOwnProperty(fieldName)) continue;
+            var input = form.find('[name="'+ fieldName +'"]');
+            input.rules( method, $ns.addressRules[fieldName]);
+        }
     };
+
+    $ns.Utils = new Utils();
 
     $.validator.addMethod("phoneIL", function(value, element, param) {
         return this.optional(element) || phoneValidation.isValidNumber(value, param);

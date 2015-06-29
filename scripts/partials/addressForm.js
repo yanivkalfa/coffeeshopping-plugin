@@ -1,4 +1,3 @@
-
 $ns.addressRules = {
     'address[city]' : {
         required: true,
@@ -32,8 +31,10 @@ $ns.addressRules = {
     },
     'address[phone_number]' : {
         required: true,
+        maxlength: 11,
         messages: {
-            required: "Required input"
+            "required": "Required input",
+            "maxlength": jQuery.validator.format($ns.errorMessages.maxlength || 'Field cannot be longer then {0} digits')
         }
     },
     'address[full_name]' : {
@@ -43,4 +44,3 @@ $ns.addressRules = {
         }
     }
 };
-

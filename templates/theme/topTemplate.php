@@ -15,7 +15,7 @@ if (!$storesPage){Utils::adminPreECHO("Can't get stores page id", "topTemplate.p
     <div class="inline">Stores:</div>
     <?php
     $storesArr = array();
-    foreach(storeHelper::getStores() as $store){
+    foreach(StoreDatabaseHelper::getStores() as $store){
         $storesArr[] = '<a href="'.$storesPage.'"><div class="inline">'.$store["name"].'</div></a>';
     }
     echo implode(" | ", $storesArr);

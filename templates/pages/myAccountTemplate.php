@@ -1,3 +1,9 @@
+<script language="javascript" type="text/javascript">
+    // Set some vars.
+    $ns.errorMessages = <?php echo json_encode($errorMessages);?>;
+    $ns.addressUrl = <?php echo json_encode( BASE_URL.'scripts/partials/addressForm.js');?>;
+</script>
+
 <div id="myaccountpagecontainer">
     <div id="tabs-selector">
         <a href="#profile"><div id="profile-selector" class="tabselector active" data-assoc="#profile"><i class="fa fa-user"></i> Profile</div></a>
@@ -9,11 +15,14 @@
 
 
     <div id="profile-tab-div" class="tabdiv">
-        <?php Utils::getTemplate('profileForm', array('user' => $user)); ?>
+        <form id="profileForm">
+            <?php Utils::getTemplate('profileForm', array('user' => $user)); ?>
 
-        <input type="hidden" name="action" value="update">
-        <input type="hidden" name="user_id" id="user_id" value="1">
-        <input type="submit" name="submit" id="submit" class="button button-primary" value="Update Profile">
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="user_id" id="user_id" value="1">
+            <div id="profileForm-alert" class="display-none"></div>
+            <input type="submit" name="submit" id="submit" class="button button-primary" value="Update Profile">
+        </form>
     </div>
 
 
@@ -21,8 +30,11 @@
     <div id="addresses-tab-div" class="tabdiv">
 
         <div id="newAddressTab">
-            <?php Utils::getTemplate('addressForm'); ?>
-            <input type="submit" name="submit" id="submit" class="button button-primary" value="Add address">
+            <form id="addressForm">
+                <?php Utils::getTemplate('addressForm'); ?>
+                <div id="addressForm-alert" class="display-none"></div>
+                <input type="submit" name="submit" id="submit" class="button button-primary" value="Add address!">
+            </form>
         </div>
 
         <div id="savedAddressTab">

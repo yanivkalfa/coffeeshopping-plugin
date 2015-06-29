@@ -11,6 +11,7 @@
  * an error/bug on line 157, the function should be static, so change to: static public function invertPositionOrder($sidebar_widgets).
  * */
 
+define("BASE_URL", plugin_dir_url(__FILE__));
 define("BASE_ADDRESS", dirname(__FILE__));
 define("IMAGES_DIR", dirname(plugin_dir_url(__FILE__))."/images/");
 define("IMAGES_DIR_PATH", dirname(plugin_dir_path(__FILE__))."images/");
@@ -89,6 +90,20 @@ if(!class_exists('coffee_shopping'))
              */
             add_action( 'widgets_init', array($this, 'register_coffeeshoppingwidgets') );
 
+            /*
+             * After logging re-instantiating cart
+             * */
+            add_filter( 'authenticate', array($this, 'afterLogin'),30, 3 );
+
+        }
+
+        public function afterLogin( $user, $username, $password ) {
+            $savedCart = CartDatabaseHelper::getCart($user->ID);
+            if(isset($_SESSION['cart']) && $savedCart) {
+                $_SESSION['cart']->clear();
+                CartHelper::instantiateCart($savedCart);
+            }
+            return $user;
         }
 
         /**
@@ -129,10 +144,6 @@ if(!class_exists('coffee_shopping'))
             }
         }
 
-        public function remove_read_caps(){
-            //add_action( 'admin_init', 'remove_read_caps' );
-        }
-
         /*
         * @ Including libs
         */
@@ -169,24 +180,7 @@ if(!class_exists('coffee_shopping'))
          * Instantiate shopping car.
          */
         public function instantiateCart(){
-
-            //unset($_SESSION['cart']);
-            if(!isset($_SESSION['cart']) || (isset($_SESSION['cart']) && $_SESSION['cart']->ID)){
-                $cartStatus = CSCons::get('cartStatus') ?: array();
-                $savedCart = NULL;
-                if(is_user_logged_in()){
-                    $current_user = wp_get_current_user();
-                    $savedCart = CartDatabaseHelper::getCart($current_user->ID);
-                    if(isset($_SESSION['cart']) && $savedCart['status'] === $cartStatus['saved']) {
-                        return;
-                    }
-                }
-                $products = isset($savedCart['ID']) ? CartDatabaseHelper::getCartProduct($savedCart['ID']) : NULL;
-
-                $_SESSION['cart'] = new Cart($savedCart, $products);
-            }
-
-            //Utils::preEcho($_SESSION['cart']);
+            CartHelper::instantiateCart();
         }
 
 
@@ -292,8 +286,8 @@ if(!class_exists('coffee_shopping'))
         public function frontRegisterScripts()
         {
             $this->removeJquery();
-            $this->registerScripts(CSCons::get('req_scripts')['shared']);
-            $this->registerScripts(CSCons::get('req_scripts')['front_end']);
+            $this->registerScripts(CSCons::get('reqScripts')['shared']);
+            $this->registerScripts(CSCons::get('reqScripts')['frontEnd']);
 
             $main_js_namespace = array(
                 'ajaxURL' => admin_url('admin-ajax.php'),
@@ -315,8 +309,8 @@ if(!class_exists('coffee_shopping'))
         public function backRegisterScripts()
         {
             $this->removeJquery();
-            $this->registerScripts(CSCons::get('req_scripts')['shared']);
-            $this->registerScripts(CSCons::get('req_scripts')['back_end']);
+            $this->registerScripts(CSCons::get('reqScripts')['shared']);
+            $this->registerScripts(CSCons::get('reqScripts')['backEnd']);
 
             $main_js_namespace = array(
                 'ajaxURL' => admin_url('admin-ajax.php'),
@@ -464,6 +458,28 @@ if(!class_exists('coffee_shopping'))
             }
         }
 
+        /**
+         * Adds csMember role
+         * @return mixed
+         */
+        public function addCsMemberRole(){
+            return add_role(
+                'csMember',
+                __( 'CoffeeShopping Member' ),
+                array(
+                    'cs_member' => true,  // true allows this capability
+                )
+            );
+        }
+
+        /**
+         * Removes csMember role
+         * @return mixed
+         */
+        public function removeCsMemberRole(){
+            return remove_role( 'csMember' );
+        }
+
         /*
          * @ On activation create Db and default page
          * https://docs.google.com/spreadsheets/d/1i_vk_ftcvHzHuoeu5_vh08uMAqY9zkCbRBNsYzgbTZI/edit#gid=0
@@ -473,6 +489,7 @@ if(!class_exists('coffee_shopping'))
         {
             $this->addTemplatesToTheme();
             $this->createPages();
+            $this->addCsMemberRole();
 
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
@@ -596,6 +613,7 @@ if(!class_exists('coffee_shopping'))
         {
             $this->removePages();
             $this->removeTemplatesFromTheme();
+            $this->removeCsMemberRole();
             /*
             global $wpdb;
 

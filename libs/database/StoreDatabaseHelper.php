@@ -6,7 +6,7 @@
  * Time: 8:49 PM
  */
 
-abstract class storeHelper{
+abstract class StoreDatabaseHelper extends SuperDatabaseHelper{
 
     /**
      * @func getStoreMapImg($store)

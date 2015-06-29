@@ -84,7 +84,7 @@ class Ajax_handler {
      */
     public function registerNewUser($post){
         // Register the user to the DB.
-        $user = userHelper::registerNewUser($post);
+        $user = UserDatabaseHelper::registerNewUser($post);
         if(!$user["success"]){
             // failed to register.
             return array(
@@ -108,6 +108,113 @@ class Ajax_handler {
         return array(
             'success'   => true,
             'msg'       => array('generatedPass' => $user['user_pass'], 'errorMsg' => '')
+        );
+    }
+
+    /**
+     * @param $post
+     * @return array
+     */
+    public function updateUserProfile($post){
+        $newUser = json_decode($post['user'], true);
+        $newUser['ID'] = (int)$newUser['ID'];
+        $user = wp_get_current_user();
+
+        if(!$newUser['ID'] || $newUser['ID'] !==  $user->ID) {
+            return array(
+                'success'   => false,
+                'msg'       => array('unAuthorized' => 'unAuthorized', 'errorMsg' => 'Cant change another user\' profile')
+            );
+        }
+
+        $updated = wp_update_user( $newUser );
+        if(isset($updated->errors)){
+            return array(
+                'success'   => false,
+                'msg'       => array('updatingUserError' => 'updatingUserError', 'errorMsg' => 'We could not update user!')
+            );
+        }
+
+        return array(
+            'success'   => true,
+            'msg'       => array('updateSuccessfully' => 'updateSuccessfully', 'errorMsg' => '')
+        );
+    }
+
+    /**
+     * @param $post
+     * @return array
+     */
+    public function addAddress($post){
+        $address = json_decode($post['address'], true);
+
+        // instantiating new address
+        $address = new Address($address);
+
+        // validating the new address
+        $error = $address->validateAddress();
+        // if we have errors reporting them
+        if(is_array($error)) {
+            return array(
+                'success' => false,
+                'msg' => $error
+            );
+        }
+
+        $address->ID = AddressDatabaseHelper::addAddress((array)$address);
+        if(!$address->ID) {
+            return array(
+                'success' => false,
+                'msg' => array('name' => 'unableToInsertAddress', 'errorMsg' => 'Unable to insert new address')
+            );
+        }
+
+        $user = wp_get_current_user();
+        // adding new address id to user meta.
+        if(!add_user_meta($user->ID, 'address_id', $address->ID)) {
+            return array(
+                'success' => false,
+                'msg' => array('name' => 'unableToAddAddressToUser', 'errorMsg' => 'Unable to add address to user')
+            );
+        }
+
+        return array(
+            'success' => true,
+            'msg' => (array)$address
+        );
+
+    }
+
+    /**
+     * @param $post
+     * @return array
+     */
+    public function removeAddress($post){
+        $address_id = $post['address_id'];
+        $user = wp_get_current_user();
+        if(!$address_id) {
+            return array(
+                'success' => false,
+                'msg' => array('name' => 'noAddressIdSupplied', 'errorMsg' => 'No address id was supplied')
+            );
+        }
+
+        $hasCart = CartDatabaseHelper::getCartByAddressId($address_id);
+        if(!$hasCart){
+            AddressDatabaseHelper::deleteAddress($address_id);
+        }
+
+        $deleted = delete_user_meta($user->ID, 'address_id', $address_id);
+        if(!$deleted) {
+            return array(
+                'success' => false,
+                'msg' => array('name' => 'unableToRemoveAddress', 'errorMsg' => 'Unable to remove address')
+            );
+        }
+
+        return array(
+            'success' => true,
+            'msg' => $address_id
         );
     }
 
@@ -203,7 +310,7 @@ class Ajax_handler {
 
     public function getClosestStore($post){
         $coords = json_decode($post["coords"], true);
-        $result = storeHelper::getClosestStore($coords["lat"],$coords["lng"]);
+        $result = StoreDatabaseHelper::getClosestStore($coords["lat"],$coords["lng"]);
 
         if ($result!==false){
             return array(

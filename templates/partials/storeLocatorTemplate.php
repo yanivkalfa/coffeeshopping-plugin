@@ -38,13 +38,13 @@
             Our stores:
         </div>
         <?php
-        $allStores = storeHelper::getStores(array());
+        $allStores = StoreDatabaseHelper::getStores(array());
         if ($allStores){
             foreach($allStores as $aStore){
                 ?>
                 <div class="aStoreDiv"
                      data-store-id="<?php echo $aStore["ID"];?>"
-                     data-embed="<?php echo storeHelper::getStoreGoogleMapsEmbed($aStore["address"]);?>"
+                     data-embed="<?php echo StoreDatabaseHelper::getStoreGoogleMapsEmbed($aStore["address"]);?>"
                      data-title-name="<?php esc_attr_e($aStore["name"]);?>"
                      data-title-address="<?php esc_attr_e($aStore["address"]);?>"
                     >
@@ -53,7 +53,7 @@
                         <i><div class="aStoreTitleAddress"><?php echo $aStore["address"];?></div></i>
                     </div>
                     <div class="aStoreImageDiv">
-                        <img src="<?php echo storeHelper::getStoreMapImg($aStore);?>">
+                        <img src="<?php echo StoreDatabaseHelper::getStoreMapImg($aStore);?>">
                     </div>
                 </div>
 

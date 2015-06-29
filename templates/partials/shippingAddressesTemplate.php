@@ -40,7 +40,7 @@ $actions = (isset($actions)) ? $actions : true;
 
             <?php if ($actions){ ?>
             <div class="inline addressactions flleft">
-                <div class="inline removeaddress"><a href="javascript:;">[X]</a></div>
+                <div class="inline removeaddress" data-address-id="<?php echo $address['ID'];?>">[X]</div>
             </div>
             <?php } ?>
         </div>
