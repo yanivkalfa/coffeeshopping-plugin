@@ -11,6 +11,7 @@
  * an error/bug on line 157, the function should be static, so change to: static public function invertPositionOrder($sidebar_widgets).
  * */
 
+define("BASE_URL", plugin_dir_url(__FILE__));
 define("BASE_ADDRESS", dirname(__FILE__));
 define("IMAGES_DIR", dirname(plugin_dir_url(__FILE__))."/images/");
 define("IMAGES_DIR_PATH", dirname(plugin_dir_path(__FILE__))."images/");
@@ -127,10 +128,6 @@ if(!class_exists('coffee_shopping'))
                 }
                 add_filter('wp_head','remove_admin_bar_style_frontend', 99);
             }
-        }
-
-        public function remove_read_caps(){
-            //add_action( 'admin_init', 'remove_read_caps' );
         }
 
         /*
@@ -464,6 +461,28 @@ if(!class_exists('coffee_shopping'))
             }
         }
 
+        /**
+         * Adds csMember role
+         * @return mixed
+         */
+        public function addCsMemberRole(){
+            return add_role(
+                'csMember',
+                __( 'CoffeeShopping Member' ),
+                array(
+                    'cs_member' => true,  // true allows this capability
+                )
+            );
+        }
+
+        /**
+         * Removes csMember role
+         * @return mixed
+         */
+        public function removeCsMemberRole(){
+            return remove_role( 'csMember' );
+        }
+
         /*
          * @ On activation create Db and default page
          * https://docs.google.com/spreadsheets/d/1i_vk_ftcvHzHuoeu5_vh08uMAqY9zkCbRBNsYzgbTZI/edit#gid=0
@@ -473,6 +492,7 @@ if(!class_exists('coffee_shopping'))
         {
             $this->addTemplatesToTheme();
             $this->createPages();
+            $this->addCsMemberRole();
 
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
@@ -592,6 +612,7 @@ if(!class_exists('coffee_shopping'))
         {
             $this->removePages();
             $this->removeTemplatesFromTheme();
+            $this->removeCsMemberRole();
             /*
             global $wpdb;
 

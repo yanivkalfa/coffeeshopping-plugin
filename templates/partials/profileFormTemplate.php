@@ -58,4 +58,5 @@ get_currentuserinfo();
     <div>
         * Fill in only if you wish to update you're password.
     </div>
+    <input type="hidden" name="ID" value="<?php echo $user->ID; ?>">
 </div>

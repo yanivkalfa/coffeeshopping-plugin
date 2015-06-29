@@ -6,7 +6,7 @@
  * Time: 6:32 PM
  */
 
-abstract class userHelper{
+abstract class UserDatabaseHelper extends SuperDatabaseHelper{
 
     public static function registerNewUser($post){
         $user = json_decode($post['user'], true);
@@ -19,7 +19,7 @@ abstract class userHelper{
         $userData = array(
             'user_login'  =>  $user['log'],
             'user_pass'   =>  self::generateUserPass(),
-            'role' => 'subscriber'
+            'role' => 'csMember'
         );
 
         $user = wp_insert_user( $userData ) ;

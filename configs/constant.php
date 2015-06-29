@@ -90,15 +90,16 @@ abstract class CSCons {
 
                     array('handle' => 'checkout_css',              'src' => '/css/checkout',                    'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'checkout'),
                     array('handle' => 'checkout_js',               'src' => '/scripts/pages/checkout',          'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
-                    array('handle' => 'address_form_js',           'src' => '/scripts/partials/addressForm',    'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'checkout'),
 
                     array('handle' => 'storeLocator_js',           'src' => '/scripts/partials/storeLocator',   'extension' => 'js',    'deps' => '', 'media' => '', 'page' => array('checkout', 'stores')),
                     array('handle' => 'storeLocator_css',          'src' => '/css/storeLocator',                'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => array('checkout', 'stores')),
 
-                    array('handle' => 'myAccount_js',           'src' => '/scripts/pages/myAccount',   'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'myaccount'),
-                    array('handle' => 'myAccount_css',          'src' => '/css/myAccount',             'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'myaccount'),
+                    array('handle' => 'myAccount_js',              'src' => '/scripts/pages/myAccount',   'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'myaccount'),
+                    array('handle' => 'myAccount_css',             'src' => '/css/myAccount',             'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'myaccount'),
 
                     array('handle' => 'theme_css',                 'src' => '/templates/theme/css/theme',       'extension' => 'css',   'deps' => '', 'media' => 'screen'),
+
+                    //array('handle' => 'address_form_js',           'src' => '/scripts/partials/addressForm',    'extension' => 'js',    'deps' => '', 'media' => '', 'page' => array('checkout' )),
                 ),
 
                 'back_end' => array(
@@ -116,6 +117,9 @@ abstract class CSCons {
 
                     /* jquery tiny pubsub*/
                     array('handle' => 'jquery_tiny_pubsub', 'src' =>  'bower_components/jquery.tinyPubSub/jquery.tinyPubSub', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
+
+                    /* jquery serializeJson*/
+                    array('handle' => 'jquery_serialize_json', 'src' =>  'bower_components/jquery.serializeJSON/jquery.serializejson', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
 
                     /* jquery.validate */
                     array('handle' => 'jquery_validate', 'src' => 'bower_components/jquery-validation/dist/jquery.validate', 'extension' => 'js', 'deps' => array('jquery'), 'media' => ''),
@@ -454,9 +458,9 @@ abstract class CSCons {
                 'required' => 'This field is required',
                 'phoneIL' => 'Please specify correct Israel phone number',
                 'number' => 'Must be a number',
-                'maxLength' => 'password must be {0} digit long',
-                'minLength' => 'password must be {0} digit long',
-                'length' => 'Value length must be {0} digit long',
+                'maxLength' => 'Field cannot be longer then {0} digits',
+                'minLength' => 'Field cannot be shorter then {0} digits',
+                'length' => 'field length must be {0} digit long',
                 'equalTo' => 'Passwords does not match',
                 'address_id' => 'You must select a shipping method'
             ),

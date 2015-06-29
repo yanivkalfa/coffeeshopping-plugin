@@ -7,6 +7,7 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
     <script language="javascript" type="text/javascript">
         // Set some vars.
         $ns.errorMessages = <?php echo json_encode($errorMessages);?>;
+        $ns.addressUrl = <?php echo json_encode( BASE_URL.'scripts/partials/addressForm.js');?>;
     </script>
 <?php } ?>
 

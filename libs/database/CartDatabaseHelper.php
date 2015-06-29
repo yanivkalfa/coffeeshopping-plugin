@@ -3,7 +3,7 @@
 * @ Cart Database queiry
 */
 
-abstract class CartDatabaseHelper {
+abstract class CartDatabaseHelper extends SuperDatabaseHelper{
 
 
 
@@ -71,6 +71,18 @@ abstract class CartDatabaseHelper {
     }
 
     /**
+     * getCartByAddressId by user id
+     *
+     * @param {number} $userId
+     * @return bool|array
+     */
+    public static function getCartByAddressId($address_id){
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'cs_carts';
+        return $wpdb->get_var("SELECT ID FROM $table_name WHERE `address_id` = '$address_id' ");
+    }
+
+    /**
      * getCart by user id
      *
      * @param {number} $userId
@@ -82,6 +94,7 @@ abstract class CartDatabaseHelper {
         $table_name = $wpdb->prefix . 'cs_carts';
         return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['saved']."' ORDER BY `create_date` DESC", ARRAY_A);
     }
+
 
     /**
      * getAddress by addressId
@@ -112,18 +125,6 @@ abstract class CartDatabaseHelper {
         }
 
         return $results;
-    }
-
-    /**
-     * get cart address by cart id
-     *
-     * @param {number} $cartId
-     * @return bool|array
-     */
-    public static function getCartAddress($cartId){
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'cs_addresses';
-        return $wpdb->get_row("SELECT * FROM $table_name WHERE `ID` = '$cartId'", ARRAY_A);
     }
 
     /**
@@ -179,57 +180,5 @@ abstract class CartDatabaseHelper {
 
         return $cartId;
     }
-
-
-    /**
-     * basic abstract function that insert item to db.
-     * @param {array} $item
-     * @param {string} $toTable
-     * @return false|number
-     */
-    public static function insertItem($item, $toTable) {
-        if(!isset($item)) return false;
-
-        global $wpdb;
-        $table_name = $wpdb->prefix . $toTable;
-        return $wpdb->insert( $table_name, $item) ? $wpdb->insert_id : false ;
-    }
-
-    /**
-     * basic abstract function that update an item on db.
-     * @param {array} $item
-     * @param {string} $toTable
-     * @return false|number
-     */
-    public static function updateItem($item, $toTable) {
-        if(!isset($item)) return false;
-
-        global $wpdb;
-        $table_name = $wpdb->prefix . $toTable;
-        return $wpdb->update($table_name, $item, array( 'ID' => $item['ID'] )) !== false ? $item['ID'] : false;
-    }
-
-    /**
-     * basic abstract function that delete an item from db.
-     * @param {array} $item
-     * @param {string} $toTable
-     * @return false|number
-     */
-    public static function deleteItem($item, $toTable) {
-        if(!isset($item)) return false;
-
-        global $wpdb;
-        $table_name = $wpdb->prefix . $toTable;
-        return $wpdb->delete($table_name, $item);
-    }
 }
-
-
-/*
-        // updating address - since we already have the id in the cart no need to change that.
-        self::updateItem((array)$cart['address'], 'cs_addresses');
-        // inserting new address and using the id for cart's address_id
-
-        */
-
 

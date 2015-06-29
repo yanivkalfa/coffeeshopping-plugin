@@ -34,6 +34,13 @@ class Address extends BasicCartObject {
             }
         }
 
+        $error = FormValidators::validateFormInput($this->phone_number, array('maxLength' => 11));
+        if(is_array($error)){
+            $error['field'] = 'phone_number';
+            return $error;
+        }
+
+
         return true;
     }
 }

@@ -121,9 +121,12 @@ if(is_user_logged_in()){
             }
         }
 
+        //$errorMessages
+
         // Add our pages to the scope.
         $scope['checkoutPage'] = $checkoutPage;
         $scope['myAccountPage'] = $myAccountPage;
+        $scope['errorMessages'] = CSCons::get('errorMessages') ?: array();
 
         Utils::getTemplate('checkout',$scope, 'pages');
     }

@@ -22,6 +22,7 @@ if(is_user_logged_in()) {
         }
     }
 
+    $scope['errorMessages'] = CSCons::get('errorMessages') ?: array();
     $scope['unfinishedCarts'] = CartDatabaseHelper::getUnfinishedCarts($scope["user"]->ID);
     $scope['delivered'] = CartDatabaseHelper::getDeliveredCarts($scope["user"]->ID);
     Utils::getTemplate('myAccount', $scope, 'pages');
