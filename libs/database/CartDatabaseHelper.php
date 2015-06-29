@@ -31,7 +31,7 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
         }
 
         $unfinishedCarts = $wpdb->get_results("SELECT * FROM $table_name
-                              WHERE `user_id` = '$userId' AND `status` NOT IN ('".$cartStatus['delivered']."', '".$cartStatus['saved']."')
+                              WHERE `user_id` = '$userId' AND `status` NOT IN ('".$cartStatus['delivered']['name']."', '".$cartStatus['saved']['name']."')
                               ORDER BY `status` ASC , `create_date` DESC", ARRAY_A);
 
         if(!$unfinishedCarts){
@@ -47,12 +47,11 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
      * @param {number} $cartId
      * @return bool|array
      */
-    //".$cartStatus['saved']."
     public static function getDeliveredCarts($userId){
         global $wpdb;
         $cartStatus = CSCons::get('cartStatus') ?: array();
         $table_name = $wpdb->prefix . 'cs_carts';
-        $carts = $wpdb->get_results("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['delivered']."' ORDER BY `create_date` DESC", ARRAY_A);
+        $carts = $wpdb->get_results("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['delivered']['name']."' ORDER BY `create_date` DESC", ARRAY_A);
         return self::generateCart($carts);
     }
 
@@ -90,7 +89,7 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
         global $wpdb;
         $cartStatus = CSCons::get('cartStatus') ?: array();
         $table_name = $wpdb->prefix . 'cs_carts';
-        return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['saved']."' ORDER BY `create_date` DESC", ARRAY_A);
+        return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['saved']['name']."' ORDER BY `create_date` DESC", ARRAY_A);
     }
 
     /**

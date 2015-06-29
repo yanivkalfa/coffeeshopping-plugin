@@ -33,7 +33,7 @@ class Cart extends Collection{
             $this->payment_method = isset($cart['payment_method']) ? $cart['payment_method'] : null;
             $this->payment_amount = isset($cart['payment_amount']) ? $cart['payment_amount'] : null;
             $this->purchase_location = isset($cart['purchase_location']) ? $cart['purchase_location'] : null;
-            $this->status = isset($cart['status']) ?  $cart['status'] : $cartStatus['saved'] ;
+            $this->status = isset($cart['status']) ?  $cart['status'] : $cartStatus['saved']['name'] ;
             $this->note = isset($cart['note']) ? $cart['note'] : null;
             $this->create_date = isset($cart['create_date']) ? $cart['create_date'] : null;
             $this->delivered_date = isset($cart['create_date']) ? $cart['create_date'] : null;

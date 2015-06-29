@@ -14,7 +14,7 @@ abstract class CartHelper {
                     $current_user = wp_get_current_user();
                     $savedCart = CartDatabaseHelper::getCart($current_user->ID);
                 }
-                if(isset($_SESSION['cart']) && $savedCart['status'] === $cartStatus['saved']) {
+                if(isset($_SESSION['cart']) && $savedCart['status'] === $cartStatus['saved']['name']) {
                     return;
                 }
             }

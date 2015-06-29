@@ -26,7 +26,7 @@ if (!$cartPage){Utils::adminPreECHO("Can't get cart page id", "cartDisplayTempla
                     Order status:
                 </div>
                 <div class="inline">
-                    <?php echo CSCons::get('cartStatus')[$cart->status];?>
+                    <?php echo CSCons::get('cartStatus')[$cart->status]['name'];?>
                 </div>
             </div>
             <?php if ($status){?>
