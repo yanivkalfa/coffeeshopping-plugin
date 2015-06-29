@@ -29,6 +29,10 @@ jQuery(document).ready( function(){
         ].join(''));
     }
 
+    if (window.location.hash!=""){
+        jQuery(".tabselector.active").removeClass("active");
+        jQuery(".tabselector[data-assoc='" + window.location.hash + "']").addClass("active");
+    }
     toggleDisplayDiv();
 
     tabselector.on("click", function(e){
@@ -36,7 +40,6 @@ jQuery(document).ready( function(){
         jQuery(this).addClass("active");
         toggleDisplayDiv();
     });
-
 
     savedAddresses.on("click", '.removeaddress', function(e){
         var address_id, data;
@@ -60,11 +63,10 @@ jQuery(document).ready( function(){
         return false;
     });
 
-
     function toggleDisplayDiv(){
-        var selected = jQuery(".tabselector.active").data("assoc");
+        var showtab = jQuery(".tabselector.active").data("assoc");
         jQuery(".tabdiv").hide();
-        jQuery("#" + selected + "-tab-div").show();
+        jQuery(showtab + "-tab-div").show();
     }
 
     form = $('#profileForm');

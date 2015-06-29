@@ -30,21 +30,14 @@ $actions = (isset($actions)) ? $actions : true;
                 <input type="radio" name="address_id" value="<?php echo $address['ID'];?>" id="addressradio_<?php echo $address['ID'];?>" />
             </div>
             <?php } ?>
-            <div class="inline addressdets">
-                <label for="addressradio_<?php echo $address['ID'];?>">
-                    <div class="addressName">
-                        <div class="inline">
-                            <b><?php echo $address['full_name'];?></b>
-                        </div>
-                        <div class="inline">
-                            - <i>(<?php echo $address['phone_number'];?>)</i>
-                        </div>
-                    </div>
-                    <div class="addressDetails">
-                        <?php echo $address['street']." ".$address['house']."/".$address['apt'].", ".$address['city'].", ".$address['postcode'].".";?>
-                    </div>
-                </label>
-            </div>
+
+            <?php
+                $scope = array(
+                    'address' => $address
+                );
+                Utils::getTemplate('singleAddress', $scope);
+            ?>
+
             <?php if ($actions){ ?>
             <div class="inline addressactions flleft">
                 <div class="inline removeaddress" data-address-id="<?php echo $address['ID'];?>">[X]</div>

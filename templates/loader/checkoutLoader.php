@@ -49,9 +49,9 @@ if(is_user_logged_in()){
 
         // is address id shipToStore then $deliver_to is set to store id, and address is empty
         if($_POST['address_id'] === 'shipToStore') {
-            $deliver_to = CartHelper::getCurrentStoreId();
+            $deliver_to = 'store';
             $address = false;
-            $address_id = '';
+            $address_id = CartHelper::getCurrentStoreId();
 
             // is address id newAddress then $deliver_to get the home flag, and the new address is used
         }else if($_POST['address_id'] === 'newAddress'){
@@ -91,6 +91,7 @@ if(is_user_logged_in()){
 
         // set payment method
         $_SESSION['cart']->setPaymentMethod('cash');// todo use different payement methods.
+        $_SESSION['cart']->setPaymentAmount();
 
          // setting deliver_to
         $_SESSION['cart']->setDeliverTo($deliver_to);

@@ -5,9 +5,12 @@ class Cart extends Collection{
     public $deliver_to;
     public $address_id;
     public $payment_method;
+    public $payment_amount;
     public $purchase_location;
     public $status;
+    public $note;
     public $create_date;
+    public $delivered_date;
 
     public function __construct($cart = NULL, $products = NULL) {
         $prdc = $products;
@@ -28,9 +31,12 @@ class Cart extends Collection{
             $this->deliver_to = isset($cart['deliver_to']) ? $cart['deliver_to'] : null;
             $this->address_id = isset($cart['address_id']) ? $cart['address_id'] : null;
             $this->payment_method = isset($cart['payment_method']) ? $cart['payment_method'] : null;
+            $this->payment_amount = isset($cart['payment_amount']) ? $cart['payment_amount'] : null;
             $this->purchase_location = isset($cart['purchase_location']) ? $cart['purchase_location'] : null;
             $this->status = isset($cart['status']) ?  $cart['status'] : $cartStatus['saved'] ;
+            $this->note = isset($cart['note']) ? $cart['note'] : null;
             $this->create_date = isset($cart['create_date']) ? $cart['create_date'] : null;
+            $this->delivered_date = isset($cart['create_date']) ? $cart['create_date'] : null;
         }
 
     }
@@ -49,6 +55,10 @@ class Cart extends Collection{
 
     public function setPaymentMethod($payment_method){
         $this->payment_method = $payment_method;
+    }
+
+    public function setPaymentAmount(){
+        $this->payment_amount = $this->getCalculatedTotal();
     }
 
     public function setPurchaseLocation($purchase_location){

@@ -504,10 +504,13 @@ if(!class_exists('coffee_shopping'))
                 user_id bigint(20) NOT NULL,
                 deliver_to varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 address_id bigint(20) NOT NULL,
-                payment_method varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'saved',
+                payment_method varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'cash',
+                payment_amount float(20) NOT NULL,
                 purchase_location varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'saved',
+                note varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                delivered_date TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);
@@ -532,6 +535,7 @@ if(!class_exists('coffee_shopping'))
                 order_limit int(10) NOT NULL,
                 delivery_min varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 delivery_max varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+                delivered_date TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);

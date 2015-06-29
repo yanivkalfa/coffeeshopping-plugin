@@ -3,9 +3,7 @@
 * @ Cart Database queiry
 */
 
-abstract class CartDatabaseHelper extends SuperDatabaseHelper{
-
-
+abstract class CartDatabaseHelper {
 
     public static function generateCart($carts){
         foreach($carts as $key => $cart){
@@ -71,18 +69,6 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper{
     }
 
     /**
-     * getCartByAddressId by user id
-     *
-     * @param {number} $userId
-     * @return bool|array
-     */
-    public static function getCartByAddressId($address_id){
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'cs_carts';
-        return $wpdb->get_var("SELECT ID FROM $table_name WHERE `address_id` = '$address_id' ");
-    }
-
-    /**
      * getCart by user id
      *
      * @param {number} $userId
@@ -93,19 +79,6 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper{
         $cartStatus = CSCons::get('cartStatus') ?: array();
         $table_name = $wpdb->prefix . 'cs_carts';
         return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['saved']."' ORDER BY `create_date` DESC", ARRAY_A);
-    }
-
-
-    /**
-     * getAddress by addressId
-     *
-     * @param {number} $userId
-     * @return bool|array
-     */
-    public static function getAddress($addressId){
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'cs_addresses';
-        return $wpdb->get_row("SELECT * FROM $table_name WHERE `ID` = '$addressId'", ARRAY_A);
     }
 
     /**
@@ -135,7 +108,7 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper{
     public static function saveCart() {
         if(!isset($_SESSION['cart'])) return false;
         // array that is used to filter the properties on cart class to fit the DB fields
-        $keep = array('ID','user_id','deliver_to','address_id','payment_method','purchase_location','status','create_date');
+        $keep = array('ID','user_id','deliver_to','address_id','payment_method','payment_amount','purchase_location','status','note','create_date', 'delivered_date');
         // turning the cart class into an array.
         $cart = (array)$_SESSION['cart'];
 
@@ -180,5 +153,57 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper{
 
         return $cartId;
     }
+
+
+    /**
+     * basic abstract function that insert item to db.
+     * @param {array} $item
+     * @param {string} $toTable
+     * @return false|number
+     */
+    public static function insertItem($item, $toTable) {
+        if(!isset($item)) return false;
+
+        global $wpdb;
+        $table_name = $wpdb->prefix . $toTable;
+        return $wpdb->insert( $table_name, $item) ? $wpdb->insert_id : false ;
+    }
+
+    /**
+     * basic abstract function that update an item on db.
+     * @param {array} $item
+     * @param {string} $toTable
+     * @return false|number
+     */
+    public static function updateItem($item, $toTable) {
+        if(!isset($item)) return false;
+
+        global $wpdb;
+        $table_name = $wpdb->prefix . $toTable;
+        return $wpdb->update($table_name, $item, array( 'ID' => $item['ID'] )) !== false ? $item['ID'] : false;
+    }
+
+    /**
+     * basic abstract function that delete an item from db.
+     * @param {array} $item
+     * @param {string} $toTable
+     * @return false|number
+     */
+    public static function deleteItem($item, $toTable) {
+        if(!isset($item)) return false;
+
+        global $wpdb;
+        $table_name = $wpdb->prefix . $toTable;
+        return $wpdb->delete($table_name, $item);
+    }
 }
+
+
+/*
+        // updating address - since we already have the id in the cart no need to change that.
+        self::updateItem((array)$cart['address'], 'cs_addresses');
+        // inserting new address and using the id for cart's address_id
+
+        */
+
 

@@ -10,7 +10,7 @@ abstract class CartHelper {
     }
 
     public static function getCurrentStoreId (){
-        return 'store_0';
+        return 0;
     }
 
 
