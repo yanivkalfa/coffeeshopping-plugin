@@ -507,7 +507,7 @@ if(!class_exists('coffee_shopping'))
                 status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'saved',
                 note varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                delivered_date TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                delivered_date TIMESTAMP on update CURRENT_TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);

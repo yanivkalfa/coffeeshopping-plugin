@@ -88,12 +88,20 @@ class Cart extends Collection{
         return $total;
     }
 
-    public function getCalculatedTotal(){
+    public function getTotalAfterProductModifiers(){
         $total = 0;
         $products = $this->get();
         foreach($products as $product){
             $total += $product->getCalculatedPrice();
         }
+
+        return $total;
+    }
+
+    public function getCalculatedTotal(){
+        $total = $this->getTotalAfterProductModifiers();
+        $total += $this->getPayPalFees($total);
+        $total += $this->getStoreCommission($total);
         return $total;
     }
 
@@ -103,16 +111,17 @@ class Cart extends Collection{
         foreach($this->get() as $key => $product){
             $productCount += $product->getQuantity();
         }
+
         if($extended){
             return array(
-                'total' => $this->getTotal(),
-                'calculatedTotal' => $this->getCalculatedTotal(),
+                'total' => CartHelper::formatNumber($this->getTotal()).Utils::getCurrencySymbol("ILS"),
+                'calculatedTotal' => CartHelper::formatNumber($this->getCalculatedTotal(),2).Utils::getCurrencySymbol("ILS"),
                 'productCount' => $productCount,
-                'aggregatedPriceModifiers' => $this->getAggregatedPriceModifiers(),
+                'aggregatedPriceModifiers' => CartHelper::formatAggregatedPriceModifiers($this->getAggregatedPriceModifiers()),
             );
         }else{
             return array(
-                'total' => $this->getTotal(),
+                'total' => CartHelper::formatNumber($this->getTotal()),
                 'productCount' => $productCount
             );
         }
@@ -131,8 +140,55 @@ class Cart extends Collection{
                 }
             }
         }
+        $total = $this->getTotalAfterProductModifiers();
+        $PayPalFees = $this->getPayPalFees($total);
+        $PayPalFeesArr = array(
+            'name' => 'PayPalFees',
+            'nameAs' => 'PayPal Fees',
+            'value' => $PayPalFees,
+        );
+        $modifiers['PayPalFees'] = new ProductPriceModifier($PayPalFeesArr);
+
+        $total += $PayPalFees;
+        $storeCommissionArr = array(
+            'name' => 'storeCommission',
+            'nameAs' => 'Store Commission',
+            'value' => $this->getStoreCommission($total),
+        );
+        $modifiers['storeCommission'] = new ProductPriceModifier($storeCommissionArr);
 
         return array_values($modifiers);
+    }
+
+    public function getPayPalFees($total){
+        if(!$total){
+            return false;
+        }
+        $PayPalFees = get_option('PayPalFees', array('amount' => 3.5, 'percentage' => true));
+
+        $fees = $PayPalFees['amount'];
+        if($PayPalFees['percentage']){
+            $fees = $total * $PayPalFees['amount']/100;
+        }
+        return $fees;
+    }
+
+    public function getStoreCommission($total){
+        if(!$total){
+            return false;
+        }
+        $storeCommission = get_option('storeCommission', array('amount' => 5, 'percentage' => true, 'bigger' => true));
+
+
+        $fees = $storeCommission['amount'];
+        if($storeCommission['percentage'] || $storeCommission['bigger']){
+            $fees = $total * $storeCommission['amount']/100;
+        }
+
+        if($storeCommission['bigger']){
+            $fees = max($storeCommission['amount'], $fees);
+        }
+        return $fees;
     }
 
     public function productExist($newItem, $savedItem){

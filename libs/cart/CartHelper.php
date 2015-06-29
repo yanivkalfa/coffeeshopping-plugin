@@ -33,4 +33,18 @@ abstract class CartHelper {
     }
 
 
+    static public function formatNumber($value){
+        return number_format($value, 2);
+    }
+
+    static public function formatAggregatedPriceModifiers($AggregatedPriceModifiers){
+        $newAggregatedPriceModifiers = array();
+        foreach($AggregatedPriceModifiers as $key => $APM){
+            $APMasArray = $APM->getObjectAsArray();
+            $APMasArray['value'] = self::formatNumber($APM->value).Utils::getCurrencySymbol("ILS");
+            $newAggregatedPriceModifiers[$key] = $APMasArray;
+        }
+
+        return $newAggregatedPriceModifiers;
+    }
 }

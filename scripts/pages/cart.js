@@ -25,7 +25,7 @@ jQuery(document).ready( function(){
             $('#aggregated-price-modifier').append(
                 $('<div>').attr('class', 'cart-' + aggregatedPriceModifier.name).append(
                     $('<div>').attr('class', 'inline header').html(aggregatedPriceModifier.nameAs),
-                    $('<div>').attr('class', 'inline detail').html(aggregatedPriceModifier.value)
+                    $('<div>').attr('class', 'inline detail cart-total').html('&nbsp;' + aggregatedPriceModifier.value)
                 )
             );
         });
