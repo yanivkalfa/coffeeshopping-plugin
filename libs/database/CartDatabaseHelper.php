@@ -57,7 +57,7 @@ abstract class CartDatabaseHelper {
     }
 
     /**
-     * getCartAddressId by user id
+     * getCartAddressId by cart id
      *
      * @param {number} $cartId
      * @return bool|array
@@ -113,9 +113,9 @@ abstract class CartDatabaseHelper {
     }
 
     /**
-     * get cart address by cart id
+     * get cart address by address id
      *
-     * @param {number} $cartId
+     * @param {number} $addressId
      * @return bool|array
      */
     public static function getCartAddress($addressId){
