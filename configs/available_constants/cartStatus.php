@@ -7,18 +7,18 @@ $value = array(
     ),
     'paid' => array(
         'name' => 'paid',
-        'nameAs' => 'paid'
+        'nameAs' => 'Paid'
     ),
     'storage' => array(
         'name' => 'storage',
-        'nameAs' => 'storage'
+        'nameAs' => 'In storage'
     ),
     'at_store' => array(
         'name' => 'at_store',
-        'nameAs' => 'at_store'
+        'nameAs' => 'At store'
     ),
     'delivered' => array(
         'name' => 'delivered',
-        'nameAs' => 'delivered'
+        'nameAs' => 'Delivered'
     )
 );
