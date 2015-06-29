@@ -137,7 +137,7 @@ class Ajax_handler {
 
         return array(
             'success'   => true,
-            'msg'       => array('updateSuccessfully' => 'updateSuccessfully', 'errorMsg' => '')
+            'msg'       => 'You\'ve successfully updated you\'re account'
         );
     }
 

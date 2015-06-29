@@ -290,7 +290,7 @@ function escapeJavaScriptText($string){
 
         <hr>
         <div id="detailspanel">
-            <iframe id="productDescriptionIframe" src="<?php echo plugins_url( '../../templates/partials/productDescriptionTemplate.php?pid='.$product->ID, __FILE__ );?>"></iframe>
+            <iframe id="productDescriptionIframe" src="<?php echo plugins_url( '../../templates/partials/productDescriptionTemplate.php?view-product='.$_GET['view-product'].'&store='.$_GET['store'] , __FILE__ );?>"></iframe>
         </div>
     </div>
 </div>

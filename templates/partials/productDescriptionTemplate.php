@@ -1,10 +1,34 @@
 <?php
 
-if(!isset($_GET['pid'])){
+if(!isset($_GET['view-product']) || !isset($_GET['store'])){
     exit;
 }
+function getWordPressRoot($filename){
 
-//get product description content
+    if(file_exists($filename)){
+        return $filename;
+    }
+
+
+}
+
+$fullpath = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+if (!function_exists('add_action')){
+    require_once ($fullpath.'/wp-load.php' );
+}
+
+// Sanitize our product id and store name.
+$productID = $_GET["view-product"];
+$store = $_GET["store"];
+
+// Our options array.
+$itemOpts = array();
+// Requested details.
+$itemOpts["IncludeSelector"] = array("Description");
+$sandbox = false;
+
+// performs the actual request.
+$result = productView::getProduct($store, $productID, $itemOpts, $sandbox);
 
 ?>
 
@@ -15,7 +39,7 @@ if(!isset($_GET['pid'])){
 </head>
 <body>
 <div id="productDescriptionWrap">
-    <?php //echo $_SESSION['descriptionHTML']; ?>
+    <?php echo $result['output']->descriptionHTML; ?>
 </div>
 
 <script>
