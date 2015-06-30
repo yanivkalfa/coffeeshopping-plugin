@@ -181,6 +181,7 @@ if(!class_exists('coffee_shopping'))
          */
         public function instantiateCart(){
             CartHelper::instantiateCart();
+            $this->addTemplatesToTheme();
         }
 
 
@@ -386,6 +387,8 @@ if(!class_exists('coffee_shopping'))
             require_once(LIBS . '/Utils.php');
             require_once(CONFIGS . '/constant.php');
             $pages = CSCons::get('pages') ?: array();
+
+            Utils::preEcho($pages);
 
             @mkdir(THEME_DIR.'/cs_templates');
             foreach($pages as $page){
