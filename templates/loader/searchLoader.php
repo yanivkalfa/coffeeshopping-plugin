@@ -34,6 +34,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     */
     // Add our filters.
     $searchOpts["filters"] = Array(
+        array('name' => 'HideDuplicateItems', 'value' => true),
         array('name' => 'ListingType', 'value' => array('AuctionWithBIN','FixedPrice','StoreInventory')),
         array('name' => 'MinQuantity', 'value' => '1'),
         array('name' => 'AvailableTo', 'value' => 'IL'),

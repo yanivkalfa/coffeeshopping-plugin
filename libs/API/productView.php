@@ -11,11 +11,24 @@
 
 abstract class productView {
 
+    /*
+     * @Uses _get_product_s to get a single product.
+    */
+    static public function getProduct($API, $productID, $itemOpts = array(), $sandbox = false){
+        return self::_get_product_s($API, $productID, $itemOpts, $sandbox);
+    }
+    /*
+     * @Uses _get_product_s to retrieve multiple products.
+    */
+    static public function getProducts($API, $productIDs, $itemOpts = array(), $sandbox = false){
+        return self::_get_product_s($API, $productIDs, $itemOpts, $sandbox);
+    }
+
     /**
      * @func getProduct($API, $productID, $itemOpts = array(), $sandbox = false)
      *  - Gets the product details to display in the 'product page view'.
      * @param   string      $API                    -   The name of the API to use (eg. ebay)
-     * @param   string      $productID              -   A string representation of the product ID (eg. 123123123)
+     * @param   string      $toGet              -   A string representation of the product ID (eg. 123123123)
      * @param   array       $itemOpts [Optional]    -   Holds our product options as specified for the given API.
      * @param   bool        $sandbox  [Optional]    -   Do we use the sandbox or live? (defaults to live)
      * @return  array       $result                 -   An array with 2 keys - result/output.
@@ -25,7 +38,7 @@ abstract class productView {
      *      - Failure - result = "ERROR",
      *                  output = Error code, codes reference at: Utils::getErrorCodeText($errorCode).
      */
-    static public function getProduct($API, $productID, $itemOpts = array(), $sandbox = false){
+    static private function _get_product_s($API, $toGet, $itemOpts = array(), $sandbox = false){
         // Check if our Adapter exists.
         if ( !Utils::API_Exists($API) ){
             Utils::adminPreECHO("API class (".$API."Adapter) doesn't exists, can't get product!", "getProduct() ERROR:: ");
@@ -50,12 +63,16 @@ abstract class productView {
         }else{
             $getter->_setLive();
         }
-        // Set our item ID.
-        $getter->_setItemID($productID);
+        // Set our item ID(s).
+        $getter->_setGetter($toGet);
         // Set our item options.
         $getter->_setItemOptions($itemOpts);
         // Run the search and get a results obj.
-        $result = $getter->getProduct();
+        if (!is_array($toGet)) {
+            $result = $getter->getProduct();
+        }else{
+            $result = $getter->getProducts();
+        }
         // Error checking
         if ($result["result"]=="ERROR"){
             return array(

@@ -3,7 +3,6 @@ class ClassLoader{
 
     public function __construct() {
         $this->loadClasses();
-
     }
 
     public function loadClasses(){

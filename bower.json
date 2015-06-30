@@ -15,6 +15,7 @@
     "dragula.js": "~1.6.0",
     "jquery-validation": "~1.13.1",
     "google.phoneValidation": "~1.0.0",
-    "jquery.serializeJSON": "~2.6.1"
+    "jquery.serializeJSON": "~2.6.1",
+    "masonry": "~3.3.0"
   }
 }

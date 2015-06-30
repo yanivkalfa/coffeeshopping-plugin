@@ -29,7 +29,24 @@ class featuredProductsWidget extends WP_Widget {
         if ( ! empty( $instance['title'] ) ) {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         }
-        echo __( 'THIS IS MY FEATURED PRODUCTS WIDGET', 'text_domain' );
+
+        $myCartWidgetPageLink = get_permalink(get_option("cs_cart_p_id"));
+        if (!$myCartWidgetPageLink){
+            Utils::adminPreECHO("Can't get search page link", "myCartWidget.php ERROR:: ");
+            echo Utils::getErrorCode("frontEnd", "widget", "myCartWidget", "7");
+            return;
+        }
+
+        $cart = array(
+            'productCount' => 0
+        );
+        if(isset($_SESSION['cart'])){
+            $cart =  $_SESSION['cart']->getStats();
+        }
+
+        $cart['page'] = $myCartWidgetPageLink;
+        Utils::getTemplate('myCartWidget', $cart);
+
         echo $args['after_widget'];
     }
 

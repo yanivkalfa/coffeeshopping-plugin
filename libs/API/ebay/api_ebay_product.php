@@ -19,7 +19,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $this->itemOptions = new stdClass();
         $this->itemOptions->IncludeSelector = array();      //  Simple array of selectors to request for the item. (empty by default)
         //          [Details, Description, TextDescription, ShippingCosts, ItemSpecifics, Variations, Compatibility]
-        $this->itemOptions->itemID = "0";                   //  The unique item ID(s) to get info for. [for multiple items use a simple array(ID, ID, ID...)]
+        $this->itemOptions->toGet = "0";                   //  The unique item ID(s) to get info for. [for multiple items use a simple array(ID, ID, ID...)]
 
         // Default comms header.
         $this->headers = array();
@@ -28,11 +28,11 @@ class ebay_ShoppingAPI extends ebayAdapter {
     }
 
     /*
-     * @func _setItemID()
+     * @func _settoGet()
      *  - Sets our item ID for the query.
      */
-    public function _setItemID($itemID){
-        $this->itemOptions->itemID = $itemID;
+    public function _setGetter($toGet){
+        $this->itemOptions->toGet = $toGet;
     }
     /*
      * @func _setItemOptions()
@@ -52,7 +52,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $this->headers =
             array(
                 'X-EBAY-API-CALL-NAME' => '',
-                'X-EBAY-API-VERSION' => '921',                      // Latest - http://developer.ebay.com/devzone/shopping/docs/ReleaseNotes.html
+                'X-EBAY-API-VERSION' => '897',                      // Latest - http://developer.ebay.com/devzone/shopping/docs/ReleaseNotes.html
                 'X-EBAY-API-REQUEST-ENCODING' => 'XML',
                 'X-EBAY-API-APP-ID' => $this->appid,
                 'Content-Type' => 'text/xml;charset=utf-8',
@@ -75,18 +75,18 @@ class ebay_ShoppingAPI extends ebayAdapter {
     }
 
     /*
-     * @func _BuildXMLItemList($itemIDs)
-     *  - Builds a proper XML itemIDs list for ebay's API.
-     * @param mixed $itemIDs - string/int/array of ItemID(s).
+     * @func _BuildXMLItemList($toGets)
+     *  - Builds a proper XML toGet list for ebay's API.
+     * @param mixed $toGet - string/int/array of toGet(s).
      * @return string
      */
-    public function _BuildXMLItemList($itemIDs){
-        if (!is_array($itemIDs)){
-            return "<ItemID>".$itemIDs."</ItemID>\n";
+    public function _BuildXMLItemList($toGet){
+        if (!is_array($toGet)){
+            return "<ItemID>".$toGet."</ItemID>\n";
         }
         $xmllist = "";
         // Iterate through each filter in the array
-        foreach ($itemIDs as $itemID) {
+        foreach ($toGet as $itemID) {
             $xmllist .= "<ItemID>".$itemID."</ItemID>\n";
         }
         return $xmllist;
@@ -109,7 +109,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         if (!empty($this->itemOptions->IncludeSelector)){
             $xmlrequest .= "<IncludeSelector>".implode(",", $this->itemOptions->IncludeSelector)."</IncludeSelector>\n";
         }
-        $xmlrequest .= "<ItemID>".$this->itemOptions->itemID."</ItemID>\n";
+        $xmlrequest .= $this->_BuildXMLItemList($this->itemOptions->toGet)."\n";
         $xmlrequest .= "</GetSingleItemRequest>\n";
 
         // Set our headers properly
@@ -186,7 +186,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Create the XML request to be POSTed.
         $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
         $xmlrequest .= "<GetShippingCostsRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n";
-        $xmlrequest .= "<ItemID>".$this->itemOptions->itemID."</ItemID>\n";
+        $xmlrequest .= $this->_BuildXMLItemList($this->itemOptions->toGet)."\n";
         $xmlrequest .= "<DestinationCountryCode>IL</DestinationCountryCode>\n";
         $xmlrequest .= "<IncludeDetails>true</IncludeDetails>\n";
         $xmlrequest .= "</GetShippingCostsRequest>​\n";
@@ -254,7 +254,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         if (!empty($this->itemOptions->IncludeSelector)){
             $xmlrequest .= "<IncludeSelector>".implode(",", $this->itemOptions->IncludeSelector)."</IncludeSelector>\n";
         }
-        $xmlrequest .= "<ItemID>".$this->_BuildXMLItemList($this->itemOptions->itemID)."</ItemID>\n";
+        $xmlrequest .= $this->_BuildXMLItemList($this->itemOptions->toGet)."\n";
         $xmlrequest .= "</GetMultipleItemsRequest>\n";
 
         // Set our headers properly
@@ -277,17 +277,29 @@ class ebay_ShoppingAPI extends ebayAdapter {
         // Checks to see if we have any type of failed call.
         if ($itemDetails->ack == "Failure" || $itemDetails->ack == "PartialFailure") {
             // Returns an error.
-            Utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category."\nERROR-MESSAGE:".$itemDetails->errorMessage->error->message."\n", "getProducts() ERROR:: ");
+            Utils::adminPreECHO("(".$itemDetails->errorMessage->error->errorId.") - ".$itemDetails->errorMessage->error->category." - ".$itemDetails->errorMessage->error->message."\n", " getProduct() ERROR:: ");
             return array(
                 'result' => "ERROR",
-                "output" => Utils::getErrorCode("API", "ebay", "getProducts", "5")
+                "output" => Utils::getErrorCode("API", "ebay", "getProducts", "2")
             );
+        }
+
+        // Iterate over all items and properly form them. (No shipping details!)
+        $itemDetailsProp = [];
+        foreach($itemDetails->Item as $Item){
+            // Make sure our item listing is "Active".
+            if ($Item->ListingStatus != "Active"){
+                continue;
+            }
+
+            // format our product properly.
+            $itemDetailsProp[] = $this->_formatProductOutput($Item);
         }
 
         // Returns a proper products object.
         return array(
             'result' => "OK",
-            "output" => $this->_formatProductOutput($itemDetails->Item)
+            "output" => $itemDetailsProp
         );
     }
 
