@@ -388,10 +388,7 @@ if(!class_exists('coffee_shopping'))
             require_once(CONFIGS . '/constant.php');
             $pages = CSCons::get('pages') ?: array();
 
-            Utils::preEcho(THEME_DIR);
-
             mkdir(THEME_DIR.'/cs_templates');
-            Utils::preEcho($pages);
             foreach($pages as $page){
                 Utils::file_str_replace(TEMPLATE_DIR.'/template-gantry.php', array('%%templateTitle%%','%%templateName%%'),array($page['title'], $page['name']), THEME_DIR.'/cs_templates' . '/template-'.$page['name'].'.php');
 
