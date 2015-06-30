@@ -388,6 +388,8 @@ if(!class_exists('coffee_shopping'))
             require_once(CONFIGS . '/constant.php');
             $pages = CSCons::get('pages') ?: array();
 
+            Utils::preEcho(THEME_DIR);
+
             mkdir(THEME_DIR.'/cs_templates');
             Utils::preEcho($pages);
             foreach($pages as $page){
