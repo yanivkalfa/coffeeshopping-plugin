@@ -25,21 +25,21 @@
         <div class="cart-totals">
             <div class="cart-subtotal">
                 <div class="inline header">Subtotal:</div>
-                <div id="cart-total" class="inline detail"><?php echo CartHelper::formatNumber($_SESSION['cart']->getTotal()).Utils::getCurrencySymbol("ILS"); ?></div>
+                <div id="cart-total" class="inline detail"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->getTotal()); ?></div>
             </div>
 
             <div id="aggregated-price-modifier">
                 <?php foreach ( $_SESSION['cart']->getAggregatedPriceModifiers() as $key => $aggregatedPriceModifier ){ ?>
                     <div class="cart-<?php echo $aggregatedPriceModifier->name; ?>">
                         <div class="inline header"><?php echo $aggregatedPriceModifier->nameAs; ?></div>
-                        <div class="inline detail cart-total"><?php echo CartHelper::formatNumber($aggregatedPriceModifier->value).Utils::getCurrencySymbol("ILS"); ?></div>
+                        <div class="inline detail cart-total"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($aggregatedPriceModifier->value); ?></div>
                     </div>
                 <?php } ?>
             </div>
 
             <div class="cart-subtotal">
                 <div class="inline header">Total:</div>
-                <div id="cart-calculated-total" class="inline detail"><?php echo CartHelper::formatNumber($_SESSION['cart']->getCalculatedTotal()).Utils::getCurrencySymbol("ILS"); ?></div>
+                <div id="cart-calculated-total" class="inline detail"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->getCalculatedTotal()); ?></div>
             </div>
 
             <div class="carttotals-actions">
