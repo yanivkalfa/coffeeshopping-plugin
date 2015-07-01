@@ -95,10 +95,10 @@
 
                 <div class="cartitemdetailtotal">
                     <div class="inline header">
-                        Total price:
+                        Item price:
                     </div>
                     <div class="inline detail">
-                        <div class="cart-product-price"><?php echo CartHelper::formatNumber($product->getPriceAfterQuantity()).Utils::getCurrencySymbol("ILS"); ?></div>
+                        <div class="cart-product-price"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($product->getPriceAfterQuantity()); ?></div>
                     </div>
                 </div>
 
