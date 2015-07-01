@@ -330,12 +330,12 @@ jQuery(document).ready( function(){
         // Get our current variant.
         var varArr = getCurrentVarSel();
         $ns.selectedVariant       = searchVariation(varArr);
-        quantity            = parseInt($ns.variations[$ns.selectedVariant]["quantity"]);
-        quantitySold        = parseInt($ns.variations[$ns.selectedVariant]["quantitySold"]);
 
         // If we have a proper selected variant.
         if ($ns.selectedVariant!=-1) {
             // Set variation details.
+            quantity            = parseInt($ns.variations[$ns.selectedVariant]["quantity"]);
+            quantitySold        = parseInt($ns.variations[$ns.selectedVariant]["quantitySold"]);
             quantitySoldElem.html(quantitySold);
             if ( quantity > quantitySold) {
                 // In stock!
