@@ -89,24 +89,11 @@ input[type="number"]{
     font-size: 12px;
 }
 
-
-#buynowbuttondiv{
-    cursor:pointer;
-    background-color: #0654ba;
-    color: white;
-    padding: 3px 15px;
-    margin: 5px;
-}
-#buynowbuttondiv.cartremove{
-    background-color: #BE181E;
-    padding: 3px 5px;
+#stockavailability.outofstock{
+    font-weight: bold;
+    color: #AA0000;
 }
 
-
-#orderquantity{
-    position:relative;
-    top:3px;
-}
 #itemprice, #shippingprice, .popupinfo{
     border-bottom: dashed 1px #2698de;
     cursor:pointer;
@@ -127,6 +114,44 @@ input[type="number"]{
 #totalprice{
     font-weight: bold;
 }
+
+#orderquantity{
+    position:relative;
+    top:3px;
+}
+
+#buynowbuttondiv{
+    display:inline-block;
+    cursor:pointer;
+    background-color: #0654ba;
+    color: white;
+    padding: 3px 15px;
+    margin: 5px;
+}
+#buynowbuttondiv.disabled{
+    background-color: #0654ba;
+}
+#buynowbuttondiv.cartremove{
+    background-color: #BE181E;
+    padding: 3px 5px;
+}
+
+#addtocartresultOK{
+    display:inline-block;
+    height:28px;
+    width:28px;
+    background: url("images/ok.png");
+    vertical-align: middle;
+}
+
+#addtocartresultERR{
+    display:inline-block;
+    height:28px;
+    width:28px;
+    background: url("images/error.png");
+    vertical-align: middle;
+}
+
 
 #detailscontainer{
     width: 100%;

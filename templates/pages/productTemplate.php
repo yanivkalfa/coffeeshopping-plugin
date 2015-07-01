@@ -119,7 +119,7 @@
                 ?>
             </div>
             <?php if ($varSetCnt>0){ ?>
-                <div align="center">
+                <div id="stockavailability" align="center">
                     <span> Available <span id="quantityavail"><?php Utils::pageEcho($product->quantityAvailable);?></span> </span> / <span> Sold <span id="quantitysold"><?php Utils::pageEcho($product->quantitySold);?></span> </span>
                 </div>
             <?php } ?>
@@ -247,7 +247,7 @@
 
         <div id="ordercontainer" class="inline">
             <?php if ($varSetCnt==0){ ?>
-                <div align="center">
+                <div id="stockavailability" align="center">
                     <span> Available <span id="quantityavail"><?php Utils::pageEcho($product->quantityAvailable);?></span> </span> / <span> Sold <span id="quantitysold"><?php Utils::pageEcho($product->quantitySold);?></span> </span>
                 </div>
             <?php } ?>
@@ -263,27 +263,25 @@
                 <div id="finalPrice" class="inline" align="center"> <?php echo $itemPricing["priceSymbol".$exchangeExtension].$itemPricing["price".$exchangeExtension];?> </div>
             </div>
             <div class="inline addtocart">
-                <div id="buynowbuttondiv" align="center">
-                    Add to cart
-                </div>
+                <div id="buynowbuttondiv" align="center">Add to cart</div>
+                <div id="addtocartresultOK"></div>
+                <div id="addtocartresultERR"></div>
             </div>
         </div>
     </div>
     <div id="detailscontainer">
         <div id="itemIDspec" align="left"><?php echo $_GET["store"];?> item number: <?php echo $product->ID;?></div>
-        <div id="itemspecs">
-            <h3>Item Specifics:</h3>
-            <?php
-            foreach($product->itemSpecifics as $spec => $value){
-                ?>
-                <div class="inline block">
-                    <div class="inline header"><?php echo $spec;?>:</div>
-                    <div class="inline"><?php echo $value;?></div>
-                </div>
-            <?php
-            }
-            ?>
-        </div>
+        <?php if (isset($product->itemSpecifics) && !empty($product->itemSpecifics)) { ?>
+            <div id="itemspecs">
+                <h3>Item Specifics:</h3>
+                <?php foreach ($product->itemSpecifics as $spec => $value) { ?>
+                    <div class="inline block">
+                        <div class="inline header"><?php echo $spec;?>:</div>
+                        <div class="inline"><?php echo $value;?></div>
+                    </div>
+                <?php } ?>
+            </div>
+        <?php } ?>
 
         <hr>
         <div id="detailspanel">

@@ -108,29 +108,36 @@ jQuery(document).ready( function(){
         jQuery("#infoPopUpDisplayDiv").hide();
     });
 
-
-    // Handle togglers.
-    jQuery("#infoPopUpDisplayDiv").hide();
-    jQuery("#exchangeDisplayDiv").hide();
-    jQuery("#quicksummary").hide();
-    jQuery("#orderdetailstogg").click(function(e){toggleID(this, "#quicksummary", e)});
-    jQuery("#DebugProductOutput").hide();
-    jQuery("#debugOutPutTogg").click(function(e){toggleID(this, "#DebugProductOutput", e)});
-    // Scroll our details panel to the left to display contents in case of need.
-    jQuery("#detailspaenl").scrollLeft(0);
-
-    // Handle 'Add to cart'
-    jQuery("#buynowbuttondiv").click(addToCart);
+    // Sets all handlers.
+    setHandlers();
 
     // ON-LOAD - get the defaults.
     updateShippingOpt();
     updateProductPrices();
+
+    function setHandlers(){
+        // Handle togglers.
+        jQuery("#addtocartresultOK").hide();
+        jQuery("#addtocartresultERR").hide();
+        jQuery("#infoPopUpDisplayDiv").hide();
+        jQuery("#exchangeDisplayDiv").hide();
+        jQuery("#quicksummary").hide();
+        jQuery("#orderdetailstogg").click(function(e){toggleID(this, "#quicksummary", e)});
+        jQuery("#DebugProductOutput").hide();
+        jQuery("#debugOutPutTogg").click(function(e){toggleID(this, "#DebugProductOutput", e)});
+        // Handle 'Add to cart'
+        jQuery("#buynowbuttondiv").click(addToCart);
+    }
 
     function addToCart(){
         if (jQuery("#itemvariations").data("hasvars")==1 && $ns.selectedVariant==-1){
             jQuery(".varset").effect("highlight", 1500);
             return false;
         }
+        if(jQuery("#buynowbuttondiv").hasClass("disabled")){
+            return false;
+        }
+        jQuery("#addtocartresultOK, #addtocartresultERR").hide();
 
         var exchDetails = getProductPricesDetails($ns.exchExtension, 1);
         var varArr = ($ns.selectedVariant!=-1) ? getCurrentVarSel() : {};
@@ -169,6 +176,10 @@ jQuery(document).ready( function(){
         var data = $ns.Utils.getData();
         if(data.success){
             $.publish($ns.events.CART_UPDATE, data.msg);
+            animateAddToCart();
+            jQuery("#addtocartresultOK").show();
+        }else{
+            jQuery("#addtocartresultERR").show();
         }
     }
     function removeFromCart(){
@@ -297,9 +308,19 @@ jQuery(document).ready( function(){
     }
 
     function updateSelectedVariant(jqRef){
-        var assocName       = jqRef.data("name");
-        var assocVal        = jqRef.val();
-        var imgElem         = jQuery(".gallery-thumbnails .item > a[data-assoc=\"" + assocName + "\"][data-assocval=\"" + assocVal + "\"]");
+        // define vars.
+        var assocName           = jqRef.data("name");
+        var assocVal            = jqRef.val();
+        var imgElem             = jQuery(".gallery-thumbnails .item > a[data-assoc=\"" + assocName + "\"][data-assocval=\"" + assocVal + "\"]");
+        var stockElem           = jQuery("#stockavailability");
+        var quantityElem        = jQuery("#quantityavail");
+        var quantitySoldElem    = jQuery("#quantitySold");
+        var orderQuantityInput  = jQuery("#orderquantity");
+        var buyNowButton        = jQuery("#buynowbuttondiv");
+        var finalPriceText      = jQuery("#finalPrice");
+        var itemPriceText       = jQuery("#itemprice");
+        var quantity, quantitySold;
+
         // Sets the picture for our variation (if available).
         imgElem.click();
 
@@ -309,15 +330,30 @@ jQuery(document).ready( function(){
         // Get our current variant.
         var varArr = getCurrentVarSel();
         $ns.selectedVariant       = searchVariation(varArr);
+        quantity            = parseInt($ns.variations[$ns.selectedVariant]["quantity"]);
+        quantitySold        = parseInt($ns.variations[$ns.selectedVariant]["quantitySold"]);
 
         // If we have a proper selected variant.
         if ($ns.selectedVariant!=-1) {
             // Set variation details.
-            jQuery("#quantityavail").html(parseFloat($ns.variations[$ns.selectedVariant]["quantity"]).toFixed(0));
-            jQuery("#quantitysold").html(parseFloat($ns.variations[$ns.selectedVariant]["quantitySold"]).toFixed(0));
-
-            // Set our variation pricing.
-            updateProductPrices();
+            quantitySoldElem.html(quantitySold);
+            if ( quantity > quantitySold) {
+                // In stock!
+                quantityElem.html(quantity);
+                stockElem.removeClass("outofstock");
+                orderQuantityInput.removeAttr("disabled");
+                buyNowButton.removeClass("disabled");
+                // Set our variation pricing.
+                updateProductPrices();
+            }else{
+                // Out of stock.
+                quantityElem.html("0");
+                stockElem.addClass("outofstock");
+                orderQuantityInput.attr("disabled", "disabled").val(0);
+                buyNowButton.addClass("disabled");
+                finalPriceText.html("-");
+                itemPriceText.html("-");
+            }
         }
     }
 
@@ -443,7 +479,7 @@ jQuery(document).ready( function(){
         // Total shipping costs - shipping+(additional*quantity)+duty+insurance.
         outputArr["shippingprice"] = shippingprice;
         // Paypal comminsion * item price + shipping costs + store commision.
-        outputArr["paypalprice"] =$ns. paypalcomm*(allitemsprice+shippingprice);//+outputArr["storeprice"]);
+        outputArr["paypalprice"] = $ns.paypalcomm*(allitemsprice+shippingprice);//+outputArr["storeprice"]);
         // Final price = item(s) price + shipping + paypal + store.
         outputArr["finalPrice"] = allitemsprice+shippingprice+outputArr["paypalprice"];//+outputArr["storeprice"];
         // Store comminsion * finalPrice. [if lower then minimum, set to minimum].
@@ -453,5 +489,46 @@ jQuery(document).ready( function(){
 
         return outputArr;
     }
+
+    function animateAddToCart () {
+        var cart = $('.cartwidgetcontainer');
+        var imgtodrag = $("#toppicturepanel .zoomItcontainer .visible img").eq(0);
+        if (imgtodrag) {
+            var imgclone = imgtodrag.clone()
+                .offset({
+                    top: imgtodrag.offset().top,
+                    left: imgtodrag.offset().left
+                })
+                .css({
+                    'opacity': '0.5',
+                    'position': 'absolute',
+                    'height': '150px',
+                    'width': '150px',
+                    'z-index': '100'
+                })
+                .appendTo($('body'))
+                .animate({
+                    'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': 75,
+                    'height': 75
+                }, 1000, 'easeInOutExpo');
+
+            setTimeout(function () {
+                cart.effect("shake", {
+                    times: 2
+                }, 200);
+                jQuery("#addtocartresultOK, #addtocartresultERR").hide();
+            }, 1500);
+
+            imgclone.animate({
+                'width': 0,
+                'height': 0
+            }, function () {
+                $(this).detach()
+            });
+        }
+    }
+
 
 });
