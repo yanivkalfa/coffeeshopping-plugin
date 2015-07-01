@@ -507,11 +507,10 @@ if(!class_exists('coffee_shopping'))
                 status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'saved',
                 note varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                delivered_date TIMESTAMP on update CURRENT_TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+                delivered_date TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);
-
 
             $table_name = $wpdb->prefix . "cs_cart_products";
             $table = "CREATE TABLE $table_name (
@@ -532,7 +531,7 @@ if(!class_exists('coffee_shopping'))
                 order_limit int(10) NOT NULL,
                 delivery_min varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 delivery_max varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-                delivered_date TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                delivered_date TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE KEY cuunique (`ID`)
                 );";
             dbDelta($table);
