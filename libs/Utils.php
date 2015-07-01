@@ -2,6 +2,14 @@
 
 abstract class Utils{
 
+    static public function escapeJavaScriptText($string){
+        return str_replace("\n", '\n', str_replace('"', '\"', addcslashes(str_replace("\r", '', (string)$string), "\0..\37'\\")));
+    }
+
+    static public function truncateStringToLength($string, $length){
+        return substr( $string, 0, strrpos( substr( $string, 0, $length), ' ' ) );
+    }
+
     static public function getAPILogoClass($API){
         return $API."-storeimg";
     }

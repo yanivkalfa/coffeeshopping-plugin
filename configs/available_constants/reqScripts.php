@@ -6,12 +6,15 @@ $value = array(
         array('handle' => 'jquery_zoomit.css',         'src' => 'bower_components/jquery.zoomIt/jquery.zoomIt',         'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
         array('handle' => 'jquery_cbcarousel_js',      'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
         array('handle' => 'jquery_cbcarousel_css',     'src' => 'bower_components/jquery.cbCarousel/jquery.cbCarousel', 'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
+        array('handle' => 'jquery_masonry_js',         'src' => 'bower_components/masonry/dist/masonry.pkgd',           'extension' => 'js',    'deps' => '', 'media' => ''),
+        array('handle' => 'imagesloaded_js',           'src' => 'bower_components/imagesloaded/imagesloaded',           'extension' => 'js',    'deps' => '', 'media' => ''),
+
         array('handle' => 'search_css',                'src' => '/css/search',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'search'),
         array('handle' => 'search_js',                 'src' => '/scripts/pages/search',                                'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'search'),
         array('handle' => 'product_css',               'src' => '/css/product',                                         'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
         array('handle' => 'product_js',                'src' => '/scripts/pages/product',                               'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
 
-
+        array('handle' => 'featuredProductsWidget',    'src' => '/scripts/partials/featuredProductsWidget',             'extension' => 'js',    'deps' => '', 'media' => ''),
         array('handle' => 'searchWidget_css',          'src' => '/css/searchWidget',                'extension' => 'css',   'deps' => '', 'media' => 'screen'),
         array('handle' => 'myCartWidget_css',          'src' => '/css/myCartWidget',                'extension' => 'css',   'deps' => '', 'media' => 'screen'),
         array('handle' => 'myCartWidget_js',           'src' => '/scripts/partials/myCartWidget',   'extension' => 'js',    'deps' => '', 'media' => ''),

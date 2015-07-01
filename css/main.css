@@ -127,3 +127,20 @@
     display:inline-block; width: 49%;
 }
 #addressform #addressHouseApt #addressApt{float:left;}
+
+/*
+     Featured products widget
+*/
+#featured-products-widget .masonryitem{
+    border:solid 1px #ddd;background:#fff;padding:5px;margin:5px;border-radius:5px;text-align:center;
+}
+#featured-products-widget .masonryimage{
+
+}
+#featured-products-widget .masonrytitle{
+
+}
+.masonrygrid .grid-item {
+    width: 266px;
+}
+.masonrygrid .grid-item--width2 { width: 300px; }

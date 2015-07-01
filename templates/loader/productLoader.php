@@ -53,8 +53,8 @@ if (
                 // Load our template.
                 $scope = array();
                 $scope["product"]               = $result["output"];
-                $scope["exchangeCurrency"]      = "ILS";
-                $scope["exchangeExtension"]     = "Exch";
+                $scope["exchangeCurrency"]      = "ILS"; // TODO:: get from admin panel.
+                $scope["exchangeExtension"]     = "Exch"; // TODO:: get from admin panel.
                 $scope["store"]                 = $store;
 
                 $scope["itemPricing"] = array(

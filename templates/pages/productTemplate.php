@@ -2,9 +2,6 @@
 /**
  * TODO: details not in use: $product->>> handlingTime, timeLeft, availableTill.
  */
-function escapeJavaScriptText($string){
-    return str_replace("\n", '\n', str_replace('"', '\"', addcslashes(str_replace("\r", '', (string)$string), "\0..\37'\\")));
-}
 ?>
 <!-- all variables comes from Utils::getTemplate -->
 

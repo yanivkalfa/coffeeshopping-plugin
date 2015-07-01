@@ -9,14 +9,14 @@
 $IDs = array(
     '180562166931',
     '161501858072',
-    '400709543922',
-    '331276240951',
-    '261667912103',
+    '261924928318',
+    '351439540986',
+    '231600677590',
     '281616040726',
-    '111680859264',
+    '121574740162',
     '291458059551',
     '321794593161',
-    '400840728084'
+    '391185228764'
 ); // TODO:: load from admin.
 $store = 'ebay'; // TODO:: load from admin.
 
@@ -36,6 +36,7 @@ if (isset($IDs) && !empty($IDs) && isset($store) && !empty($store)) {
         $scope = array(
             "errorsText" => $result["output"]
         );
+
         Utils::getTemplate('featuredProductsWidgetError', $scope);
 
     } else {
@@ -45,6 +46,10 @@ if (isset($IDs) && !empty($IDs) && isset($store) && !empty($store)) {
             'products' => $result["output"],
             'title' => '', // TODO:: load from admin.
         );
+        $scope["exchangeCurrency"]      = "ILS"; // TODO:: get from admin panel.
+        $scope["exchangeExtension"]     = "Exch"; // TODO:: get from admin panel
+        $scope["store"]                 = "ebay"; // TODO:: get from admin panel
+
         Utils::getTemplate('featuredProductsWidget', $scope);
     }
 
