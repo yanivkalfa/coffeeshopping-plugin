@@ -147,10 +147,10 @@ jQuery(document).ready( function(){
                 if (addressIdNeeded) {
                     errorMsg = '<span>' + validator.errorMap.address_id + '</span>';
 
-                    alertSelector.html(errorMsg)
+                    addressFormAlert.html(errorMsg)
                         .removeClass('display-none alert-error alert-warning alert-success').addClass('alert-error');
                 } else {
-                    alertSelector.html('')
+                    addressFormAlert.html('')
                         .removeClass('display-none alert-error alert-warning alert-success').addClass('display-none');
                 }
             },
