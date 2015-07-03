@@ -594,11 +594,11 @@ if(!class_exists('coffee_shopping'))
             $table_name = $wpdb->prefix . "cs_stores";
             $table = "CREATE TABLE $table_name (
               ID int NOT NULL AUTO_INCREMENT,
-              name varchar(255) NOT NULL,
-              address varchar(255) NOT NULL,
+              name varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              address varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               lat float(10, 6) NOT NULL,
               lng float(10, 6) NOT NULL,
-              description varchar(255) NOT NULL,
+              description varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               UNIQUE KEY cuunique (`ID`)
               );";
             dbDelta($table);
