@@ -15,6 +15,7 @@ $value = array(
         array('handle' => 'product_js',                'src' => '/scripts/pages/product',                               'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
 
         array('handle' => 'featuredProductsWidget',    'src' => '/scripts/partials/featuredProductsWidget',             'extension' => 'js',    'deps' => '', 'media' => ''),
+        array('handle' => 'header_css',                'src' => '/css/header',                      'extension' => 'css',   'deps' => '', 'media' => 'screen'),
         array('handle' => 'searchWidget_css',          'src' => '/css/searchWidget',                'extension' => 'css',   'deps' => '', 'media' => 'screen'),
         array('handle' => 'myCartWidget_css',          'src' => '/css/myCartWidget',                'extension' => 'css',   'deps' => '', 'media' => 'screen'),
         array('handle' => 'myCartWidget_js',           'src' => '/scripts/partials/myCartWidget',   'extension' => 'js',    'deps' => '', 'media' => ''),

@@ -1,11 +1,14 @@
 /* Search Page BEGIN*/
-.searchresultsul{margin:0px;}
+.searchresultsstore{margin:0;}
+.searchresultsul{margin:0;}
 .searchresultentry{
     display: block;
     width: 100%;
-    height: 255px;
+    min-height: 255px;
     border-bottom: 1px solid #ddd;
+    padding:10px 0px;
 }
+
 /* Per API results <li> */
 .searchresultsli{
     background-color: #fff;
@@ -15,9 +18,8 @@
 }
 
 /* Image Div */
-#imgdivcont{
+.imgdivcont{
     display: inline-block;
-    width: 30%;
     vertical-align: top;
     float:left;
 }
@@ -28,11 +30,11 @@
 }
 .imgdiv img{
     max-height: 225px !important;
-    min-width: 225px !important;
+    min-width: 183px !important;
 }
 
 /* Details Div */
-#detailsdivcont{
+.detailsdivcont{
     display: inline-block;
     width: 70%;
     vertical-align: top;
@@ -84,6 +86,9 @@
     background: url("images/nextarrow.png") no-repeat center;
 }
 
+.perpagedisplaytext{
+    display: inline-block;
+}
 #perpageselect {
     display:inline-block;
     padding: 0px;
@@ -120,3 +125,31 @@
 }
 
 /* END Search Page*/
+
+/*
+      RESPONSIVENESS-NESS!
+*/
+@media screen and (min-width: 300px) and (max-width: 540px){
+    .searchresultsli{padding:0;}
+    .searchresultentry{padding:10px 0px;}
+    .imgdivcont{  display: block;  vertical-align: top;  text-align: center;  float:none;  }
+    .imgdiv{  margin:0;  }
+    .detailscont{text-align: center;}
+    .detailsdivcont, .minidetails{display:block;width:100%;text-align: center;}
+    .entryfooterdiv{text-align: center;}
+    .entryfooterdiv a{  width: 50%;  }
+}
+@media screen and (min-width: 540px) and (max-width: 768px){
+    .searchresultsli{padding:0;}
+    .imgdivcont{  display: block;  vertical-align: top;  text-align: center;  float:none;  }
+    .imgdiv{  margin:0;  }
+    .detailscont{text-align: center;}
+    .detailsdivcont, .minidetails{display:block;width:100%;text-align: center;}
+    .entryfooterdiv{text-align: center;}
+    .entryfooterdiv a{  width: 50%;  }
+}
+@media screen and (min-width: 768px) and (max-width: 960px){
+
+}
+@media screen and (min-width: 960px) and (max-width: 1200px){}
+@media screen and (min-width: 1200px){}

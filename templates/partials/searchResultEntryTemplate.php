@@ -1,15 +1,15 @@
 <li id="<?php echo $item["ID"];?>" class="searchresultentry">
 
-    <div id="imgdivcont">
+    <div class="imgdivcont">
         <div class="imgdiv">
             <a href="<?php echo esc_url($productPageLink);?>" class="imglink">
-                <img src="<?php echo $item["image"];?>" alt="<?php echo $item["title"];?>">
+                <img src="<?php echo Utils::getPictureBySize($API, $item["image"], "300w"); ?>" alt="<?php echo $item["title"];?>">
             </a>
         </div>
     </div>
 
-    <div id="detailscont">
-        <div id="detailstopcont">
+    <div class="detailscont">
+        <div class="detailstopcont">
             <h3 class="titlediv">
                 <a href="<?php echo esc_url($productPageLink);?>" class="" title="<?php echo $item["title"];?>">
                     <strong><?php echo $item["title"];?></strong>
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div id="detailsdivcont">
+        <div class="detailsdivcont">
             <ul class="pricediv nolistbull minidetails">
                 <li class="itemcondition">
                     <span class="">Condition: <?php echo $item["conditionText"];?></span>
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <div id="entryfooterdiv">
-        <a href="<?php echo esc_url($productPageLink);?>">View details</a>
+    <div class="entryfooterdiv">
+        <a class="btn btn-primary" href="<?php echo esc_url($productPageLink);?>">View details</a>
     </div>
 </li>

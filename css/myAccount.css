@@ -79,3 +79,40 @@
 .cartorderstatusicons{margin: 10px 0px;}
 .cartitemstatusicons{margin: 10px 0px;}
 .cartstatusicons > .fa.done{color:#0066bb;}
+
+
+/*
+      RESPONSIVENESS-NESS!
+*/
+@media screen and (min-width: 300px) and (max-width: 540px){
+    #tabs-selector{padding:0;background:#fff;}
+    .tabselector{display:block;width:100%;}
+    .tabselector.active{
+        color: #F5F5F5;
+        border: none;
+        background: #419BDE;
+    }
+    #tabs-selector a{text-decoration: none !important;color: #F5F5F5;}
+
+    #profileform, #profileform .inline{width:100%;display:inline-block;}
+    #profileform .inline input {width:100%;}
+
+    #newAddressTab, #savedAddressTab{width:100%;display:inline-block;}
+
+    .cartcontentblock .inline{  display:block; width:100%;  }
+}
+@media screen and (min-width: 540px) and (max-width: 768px){
+    .cartcontentblock .inline{display:block; width:100%;}
+    .tabselector{  font-size: 18px;  padding: 3px;  text-align: center;}
+    .tabselector i{display:none;}
+}
+@media screen and (min-width: 768px) and (max-width: 960px){
+    .tabselector{  font-size: 22px; text-align: center;}
+    .cartorderproducts{display:inline-block;width:68%;margin-right:10px;}
+}
+@media screen and (min-width: 960px) and (max-width: 1200px){
+    .cartorderproducts{display:inline-block;width:68%;margin-right:10px;}
+}
+@media screen and (min-width: 1200px){
+    .cartorderproducts{display:inline-block;width:68%;margin-right:10px;}
+}

@@ -1,0 +1,82 @@
+.widget_headerwidget.rt-block{
+    margin:0;
+    padding: 0;
+    margin-right:30px;
+    text-align: center;
+}
+.headerblock{
+    display: inline-block;
+}
+#header-first{
+    width: 25%;
+    vertical-align: top;
+}
+#header-middle{
+    width: 60%;
+    vertical-align: top;
+    margin-top: 40px;
+}
+#header-last{
+    vertical-align: top;
+    margin-top: 40px;
+}
+
+#header-menu{line-height: 50px;}
+#header-menu ul{
+    list-style-type: none;
+    text-align: center;
+}
+#header-menu li{
+    display: inline-block;
+}
+#header-menu li:hover, #header-menu li.current-menu-item{}
+
+#header-menu li a {
+    border: 1px solid transparent;
+    display:inline-block;
+    padding: 10px;
+    color: #6e6e6e;
+    text-shadow: 0 2px 3px #ffffff;
+    font-size: inherit;
+    font-weight: inherit;
+}
+#header-menu li a:hover{
+    color: #2698de;
+    text-shadow: 1px 1px 0 #ffffff;
+}
+#header-menu li.current-menu-item a, #header-menu li a:hover{
+    border: 1px solid #cbcbcb;
+    background: #f2f2f2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border-top: 0;
+    -webkit-box-shadow: inset 0px 1px 0px #cbcbcb, inset 0px 2px 0px #ffffff;
+    -moz-box-shadow: inset 0px 1px 0px #cbcbcb, inset 0px 2px 0px #ffffff;
+    box-shadow: inset 0px 1px 0px #cbcbcb, inset 0px 2px 0px #ffffff;
+}
+
+#header-menu li a:before{content:none;}
+
+/*
+        HEADER RESPONSIVENESS-NESS!
+*/
+@media screen and (min-width: 300px) and (max-width: 540px){
+    .widget_headerwidget.rt-block{margin:0px;}
+    #header-first{display:block;width: 100%;}
+    #header-middle{margin:0;width: 100%;  }
+    #header-last{margin:0;}
+}
+@media screen and (min-width: 540px) and (max-width: 768px){
+    .widget_headerwidget.rt-block{margin:0px;}
+    #header-first{display:block;width: 100%;}
+    #header-middle{margin:0;width: 100%;}
+    #header-last{margin:0;}
+}
+@media screen and (min-width: 768px) and (max-width: 960px){
+    #header-middle, #header-last{margin-top: 20px;}
+}
+@media screen and (min-width: 960px) and (max-width: 1200px){
+    #header-middle, #header-last{margin-top: 30px;}
+}
+@media screen and (min-width: 1200px){}

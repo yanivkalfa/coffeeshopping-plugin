@@ -11,8 +11,11 @@
 <div id="storeLocator">
     <div id="storeLocatorAddress">
         <div class="inline textbottom">Search for a store close to:</div>
-        <div class="inline"><input id="storeLocateInput" type="text"/> </div>
-        <div class="inline va-top"><input id="storeLocateButton" type="button" value="Go!"/></div>
+        <div class="inline">
+            <input id="storeLocateInput" type="text"/>
+            <div class="inline va-top"><input id="storeLocateButton" type="button" value="Go!"/></div>
+        </div>
+
         <div id="storeLocatorAddressErr" class="display-none">We couldn't find the provided address!</div>
     </div>
 
@@ -28,7 +31,6 @@
                 </div>
                 <div class="aStoreImageDiv">
                     <iframe id="mapiframe" class="aStoreImageDiv" width="100%" height="100%" frameborder="0" style="border:0" src="" allowfullscreen></iframe>
-
                 </div>
             </div>
         </div>

@@ -47,7 +47,7 @@
         // Output next.
         if ($current<$last){echo "<div class=\"pagelink pagenext\">&nbsp;</div>";}
         ?>
-            &nbsp;per page:&nbsp;
+            <div class="perpagedisplaytext">&nbsp;per page:&nbsp;</div>
             <div id="perpageselect">
                 <?php
                 $formedLink = $searchPageLink."&pg=".$searchResults->paginationOutput[$API]["pageNumber"];

@@ -43,7 +43,7 @@
             </div>
 
             <div class="carttotals-actions">
-                <span class="cart-continue-shopping btn btn-primary">Continue shopping</span>
+                <a href="<?php echo $referredFrom;?>" class="cart-continue-shopping btn btn-primary">Continue shopping</a>
                 <a href="<?php echo $checkoutPage;?>" class="cart-save btn btn-primary">Checkout</a>
                 <!-- <span class=" cart-product-procced-checkout btn btn-primary">Proceed to checkout</span>  -->
             </div>
