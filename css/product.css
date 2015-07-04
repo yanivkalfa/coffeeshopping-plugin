@@ -89,7 +89,7 @@ input[type="number"]{
     font-size: 12px;
 }
 
-#stockavailability.outofstock{
+#quantityavail.outofstock{
     font-weight: bold;
     color: #AA0000;
 }
@@ -240,12 +240,12 @@ input[type="number"]{
     #topdetailspanel > div.productDetailsTitle > h1 {font-size: 150%;text-align: center;}
 
     #productchoices select {width:99%;}
-    .inline {width:99%;}
+    .productpagecontent .inline {width:99%;}
     #toppicturepanel, #productchoices, #quicksummary, #ordercontainer {width: 100%;}
     #toppicturepanel{padding-right: 10px;}
 
-    #shippmentdiv .radiocol{width:10%;  }
-    #shippmentdiv .namecol{width: 85%;text-align: center;}
+    #shippmentdiv .radiocol{width: 100%;text-align: center;}
+    #shippmentdiv .namecol{width: 100%;text-align: center;}
     #shippmentdiv .pricecol{width: 100%;text-align: center;}
     #shippingcostsdets{text-align: center;}
     #shippingdays{display: inline-block;width: 100%;}
@@ -260,7 +260,7 @@ input[type="number"]{
     #toppicturepanel .zoomItcontainer .full-image {min-height: 400px;}
     #toppicturepanel .zoomItcontainer .full-image > a {min-height: 400px;}
 
-    .inline {display:inline-block;width:auto;}
+    .productpagecontent .inline {display:inline-block;width:auto;}
 
     #productchoices select {width:99%;}
     #productchoices .inline {width:55%;}
@@ -330,7 +330,7 @@ input[type="number"]{
 
 }
 @media screen and (min-width: 1200px) {
-    .inline {display:inline-block;}
+    .productpagecontent .inline {display:inline-block;}
     #middlecontainer{min-height: 490px;}
 
     #toppicturepanel .zoomItcontainer .full-image {min-height: 400px;}
