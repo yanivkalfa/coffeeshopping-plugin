@@ -255,6 +255,15 @@ input[type="number"]{
     #ordercontainer .inline {display: inline-block; width:100%;}
     #orderquantity{width:100%;}
     #ordercontainer > div.inline.addtocart{width:100%;}
+    .zoomItcontainer .full-image > a > img{
+        margin: 0;
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-right: 0;
+        transform: initial;
+        max-height:100%;max-width:100%;
+    }
 }
 @media screen and (min-width: 540px){
     #toppicturepanel .zoomItcontainer .full-image {min-height: 400px;}
