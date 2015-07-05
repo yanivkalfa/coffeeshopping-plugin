@@ -92,7 +92,14 @@
     }
     .carttotals-actions a {margin-bottom: 5px;}
 
-
+    .cartitemimg > a > img {
+        margin: 0;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: inherit;
+        height: 100%;
+    }
 }
 @media screen and (min-width: 540px) and (max-width: 768px){
     .cartitemimgdiv.inline, .cartitemdetailsdiv.inline{
