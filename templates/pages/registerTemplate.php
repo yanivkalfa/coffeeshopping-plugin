@@ -23,6 +23,24 @@ if(is_super_admin() || !is_user_logged_in()){
                     </div>
                 </div>
 
+                <div class="form-group form-ltr">
+                    <label><?php _e("Password *", 'coffee-shopping' ); ?></label>
+                    <div class="phonearea">
+                        <input id="logininput" type="text" class="form-control" name="log"/>
+                        <div id="inputvalidatorOK"></div>
+                        <div id="inputvalidatorERR"></div>
+                    </div>
+                </div>
+
+                <div class="form-group form-ltr">
+                    <label><?php _e("Confirm Password *", 'coffee-shopping' ); ?></label>
+                    <div class="phonearea">
+                        <input id="logininput" type="text" class="form-control" name="log"/>
+                        <div id="inputvalidatorOK"></div>
+                        <div id="inputvalidatorERR"></div>
+                    </div>
+                </div>
+
                 <div id="form-alert" class="display-none"><?php _e("Register successfully", 'coffee-shopping' ); ?></div>
 
                 <div class="form-group form-ltr">

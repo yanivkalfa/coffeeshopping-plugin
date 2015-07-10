@@ -164,33 +164,27 @@ class Cart extends Collection{
         if(!$total){
             return false;
         }
-        $PayPalFees = get_option('PayPalFees', array('amount' => 2.5, 'percentage' => true));
+        $PayPalFees = get_option('PayPalFees', array( 'percentage' => 2.5));
 
-        $fees = $PayPalFees['amount'];
-        if($PayPalFees['percentage']){
-            $fees = $total * $PayPalFees['amount']/100;
-        }
-        return $fees;
+        return $PayPalFees['percentage'] ?  $total * $PayPalFees['percentage']/100 : 0;
     }
 
     public function getStoreCommission($total){
         if(!$total){
             return false;
         }
-        $storeCommission = get_option('storeCommission', array('amount' => 5, 'percentage' => true, 'bigger' => true));
+        $storeCommission = get_option('storeCommission', array('store' => 5, 'percentage' => 10, 'bigger' => true));
 
-        //Utils::preEcho($storeCommission);
-
-        $fees = $storeCommission['amount'];
+        $fees = $storeCommission['store'];
+        $percentageFees = 0;
         if($storeCommission['percentage'] || $storeCommission['bigger']){
-            $fees = $total * $storeCommission['amount']/100;
+            $percentageFees = $total * $storeCommission['percentage']/100;
         }
 
-        //Utils::preEcho($fees, 'first fees');
         if($storeCommission['bigger']){
-            $fees = max($storeCommission['amount'], $fees);
+            $fees = max($fees, $percentageFees);
         }
-        //::preEcho($fees, 'second fees');
+
         return $fees;
     }
 
