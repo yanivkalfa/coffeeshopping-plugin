@@ -31,6 +31,21 @@
                 </div>
                 <div class="aStoreImageDiv">
                     <iframe id="mapiframe" class="aStoreImageDiv" width="100%" height="100%" frameborder="0" style="border:0" src="" allowfullscreen></iframe>
+                    <?php if(Utils::isMobile()){?>
+                        <a class="aStoreWazeLink aStoreMapWazeLink" href=""><div class="wazenavimg"></div></a>
+                    <?php } ?>
+                </div>
+                <div class="aStoreDescriptionDiv">
+                    <div class="aStoreDescImageDiv">
+                        <img class="aStoreImage" src="" alt="Store image"/>
+                    </div>
+                    <div class="aStoreDescription"></div>
+                    <?php if(Utils::isMobile()){?>
+                        <div class="aStoreDescriptionNav">
+                            <?php _e("Click to navigate using waze: ", "coffee-shopping");?>
+                            <a class="aStoreWazeLink aStoreDescriptionWazeLink" href=""><div class="wazenavimg"></div></a>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -49,6 +64,9 @@
                      data-embed="<?php echo StoreDatabaseHelper::getStoreGoogleMapsEmbed($aStore["address"]);?>"
                      data-title-name="<?php esc_attr_e($aStore["name"]);?>"
                      data-title-address="<?php esc_attr_e($aStore["address"]);?>"
+                     data-description="<?php esc_attr_e($aStore["description"]);?>"
+                     data-imgurl="<?php esc_attr_e($aStore["imgurl"]);?>"
+                     data-wazeurl="<?php esc_attr_e("waze://?ll=".$aStore["lat"].",".$aStore["lng"]."&navigate=yes");?>"
                     >
                     <div class="aStoreTitle">
                         <div class="aStoreTitleName"><?php echo $aStore["name"];?></div>

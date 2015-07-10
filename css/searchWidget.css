@@ -7,11 +7,43 @@
 #searchwidgetdiv{
     display:block;
 }
+#searchinputdiv{
+    position: relative;
+}
 #searchwidgetinput{
     height:42px;
-    width: 75%;
+    width: 83%;
+    padding-left: 45px;
 }
 #searchwidgetbutton{
     height:42px;
+    width: 18%;
 }
+#searchadvbutton {
+    position:absolute;
+    top:10px;
+    left: 19%;
+    cursor: pointer;
+}
+
+#searchadvbutton.active{
+    color: #26A4E7;
+}
+
+#searchwidgetadvanceddiv {
+    text-align: inherit;
+    margin-top: 10px;
+}
+#searchwidgetadvanceddiv input {
+    vertical-align: text-bottom;
+}
+#searchwidgetadvanceddiv .header {
+    font-weight: bold;
+    padding-right: 3px;
+}
+
+#searchwidgetadvanceddiv label {
+    cursor: pointer;
+}
+
 /* END Search Widget */

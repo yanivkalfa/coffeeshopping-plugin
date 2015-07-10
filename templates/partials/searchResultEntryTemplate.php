@@ -14,7 +14,11 @@
                 <a href="<?php echo esc_url($productPageLink);?>" class="" title="<?php echo $item["title"];?>">
                     <strong><?php echo $item["title"];?></strong>
                 </a>
-                <span class="catspan"><?php _e("Category:", 'coffee-shopping' ); ?> <?php echo $item["categoryText"];?></span>
+                <div class="catspan">
+                    <div class="inline"><?php _e("Category:", 'coffee-shopping' ); ?></div>
+                    <div class="inline"><?php echo $item["categoryText"];?></div>
+                </div>
+
             </h3>
 
             <div class="subtitlediv">
@@ -25,24 +29,25 @@
         <div class="detailsdivcont">
             <ul class="pricediv nolistbull minidetails">
                 <li class="itemcondition">
-                    <span class=""><?php _e("Condition:", 'coffee-shopping' ); ?> <?php echo $item["conditionText"];?></span>
+                    <div class="inline"><?php _e("Condition:", 'coffee-shopping' ); ?></div>
+                    <div class="inline"><?php echo $item["conditionText"];?></div>
                 </li>
                 <li class="buyprice">
-                    <span class="bold">
-                        <?php _e("Price:", 'coffee-shopping' ); ?> <b><?php echo $item["priceSymbol".$exchangeExtension];?></b><?php echo $item["price".$exchangeExtension];?>
-                    </span>
+                    <div class="inline"><?php _e("Price:", 'coffee-shopping' ); ?></div>
+                    <div class="inline"><b><?php echo $item["priceSymbol".$exchangeExtension];?></b><?php echo $item["price".$exchangeExtension];?></b></div>
                 </li>
                 <li class="shippinginfo">
-                <span class="shipp">
-                    <span>
-                        <?php _e("Shipping:", 'coffee-shopping' ); ?> <span class="bfsp"><?php echo $item["shippingType"];?></span>
-                    </span>
-                </span>
+                        <?php
+                            $shippingtext = ($item["shipping".$exchangeExtension]==0) ? __("Free", "coffee-shopping") : $item["shippingSymbol".$exchangeExtension].$item["shipping".$exchangeExtension];
+                        ?>
+                    <div class="inline"><?php _e("Shipping:", 'coffee-shopping' ); ?></div>
+                    <div class="inline"><?php echo $shippingtext;?></div>
                 </li>
             </ul>
             <ul class="locationdiv nolistbull minidetails">
                 <li>
-                    <?php _e("From", 'coffee-shopping' ); ?> <?php echo $item["locationInfo"];?>
+                    <div class="inline"><?php _e("From:", 'coffee-shopping' ); ?></div>
+                    <div class="inline"><?php echo $item["locationInfo"];?></div>
                 </li>
                 <li>
                     <?php if ($item["isTopSeller"]) { ?>

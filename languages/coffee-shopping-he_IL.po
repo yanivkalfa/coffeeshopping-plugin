@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: coffee-shopping\n"
 "POT-Creation-Date: 2015-07-10 01:14-0400\n"
-"PO-Revision-Date: 2015-07-10 01:31-0400\n"
+"PO-Revision-Date: 2015-07-10 12:16+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: configs/available_constants/cartStatus.php:6
 #: configs/available_constants/productStatus.php:6
 msgid "In cart"
-msgstr ""
+msgstr "בעגלת הקניות"
 
 #: configs/available_constants/cartStatus.php:10
 #: configs/available_constants/productStatus.php:10

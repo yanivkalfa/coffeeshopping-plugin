@@ -102,7 +102,7 @@
                     </div>
                 </div>
 
-                <div class="cartitemdetailtotal">
+                <div class="cartitemdetailshipping">
                     <div class="inline header">
                         <?php _e("Shipping cost:", 'coffee-shopping' ); ?>
                     </div>
@@ -110,7 +110,6 @@
                         <div class="cart-product-price"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($product->getShippingCost()); ?></div>
                     </div>
                 </div>
-
             </div>
 
         </div>
