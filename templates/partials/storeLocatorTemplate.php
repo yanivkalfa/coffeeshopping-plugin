@@ -10,18 +10,18 @@
 
 <div id="storeLocator">
     <div id="storeLocatorAddress">
-        <div class="inline textbottom">Search for a store close to:</div>
+        <div class="inline textbottom"><?php _e("Search for a store close to:", 'coffee-shopping' ); ?></div>
         <div class="inline">
             <input id="storeLocateInput" type="text"/>
-            <div class="inline va-top"><input id="storeLocateButton" type="button" value="Go!"/></div>
+            <div class="inline va-top"><input id="storeLocateButton" type="button" value="<?php _e("Go!", 'coffee-shopping' ); ?>"/></div>
         </div>
 
-        <div id="storeLocatorAddressErr" class="display-none">We couldn't find the provided address!</div>
+        <div id="storeLocatorAddressErr" class="display-none"><?php _e("We couldn't find the provided address!", 'coffee-shopping' ); ?></div>
     </div>
 
     <div id="mapcontdiv" class="inline">
         <div class="storesTitle">
-            Closest store location:
+            <?php _e("Closest store location:", 'coffee-shopping' ); ?>
         </div>
         <div id="mapdiv">
             <div class="aStoreDiv">
@@ -44,7 +44,7 @@
     </div>
     <div id="storescontdiv" class="inline">
         <div class="storesTitle">
-            Our stores:
+            <?php _e("Our stores:", 'coffee-shopping' ); ?>
         </div>
         <?php
         $allStores = StoreDatabaseHelper::getStores(array());

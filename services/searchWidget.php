@@ -14,8 +14,8 @@ class searchWidget extends WP_Widget {
     function __construct() {
         parent::__construct(
             'searchWidget', // Base ID
-            __( 'CoffeeShopping search', 'text_domain' ), // Name
-            array( 'description' => __( 'Store searching widget', 'text_domain' ), ) // Args
+            __( 'CoffeeShopping search', 'coffee-shopping' ), // Name
+            array( 'description' => __( 'Store searching widget', 'coffee-shopping' ), ) // Args
         );
     }
 
@@ -31,7 +31,7 @@ class searchWidget extends WP_Widget {
 
         $searchPageLink = get_permalink(get_option("cs_search_p_id"));
         if (!$searchPageLink){
-            Utils::adminPreECHO("Can't get search page link", "searchWidget.php ERROR:: ");
+            Utils::adminPreECHO(__( "Can't get search page link", 'coffee-shopping' ), __( "searchWidget.php ERROR:: ", 'coffee-shopping' ));
             echo Utils::getErrorCode("frontEnd", "widget", "searchWidget", "7");
             return;
         }

@@ -32,6 +32,5 @@ class ProductPriceModifier extends BasicCartObject {
         }else{
             return $this->value * $quantity;
         }
-
     }
 }

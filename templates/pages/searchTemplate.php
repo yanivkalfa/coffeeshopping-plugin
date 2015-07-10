@@ -4,7 +4,7 @@
     foreach ($searchResults->items as $API => $items) {
     ?>
     <li class="searchresultsli">
-        <h2><?php echo $API;?> Search Results (<?php echo $searchResults->paginationOutput[$API]["totalEntries"];?>): <?php echo $searchVal;?></h2>
+        <h2><?php echo $API;?> <?php _e("Search Results", 'coffee-shopping' ); ?> (<?php echo $searchResults->paginationOutput[$API]["totalEntries"];?>): <?php echo $searchVal;?></h2>
         <ul class="searchresultsstore nolistbull">
             <?php
             foreach ($items as $item) {
@@ -47,7 +47,7 @@
         // Output next.
         if ($current<$last){echo "<div class=\"pagelink pagenext\">&nbsp;</div>";}
         ?>
-            <div class="perpagedisplaytext">&nbsp;per page:&nbsp;</div>
+            <div class="perpagedisplaytext">&nbsp;<?php _e("per page:", 'coffee-shopping' ); ?>&nbsp;</div>
             <div id="perpageselect">
                 <?php
                 $formedLink = $searchPageLink."&pg=".$searchResults->paginationOutput[$API]["pageNumber"];

@@ -24,7 +24,7 @@
     <div id="carttotalsdiv">
         <div class="cart-totals">
             <div class="cart-subtotal">
-                <div class="inline header">Subtotal:</div>
+                <div class="inline header"><?php _e("Subtotal:", 'coffee-shopping' ); ?></div>
                 <div id="cart-total" class="inline detail"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->getTotal()); ?></div>
             </div>
 
@@ -38,13 +38,13 @@
             </div>
 
             <div class="cart-subtotal">
-                <div class="inline header">Total:</div>
+                <div class="inline header"><?php _e("Total:", 'coffee-shopping' ); ?></div>
                 <div id="cart-calculated-total" class="inline detail"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->getCalculatedTotal()); ?></div>
             </div>
 
             <div class="carttotals-actions">
-                <a href="<?php echo $referredFrom;?>" class="cart-continue-shopping btn btn-primary">Continue shopping</a>
-                <a href="<?php echo $checkoutPage;?>" class="cart-save btn btn-primary">Checkout</a>
+                <a href="<?php echo $referredFrom;?>" class="cart-continue-shopping btn btn-primary"><?php _e("Continue shopping", 'coffee-shopping' ); ?></a>
+                <a href="<?php echo $checkoutPage;?>" class="cart-save btn btn-primary"><?php _e("Checkout", 'coffee-shopping' ); ?></a>
                 <!-- <span class=" cart-product-procced-checkout btn btn-primary">Proceed to checkout</span>  -->
             </div>
         </div>

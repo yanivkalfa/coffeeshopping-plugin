@@ -27,11 +27,11 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
     <div>
 
         <form id="addressForm" action="/checkout/" method="post">
-            <h4>Please select where to ship to:</h4>
-            <div id="reselect" class="display-none">Shipping options</div>
+            <h4><?php _e("Please select where to ship to:", 'coffee-shopping' ); ?></h4>
+            <div id="reselect" class="display-none"><?php _e("Shipping options", 'coffee-shopping' ); ?></div>
             <div id="shippingSelection" align="center">
-                <div id="shipToHome" class="inline shipToHome"><img src="<?php echo $shiptohome;?>" alt="Ship to home"/></div>
-                <div id="shipToStore" class="inline shipToStore"><img src="<?php echo $shiptostore;?>" alt="Ship to store"/></div>
+                <div id="shipToHome" class="inline shipToHome"><img src="<?php echo $shiptohome;?>" alt="<?php _e("Ship to home", 'coffee-shopping' ); ?>"/></div>
+                <div id="shipToStore" class="inline shipToStore"><img src="<?php echo $shiptostore;?>" alt="<?php _e("Ship to store", 'coffee-shopping' ); ?>"/></div>
             </div>
 
 
@@ -40,9 +40,9 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                 <div id="shipToStoreTab" class="display-none" align="center">
                     <div class="form-group">
                         <div id="shipToStore" class="inline shipToStore">
-                            <img src="<?php echo $shiptostore;?>" alt="Ship to store"/>
+                            <img src="<?php echo $shiptostore;?>" alt="<?php _e("Ship to store", 'coffee-shopping' ); ?>"/>
                         </div>
-                        <input type="radio" name="address_id" id="shipToStoreInput" value="shipToStore" class="display-none"/>
+                        <input type="radio" name="address_id" id="shipToStoreInput" value="<?php _e("shipToStore", 'coffee-shopping' ); ?>" class="display-none"/>
                     </div>
                 </div>
 
@@ -50,24 +50,24 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 
                     <div class="form-group">
                         <div id="shipToHome" class="inline shipToHome">
-                            <img src="<?php echo $shiptohome;?>" alt="Ship to home"/>
+                            <img src="<?php echo $shiptohome;?>" alt="<?php _e("Ship to home", 'coffee-shopping' ); ?>"/>
                         </div>
                         <div id="savedAddressTab">
                             <?php
                                 $scope = array(
                                     'addresses' => $addresses,
-                                    'header' => "Shipping to:",
+                                    'header' => __("Shipping to:", 'coffee-shopping' ),
                                     'actions' => false
                                 );
                                 Utils::getTemplate('shippingAddresses', $scope);
                             ?>
                             <div id="newAddress" class="single-address <?php echo isset($addresses) ? '' : 'display-none'; ?>">
                                 <div class="inline addressradio">
-                                    <input type="radio" name="address_id" id="newAddressField" value="newAddress"/>
+                                    <input type="radio" name="address_id" id="newAddressField" value="<?php _e("newAddress", 'coffee-shopping' ); ?>"/>
                                 </div>
                                 <label for="newAddressField">
                                     <div class="inline addressdets">
-                                        <div id="newAddressTitle" class="inline">Create New Address</div>
+                                        <div id="newAddressTitle" class="inline"><?php _e("Create New Address", 'coffee-shopping' ); ?></div>
                                     </div>
                                 </label>
                             </div>
@@ -84,7 +84,7 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 
             <div id="submitCheckout" class="form-group display-none">
                 <input name="saveAddress" value="true" type="hidden">
-                <input type="submit" class="btn btn-primary form-control full-width-button" value="Checkout" />
+                <input type="submit" class="btn btn-primary form-control full-width-button" value="<?php _e("Checkout", 'coffee-shopping' ); ?>" />
             </div>
         </form>
     </div>

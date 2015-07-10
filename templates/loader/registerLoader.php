@@ -7,9 +7,9 @@
  */
 
 $myAccountPage = get_permalink(get_option("cs_myAccount_p_id"));
-if (!$myAccountPage){Utils::adminPreECHO("Can't get register page id", "loginLoader.php ERROR:: ");}
+if (!$myAccountPage){Utils::adminPreECHO(__("Can't get register page id", 'coffee-shopping' ), __("loginLoader.php ERROR:: ", 'coffee-shopping' ));}
 $logoutPage = get_permalink(get_option("cs_logout_p_id"));
-if (!$logoutPage){Utils::adminPreECHO("Can't get logout page id", "topTemplate.php ERROR:: ");}
+if (!$logoutPage){Utils::adminPreECHO(__("Can't get logout page id", 'coffee-shopping' ), __("topTemplate.php ERROR:: ", 'coffee-shopping' ));}
 
 $scope = array(
     'errorMessages' => CSCons::get('errorMessages') ?: array(),

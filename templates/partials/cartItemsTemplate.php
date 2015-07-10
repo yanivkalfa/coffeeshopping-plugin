@@ -45,7 +45,7 @@
                 <div class="cartitemdelivery inline">
                     <?php if ($product->status!="delivered"){ ?>
                         <div class="inline header">
-                            Estimated delivery:
+                            <?php _e("Estimated delivery:", 'coffee-shopping' ); ?>
                         </div>
                         <div class="inline detail">
                             <?php echo $product->delivery_min. "-" .$product->delivery_max ;?>
@@ -54,7 +54,7 @@
                     <?php }else{ ?>
 
                         <div class="inline header">
-                            Delivered at:
+                            <?php _e("Delivered at:", 'coffee-shopping' ); ?>
                         </div>
                         <div class="inline detail">
                             <?php echo $product->delivered_date;?>
@@ -80,14 +80,14 @@
                 <div class="cartitemdetails inline">
                     <div class="cartitemdetailquantity">
                         <div class="inline header">
-                            Quantity:
+                            <?php _e("Quantity:", 'coffee-shopping' ); ?>
                         </div>
                         <div class="inline detail">
                             <input type="number" min="1" max="<?php echo $product->order_limit; ?>" id="quantity" class="product-quantity form-control" value="<?php echo $product->quantity; ?>"/>
                         </div>
 
-                        <div class="display-none cart-product-update inline"> <a>[Update]</a></div>
-                        <div class="cart-product-remove btn btn-primary inline">Remove item</div>
+                        <div class="display-none cart-product-update inline"> <a>[<?php _e("Update:", 'coffee-shopping' ); ?>]</a></div>
+                        <div class="cart-product-remove btn btn-primary inline"><?php _e("Remove item", 'coffee-shopping' ); ?></div>
                     </div>
 
                 </div>
@@ -95,10 +95,19 @@
 
                 <div class="cartitemdetailtotal">
                     <div class="inline header">
-                        Item price:
+                        <?php _e("Item price:", 'coffee-shopping' ); ?>
                     </div>
                     <div class="inline detail">
                         <div class="cart-product-price"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($product->getPriceAfterQuantity()); ?></div>
+                    </div>
+                </div>
+
+                <div class="cartitemdetailtotal">
+                    <div class="inline header">
+                        <?php _e("Shipping cost:", 'coffee-shopping' ); ?>
+                    </div>
+                    <div class="inline detail">
+                        <div class="cart-product-price"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($product->getShippingCost()); ?></div>
                     </div>
                 </div>
 

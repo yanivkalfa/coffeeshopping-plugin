@@ -12,8 +12,8 @@ class myCartWidget extends WP_Widget {
     function __construct() {
         parent::__construct(
             'myCartWidget', // Base ID
-            __( 'CoffeeShopping my cart', 'text_domain' ), // Name
-            array( 'description' => __( 'My cart widget', 'text_domain' ), ) // Args
+            __( 'CoffeeShopping my cart', 'coffee-shopping' ), // Name
+            array( 'description' => __( 'My cart widget', 'coffee-shopping' ), ) // Args
         );
     }
 
@@ -29,7 +29,7 @@ class myCartWidget extends WP_Widget {
 
         $myCartWidgetPageLink = get_permalink(get_option("cs_cart_p_id"));
         if (!$myCartWidgetPageLink){
-            Utils::adminPreECHO("Can't get search page link", "myCartWidget.php ERROR:: ");
+            Utils::adminPreECHO(__( "Can't get search page link", 'coffee-shopping' ), __( "myCartWidget.php ERROR:: ", 'coffee-shopping' ));
             echo Utils::getErrorCode("frontEnd", "widget", "myCartWidget", "7");
             return;
         }
@@ -67,5 +67,3 @@ class myCartWidget extends WP_Widget {
     public function update( $new_instance, $old_instance ) {}
 
 } // class myCartWidget
-
-?>

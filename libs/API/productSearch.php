@@ -32,7 +32,7 @@ abstract class productSearch {
     static public function searchAPI($API, $searchVal, $searchOpts = array(), $sandbox = false){
         // Check if our Adapter exists.
         if ( !Utils::API_Exists($API) ){
-            Utils::adminPreECHO("API class (".$API."Adapter) doesn't exists, can't search!", "searchAPI() ERROR:: ");
+            Utils::adminPreECHO(sprintf( __( 'API class (%1$s Adapter) doesn\'t exists, can\'t search!', 'coffee-shopping' ), $API ), __( "searchAPI() ERROR:: ", 'coffee-shopping' ));
             return array(
                 "result" => "ERROR",
                 "output" => Utils::getErrorCode("frontEnd", "productSearch", "searchAPI", "6")
@@ -40,7 +40,7 @@ abstract class productSearch {
         }
         $apiClass = $API."_FindingAPI";
         if (!class_exists($apiClass)){
-            Utils::adminPreECHO("API class ($apiClass) doesn't exists, can't search!", "searchAPI() ERROR:: ");
+            Utils::adminPreECHO(sprintf( __( 'API class (%1$s) doesn\'t exists, can\'t search!', 'coffee-shopping' ), $apiClass ), __( "searchAPI() ERROR:: ", 'coffee-shopping' ));
             return array(
                 "result" => "ERROR",
                 "output" => Utils::getErrorCode("frontEnd", "productSearch", "searchAPI", "6")
@@ -124,7 +124,7 @@ abstract class productSearch {
                 "output" => $searchResults
             );
         }else{
-            Utils::adminPreECHO($searchResults, "searchALL() ERROR:: ");
+            Utils::adminPreECHO($searchResults, __( "searchAPI() ERROR:: ", 'coffee-shopping' ));
             return array(
                 "result" => "ERROR",
                 "output" => Utils::getErrorCode("frontEnd", "productSearch", "searchALL", "6")

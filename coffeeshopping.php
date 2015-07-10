@@ -3,6 +3,7 @@
   Plugin Name: Coffee Shopping
   Description: Plugin designed for coffeeshopping.co.il!!
   Version: 0.0.1
+  Text Domain: coffee-shopping
 */
 
 /*
@@ -34,6 +35,10 @@ if(!class_exists('coffee_shopping'))
 
         public function __construct()
         {
+            /**
+             * Loading localization files
+             */
+            add_action('plugins_loaded', array($this, 'loadTextDomain'));
 
             /*
             * @ remove admin bar for user
@@ -94,8 +99,12 @@ if(!class_exists('coffee_shopping'))
              * After logging re-instantiating cart
              * */
             add_filter( 'authenticate', array($this, 'afterLogin'),30, 3 );
-
         }
+
+        public function loadTextDomain() {
+            load_plugin_textdomain( 'coffee-shopping', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        }
+
 
         public function afterLogin( $user, $username, $password ) {
             $savedCart = CartDatabaseHelper::getCart($user->ID);
@@ -373,7 +382,7 @@ if(!class_exists('coffee_shopping'))
         {
             if ( !current_user_can( 'manage_options' ))
             {
-                wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+                wp_die( __( "You do not have sufficient permissions to access this page.", 'coffee-shopping' ) );
             }
             require (dirname(__FILE__).'/services/settings.php');
         }
@@ -451,6 +460,7 @@ if(!class_exists('coffee_shopping'))
          * @return string
          */
         public function set_admin_language($lang){
+
             if(is_admin()){
                 return 'en_US';
             }else{

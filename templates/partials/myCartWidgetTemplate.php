@@ -1,8 +1,8 @@
 <div class="ui-widget cartwidgetcontainer">
-	<div class="cartimage" title="View your cart!">
+	<div class="cartimage" title="<?php _e("View your cart!", 'coffee-shopping' ); ?>">
 		<a href="<?php echo $page; ?>"><span class="cart-head-wrap"></span></a>
 	</div>
-	<div class="cartcount" title="View your cart!">
+	<div class="cartcount" title="<?php _e("View your cart!", 'coffee-shopping' ); ?>">
 		<a href="<?php echo $page; ?>"><span class="cart-head-item-count"><?php echo $productCount; ?></span></a>
 	</div>
 </div>
