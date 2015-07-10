@@ -1,19 +1,20 @@
 <?php
 $cartPage = get_permalink(get_option("cs_cart_p_id"));
-if (!$cartPage){Utils::adminPreECHO("Can't get cart page id", "cartDisplayTemplate.php ERROR:: ");}
+if (!$cartPage){Utils::adminPreECHO(__("Can't get cart page id", 'coffee-shopping' ), __("cartDisplayTemplate.php ERROR:: ", 'coffee-shopping' ));}
 ?>
+
 <div class="cartcontentblock">
     <div class="cartdetails inline">
         <div class="cartordertitle">
         <h4>
-            <div class="inline header">Order ID: #</div><div class="inline"><?php echo $cart->ID;?></div>
-            <?php echo ($cart->status=="saved") ? '<div class="inline titleincart"> <a href="'.$cartPage.'">(In Cart)</a> </div>' : '';?>
+            <div class="inline header"><?php _e("Order ID: #", 'coffee-shopping' ); ?></div><div class="inline"><?php echo $cart->ID;?></div>
+            <?php echo ($cart->status=="saved") ? '<div class="inline titleincart"> <a href="'.$cartPage.'">('._e("In Cart", 'coffee-shopping' ).')</a> </div>' : '';?>
         </h4>
         </div>
 
         <div class="cartorderdate">
             <div class="inline header">
-                Created at:
+                <?php _e("Created at:", 'coffee-shopping' ); ?>
             </div>
             <div class="inline">
                 <?php echo $cart->create_date;?>
@@ -23,7 +24,7 @@ if (!$cartPage){Utils::adminPreECHO("Can't get cart page id", "cartDisplayTempla
         <div class="cartorderstatus">
             <div>
                 <div class="inline header">
-                    Order status:
+                    <?php _e("Order status:", 'coffee-shopping' ); ?>
                 </div>
                 <div class="inline">
                     <?php echo CSCons::get('cartStatus')[$cart->status]['nameAs'];?>
@@ -44,7 +45,7 @@ if (!$cartPage){Utils::adminPreECHO("Can't get cart page id", "cartDisplayTempla
         </div>
 
         <div class="cartorderdelivery">
-            <div class="header">Deliver to:</div>
+            <div class="header"><?php _e("Deliver to:", 'coffee-shopping' ); ?></div>
             <div>
             <?php
             if ($cart->deliver_to=="home"){
@@ -61,7 +62,7 @@ if (!$cartPage){Utils::adminPreECHO("Can't get cart page id", "cartDisplayTempla
         </div>
 
         <div class="cartorderpayment">
-            <div class="header">Payment details:</div>
+            <div class="header"><?php _e("Payment details:", 'coffee-shopping' ); ?></div>
             <div><?php echo $cart->payment_method.' - '.Utils::getCurrencySymbol("ILS").round($cart->payment_amount, 2);?></div>
         </div>
 

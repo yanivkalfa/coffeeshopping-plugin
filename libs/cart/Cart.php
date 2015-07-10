@@ -164,7 +164,7 @@ class Cart extends Collection{
         if(!$total){
             return false;
         }
-        $PayPalFees = get_option('PayPalFees', array('amount' => 3.5, 'percentage' => true));
+        $PayPalFees = get_option('PayPalFees', array('amount' => 2.5, 'percentage' => true));
 
         $fees = $PayPalFees['amount'];
         if($PayPalFees['percentage']){
@@ -179,15 +179,18 @@ class Cart extends Collection{
         }
         $storeCommission = get_option('storeCommission', array('amount' => 5, 'percentage' => true, 'bigger' => true));
 
+        //Utils::preEcho($storeCommission);
 
         $fees = $storeCommission['amount'];
         if($storeCommission['percentage'] || $storeCommission['bigger']){
             $fees = $total * $storeCommission['amount']/100;
         }
 
+        //Utils::preEcho($fees, 'first fees');
         if($storeCommission['bigger']){
             $fees = max($storeCommission['amount'], $fees);
         }
+        //::preEcho($fees, 'second fees');
         return $fees;
     }
 

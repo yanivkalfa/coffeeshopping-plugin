@@ -8,11 +8,6 @@ class Ajax_handler {
 	/*
 	* @ premissions/capabilities responses.
 	*/
-	private $cap_msgs = array(
-		'add' => "Sorry, it looks like you don't have permission to add",
-		'edit' => "Sorry, it looks like you don't have permission to edit",
-		'delete' => "Sorry, it looks like you don't have permission to delete"
-	);
 
 	public function __construct() {
 		add_action('wp_ajax_nopriv_ajax_handler', array($this, 'handle_ajax'));
@@ -65,12 +60,12 @@ class Ajax_handler {
 				}
 			} else {
 				$json['success'] = false;
-				$json['msg'] = __CLASS__.'::'.$method.' not found, define first! por favor..';
+				$json['msg'] = __CLASS__.'::'.$method.__( " not found, define first! por favor..", 'coffee-shopping' );
 				echo json_encode($json);
 			}
 		}else{
             $json['success'] = false;
-            $json['msg'] = __CLASS__.':: method was not defined or authenticate request.';
+            $json['msg'] = __CLASS__.':: '.__( "method was not defined or authenticate request.", 'coffee-shopping' );
             echo json_encode($json);
         }
 		exit;
@@ -100,7 +95,7 @@ class Ajax_handler {
         if (is_super_admin()) {
             return array(
                 'success'   => true,
-                'msg'       => array('generatedPass' => $user['user_pass'], 'errorMsg' => "prevent-login")
+                'msg'       => array('generatedPass' => $user['user_pass'], 'errorMsg' => __( "prevent-login", 'coffee-shopping' ))
             );
         }
 
@@ -123,7 +118,7 @@ class Ajax_handler {
         if(!$newUser['ID'] || $newUser['ID'] !==  $user->ID) {
             return array(
                 'success'   => false,
-                'msg'       => array('unAuthorized' => 'unAuthorized', 'errorMsg' => 'Cant change another user\' profile')
+                'msg'       => array('unAuthorized' => 'unAuthorized', 'errorMsg' => __( "Cant change another user' profile", 'coffee-shopping' ))
             );
         }
 
@@ -131,13 +126,13 @@ class Ajax_handler {
         if(isset($updated->errors)){
             return array(
                 'success'   => false,
-                'msg'       => array('updatingUserError' => 'updatingUserError', 'errorMsg' => 'We could not update user!')
+                'msg'       => array('updatingUserError' => 'updatingUserError', 'errorMsg' =>  __( "We could not update user!", 'coffee-shopping' ))
             );
         }
 
         return array(
             'success'   => true,
-            'msg'       => 'You\'ve successfully updated you\'re account'
+            'msg'       => __( "You've successfully updated you're account", 'coffee-shopping' )
         );
     }
 
@@ -165,7 +160,7 @@ class Ajax_handler {
         if(!$address->ID) {
             return array(
                 'success' => false,
-                'msg' => array('name' => 'unableToInsertAddress', 'errorMsg' => 'Unable to insert new address')
+                'msg' => array('name' => 'unableToInsertAddress', 'errorMsg' => __( "Unable to insert new address", 'coffee-shopping' ))
             );
         }
 
@@ -174,7 +169,7 @@ class Ajax_handler {
         if(!add_user_meta($user->ID, 'address_id', $address->ID)) {
             return array(
                 'success' => false,
-                'msg' => array('name' => 'unableToAddAddressToUser', 'errorMsg' => 'Unable to add address to user')
+                'msg' => array('name' => 'unableToAddAddressToUser', 'errorMsg' => __( "Unable to add address to user", 'coffee-shopping' ))
             );
         }
 
@@ -195,7 +190,7 @@ class Ajax_handler {
         if(!$address_id) {
             return array(
                 'success' => false,
-                'msg' => array('name' => 'noAddressIdSupplied', 'errorMsg' => 'No address id was supplied')
+                'msg' => array('name' => 'noAddressIdSupplied', 'errorMsg' => __( "No address id was supplied", 'coffee-shopping' ))
             );
         }
 
@@ -208,7 +203,7 @@ class Ajax_handler {
         if(!$deleted) {
             return array(
                 'success' => false,
-                'msg' => array('name' => 'unableToRemoveAddress', 'errorMsg' => 'Unable to remove address')
+                'msg' => array('name' => 'unableToRemoveAddress', 'errorMsg' => __( "Unable to remove address", 'coffee-shopping' ))
             );
         }
 
@@ -245,7 +240,7 @@ class Ajax_handler {
         if(!$_SESSION['cart']->add(new Product($product))){
             return array(
                 'success' => false,
-                'msg' => 'Couldn\'t add the product to cart'
+                'msg' => __( "Couldn't add the product to cart", 'coffee-shopping' )
             );
         }
 
@@ -274,13 +269,13 @@ class Ajax_handler {
         if(!$product){
             return array(
                 'success' => false,
-                'msg' => 'Error: Product was not found'
+                'msg' =>  __( "Error: Product was not found", 'coffee-shopping' )
             );
         }
         if(!$product->updateQuantity($quantity)){
             return array(
                 'success' => false,
-                'msg' => 'Error: Could not update product\'s quantity'
+                'msg' => __( "Error: Could not update product's quantity", 'coffee-shopping' )
             );
         }
 

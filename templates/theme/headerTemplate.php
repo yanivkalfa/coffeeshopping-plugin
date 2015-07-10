@@ -15,7 +15,7 @@
          */
         $searchPageLink = get_permalink(get_option("cs_search_p_id"));
         if (!$searchPageLink){
-            Utils::adminPreECHO("Can't get search page link", "searchWidget.php ERROR:: ");
+            Utils::adminPreECHO(__("Can't get search page link", 'coffee-shopping' ), __("searchWidget.php ERROR:: ", 'coffee-shopping' ));
             echo Utils::getErrorCode("frontEnd", "widget", "searchWidget", "7");
             return;
         }
@@ -37,7 +37,7 @@
      */
     $myCartWidgetPageLink = get_permalink(get_option("cs_cart_p_id"));
     if (!$myCartWidgetPageLink){
-        Utils::adminPreECHO("Can't get search page link", "myCartWidget.php ERROR:: ");
+        Utils::adminPreECHO(__("Can't get search page link", 'coffee-shopping' ), __("myCartWidget.php ERROR:: ", 'coffee-shopping' ));
         echo Utils::getErrorCode("frontEnd", "widget", "myCartWidget", "7");
         return;
     }
@@ -51,5 +51,4 @@
     Utils::getTemplate('myCartWidget', $cart);
     ?>
 </div>
-
 

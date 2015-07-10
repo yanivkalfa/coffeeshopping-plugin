@@ -1,9 +1,9 @@
 <?php
 
 $checkoutPage = get_permalink(get_option("cs_checkout_p_id"));
-if (!$checkoutPage){Utils::adminPreECHO("Can't get checkout page id", "CheckoutLoader.php ERROR:: ");}
+if (!$checkoutPage){Utils::adminPreECHO(__( "Can't get checkout page id", 'coffee-shopping' ), __( "CheckoutLoader.php ERROR:: ", 'coffee-shopping' ));}
 $myAccountPage = get_permalink(get_option("cs_myAccount_p_id"));
-if (!$myAccountPage){Utils::adminPreECHO("Can't get register page id", "loginLoader.php ERROR:: ");}
+if (!$myAccountPage){Utils::adminPreECHO(__( "Can't get register page id", 'coffee-shopping' ), __( "loginLoader.php ERROR:: ", 'coffee-shopping' ));}
 
 
 if(is_user_logged_in()){

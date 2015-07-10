@@ -34,7 +34,7 @@ if (isset($IDs) && !empty($IDs) && isset($store) && !empty($store)) {
     // Output results if we have any proper ones, else display errors.
     if ($result["result"] == "ERROR") {
         // Failed to get the products.
-        Utils::adminPreECHO("featuredProductsWidget::productView::getProducts(...) failed!", "featuredProductsWidget ERROR:: ");
+        Utils::adminPreECHO(__( "featuredProductsWidget::productView::getProducts(...) failed!", 'coffee-shopping' ), __( "featuredProductsWidget ERROR:: ", 'coffee-shopping' ));
         $scope = array(
             "errorsText" => $result["output"]
         );
@@ -57,7 +57,7 @@ if (isset($IDs) && !empty($IDs) && isset($store) && !empty($store)) {
 
 }else{
     // No products or bad store.
-    Utils::adminPreECHO("No featured product IDs where set!", "featuredProductsWidget ERROR:: ");
+    Utils::adminPreECHO(__( "No featured product IDs where set!", 'coffee-shopping' ), __( "featuredProductsWidget ERROR:: ", 'coffee-shopping' ));
     $scope = array(
         "errorsText" => Utils::getErrorCode("templateLoader", "widget", "missingArgs", "9")
     );

@@ -91,11 +91,11 @@ class ebayAdapter {
 }
 // Require the extensions.
 require_once dirname(__FILE__)."/api_ebay_finding.php";
-if (!class_exists("ebay_FindingAPI")){echo "Failed to load ebay_FindingAPI class!";}
+if (!class_exists("ebay_FindingAPI")){ _e( "Failed to load ebay_FindingAPI class!", 'coffee-shopping' );}
 require_once dirname(__FILE__) . "/api_ebay_product.php";
-if (!class_exists("ebay_ShoppingAPI")){echo "Failed to load ebay_ShoppingAPI class!";}
+if (!class_exists("ebay_ShoppingAPI")){ _e( "Failed to load ebay_ShoppingAPI class!", 'coffee-shopping' );}
 require_once dirname(__FILE__) . "/api_ebay_utils.php";
-if (!class_exists("ebay_Utils")){echo "Failed to load ebay_Utils class!";}
+if (!class_exists("ebay_Utils")){ _e( "Failed to load ebay_Utils class!", 'coffee-shopping' );}
 
 
 

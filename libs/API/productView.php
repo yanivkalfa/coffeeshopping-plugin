@@ -41,7 +41,8 @@ abstract class productView {
     static private function _get_product_s($API, $toGet, $itemOpts = array(), $sandbox = false){
         // Check if our Adapter exists.
         if ( !Utils::API_Exists($API) ){
-            Utils::adminPreECHO("API class (".$API."Adapter) doesn't exists, can't get product!", "getProduct() ERROR:: ");
+
+            Utils::adminPreECHO(sprintf( __( 'API class (%1$s Adapter) doesn\'t exists, can\'t get product!', 'coffee-shopping' ), $API ), __( "getProduct() ERROR:: ", 'coffee-shopping' ));
             return array(
                 "result" => "ERROR",
                 "output" => Utils::getErrorCode("frontEnd", "productView", "getProduct", "2")
@@ -49,7 +50,8 @@ abstract class productView {
         }
         $apiClass = $API."_ShoppingAPI";
         if (!class_exists($apiClass)){
-            Utils::adminPreECHO("API class ($apiClass) doesn't exists, can't get product!", "getProduct() ERROR:: ");
+
+            Utils::adminPreECHO(sprintf( __( 'API class (%1$s) doesn\'t exists, can\'t get product!', 'coffee-shopping' ), $apiClass ), __( "getProduct() ERROR:: ", 'coffee-shopping' ));
             return array(
                 "result" => "ERROR",
                 "output" => Utils::getErrorCode("frontEnd", "productView", "getProduct", "2")

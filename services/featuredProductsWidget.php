@@ -12,8 +12,8 @@ class featuredProductsWidget extends WP_Widget {
     function __construct() {
         parent::__construct(
             'featuredProductsWidget', // Base ID
-            __( 'CoffeeShopping featured', 'text_domain' ), // Name
-            array( 'description' => __( 'Featured products widget', 'text_domain' ), ) // Args
+            __( 'CoffeeShopping featured', 'coffee-shopping' ), // Name
+            array( 'description' => __( 'Featured products widget', 'coffee-shopping' ), ) // Args
         );
     }
 
@@ -32,7 +32,7 @@ class featuredProductsWidget extends WP_Widget {
 
         $myCartWidgetPageLink = get_permalink(get_option("cs_cart_p_id"));
         if (!$myCartWidgetPageLink){
-            Utils::adminPreECHO("Can't get search page link", "myCartWidget.php ERROR:: ");
+            Utils::adminPreECHO(__( "Can't get search page link", 'coffee-shopping' ), __( "myCartWidget.php ERROR:: ", 'coffee-shopping' ));
             echo Utils::getErrorCode("frontEnd", "widget", "myCartWidget", "7");
             return;
         }
@@ -57,7 +57,7 @@ class featuredProductsWidget extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-        $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'text_domain' );
+        $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'coffee-shopping' );
         ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
@@ -83,5 +83,3 @@ class featuredProductsWidget extends WP_Widget {
     }
 
 } // class featuredProductsWidget
-
-?>

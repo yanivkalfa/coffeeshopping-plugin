@@ -1,1 +1,1 @@
-<div>You've logged out successfully</div>
+<div><?php _e("You've logged out successfully", 'coffee-shopping' ); ?></div>

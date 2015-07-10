@@ -14,7 +14,7 @@
                 <a href="<?php echo esc_url($productPageLink);?>" class="" title="<?php echo $item["title"];?>">
                     <strong><?php echo $item["title"];?></strong>
                 </a>
-                <span class="catspan">Category: <?php echo $item["categoryText"];?></span>
+                <span class="catspan"><?php _e("Category:", 'coffee-shopping' ); ?> <?php echo $item["categoryText"];?></span>
             </h3>
 
             <div class="subtitlediv">
@@ -25,24 +25,24 @@
         <div class="detailsdivcont">
             <ul class="pricediv nolistbull minidetails">
                 <li class="itemcondition">
-                    <span class="">Condition: <?php echo $item["conditionText"];?></span>
+                    <span class=""><?php _e("Condition:", 'coffee-shopping' ); ?> <?php echo $item["conditionText"];?></span>
                 </li>
                 <li class="buyprice">
-                <span class="bold">
-                        Price: <b><?php echo $item["priceSymbol".$exchangeExtension];?></b><?php echo $item["price".$exchangeExtension];?>
-                </span>
+                    <span class="bold">
+                        <?php _e("Price:", 'coffee-shopping' ); ?> <b><?php echo $item["priceSymbol".$exchangeExtension];?></b><?php echo $item["price".$exchangeExtension];?>
+                    </span>
                 </li>
                 <li class="shippinginfo">
                 <span class="shipp">
                     <span>
-                        Shipping: <span class="bfsp"><?php echo $item["shippingType"];?></span>
+                        <?php _e("Shipping:", 'coffee-shopping' ); ?> <span class="bfsp"><?php echo $item["shippingType"];?></span>
                     </span>
                 </span>
                 </li>
             </ul>
             <ul class="locationdiv nolistbull minidetails">
                 <li>
-                    From <?php echo $item["locationInfo"];?>
+                    <?php _e("From", 'coffee-shopping' ); ?> <?php echo $item["locationInfo"];?>
                 </li>
                 <li>
                     <?php if ($item["isTopSeller"]) { ?>

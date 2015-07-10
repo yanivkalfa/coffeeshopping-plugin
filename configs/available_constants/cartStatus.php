@@ -3,22 +3,22 @@
 $value = array(
     'saved' => array(
         'name' => 'saved',
-        'nameAs' => 'In cart'
+        'nameAs' => __( "In cart", 'coffee-shopping' ),
     ),
     'paid' => array(
         'name' => 'paid',
-        'nameAs' => 'Paid'
+        'nameAs' => __( "Paid", 'coffee-shopping' ),
     ),
     'storage' => array(
         'name' => 'storage',
-        'nameAs' => 'In storage'
+        'nameAs' => __( "In storage", 'coffee-shopping' ),
     ),
     'at_store' => array(
         'name' => 'at_store',
-        'nameAs' => 'At store'
+        'nameAs' => __( "At store", 'coffee-shopping' ),
     ),
     'delivered' => array(
         'name' => 'delivered',
-        'nameAs' => 'Delivered'
+        'nameAs' => __( "Delivered", 'coffee-shopping' ),
     )
 );

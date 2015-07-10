@@ -7,9 +7,9 @@
  */
 
 $registerPage = get_permalink(get_option("cs_register_p_id"));
-if (!$registerPage){Utils::adminPreECHO("Can't get register page id", "loginLoader.php ERROR:: ");}
+if (!$registerPage){Utils::adminPreECHO(__("Can't get register page id", 'coffee-shopping' ), __("loginLoader.php ERROR:: ", 'coffee-shopping' ));}
 $myAccountPage = get_permalink(get_option("cs_myAccount_p_id"));
-if (!$myAccountPage){Utils::adminPreECHO("Can't get register page id", "loginLoader.php ERROR:: ");}
+if (!$myAccountPage){Utils::adminPreECHO(__("Can't get register page id", 'coffee-shopping' ), __("loginLoader.php ERROR:: ", 'coffee-shopping' ));}
 
 $scope = array(
     'registerPage' => $registerPage,

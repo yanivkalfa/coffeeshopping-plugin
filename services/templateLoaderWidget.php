@@ -14,8 +14,8 @@ class templateLoaderWidget extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'templateLoaderWidget', // Base ID
-			__( 'CoffeeShopping templates', 'text_domain' ), // Name
-			array( 'description' => __( 'Load a theme template', 'text_domain' ), ) // Args
+			__( 'CoffeeShopping templates', 'coffee-shopping' ), // Name
+			array( 'description' => __( 'Load a theme template', 'coffee-shopping' ), ) // Args
 		);
 	}
 
@@ -43,10 +43,10 @@ class templateLoaderWidget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$templatename = ! empty( $instance['templatename'] ) ? $instance['templatename'] : __( '', 'text_domain' );
+		$templatename = ! empty( $instance['templatename'] ) ? $instance['templatename'] : '';
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'templatename' ); ?>"><?php _e( 'Template:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'templatename' ); ?>"><?php _e( 'Template:','coffee-shopping' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'templatename' ); ?>" name="<?php echo $this->get_field_name( 'templatename' ); ?>" type="text" value="<?php echo esc_attr( $templatename ); ?>">
 		</p>
 	<?php

@@ -52,7 +52,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
 
     // error checking
     if ($result["result"]=="ERROR"){
-        Utils::adminPreECHO("productSearch::searchALL(...) failed!", "searchLoader() ERROR:: ");
+        Utils::adminPreECHO(__("productSearch::searchALL(...) failed!", 'coffee-shopping' ), __("searchLoader() ERROR:: ", 'coffee-shopping' ));
         $scope = array(
             "errorsText" => $result["output"]
         );
@@ -62,7 +62,7 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
         // Output the search results template.
         $productPage = get_permalink(get_option("cs_product_p_id"));
         if (!$productPage){
-            Utils::adminPreECHO("Can't get product page id", "searchTemplate() ERROR:: ");
+            Utils::adminPreECHO(__("Can't get product page id", 'coffee-shopping' ), __("searchTemplate() ERROR:: ", 'coffee-shopping' ));
             $scope = array(
                 "errorsText" => Utils::getErrorCode("templateLoader", "productSearch", "searchAPI", "8")
             );

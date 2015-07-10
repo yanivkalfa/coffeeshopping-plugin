@@ -96,7 +96,7 @@ class currencyExchange {
             if (is_writable($cache)) {
                 fwrite($fh, $fileRead);
             }else{
-                die("File $cache is not WRITABLE - check folder permissions");
+                die(sprintf( __( 'File %1$s is not WRITABLE - check folder permissions', 'coffee-shopping' ), $cache ));
             }
         }
 

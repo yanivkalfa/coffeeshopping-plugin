@@ -1,13 +1,13 @@
 <?php
 $value = array(
-    array('name' => 'cart', 'title'=> 'Cart'),
-    array('name' => 'product', 'title'=> 'Product'),
-    array('name' => 'search', 'title'=> 'Search'),
-    array('name' => 'checkout', 'title'=> 'Checkout'),
-    array('name' => 'home', 'title'=> 'Home'),
-    array('name' => 'myAccount', 'title'=> 'My Account'),
-    array('name' => 'register', 'title'=> 'Register'),
-    array('name' => 'login', 'title'=> 'Login'),
-    array('name' => 'logout', 'title'=> 'Logout'),
-    array('name' => 'stores', 'title'=> 'Our Stores'),
+    array("name" => "cart", "title"=> __( "Cart", "coffee-shopping" )),
+    array("name" => "product", "title"=>  __( "Product", "coffee-shopping" )),
+    array("name" => "search", "title"=> __( "Search", "coffee-shopping" )),
+    array("name" => "checkout", "title"=> __( "Checkout", "coffee-shopping" )),
+    array("name" => "home", "title"=> __( "Home", "coffee-shopping" )),
+    array("name" => "myAccount", "title"=> __( "My Account", "coffee-shopping")),
+    array("name" => "register", "title"=> __( "Register", "coffee-shopping")),
+    array("name" => "login", "title"=>  __( "Login", "coffee-shopping")),
+    array("name" => "logout", "title"=>__( "Logout", "coffee-shopping")),
+    array("name" => "stores", "title"=> __( "Our Stores", "coffee-shopping")),
 );

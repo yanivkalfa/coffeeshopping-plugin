@@ -51,6 +51,13 @@ class Product extends BasicCartObject {
         }
     }
 
+    public function getShippingCost(){
+        foreach($this->price_modifiers as $PPM){
+            if($PPM->name === 'shippingCosts') return $PPM->getModifierValue($this->getQuantity());
+        }
+        return false;
+    }
+
     public function getPrice(){
         return $this->price;
     }
