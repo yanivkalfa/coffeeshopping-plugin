@@ -97,8 +97,6 @@ abstract class StoreDatabaseHelper extends SuperDatabaseHelper{
      * @return          bool
      */
     public static function insertStore($store){
-        if(!isset($store)) return false;
-
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_stores';
         return $wpdb->insert( $table_name, $store) ? $wpdb->insert_id : false;
@@ -111,8 +109,6 @@ abstract class StoreDatabaseHelper extends SuperDatabaseHelper{
      * @return          bool
      */
     public static function updateStore($store){
-        if(!isset($store)) return false;
-
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_stores';
         return $wpdb->update($table_name, $store, array( 'ID' => $store['ID'] )) !== false ? $store['ID'] : false;
@@ -125,8 +121,6 @@ abstract class StoreDatabaseHelper extends SuperDatabaseHelper{
      * @return                  bool
      */
     public static function deleteStore($storeWhere){
-        if(!isset($item)) return false;
-
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_stores';
         return $wpdb->delete($table_name, $storeWhere);
