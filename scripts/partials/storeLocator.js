@@ -4,12 +4,14 @@
 
 jQuery(document).ready( function(){
     // declare vars.
-    var mapiframe, mapNameDiv, mapAddressDiv, aStoreLocation,
+    var mapiframe, mapNameDiv, mapAddressDiv, mapDescription, mapImage, aStoreLocation,
         storeLocatorAddress, storeLocatorAddressErr, storeLocateInput, storeLocateButton;
 
     mapiframe = $("#mapiframe");
     mapNameDiv = $("#mapdiv .aStoreTitleName");
     mapAddressDiv = $("#mapdiv .aStoreTitleAddress");
+    mapDescription = $("#mapdiv .aStoreDescription");
+    mapImage = $("#mapdiv .aStoreImage");
     aStoreLocation = $("#storescontdiv .aStoreDiv");
 
     storeLocatorAddress = $("#storeLocatorAddress");
@@ -82,5 +84,7 @@ jQuery(document).ready( function(){
         mapiframe.attr("src", $(storeDiv).data("embed"));
         mapNameDiv.html($(storeDiv).data("title-name"));
         mapAddressDiv.html($(storeDiv).data("title-address"));
+        mapDescription.html($(storeDiv).data("description"));
+        mapImage.attr("src", $(storeDiv).data("imgurl"));
     }
 });

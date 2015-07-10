@@ -609,6 +609,7 @@ if(!class_exists('coffee_shopping'))
               lat float(10, 6) NOT NULL,
               lng float(10, 6) NOT NULL,
               description varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              imgurl varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               UNIQUE KEY cuunique (`ID`)
               );";
             dbDelta($table);
