@@ -1,0 +1,2029 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: coffee-shopping\n"
+"POT-Creation-Date: 2015-07-10 01:14-0400\n"
+"PO-Revision-Date: 2015-07-10 01:31-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: bower_components\n"
+
+#: coffeeshopping.php:377
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: coffeeshopping.php:469
+msgid "CoffeeShopping Member"
+msgstr ""
+
+#: configs/available_constants/cartStatus.php:6
+#: configs/available_constants/productStatus.php:6
+msgid "In cart"
+msgstr ""
+
+#: configs/available_constants/cartStatus.php:10
+#: configs/available_constants/productStatus.php:10
+msgid "Paid"
+msgstr ""
+
+#: configs/available_constants/cartStatus.php:14
+#: configs/available_constants/productStatus.php:14
+msgid "In storage"
+msgstr ""
+
+#: configs/available_constants/cartStatus.php:18
+#: configs/available_constants/productStatus.php:18
+msgid "At store"
+msgstr ""
+
+#: configs/available_constants/cartStatus.php:22
+#: configs/available_constants/productStatus.php:22
+msgid "Delivered"
+msgstr ""
+
+#: configs/available_constants/countries.php:3
+msgid "Afghanistan"
+msgstr ""
+
+#: configs/available_constants/countries.php:4
+msgid "Aland Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:5
+msgid "Albania"
+msgstr ""
+
+#: configs/available_constants/countries.php:6
+msgid "Algeria"
+msgstr ""
+
+#: configs/available_constants/countries.php:7
+msgid "American Samoa"
+msgstr ""
+
+#: configs/available_constants/countries.php:8
+msgid "Andorra"
+msgstr ""
+
+#: configs/available_constants/countries.php:9
+msgid "Angola"
+msgstr ""
+
+#: configs/available_constants/countries.php:10
+msgid "Anguilla"
+msgstr ""
+
+#: configs/available_constants/countries.php:11
+msgid "Antarctica"
+msgstr ""
+
+#: configs/available_constants/countries.php:12
+msgid "Antigua And Barbuda"
+msgstr ""
+
+#: configs/available_constants/countries.php:13
+msgid "Argentina"
+msgstr ""
+
+#: configs/available_constants/countries.php:14
+msgid "Armenia"
+msgstr ""
+
+#: configs/available_constants/countries.php:15
+msgid "Aruba"
+msgstr ""
+
+#: configs/available_constants/countries.php:16
+msgid "Australia"
+msgstr ""
+
+#: configs/available_constants/countries.php:17
+msgid "Austria"
+msgstr ""
+
+#: configs/available_constants/countries.php:18
+msgid "Azerbaijan"
+msgstr ""
+
+#: configs/available_constants/countries.php:19
+msgid "Bahamas"
+msgstr ""
+
+#: configs/available_constants/countries.php:20
+msgid "Bahrain"
+msgstr ""
+
+#: configs/available_constants/countries.php:21
+msgid "Bangladesh"
+msgstr ""
+
+#: configs/available_constants/countries.php:22
+msgid "Barbados"
+msgstr ""
+
+#: configs/available_constants/countries.php:23
+msgid "Belarus"
+msgstr ""
+
+#: configs/available_constants/countries.php:24
+msgid "Belgium"
+msgstr ""
+
+#: configs/available_constants/countries.php:25
+msgid "Belize"
+msgstr ""
+
+#: configs/available_constants/countries.php:26
+msgid "Benin"
+msgstr ""
+
+#: configs/available_constants/countries.php:27
+msgid "Bermuda"
+msgstr ""
+
+#: configs/available_constants/countries.php:28
+msgid "Bhutan"
+msgstr ""
+
+#: configs/available_constants/countries.php:29
+msgid "Bolivia"
+msgstr ""
+
+#: configs/available_constants/countries.php:30
+msgid "Bosnia And Herzegovina"
+msgstr ""
+
+#: configs/available_constants/countries.php:31
+msgid "Botswana"
+msgstr ""
+
+#: configs/available_constants/countries.php:32
+msgid "Bouvet Island"
+msgstr ""
+
+#: configs/available_constants/countries.php:33
+msgid "Brazil"
+msgstr ""
+
+#: configs/available_constants/countries.php:34
+msgid "British Indian Ocean Territory"
+msgstr ""
+
+#: configs/available_constants/countries.php:35
+msgid "Brunei Darussalam"
+msgstr ""
+
+#: configs/available_constants/countries.php:36
+msgid "Bulgaria"
+msgstr ""
+
+#: configs/available_constants/countries.php:37
+msgid "Burkina Faso"
+msgstr ""
+
+#: configs/available_constants/countries.php:38
+msgid "Burundi"
+msgstr ""
+
+#: configs/available_constants/countries.php:39
+msgid "Cambodia"
+msgstr ""
+
+#: configs/available_constants/countries.php:40
+msgid "Cameroon"
+msgstr ""
+
+#: configs/available_constants/countries.php:41
+msgid "Canada"
+msgstr ""
+
+#: configs/available_constants/countries.php:42
+msgid "Cape Verde"
+msgstr ""
+
+#: configs/available_constants/countries.php:43
+msgid "Cayman Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:44
+msgid "Central African Republic"
+msgstr ""
+
+#: configs/available_constants/countries.php:45
+msgid "Chad"
+msgstr ""
+
+#: configs/available_constants/countries.php:46
+msgid "Chile"
+msgstr ""
+
+#: configs/available_constants/countries.php:47
+msgid "China"
+msgstr ""
+
+#: configs/available_constants/countries.php:48
+msgid "Christmas Island"
+msgstr ""
+
+#: configs/available_constants/countries.php:49
+msgid "Cocos (Keeling) Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:50
+msgid "Colombia"
+msgstr ""
+
+#: configs/available_constants/countries.php:51
+msgid "Comoros"
+msgstr ""
+
+#: configs/available_constants/countries.php:52
+msgid "Congo"
+msgstr ""
+
+#: configs/available_constants/countries.php:53
+msgid "Congo, Democratic Republic"
+msgstr ""
+
+#: configs/available_constants/countries.php:54
+msgid "Cook Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:55
+msgid "Costa Rica"
+msgstr ""
+
+#: configs/available_constants/countries.php:56
+msgid "Cote D'Ivoire"
+msgstr ""
+
+#: configs/available_constants/countries.php:57
+msgid "Croatia"
+msgstr ""
+
+#: configs/available_constants/countries.php:58
+msgid "Cuba"
+msgstr ""
+
+#: configs/available_constants/countries.php:59
+msgid "Cyprus"
+msgstr ""
+
+#: configs/available_constants/countries.php:60
+msgid "Czech Republic"
+msgstr ""
+
+#: configs/available_constants/countries.php:61
+msgid "Denmark"
+msgstr ""
+
+#: configs/available_constants/countries.php:62
+msgid "Djibouti"
+msgstr ""
+
+#: configs/available_constants/countries.php:63
+msgid "Dominica"
+msgstr ""
+
+#: configs/available_constants/countries.php:64
+msgid "Dominican Republic"
+msgstr ""
+
+#: configs/available_constants/countries.php:65
+msgid "Ecuador"
+msgstr ""
+
+#: configs/available_constants/countries.php:66
+msgid "Egypt"
+msgstr ""
+
+#: configs/available_constants/countries.php:67
+msgid "El Salvador"
+msgstr ""
+
+#: configs/available_constants/countries.php:68
+msgid "Equatorial Guinea"
+msgstr ""
+
+#: configs/available_constants/countries.php:69
+msgid "Eritrea"
+msgstr ""
+
+#: configs/available_constants/countries.php:70
+msgid "Estonia"
+msgstr ""
+
+#: configs/available_constants/countries.php:71
+msgid "Ethiopia"
+msgstr ""
+
+#: configs/available_constants/countries.php:72
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
+
+#: configs/available_constants/countries.php:73
+msgid "Faroe Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:74
+msgid "Fiji"
+msgstr ""
+
+#: configs/available_constants/countries.php:75
+msgid "Finland"
+msgstr ""
+
+#: configs/available_constants/countries.php:76
+msgid "France"
+msgstr ""
+
+#: configs/available_constants/countries.php:77
+msgid "French Guiana"
+msgstr ""
+
+#: configs/available_constants/countries.php:78
+msgid "French Polynesia"
+msgstr ""
+
+#: configs/available_constants/countries.php:79
+msgid "French Southern Territories"
+msgstr ""
+
+#: configs/available_constants/countries.php:80
+msgid "Gabon"
+msgstr ""
+
+#: configs/available_constants/countries.php:81
+msgid "Gambia"
+msgstr ""
+
+#: configs/available_constants/countries.php:82
+msgid "Georgia"
+msgstr ""
+
+#: configs/available_constants/countries.php:83
+msgid "Germany"
+msgstr ""
+
+#: configs/available_constants/countries.php:84
+msgid "Ghana"
+msgstr ""
+
+#: configs/available_constants/countries.php:85
+msgid "Gibraltar"
+msgstr ""
+
+#: configs/available_constants/countries.php:86
+msgid "Greece"
+msgstr ""
+
+#: configs/available_constants/countries.php:87
+msgid "Greenland"
+msgstr ""
+
+#: configs/available_constants/countries.php:88
+msgid "Grenada"
+msgstr ""
+
+#: configs/available_constants/countries.php:89
+msgid "Guadeloupe"
+msgstr ""
+
+#: configs/available_constants/countries.php:90
+msgid "Guam"
+msgstr ""
+
+#: configs/available_constants/countries.php:91
+msgid "Guatemala"
+msgstr ""
+
+#: configs/available_constants/countries.php:92
+msgid "Guernsey"
+msgstr ""
+
+#: configs/available_constants/countries.php:93
+msgid "Guinea"
+msgstr ""
+
+#: configs/available_constants/countries.php:94
+msgid "Guinea-Bissau"
+msgstr ""
+
+#: configs/available_constants/countries.php:95
+msgid "Guyana"
+msgstr ""
+
+#: configs/available_constants/countries.php:96
+msgid "Haiti"
+msgstr ""
+
+#: configs/available_constants/countries.php:97
+msgid "Heard Island & Mcdonald Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:98
+msgid "Holy See (Vatican City State)"
+msgstr ""
+
+#: configs/available_constants/countries.php:99
+msgid "Honduras"
+msgstr ""
+
+#: configs/available_constants/countries.php:100
+msgid "Hong Kong"
+msgstr ""
+
+#: configs/available_constants/countries.php:101
+msgid "Hungary"
+msgstr ""
+
+#: configs/available_constants/countries.php:102
+msgid "Iceland"
+msgstr ""
+
+#: configs/available_constants/countries.php:103
+msgid "India"
+msgstr ""
+
+#: configs/available_constants/countries.php:104
+msgid "Indonesia"
+msgstr ""
+
+#: configs/available_constants/countries.php:105
+msgid "Iran, Islamic Republic Of"
+msgstr ""
+
+#: configs/available_constants/countries.php:106
+msgid "Iraq"
+msgstr ""
+
+#: configs/available_constants/countries.php:107
+msgid "Ireland"
+msgstr ""
+
+#: configs/available_constants/countries.php:108
+msgid "Isle Of Man"
+msgstr ""
+
+#: configs/available_constants/countries.php:109
+msgid "Israel"
+msgstr ""
+
+#: configs/available_constants/countries.php:110
+msgid "Italy"
+msgstr ""
+
+#: configs/available_constants/countries.php:111
+msgid "Jamaica"
+msgstr ""
+
+#: configs/available_constants/countries.php:112
+msgid "Japan"
+msgstr ""
+
+#: configs/available_constants/countries.php:113
+msgid "Jersey"
+msgstr ""
+
+#: configs/available_constants/countries.php:114
+msgid "Jordan"
+msgstr ""
+
+#: configs/available_constants/countries.php:115
+msgid "Kazakhstan"
+msgstr ""
+
+#: configs/available_constants/countries.php:116
+msgid "Kenya"
+msgstr ""
+
+#: configs/available_constants/countries.php:117
+msgid "Kiribati"
+msgstr ""
+
+#: configs/available_constants/countries.php:118
+msgid "Korea"
+msgstr ""
+
+#: configs/available_constants/countries.php:119
+msgid "Kuwait"
+msgstr ""
+
+#: configs/available_constants/countries.php:120
+msgid "Kyrgyzstan"
+msgstr ""
+
+#: configs/available_constants/countries.php:121
+msgid "Lao People\\'s Democratic Republic"
+msgstr ""
+
+#: configs/available_constants/countries.php:122
+msgid "Latvia"
+msgstr ""
+
+#: configs/available_constants/countries.php:123
+msgid "Lebanon"
+msgstr ""
+
+#: configs/available_constants/countries.php:124
+msgid "Lesotho"
+msgstr ""
+
+#: configs/available_constants/countries.php:125
+msgid "Liberia"
+msgstr ""
+
+#: configs/available_constants/countries.php:126
+msgid "Libyan Arab Jamahiriya"
+msgstr ""
+
+#: configs/available_constants/countries.php:127
+msgid "Liechtenstein"
+msgstr ""
+
+#: configs/available_constants/countries.php:128
+msgid "Lithuania"
+msgstr ""
+
+#: configs/available_constants/countries.php:129
+msgid "Luxembourg"
+msgstr ""
+
+#: configs/available_constants/countries.php:130
+msgid "Macao"
+msgstr ""
+
+#: configs/available_constants/countries.php:131
+msgid "Macedonia"
+msgstr ""
+
+#: configs/available_constants/countries.php:132
+msgid "Madagascar"
+msgstr ""
+
+#: configs/available_constants/countries.php:133
+msgid "Malawi"
+msgstr ""
+
+#: configs/available_constants/countries.php:134
+msgid "Malaysia"
+msgstr ""
+
+#: configs/available_constants/countries.php:135
+msgid "Maldives"
+msgstr ""
+
+#: configs/available_constants/countries.php:136
+msgid "Mali"
+msgstr ""
+
+#: configs/available_constants/countries.php:137
+msgid "Malta"
+msgstr ""
+
+#: configs/available_constants/countries.php:138
+msgid "Marshall Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:139
+msgid "Martinique"
+msgstr ""
+
+#: configs/available_constants/countries.php:140
+msgid "Mauritania"
+msgstr ""
+
+#: configs/available_constants/countries.php:141
+msgid "Mauritius"
+msgstr ""
+
+#: configs/available_constants/countries.php:142
+msgid "Mayotte"
+msgstr ""
+
+#: configs/available_constants/countries.php:143
+msgid "Mexico"
+msgstr ""
+
+#: configs/available_constants/countries.php:144
+msgid "Micronesia, Federated States Of"
+msgstr ""
+
+#: configs/available_constants/countries.php:145
+msgid "Moldova"
+msgstr ""
+
+#: configs/available_constants/countries.php:146
+msgid "Monaco"
+msgstr ""
+
+#: configs/available_constants/countries.php:147
+msgid "Mongolia"
+msgstr ""
+
+#: configs/available_constants/countries.php:148
+msgid "Montenegro"
+msgstr ""
+
+#: configs/available_constants/countries.php:149
+msgid "Montserrat"
+msgstr ""
+
+#: configs/available_constants/countries.php:150
+msgid "Morocco"
+msgstr ""
+
+#: configs/available_constants/countries.php:151
+msgid "Mozambique"
+msgstr ""
+
+#: configs/available_constants/countries.php:152
+msgid "Myanmar"
+msgstr ""
+
+#: configs/available_constants/countries.php:153
+msgid "Namibia"
+msgstr ""
+
+#: configs/available_constants/countries.php:154
+msgid "Nauru"
+msgstr ""
+
+#: configs/available_constants/countries.php:155
+msgid "Nepal"
+msgstr ""
+
+#: configs/available_constants/countries.php:156
+msgid "Netherlands"
+msgstr ""
+
+#: configs/available_constants/countries.php:157
+msgid "Netherlands Antilles"
+msgstr ""
+
+#: configs/available_constants/countries.php:158
+msgid "New Caledonia"
+msgstr ""
+
+#: configs/available_constants/countries.php:159
+msgid "New Zealand"
+msgstr ""
+
+#: configs/available_constants/countries.php:160
+msgid "Nicaragua"
+msgstr ""
+
+#: configs/available_constants/countries.php:161
+msgid "Niger"
+msgstr ""
+
+#: configs/available_constants/countries.php:162
+msgid "Nigeria"
+msgstr ""
+
+#: configs/available_constants/countries.php:163
+msgid "Niue"
+msgstr ""
+
+#: configs/available_constants/countries.php:164
+msgid "Norfolk Island"
+msgstr ""
+
+#: configs/available_constants/countries.php:165
+msgid "Northern Mariana Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:166
+msgid "Norway"
+msgstr ""
+
+#: configs/available_constants/countries.php:167
+msgid "Oman"
+msgstr ""
+
+#: configs/available_constants/countries.php:168
+msgid "Pakistan"
+msgstr ""
+
+#: configs/available_constants/countries.php:169
+msgid "Palau"
+msgstr ""
+
+#: configs/available_constants/countries.php:170
+msgid "Palestinian Territory, Occupied"
+msgstr ""
+
+#: configs/available_constants/countries.php:171
+msgid "Panama"
+msgstr ""
+
+#: configs/available_constants/countries.php:172
+msgid "Papua New Guinea"
+msgstr ""
+
+#: configs/available_constants/countries.php:173
+msgid "Paraguay"
+msgstr ""
+
+#: configs/available_constants/countries.php:174
+msgid "Peru"
+msgstr ""
+
+#: configs/available_constants/countries.php:175
+msgid "Philippines"
+msgstr ""
+
+#: configs/available_constants/countries.php:176
+msgid "Pitcairn"
+msgstr ""
+
+#: configs/available_constants/countries.php:177
+msgid "Poland"
+msgstr ""
+
+#: configs/available_constants/countries.php:178
+msgid "Portugal"
+msgstr ""
+
+#: configs/available_constants/countries.php:179
+msgid "Puerto Rico"
+msgstr ""
+
+#: configs/available_constants/countries.php:180
+msgid "Qatar"
+msgstr ""
+
+#: configs/available_constants/countries.php:181
+msgid "Reunion"
+msgstr ""
+
+#: configs/available_constants/countries.php:182
+msgid "Romania"
+msgstr ""
+
+#: configs/available_constants/countries.php:183
+msgid "Russian Federation"
+msgstr ""
+
+#: configs/available_constants/countries.php:184
+msgid "Rwanda"
+msgstr ""
+
+#: configs/available_constants/countries.php:185
+msgid "Saint Barthelemy"
+msgstr ""
+
+#: configs/available_constants/countries.php:186
+msgid "Saint Helena"
+msgstr ""
+
+#: configs/available_constants/countries.php:187
+msgid "Saint Kitts And Nevis"
+msgstr ""
+
+#: configs/available_constants/countries.php:188
+msgid "Saint Lucia"
+msgstr ""
+
+#: configs/available_constants/countries.php:189
+msgid "Saint Martin"
+msgstr ""
+
+#: configs/available_constants/countries.php:190
+msgid "Saint Pierre And Miquelon"
+msgstr ""
+
+#: configs/available_constants/countries.php:191
+msgid "Saint Vincent And Grenadines"
+msgstr ""
+
+#: configs/available_constants/countries.php:192
+msgid "Samoa"
+msgstr ""
+
+#: configs/available_constants/countries.php:193
+msgid "San Marino"
+msgstr ""
+
+#: configs/available_constants/countries.php:194
+msgid "Sao Tome And Principe"
+msgstr ""
+
+#: configs/available_constants/countries.php:195
+msgid "Saudi Arabia"
+msgstr ""
+
+#: configs/available_constants/countries.php:196
+msgid "Senegal"
+msgstr ""
+
+#: configs/available_constants/countries.php:197
+msgid "Serbia"
+msgstr ""
+
+#: configs/available_constants/countries.php:198
+msgid "Seychelles"
+msgstr ""
+
+#: configs/available_constants/countries.php:199
+msgid "Sierra Leone"
+msgstr ""
+
+#: configs/available_constants/countries.php:200
+msgid "Singapore"
+msgstr ""
+
+#: configs/available_constants/countries.php:201
+msgid "Slovakia"
+msgstr ""
+
+#: configs/available_constants/countries.php:202
+msgid "Slovenia"
+msgstr ""
+
+#: configs/available_constants/countries.php:203
+msgid "Solomon Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:204
+msgid "Somalia"
+msgstr ""
+
+#: configs/available_constants/countries.php:205
+msgid "South Africa"
+msgstr ""
+
+#: configs/available_constants/countries.php:206
+msgid "South Georgia And Sandwich Isl."
+msgstr ""
+
+#: configs/available_constants/countries.php:207
+msgid "Spain"
+msgstr ""
+
+#: configs/available_constants/countries.php:208
+msgid "Sri Lanka"
+msgstr ""
+
+#: configs/available_constants/countries.php:209
+msgid "Sudan"
+msgstr ""
+
+#: configs/available_constants/countries.php:210
+msgid "Suriname"
+msgstr ""
+
+#: configs/available_constants/countries.php:211
+msgid "Svalbard And Jan Mayen"
+msgstr ""
+
+#: configs/available_constants/countries.php:212
+msgid "Swaziland"
+msgstr ""
+
+#: configs/available_constants/countries.php:213
+msgid "Sweden"
+msgstr ""
+
+#: configs/available_constants/countries.php:214
+msgid "Switzerland"
+msgstr ""
+
+#: configs/available_constants/countries.php:215
+msgid "Syrian Arab Republic"
+msgstr ""
+
+#: configs/available_constants/countries.php:216
+msgid "Taiwan"
+msgstr ""
+
+#: configs/available_constants/countries.php:217
+msgid "Tajikistan"
+msgstr ""
+
+#: configs/available_constants/countries.php:218
+msgid "Tanzania"
+msgstr ""
+
+#: configs/available_constants/countries.php:219
+msgid "Thailand"
+msgstr ""
+
+#: configs/available_constants/countries.php:220
+msgid "Timor-Leste"
+msgstr ""
+
+#: configs/available_constants/countries.php:221
+msgid "Togo"
+msgstr ""
+
+#: configs/available_constants/countries.php:222
+msgid "Tokelau"
+msgstr ""
+
+#: configs/available_constants/countries.php:223
+msgid "Tonga"
+msgstr ""
+
+#: configs/available_constants/countries.php:224
+msgid "Trinidad And Tobago"
+msgstr ""
+
+#: configs/available_constants/countries.php:225
+msgid "Tunisia"
+msgstr ""
+
+#: configs/available_constants/countries.php:226
+msgid "Turkey"
+msgstr ""
+
+#: configs/available_constants/countries.php:227
+msgid "Turkmenistan"
+msgstr ""
+
+#: configs/available_constants/countries.php:228
+msgid "Turks And Caicos Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:229
+msgid "Tuvalu"
+msgstr ""
+
+#: configs/available_constants/countries.php:230
+msgid "Uganda"
+msgstr ""
+
+#: configs/available_constants/countries.php:231
+msgid "Ukraine"
+msgstr ""
+
+#: configs/available_constants/countries.php:232
+msgid "United Arab Emirates"
+msgstr ""
+
+#: configs/available_constants/countries.php:233
+msgid "United Kingdom"
+msgstr ""
+
+#: configs/available_constants/countries.php:234
+msgid "United States"
+msgstr ""
+
+#: configs/available_constants/countries.php:235
+msgid "United States Outlying Islands"
+msgstr ""
+
+#: configs/available_constants/countries.php:236
+msgid "Uruguay"
+msgstr ""
+
+#: configs/available_constants/countries.php:237
+msgid "Uzbekistan"
+msgstr ""
+
+#: configs/available_constants/countries.php:238
+msgid "Vanuatu"
+msgstr ""
+
+#: configs/available_constants/countries.php:239
+msgid "Venezuela"
+msgstr ""
+
+#: configs/available_constants/countries.php:240
+msgid "Viet Nam"
+msgstr ""
+
+#: configs/available_constants/countries.php:241
+msgid "Virgin Islands, British"
+msgstr ""
+
+#: configs/available_constants/countries.php:242
+msgid "Virgin Islands, U.S."
+msgstr ""
+
+#: configs/available_constants/countries.php:243
+msgid "Wallis And Futuna"
+msgstr ""
+
+#: configs/available_constants/countries.php:244
+msgid "Western Sahara"
+msgstr ""
+
+#: configs/available_constants/countries.php:245
+msgid "Yemen"
+msgstr ""
+
+#: configs/available_constants/countries.php:246
+msgid "Zambia"
+msgstr ""
+
+#: configs/available_constants/countries.php:247
+msgid "Zimbabwe"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:3
+msgid "US Dollar"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:4
+msgid "Pound Sterling"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:5
+msgid "Japanese Yen"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:6
+msgid "European Euro"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:7
+msgid "Australian Dollar"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:8
+msgid "Canadian Dollar"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:9
+msgid "Denmark Krone"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:10
+msgid "Norway Krone"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:11
+msgid "South Africa Rand"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:12
+msgid "Sweden Krona"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:13
+msgid "Switzerland Franc"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:14
+msgid "Jordan Dinar"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:15
+msgid "Lebanon Pound"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:16
+msgid "Egypt Pound"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:17
+msgid "Hong Kong Dollar"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:18
+msgid "Chinese Yuan Renminbi"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:19
+msgid "Indian Rupee"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:20
+msgid "Singapore Dollar"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:21
+msgid "Israeli Shekel"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:22
+msgid "Thai Baht"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:23
+msgid "Czech Koruna"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:24
+msgid "Bulgarian Lev"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:25
+msgid "Hungarian Forint"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:26
+msgid "Polish Zloty"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:27
+msgid "Romanian Leu"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:28
+msgid "Croatian Kuna"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:29
+msgid "Russian Rouble"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:30
+msgid "Turkish Lira"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:31
+msgid "Brasilian Real"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:32
+msgid "Indonesian Rupiah"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:33
+msgid "South Korean Won"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:34
+msgid "Mexican Peso"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:35
+msgid "Malaysian Ringgit"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:36
+msgid "New Zealand Dollar"
+msgstr ""
+
+#: configs/available_constants/currencyNames.php:37
+msgid "Philippine Peso"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:3
+msgid "Improper search string"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:4
+msgid "cURL Communication error"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:5
+msgid "Failed to get the requested item details"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:6
+msgid "Failed to get page contents, some arguments are missing"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:7
+msgid "It seems like this item's listing is inactive"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:8
+msgid "Failed to get the requested item(s) details"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:9
+msgid "Failed to get the search results"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:10
+#: services/featuredProductsWidget.php:35 services/myCartWidget.php:32
+#: services/searchWidget.php:34 templates/theme/headerTemplate.php:18
+#: templates/theme/headerTemplate.php:40
+msgid "Can't get search page link"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:11
+msgid "Can't get product page link"
+msgstr ""
+
+#: configs/available_constants/errorCodesHandler.php:12
+msgid "Widget failed to load."
+msgstr ""
+
+#: configs/available_constants/errorMessages.php:3
+msgid "Method does not exist"
+msgstr ""
+
+#: configs/available_constants/errorMessages.php:4
+msgid "This field is required"
+msgstr ""
+
+#: configs/available_constants/errorMessages.php:5
+msgid "Please specify correct Israel phone number"
+msgstr ""
+
+#: configs/available_constants/errorMessages.php:6
+msgid "Must be a number"
+msgstr ""
+
+#: configs/available_constants/errorMessages.php:7
+msgid "Field cannot be longer then {0} digits"
+msgstr ""
+
+#: configs/available_constants/errorMessages.php:8
+msgid "Field cannot be shorter then {0} digits"
+msgstr ""
+
+#: configs/available_constants/errorMessages.php:9
+msgid "field length must be {0} digits long"
+msgstr ""
+
+#: configs/available_constants/errorMessages.php:10
+msgid "Passwords does not match"
+msgstr ""
+
+#: configs/available_constants/errorMessages.php:11
+msgid "You must select a shipping method"
+msgstr ""
+
+#: configs/available_constants/pages.php:3
+msgid "Cart"
+msgstr ""
+
+#: configs/available_constants/pages.php:4
+msgid "Product"
+msgstr ""
+
+#: configs/available_constants/pages.php:5
+#: templates/partials/searchWidgetTemplate.php:4
+msgid "Search"
+msgstr ""
+
+#: configs/available_constants/pages.php:6 templates/pages/cartTemplate.php:47
+#: templates/pages/checkoutTemplate.php:87
+msgid "Checkout"
+msgstr ""
+
+#: configs/available_constants/pages.php:7
+msgid "Home"
+msgstr ""
+
+#: configs/available_constants/pages.php:8
+#: templates/partials/checkoutDoneTemplate.php:12
+msgid "My Account"
+msgstr ""
+
+#: configs/available_constants/pages.php:9
+#: templates/pages/registerTemplate.php:29
+#: templates/partials/checkoutLoginRequestTemplate.php:9
+#: templates/theme/topTemplate.php:27
+msgid "Register"
+msgstr ""
+
+#: configs/available_constants/pages.php:10
+#: templates/pages/loginTemplate.php:30
+#: templates/partials/checkoutLoginRequestTemplate.php:9
+#: templates/theme/topTemplate.php:26
+msgid "Login"
+msgstr ""
+
+#: configs/available_constants/pages.php:11
+#: templates/pages/registerTemplate.php:61 templates/theme/topTemplate.php:32
+msgid "Logout"
+msgstr ""
+
+#: configs/available_constants/pages.php:12
+msgid "Our Stores"
+msgstr ""
+
+#: libs/API/ebay/ebayAdapter.php:94
+msgid "Failed to load ebay_FindingAPI class!"
+msgstr ""
+
+#: libs/API/ebay/ebayAdapter.php:96
+msgid "Failed to load ebay_ShoppingAPI class!"
+msgstr ""
+
+#: libs/API/ebay/ebayAdapter.php:98
+msgid "Failed to load ebay_Utils class!"
+msgstr ""
+
+#: libs/API/productSearch.php:35
+#, php-format
+msgid "API class (%1$s Adapter) doesn't exists, can't search!"
+msgstr ""
+
+#: libs/API/productSearch.php:35 libs/API/productSearch.php:43
+#: libs/API/productSearch.php:127
+msgid "searchAPI() ERROR:: "
+msgstr ""
+
+#: libs/API/productSearch.php:43
+#, php-format
+msgid "API class (%1$s) doesn't exists, can't search!"
+msgstr ""
+
+#: libs/API/productView.php:45
+#, php-format
+msgid "API class (%1$s Adapter) doesn't exists, can't get product!"
+msgstr ""
+
+#: libs/API/productView.php:45 libs/API/productView.php:54
+msgid "getProduct() ERROR:: "
+msgstr ""
+
+#: libs/API/productView.php:54
+#, php-format
+msgid "API class (%1$s) doesn't exists, can't get product!"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:63
+msgid " not found, define first! por favor.."
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:68
+msgid "method was not defined or authenticate request."
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:98
+msgid "prevent-login"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:121
+msgid "Cant change another user' profile"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:129
+msgid "We could not update user!"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:135
+msgid "You've successfully updated you're account"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:163
+msgid "Unable to insert new address"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:172
+msgid "Unable to add address to user"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:193
+msgid "No address id was supplied"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:206
+msgid "Unable to remove address"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:243
+msgid "Couldn't add the product to cart"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:272
+msgid "Error: Product was not found"
+msgstr ""
+
+#: libs/ajax/Ajax_handler.php:278
+msgid "Error: Could not update product's quantity"
+msgstr ""
+
+#: libs/currencyExchange.php:99
+#, php-format
+msgid "File %1$s is not WRITABLE - check folder permissions"
+msgstr ""
+
+#: services/featuredProductsWidget.php:15
+msgid "CoffeeShopping featured"
+msgstr ""
+
+#: services/featuredProductsWidget.php:16
+msgid "Featured products widget"
+msgstr ""
+
+#: services/featuredProductsWidget.php:35 services/myCartWidget.php:32
+#: templates/theme/headerTemplate.php:40
+msgid "myCartWidget.php ERROR:: "
+msgstr ""
+
+#: services/featuredProductsWidget.php:60
+msgid "New title"
+msgstr ""
+
+#: services/featuredProductsWidget.php:63
+msgid "Title:"
+msgstr ""
+
+#: services/myCartWidget.php:15
+msgid "CoffeeShopping my cart"
+msgstr ""
+
+#: services/myCartWidget.php:16
+msgid "My cart widget"
+msgstr ""
+
+#: services/searchWidget.php:17
+msgid "CoffeeShopping search"
+msgstr ""
+
+#: services/searchWidget.php:18
+msgid "Store searching widget"
+msgstr ""
+
+#: services/searchWidget.php:34 templates/theme/headerTemplate.php:18
+msgid "searchWidget.php ERROR:: "
+msgstr ""
+
+#: services/templateLoaderWidget.php:17
+msgid "CoffeeShopping templates"
+msgstr ""
+
+#: services/templateLoaderWidget.php:18
+msgid "Load a theme template"
+msgstr ""
+
+#: services/templateLoaderWidget.php:49
+msgid "Template:"
+msgstr ""
+
+#: templates/body_gantry.php:67
+msgid "Edit"
+msgstr ""
+
+#: templates/loader/cartLoader.php:4 templates/loader/checkoutLoader.php:4
+msgid "Can't get checkout page id"
+msgstr ""
+
+#: templates/loader/cartLoader.php:4
+msgid "cartLoader.php ERROR:: "
+msgstr ""
+
+#: templates/loader/checkoutLoader.php:4
+msgid "CheckoutLoader.php ERROR:: "
+msgstr ""
+
+#: templates/loader/checkoutLoader.php:6 templates/loader/loginLoader.php:10
+#: templates/loader/loginLoader.php:12 templates/loader/registerLoader.php:10
+#: templates/partials/checkoutLoginRequestTemplate.php:5
+#: templates/theme/topTemplate.php:5
+msgid "Can't get register page id"
+msgstr ""
+
+#: templates/loader/checkoutLoader.php:6 templates/loader/loginLoader.php:10
+#: templates/loader/loginLoader.php:12 templates/loader/registerLoader.php:10
+msgid "loginLoader.php ERROR:: "
+msgstr ""
+
+#: templates/loader/homeLoader.php:37
+msgid "featuredProductsWidget::productView::getProducts(...) failed!"
+msgstr ""
+
+#: templates/loader/homeLoader.php:37 templates/loader/homeLoader.php:60
+msgid "featuredProductsWidget ERROR:: "
+msgstr ""
+
+#: templates/loader/homeLoader.php:60
+msgid "No featured product IDs where set!"
+msgstr ""
+
+#: templates/loader/registerLoader.php:12 templates/theme/topTemplate.php:7
+msgid "Can't get logout page id"
+msgstr ""
+
+#: templates/loader/registerLoader.php:12 templates/theme/topTemplate.php:3
+#: templates/theme/topTemplate.php:5 templates/theme/topTemplate.php:7
+#: templates/theme/topTemplate.php:9
+msgid "topTemplate.php ERROR:: "
+msgstr ""
+
+#: templates/loader/searchLoader.php:55
+msgid "productSearch::searchALL(...) failed!"
+msgstr ""
+
+#: templates/loader/searchLoader.php:55
+msgid "searchLoader() ERROR:: "
+msgstr ""
+
+#: templates/loader/searchLoader.php:65
+msgid "Can't get product page id"
+msgstr ""
+
+#: templates/loader/searchLoader.php:65
+msgid "searchTemplate() ERROR:: "
+msgstr ""
+
+#: templates/pages/cartTemplate.php:27
+msgid "Subtotal:"
+msgstr ""
+
+#: templates/pages/cartTemplate.php:41
+msgid "Total:"
+msgstr ""
+
+#: templates/pages/cartTemplate.php:46
+msgid "Continue shopping"
+msgstr ""
+
+#: templates/pages/checkoutTemplate.php:30
+msgid "Please select where to ship to:"
+msgstr ""
+
+#: templates/pages/checkoutTemplate.php:31
+msgid "Shipping options"
+msgstr ""
+
+#: templates/pages/checkoutTemplate.php:33
+#: templates/pages/checkoutTemplate.php:53
+msgid "Ship to home"
+msgstr ""
+
+#: templates/pages/checkoutTemplate.php:34
+#: templates/pages/checkoutTemplate.php:43
+msgid "Ship to store"
+msgstr ""
+
+#: templates/pages/checkoutTemplate.php:45
+msgid "shipToStore"
+msgstr ""
+
+#: templates/pages/checkoutTemplate.php:59
+msgid "Shipping to:"
+msgstr ""
+
+#: templates/pages/checkoutTemplate.php:66
+msgid "newAddress"
+msgstr ""
+
+#: templates/pages/checkoutTemplate.php:70
+msgid "Create New Address"
+msgstr ""
+
+#: templates/pages/loginTemplate.php:9
+msgid "Login details:"
+msgstr ""
+
+#: templates/pages/loginTemplate.php:12
+#: templates/pages/registerTemplate.php:18
+#: templates/partials/addressFormTemplate.php:7
+msgid "Phone Number *"
+msgstr ""
+
+#: templates/pages/loginTemplate.php:16
+msgid "Password *"
+msgstr ""
+
+#: templates/pages/loginTemplate.php:21
+msgid "Don't have an account?"
+msgstr ""
+
+#: templates/pages/loginTemplate.php:21
+msgid "Register!"
+msgstr ""
+
+#: templates/pages/loginTemplate.php:25
+msgid "Login Failed"
+msgstr ""
+
+#: templates/pages/logoutTemplate.php:1
+msgid "You've logged out successfully"
+msgstr "ביצעת התנתקות  בהצלחה"
+
+#: templates/pages/myAccountTemplate.php:9
+msgid "Profile"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:10
+msgid "Addresses"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:11
+msgid "Orders"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:12
+msgid "History"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:24
+msgid "Update Profile"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:36
+msgid "Add address"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:43
+msgid "Your addresses:"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:68
+msgid "No existing Orders!"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:69
+msgid "You don't have any orders in your account yet!"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:70
+msgid "Stop wasting time, browse our site and make some orders!"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:94
+msgid "Empty History!"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:95
+msgid "You don't have any order history yet!"
+msgstr ""
+
+#: templates/pages/myAccountTemplate.php:96
+msgid "Once an order have been delivered it will be moved here."
+msgstr ""
+
+#: templates/pages/productTemplate.php:86
+msgid "Make your order"
+msgstr ""
+
+#: templates/pages/productTemplate.php:91
+msgid "Item condition:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:123
+#: templates/pages/productTemplate.php:254
+msgid "Available"
+msgstr ""
+
+#: templates/pages/productTemplate.php:123
+#: templates/pages/productTemplate.php:254
+msgid "Sold"
+msgstr ""
+
+#: templates/pages/productTemplate.php:128
+msgid "Shipping options:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:159
+msgid "Order details"
+msgstr ""
+
+#: templates/pages/productTemplate.php:162
+msgid "Seller:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:165
+msgid "Score:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:166
+msgid "Positive:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:173
+msgid "Shipping from:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:179
+msgid "Pricing summary:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:181
+#: templates/partials/cartItemsTemplate.php:98
+msgid "Item price:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:185
+msgid "Shipping price:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:189
+msgid "Store comission:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:191
+msgid "Store commission info"
+msgstr ""
+
+#: templates/pages/productTemplate.php:192
+msgid "Store commission will be calculated on checkout."
+msgstr ""
+
+#: templates/pages/productTemplate.php:193
+msgid "*CoffeeShopping club members enjoy <br> store commission discount!"
+msgstr ""
+
+#: templates/pages/productTemplate.php:197
+msgid "Paypal comission:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:203
+msgid "Price per item:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:210
+msgid "Original price:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:216
+msgid "Exchange rate:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:224
+msgid "*Exchange rates supplied by"
+msgstr ""
+
+#: templates/pages/productTemplate.php:225
+msgid "'European Central Bank'"
+msgstr ""
+
+#: templates/pages/productTemplate.php:258
+#: templates/partials/cartItemsTemplate.php:83
+msgid "Quantity:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:265
+msgid "Total price:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:269
+msgid "Add to cart"
+msgstr ""
+
+#: templates/pages/productTemplate.php:276
+msgid "item number:"
+msgstr ""
+
+#: templates/pages/productTemplate.php:279
+msgid "Item Specifics:"
+msgstr ""
+
+#: templates/pages/registerTemplate.php:14
+msgid "Register to CoffeeShopping:"
+msgstr ""
+
+#: templates/pages/registerTemplate.php:26
+msgid "Register successfully"
+msgstr ""
+
+#: templates/pages/registerTemplate.php:40
+msgid "Thank you for registering!"
+msgstr ""
+
+#: templates/pages/registerTemplate.php:41
+msgid "An automated login password was generated for you, "
+msgstr ""
+
+#: templates/pages/registerTemplate.php:41
+msgid "please memorize it!"
+msgstr ""
+
+#: templates/pages/registerTemplate.php:42
+msgid "Password:"
+msgstr ""
+
+#: templates/pages/registerTemplate.php:43
+msgid "* You can change your password in your"
+msgstr ""
+
+#: templates/pages/registerTemplate.php:43
+msgid "account page."
+msgstr ""
+
+#: templates/pages/registerTemplate.php:45
+msgid "Go back to where you were."
+msgstr ""
+
+#: templates/pages/registerTemplate.php:60
+msgid "Already registered"
+msgstr ""
+
+#: templates/pages/registerTemplate.php:61
+msgid "If you would like to register a new account please logout first."
+msgstr "אם תרצי לרשום חשבון חדש בבקשה קודם התנתק."
+
+#: templates/pages/searchTemplate.php:7
+msgid "Search Results"
+msgstr ""
+
+#: templates/pages/searchTemplate.php:50
+msgid "per page:"
+msgstr ""
+
+#: templates/partials/addressFormTemplate.php:2
+msgid "New address:"
+msgstr ""
+
+#: templates/partials/addressFormTemplate.php:4
+msgid "Full Name *"
+msgstr ""
+
+#: templates/partials/addressFormTemplate.php:10
+msgid "City *"
+msgstr ""
+
+#: templates/partials/addressFormTemplate.php:13
+msgid "Street *"
+msgstr ""
+
+#: templates/partials/addressFormTemplate.php:16
+msgid "House #*"
+msgstr ""
+
+#: templates/partials/addressFormTemplate.php:17
+msgid "Apartment #*"
+msgstr ""
+
+#: templates/partials/addressFormTemplate.php:20
+msgid "Postal Code *"
+msgstr ""
+
+#: templates/partials/cartDisplayTemplate.php:3
+msgid "Can't get cart page id"
+msgstr ""
+
+#: templates/partials/cartDisplayTemplate.php:3
+msgid "cartDisplayTemplate.php ERROR:: "
+msgstr ""
+
+#: templates/partials/cartDisplayTemplate.php:10
+msgid "Order ID: #"
+msgstr ""
+
+#: templates/partials/cartDisplayTemplate.php:11
+msgid "In Cart"
+msgstr ""
+
+#: templates/partials/cartDisplayTemplate.php:17
+msgid "Created at:"
+msgstr ""
+
+#: templates/partials/cartDisplayTemplate.php:27
+msgid "Order status:"
+msgstr ""
+
+#: templates/partials/cartDisplayTemplate.php:48
+msgid "Deliver to:"
+msgstr ""
+
+#: templates/partials/cartDisplayTemplate.php:65
+msgid "Payment details:"
+msgstr ""
+
+#: templates/partials/cartItemsTemplate.php:48
+msgid "Estimated delivery:"
+msgstr ""
+
+#: templates/partials/cartItemsTemplate.php:57
+msgid "Delivered at:"
+msgstr ""
+
+#: templates/partials/cartItemsTemplate.php:89
+msgid "Update:"
+msgstr ""
+
+#: templates/partials/cartItemsTemplate.php:90
+msgid "Remove item"
+msgstr ""
+
+#: templates/partials/cartItemsTemplate.php:107
+msgid "Shipping cost:"
+msgstr ""
+
+#: templates/partials/checkoutDoneTemplate.php:11
+msgid "You've successfully save your cart, order ID:"
+msgstr ""
+
+#: templates/partials/checkoutDoneTemplate.php:12
+msgid ""
+"You can visit your account to review your card, order status and general "
+"information"
+msgstr ""
+
+#: templates/partials/checkoutDoneTemplate.php:13
+msgid "To complete the order, please, refer to one of our stores."
+msgstr ""
+
+#: templates/partials/checkoutLoginRequestTemplate.php:3
+#: templates/theme/topTemplate.php:3
+msgid "Can't get login page id"
+msgstr ""
+
+#: templates/partials/checkoutLoginRequestTemplate.php:3
+#: templates/partials/checkoutLoginRequestTemplate.php:5
+msgid "checkoutLoginRequestTemplate.php ERROR:: "
+msgstr ""
+
+#: templates/partials/checkoutLoginRequestTemplate.php:8
+msgid "You have to login or register to save your cart and make an order"
+msgstr ""
+
+#: templates/partials/checkoutLoginRequestTemplate.php:9
+msgid "Please"
+msgstr ""
+
+#: templates/partials/emptyCartErrorTemplate.php:1
+msgid "Your shopping cart is empty, but it doesn't have to be."
+msgstr ""
+
+#: templates/partials/emptyCartErrorTemplate.php:2
+msgid ""
+"There are lots of great deals and one-of-a-kind items just waiting for you."
+msgstr ""
+
+#: templates/partials/emptyCartErrorTemplate.php:3
+msgid ""
+"Start shopping, and look for the \"Add to cart\" button. You can add several "
+"items to your cart from different sellers and pay for them all at once."
+msgstr ""
+
+#: templates/partials/featuredProductsWidgetTemplate.php:4
+msgid "Image Not Found!"
+msgstr ""
+
+#: templates/partials/featuredProductsWidgetTemplate.php:11
+#: templates/partials/searchResultEntryTemplate.php:32
+msgid "Price:"
+msgstr ""
+
+#: templates/partials/myCartWidgetTemplate.php:2
+#: templates/partials/myCartWidgetTemplate.php:5
+msgid "View your cart!"
+msgstr ""
+
+#: templates/partials/profileFormTemplate.php:6
+msgid "Profile details:"
+msgstr ""
+
+#: templates/partials/profileFormTemplate.php:9
+msgid "Account Phone #:"
+msgstr ""
+
+#: templates/partials/profileFormTemplate.php:17
+msgid "First Name:"
+msgstr ""
+
+#: templates/partials/profileFormTemplate.php:26
+msgid "Last Name:"
+msgstr ""
+
+#: templates/partials/profileFormTemplate.php:35
+msgid "E-mail:"
+msgstr ""
+
+#: templates/partials/profileFormTemplate.php:44
+msgid "New Password:"
+msgstr ""
+
+#: templates/partials/profileFormTemplate.php:52
+msgid "Repeat New Password:"
+msgstr ""
+
+#: templates/partials/profileFormTemplate.php:59
+msgid "* Fill in only if you wish to update you're password."
+msgstr ""
+
+#: templates/partials/searchResultEntryTemplate.php:17
+msgid "Category:"
+msgstr ""
+
+#: templates/partials/searchResultEntryTemplate.php:28
+msgid "Condition:"
+msgstr ""
+
+#: templates/partials/searchResultEntryTemplate.php:38
+msgid "Shipping:"
+msgstr ""
+
+#: templates/partials/searchResultEntryTemplate.php:45
+msgid "From"
+msgstr ""
+
+#: templates/partials/storeLocatorTemplate.php:13
+msgid "Search for a store close to:"
+msgstr ""
+
+#: templates/partials/storeLocatorTemplate.php:16
+msgid "Go!"
+msgstr ""
+
+#: templates/partials/storeLocatorTemplate.php:19
+msgid "We couldn't find the provided address!"
+msgstr ""
+
+#: templates/partials/storeLocatorTemplate.php:24
+msgid "Closest store location:"
+msgstr ""
+
+#: templates/partials/storeLocatorTemplate.php:40
+msgid "Our stores:"
+msgstr ""
+
+#: templates/theme/topTemplate.php:9
+msgid "Can't get stores page id"
+msgstr ""
+
+#: templates/theme/topTemplate.php:15
+msgid "Stores:"
+msgstr ""
