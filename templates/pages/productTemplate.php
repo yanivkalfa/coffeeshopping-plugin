@@ -83,12 +83,12 @@
         <div id="productchoices">
             <a href="<?php echo $product->storeLink;?>" title="View on <?php echo $store;?>" target="_blank"><div class="<?php echo Utils::getAPILogoClass($store);?> flleft"></div></a>
             <h3>
-                <?php _e("Make your order", 'coffee-shopping' ); ?>
+                <?php Utils::pageEcho("Make your order"); ?>
                 <?php echo $product->topRatedItem ? "<div title=\"Top rated product!\" class=\"topratedproductimg flleft\"></div>" : "";?>
                 :
             </h3>
             <div id="itemcondition">
-                <div class="inline header"><?php _e("Item condition:", 'coffee-shopping' ); ?></div>
+                <div class="inline header">Item condition:</div>
                 <div class="inline"><?php Utils::pageEcho($product->conditionText);?></div>
             </div>
 
@@ -120,12 +120,12 @@
             </div>
             <?php if ($varSetCnt>0){ ?>
                 <div id="stockavailability" align="center">
-                    <span> <?php _e("Available", 'coffee-shopping' ); ?> <span id="quantityavail"><?php Utils::pageEcho($product->quantityAvailable);?></span> </span> / <span> <?php _e("Sold", 'coffee-shopping' ); ?> <span id="quantitysold"><?php Utils::pageEcho($product->quantitySold);?></span> </span>
+                    <span> Available <span id="quantityavail"><?php Utils::pageEcho($product->quantityAvailable);?></span> </span> / <span> Sold <span id="quantitysold"><?php Utils::pageEcho($product->quantitySold);?></span> </span>
                 </div>
             <?php } ?>
 
             <div id="itemshippingdiv">
-                <div><?php _e("Shipping options:", 'coffee-shopping' ); ?> </div>
+                <div>Shipping options:</div>
                 <div id="shippmentdiv">
                     <?php
                     $i = 0;
@@ -156,64 +156,61 @@
         </div>
         <hr/>
 
-        <div><?php _e("Order details", 'coffee-shopping' ); ?> [<a href="#" id="orderdetailstogg">+</a>]</div>
+        <div>Order details [<a href="#" id="orderdetailstogg">+</a>]</div>
         <div id="quicksummary" class="inline">
             <div id="sellerinfo">
-                <div class="inline header"> <?php _e("Seller:", 'coffee-shopping' ); ?> </div>
+                <div class="inline header"> Seller: </div>
                 <div class="inline">
                     <span> <?php echo $product->sellerInfo["userID"];?></span>,
-                    <span> <?php _e("Score:", 'coffee-shopping' ); ?> <?php echo $product->sellerInfo["feedbackScore"];?></span>,
-                    <span> <?php _e("Positive:", 'coffee-shopping' ); ?> <?php echo $product->sellerInfo["feedbackPercent"];?>%</span>
+                    <span> Score: <?php echo $product->sellerInfo["feedbackScore"];?></span>,
+                    <span> Positive: <?php echo $product->sellerInfo["feedbackPercent"];?>%</span>
                     <?php echo $product->sellerInfo["topRated"]? "<div class=\"topratedsellerimg\"></div>" : "";?>
                 </div>
             </div>
 
             <div id="shippinginfo">
                 <div>
-                    <div class="inline header"> <?php _e("Shipping from:", 'coffee-shopping' ); ?> </div>
+                    <div class="inline header"> Shipping from: </div>
                     <div class="inline"><?php Utils::pageEcho($product->location.", ".Utils::getCountryFromCode($product->country));?></div>
                 </div>
             </div>
 
             <div id="pricinginfo" class="inline">
-                <div><?php _e("Pricing summary:", 'coffee-shopping' ); ?></div>
+                <div>Pricing summary:</div>
                 <div>
-                    <div class="inline header"><?php _e("Item price:", 'coffee-shopping' ); ?></div>
+                    <div class="inline header">Item price:</div>
                     <div id="itemprice" class="inline"> <?php echo $itemPricing["priceSymbol".$exchangeExtension].$itemPricing["price".$exchangeExtension];?> </div>
                 </div>
                 <div>
-                    <div class="inline header"><?php _e("Shipping price:", 'coffee-shopping' ); ?></div>
+                    <div class="inline header">Shipping price:</div>
                     <div id="shippingprice" class="inline"></div>
                 </div>
                 <div>
-                    <div class="inline header"><?php _e("Store comission:", 'coffee-shopping' ); ?></div>
-                    <div id="storeprice" class="inline popupinfo"
-                         data-popup-title="<?php _e("Store commission info", 'coffee-shopping' ); ?>"
-                         data-popup-content="<?php _e("Store commission will be calculated on checkout.", 'coffee-shopping' ); ?>"
-                         data-popup-footer="<?php _e('*CoffeeShopping club members enjoy <br> store commission discount!','coffee-shopping' ); ?>">
+                    <div class="inline header">Store comission:</div>
+                    <div id="storeprice" class="inline popupinfo" data-popup-title="Store commission info" data-popup-content="Store commission will be calculated on checkout." data-popup-footer="*CoffeeShopping club members enjoy <br /> store commission discount!">
                         (?)</div>
                 </div>
                 <div>
-                    <div class="inline header"><?php _e("Paypal comission:", 'coffee-shopping' ); ?></div>
+                    <div class="inline header">Paypal comission:</div>
                     <div id="paypalprice" class="inline"></div>
                 </div>
             </div>
 
             <div id="pricingsumm" class="inline" align="center">
-                <div><?php _e("Price per item:", 'coffee-shopping' ); ?></div>
+                <div>Price per item:</div>
                 <div id="totalprice"> <?php echo $itemPricing["priceSymbol".$exchangeExtension].$itemPricing["price".$exchangeExtension];?> </div>
             </div>
 
             <div id="exchangeDisplayDiv">
                 <div id="exchangeDivCont">
                     <div id="pop_origprice">
-                        <div class="popinline header"> <?php _e("Original price:", 'coffee-shopping' ); ?> </div>
+                        <div class="popinline header"> Original price: </div>
                         <div class="popinline">
                             <span id="originalCurrSymbol"></span><span id="originalPrice"></span>
                         </div>
                     </div>
                     <div id="pop_rate">
-                        <div class="popinline header"> <?php _e("Exchange rate:", 'coffee-shopping' ); ?> </div>
+                        <div class="popinline header"> Exchange rate: </div>
                         <div class="popinline">
                             <?php echo Utils::getCurrencySymbol($exchangeCurrency);?><span id="exchangeRate"></span>
                             =
@@ -221,8 +218,8 @@
                         </div>
                     </div>
                     <div id="pop_provider" align="center">
-                        <?php _e("*Exchange rates supplied by", 'coffee-shopping' ); ?><br/>
-                        <?php _e("'European Central Bank'", 'coffee-shopping' ); ?>
+                        *Exchange rates supplied by<br/>
+                        'European Central Bank'
                     </div>
                 </div>
                 <div class="pop_bottom"></div>
@@ -251,32 +248,32 @@
         <div id="ordercontainer" class="inline">
             <?php if ($varSetCnt==0){ ?>
                 <div id="stockavailability" align="center">
-                    <span> <?php _e("Available", 'coffee-shopping' ); ?> <span id="quantityavail"><?php Utils::pageEcho($product->quantityAvailable);?></span> </span> / <span> <?php _e("Sold", 'coffee-shopping' ); ?> <span id="quantitysold"><?php Utils::pageEcho($product->quantitySold);?></span> </span>
+                    <span> Available <span id="quantityavail"><?php Utils::pageEcho($product->quantityAvailable);?></span> </span> / <span> Sold <span id="quantitysold"><?php Utils::pageEcho($product->quantitySold);?></span> </span>
                 </div>
             <?php } ?>
             <div class="inline">
-                <div class="inline header"><?php _e("Quantity:", 'coffee-shopping' ); ?></div>
+                <div class="inline header">Quantity:</div>
                 <?php
                 $maxQuantity = (intval($product->quantityAvailable) > intval($product->orderLimit) && intval($product->orderLimit) > 0) ? intval($product->orderLimit) : intval($product->quantityAvailable);
                 ?>
                 <div class="inline"><input id="orderquantity" type="number" max="<?php Utils::pageEcho($maxQuantity);?>" min="1" value="1" /></div>
             </div>
             <div class="inline">
-                <div class="inline header"><?php _e("Total price:", 'coffee-shopping' ); ?> </div>
+                <div class="inline header">Total price: </div>
                 <div id="finalPrice" class="inline" align="center"> <?php echo $itemPricing["priceSymbol".$exchangeExtension].$itemPricing["price".$exchangeExtension];?> </div>
             </div>
             <div class="inline addtocart">
-                <div id="buynowbuttondiv" align="center"><?php _e("Add to cart", 'coffee-shopping' ); ?></div>
+                <div id="buynowbuttondiv" align="center">Add to cart</div>
                 <div id="addtocartresultOK"></div>
                 <div id="addtocartresultERR"></div>
             </div>
         </div>
     </div>
     <div id="detailscontainer">
-        <div id="itemIDspec" align="left"><?php echo $_GET["store"];?> <?php _e("item number:", 'coffee-shopping' ); ?> <?php echo $product->ID;?></div>
+        <div id="itemIDspec" align="left"><?php echo $_GET["store"];?> item number: <?php echo $product->ID;?></div>
         <?php if (isset($product->itemSpecifics) && !empty($product->itemSpecifics)) { ?>
             <div id="itemspecs">
-                <h3><?php _e("Item Specifics:", 'coffee-shopping' ); ?></h3>
+                <h3>Item Specifics:</h3>
                 <?php foreach ($product->itemSpecifics as $spec => $value) { ?>
                     <div class="inline block">
                         <div class="inline header"><?php echo $spec;?>:</div>
