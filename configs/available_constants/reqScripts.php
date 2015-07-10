@@ -10,7 +10,7 @@ $value = array(
         array('handle' => 'imagesloaded_js',           'src' => 'bower_components/imagesloaded/imagesloaded',           'extension' => 'js',    'deps' => '', 'media' => ''),
 
         array('handle' => 'search_css',                'src' => '/css/search',                                          'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'search'),
-        array('handle' => 'search_js',                 'src' => '/scripts/pages/search',                                'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'search'),
+        array('handle' => 'search_js',                 'src' => '/scripts/pages/search',                                'extension' => 'js',    'deps' => '', 'media' => ''),
         array('handle' => 'product_css',               'src' => '/css/product',                                         'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
         array('handle' => 'product_js',                'src' => '/scripts/pages/product',                               'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
 

@@ -12,6 +12,7 @@
 }
 
 .cartitemimgdiv{
+    margin-top: 12px;
     vertical-align: top;
     width:29%;
     position:relative;
@@ -38,6 +39,10 @@
     width:70%;
 }
 
+.cartitemtitle,{
+    padding-left: 15px;
+}
+
 .cartitemdetails .header, .cartitemdetails .detail{
     width:29%;
 }
@@ -47,6 +52,7 @@
 }
 .cartitemdetailstore{
     float:left;
+    padding-left:15px;
 }
 .cart-product-price{
 }

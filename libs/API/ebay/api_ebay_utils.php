@@ -7,6 +7,11 @@
  */
 
 abstract class ebay_Utils{
+    static public function isProductID($test){
+        if (!preg_match("([[:alpha:]])", $test) && strlen($test)>8){
+            return true;
+        }
+    }
 
     static public function getEbayPicture($link, $size){
 

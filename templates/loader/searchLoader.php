@@ -12,6 +12,21 @@
 
 // Handle our search calls.
 if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
+    // load the search results page.
+    loadSearchPage();
+
+}else{
+    Utils::adminPreECHO($_GET, "searchLoader() ERROR:: No search value was specified, ");
+    $scope = array(
+        "errorsText" => Utils::getErrorCode("templateLoader", "productSearch", "missingArgs", "3")
+    );
+    // No product or unknown store.
+    Utils::getTemplate('searchError', $scope);
+}
+
+
+
+function loadSearchPage(){
     // Our searching keywords.
     $searchVal = sanitize_text_field($_GET["search-product"]); // WP func sanitize_text_field()
 
@@ -29,21 +44,39 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
     // Handle categories.
     $searchOpts["categories"] = (isset($_GET["pcats"]) && !empty($_GET["pcats"]))? array_map('intval', $_GET["pcats"]) : 0;
 
-    /*
-     * TODO: Should be loaded from admin panel.
-    */
-    // Add our filters.
+    $productPage = get_permalink(get_option("cs_product_p_id"));
+    if (!$productPage){
+        Utils::adminPreECHO(__("Can't get product page id", 'coffee-shopping' ), __("searchTemplate() ERROR:: ", 'coffee-shopping' ));
+        $scope = array(
+            "errorsText" => Utils::getErrorCode("templateLoader", "productSearch", "searchAPI", "8")
+        );
+        Utils::getTemplate('searchError', $scope);
+        return;
+    }
+
+    // Check if it's a product ID.
+    if (count($APIs)==1 && Utils::isProductID($APIs[0], $_GET["search-product"])) {
+        // Redirect to product page.
+        $productPageLink = $productPage . "?view-product=" . $_GET["search-product"] . "&store=" . $APIs[0];
+        wp_redirect($productPageLink, 302);
+    }
+
+    // Add our filters.  TODO: Should be loaded from admin panel.
     $searchOpts["filters"] = Array(
         array('name' => 'HideDuplicateItems', 'value' => true),
         array('name' => 'ListingType', 'value' => array('AuctionWithBIN','FixedPrice','StoreInventory')),
         array('name' => 'MinQuantity', 'value' => '1'),
         array('name' => 'AvailableTo', 'value' => 'IL'),
         array('name' => 'PaymentMethod', 'value' => 'PayPal'),
-        //array('name' => 'Condition','value' => array('1000', '1500', '1750', '2000'),'paramName' => 'name','paramValue' => 'value'),
     );
 
+    // Add user advanced search filters:
+    if (isset($_GET["conditions"]) && is_array($_GET["conditions"])) {
+        $searchOpts["filters"][] = array('name' => 'Condition', 'value' => $_GET["conditions"]);
+    }
     // Our sorting order
-    $searchOpts["sortOrder"] = "BestMatch";
+    $searchOpts["sortOrder"] = (isset($_GET["sortOrder"]) && !empty($_GET["sortOrder"])) ? $_GET["sortOrder"] : "BestMatch";
+
     // Our mode (sandbox/live)
     $sandbox = false;
 
@@ -60,31 +93,13 @@ if (isset($_GET["search-product"]) && !empty($_GET["search-product"])) {
 
     }else{
         // Output the search results template.
-        $productPage = get_permalink(get_option("cs_product_p_id"));
-        if (!$productPage){
-            Utils::adminPreECHO(__("Can't get product page id", 'coffee-shopping' ), __("searchTemplate() ERROR:: ", 'coffee-shopping' ));
-            $scope = array(
-                "errorsText" => Utils::getErrorCode("templateLoader", "productSearch", "searchAPI", "8")
-            );
-            Utils::getTemplate('searchError', $scope);
-
-        }else{
-            $scope = array(
-                "productPage" => $productPage,
-                "searchResults" => $result["output"]
-            );
-            $scope["exchangeCurrency"]      = "ILS";
-            $scope["exchangeExtension"]     = "Exch";
-            $scope["searchVal"]             = $_GET["search-product"];
-            Utils::getTemplate('search', $scope, 'pages');
-        }
+        $scope = array(
+            "productPage" => $productPage,
+            "searchResults" => $result["output"]
+        );
+        $scope["exchangeCurrency"]      = "ILS";
+        $scope["exchangeExtension"]     = "Exch";
+        $scope["searchVal"]             = $_GET["search-product"];
+        Utils::getTemplate('search', $scope, 'pages');
     }
-}else{
-    Utils::adminPreECHO("No search value was specified, \$_GET[\"search-product\"]='".$_GET["search-product"]."'", "searchLoader() ERROR:: ");
-    $scope = array(
-        "errorsText" => Utils::getErrorCode("templateLoader", "productSearch", "missingArgs", "3")
-    );
-    // No product or unknown store.
-    Utils::getTemplate('searchError', $scope);
 }
-

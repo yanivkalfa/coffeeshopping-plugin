@@ -47,6 +47,32 @@
     cursor:pointer;
 }
 
+.aStoreImageDiv{
+    position: relative;
+}
+.aStoreMapWazeLink{
+    position: absolute;
+    bottom: 14px;
+    left: 5px;
+}
+.aStoreMapWazeLink .wazenavimg{
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 55px !important;
+}
+.aStoreTitleWazeLink{
+    float:left;
+}
+.aStoreDescriptionNav{
+    display: inline-block;
+    vertical-align: top;
+    line-height: 55px;
+}
+.aStoreDescriptionDiv{
+    border-top: 2px solid #ddd;
+}
+
 /*
       RESPONSIVENESS-NESS!
 */

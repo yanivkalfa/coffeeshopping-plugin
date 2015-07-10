@@ -37,6 +37,7 @@ class searchWidget extends WP_Widget {
         }
 	    $scope = array(
 		    "searchPageLink" => $searchPageLink,
+            "adv" => (isset($_GET["adv"]) && !empty($_GET["adv"])) ? $_GET["adv"] : 0
 	    );
 	    Utils::getTemplate('searchWidget', $scope);
 

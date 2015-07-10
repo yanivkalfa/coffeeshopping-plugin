@@ -8,7 +8,7 @@ if (!$cartPage){Utils::adminPreECHO(__("Can't get cart page id", 'coffee-shoppin
         <div class="cartordertitle">
         <h4>
             <div class="inline header"><?php _e("Order ID: #", 'coffee-shopping' ); ?></div><div class="inline"><?php echo $cart->ID;?></div>
-            <?php echo ($cart->status=="saved") ? '<div class="inline titleincart"> <a href="'.$cartPage.'">('._e("In Cart", 'coffee-shopping' ).')</a> </div>' : '';?>
+            <?php echo ($cart->status=="saved") ? '<div class="inline titleincart"> <a href="'.$cartPage.'">('.__("In cart", 'coffee-shopping' ).')</a> </div>' : '';?>
         </h4>
         </div>
 

@@ -80,6 +80,14 @@
     border-radius: 3px;
 }
 
+.wazenavimg{
+    display:inline-block;
+    background: url("images/waze-x200.png") no-repeat;
+    width: 200px !important;
+    height: 53px !important;
+}
+
+
 /*
         Forms:
 */

@@ -23,7 +23,7 @@
         <div id="paginationdivcont" align="center">
         <?php
         // Form our current page link:
-        $searchPageLink = get_permalink()."?search-product=".urlencode($searchVal);
+        $searchPageLink = get_permalink()."?".http_build_query($_GET);
         // Build our pagination line:
         $display    =   10;
         $current    =   $searchResults->paginationOutput[$API]["pageNumber"];
@@ -41,7 +41,7 @@
                 echo " <div class=\"pagelink currpage\">" . $current . "</div> ";
             }else{
                 $formedLink = $searchPageLink."&pg=".$d."&ppg=".$searchResults->paginationOutput[$API]["entriesPerPage"];
-                echo " <div class=\"pagelink\"><a href=\"".esc_url($formedLink)."\">" . $d . "</a></div> ";
+                echo " <a href=\"".esc_url($formedLink)."\"><div class=\"pagelink\">" . $d . "</div></a> ";
             }
         }
         // Output next.
@@ -54,9 +54,9 @@
                 ?>
                 <div class="perpageopt"><?php echo $searchResults->paginationOutput[$API]["entriesPerPage"];?></div>
                 <ul class="perpageopts">
-                    <?php echo ($searchResults->paginationOutput[$API]["entriesPerPage"]==10) ? "" : "<li class=\"perpageopt\"><a href=\"".esc_url($formedLink."&ppg=10")."\">10</a>" ;?></li>
-                    <?php echo ($searchResults->paginationOutput[$API]["entriesPerPage"]==25) ? "" : "<li class=\"perpageopt\"><a href=\"".esc_url($formedLink."&ppg=25")."\">25</a>" ;?></li>
-                    <?php echo ($searchResults->paginationOutput[$API]["entriesPerPage"]==50) ? "" : "<li class=\"perpageopt\"><a href=\"".esc_url($formedLink."&ppg=50")."\">50</a>" ;?></li>
+                    <?php echo ($searchResults->paginationOutput[$API]["entriesPerPage"]==10) ? "" : "<a href=\"".esc_url($formedLink."&ppg=10")."\"><li class=\"perpageopt\">10" ;?></li></a>
+                    <?php echo ($searchResults->paginationOutput[$API]["entriesPerPage"]==25) ? "" : "<a href=\"".esc_url($formedLink."&ppg=25")."\"><li class=\"perpageopt\">25" ;?></li></a>
+                    <?php echo ($searchResults->paginationOutput[$API]["entriesPerPage"]==50) ? "" : "<a href=\"".esc_url($formedLink."&ppg=50")."\"><li class=\"perpageopt\">50" ;?></li></a>
                 </ul>
             </div>
 

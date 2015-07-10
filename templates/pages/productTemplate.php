@@ -23,7 +23,7 @@
     $ns.storeLink = "<?php echo $product->storeLink;?>";
     $ns.orderLimit = "<?php echo (isset($product->orderLimit)) ? $product->orderLimit : 1;?>";
     $ns.store = "<?php echo $store;?>";
-    $ns.paypalcomm = parseFloat(<?php echo 3.5/100;?>);
+    $ns.paypalcomm = parseFloat(<?php echo 2.5/100; //TODO:: get from admin panel. ?>);
 
     $ns.jqueryUrl = '<?php echo plugins_url( '../../bower_components/jquery/dist/jquery.min.js', __FILE__ ); ?>';
 </script>

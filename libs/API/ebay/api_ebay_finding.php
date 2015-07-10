@@ -269,21 +269,23 @@ class ebay_FindingAPI extends ebayAdapter {
         $index = 0;
         foreach ($searchOutput->searchResult->item as $item){
             $ObjSearch->item[$index]  = array(
-                "ID"            =>          (string)$item->itemId,
-                "image"         =>          (string)$item->galleryURL,
-                "storeLink"     =>          (string)$item->viewItemURL,
-                "title"         =>          (string)$item->title,
-                "subtitle"      =>          (string)$item->subtitle,
-                "price"         =>          (string)$item->sellingStatus->currentPrice,
-                "priceCurrency" =>          (string)$item->sellingStatus->currentPrice["currencyId"],
-                "shippingType"  =>          (string)$item->shippingInfo->shippingType,
-                "locationInfo"  =>          (string)$item->location,
-                "isTopSeller"   =>          (string)$item->topRatedListing,
-                "categoryText"  =>          (string)$item->primaryCategory->categoryName,
-                "conditionText" =>          (string)$item->condition->conditionDisplayName
+                "ID"                =>          (string)$item->itemId,
+                "image"             =>          (string)$item->galleryURL,
+                "storeLink"         =>          (string)$item->viewItemURL,
+                "title"             =>          (string)$item->title,
+                "subtitle"          =>          (string)$item->subtitle,
+                "price"             =>          (string)$item->sellingStatus->currentPrice,
+                "priceCurrency"     =>          (string)$item->sellingStatus->currentPrice["currencyId"],
+                "shippingType"      =>          (string)$item->shippingInfo->shippingType,
+                "shipping"          =>          (string)$item->shippingInfo->shippingServiceCost,
+                "shippingCurrency"  =>          (string)$item->shippingInfo->shippingServiceCost["currencyId"],
+                "locationInfo"      =>          (string)$item->location,
+                "isTopSeller"       =>          (string)$item->topRatedListing,
+                "categoryText"      =>          (string)$item->primaryCategory->categoryName,
+                "conditionText"     =>          (string)$item->condition->conditionDisplayName
             );
             // get exchange rates:
-            Utils::addExchangeKeys($ObjSearch->item[$index],  Array("price"), $this->exchSuff, $this->exchCurrency);
+            Utils::addExchangeKeys($ObjSearch->item[$index],  Array("price", "shipping"), $this->exchSuff, $this->exchCurrency);
 
             $index++;
         }

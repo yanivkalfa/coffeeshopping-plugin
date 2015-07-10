@@ -107,6 +107,7 @@ abstract class productSearch {
             $result = productSearch::searchAPI($API, $searchVal, $searchOpts, $sandbox);
             $searchResults->status["$API"] = $result["result"];
             if ($result["result"]=="OK"){
+                if ($result["output"]->count > 0){
                 $hasResults = true;
                 // Store our count for current API.
                 $searchResults->count["$API"] = $result["output"]->count;
@@ -114,6 +115,7 @@ abstract class productSearch {
                 $searchResults->paginationOutput["$API"] = $result["output"]->paginationOutput;
                 // Store our items per API.
                 $searchResults->items["$API"] = $result["output"]->item;
+                }
             }else{
                 $searchResults->errors["$API"] = $result["output"];
             }
