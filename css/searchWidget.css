@@ -9,9 +9,10 @@
 }
 #searchwidgetinput{
     height:42px;
-    width: 75%;
+    width: 85%;
 }
 #searchwidgetbutton{
     height:42px;
+    width: 15%;
 }
 /* END Search Widget */

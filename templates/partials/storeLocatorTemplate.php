@@ -32,6 +32,13 @@
                 <div class="aStoreImageDiv">
                     <iframe id="mapiframe" class="aStoreImageDiv" width="100%" height="100%" frameborder="0" style="border:0" src="" allowfullscreen></iframe>
                 </div>
+                &nbsp;
+                <div class="aStoreDescriptionDiv">
+                    <div class="aStoreDescImageDiv">
+                        <img class="aStoreImage" src="" alt="Store image"/>
+                    </div>
+                    <div class="aStoreDescription"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -49,6 +56,8 @@
                      data-embed="<?php echo StoreDatabaseHelper::getStoreGoogleMapsEmbed($aStore["address"]);?>"
                      data-title-name="<?php esc_attr_e($aStore["name"]);?>"
                      data-title-address="<?php esc_attr_e($aStore["address"]);?>"
+                     data-description="<?php esc_attr_e($aStore["description"]);?>"
+                     data-imgurl="<?php esc_attr_e($aStore["imgurl"]);?>"
                     >
                     <div class="aStoreTitle">
                         <div class="aStoreTitleName"><?php echo $aStore["name"];?></div>

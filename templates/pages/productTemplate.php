@@ -185,11 +185,15 @@
                     <div class="inline header">Shipping price:</div>
                     <div id="shippingprice" class="inline"></div>
                 </div>
-                <div>
+                <?php
+                /*
+                ?><div>
                     <div class="inline header">Store comission:</div>
                     <div id="storeprice" class="inline popupinfo" data-popup-title="Store commission info" data-popup-content="Store commission will be calculated on checkout." data-popup-footer="*CoffeeShopping club members enjoy <br /> store commission discount!">
                         (?)</div>
                 </div>
+                */
+                ?>
                 <div>
                     <div class="inline header">Paypal comission:</div>
                     <div id="paypalprice" class="inline"></div>
