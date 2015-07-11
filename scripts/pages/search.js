@@ -22,8 +22,6 @@ $(document).ready(function(){
         }
     });
 
-
-
     function resetoptions(){
         var stores = jQuery(".storecheckbox"),
             conditions = jQuery(".conditionscheckbox"),

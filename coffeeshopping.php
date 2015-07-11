@@ -607,13 +607,30 @@ if(!class_exists('coffee_shopping'))
 
             $table_name = $wpdb->prefix . "cs_stores";
             $table = "CREATE TABLE $table_name (
-              ID int NOT NULL AUTO_INCREMENT,
+              ID bigint(20) NOT NULL AUTO_INCREMENT,
               name varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               address varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               lat float(10, 6) NOT NULL,
               lng float(10, 6) NOT NULL,
               description varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               imgurl varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              UNIQUE KEY cuunique (`ID`)
+              );";
+            dbDelta($table);
+
+            $table_name = $wpdb->prefix . "cs_saved_products";
+            $table = "CREATE TABLE $table_name (
+              ID bigint(20) NOT NULL AUTO_INCREMENT,
+              productID bigint(20) NOT NULL,
+              store varchar(50) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              title varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              image varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              price float(10, 2) NOT NULL,
+              priceCurrency varchar(4) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              shipping float(10, 2) NOT NULL,
+              shippingCurrency varchar(4) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              listname varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              lastupdate TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
               UNIQUE KEY cuunique (`ID`)
               );";
             dbDelta($table);

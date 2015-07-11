@@ -21,14 +21,17 @@ $IDs = array(
     '171430828138'
 ); // TODO:: load from admin.
 $store = 'ebay'; // TODO:: load from admin.
+$listname = "recommended";
 
-// Our options array.
-$itemOpts = array(
-    'IncludeSelector' => explode(",", "Details")
-);
+//insertSavedProductsList($IDs, $store, $listname);
+//getSavedProductsList("recommended");
+//function getSavedProductsList($listname){}
 
 if (isset($IDs) && !empty($IDs) && isset($store) && !empty($store)) {
     // performs the actual request.
+    $itemOpts = array(
+        'IncludeSelector' => explode(",", "Details")
+    );
     $result = productView::getProducts($store, $IDs, $itemOpts);
 
     // Output results if we have any proper ones, else display errors.
