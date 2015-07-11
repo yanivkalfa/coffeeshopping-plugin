@@ -8,32 +8,54 @@
 
 abstract class UserDatabaseHelper extends SuperDatabaseHelper{
 
-    public static function registerNewUser($post){
-        $user = json_decode($post['user'], true);
-
-        $error = FormValidators::validateFormInput($user['log'], 'phoneIL');
+    public static function registerNewUser($log){
+        // validating phone number
+        $error = FormValidators::validateFormInput($log, 'phoneIL');
         if(is_array($error)){
             return array( 'success' => false, 'msg' => $error );
         }
 
+        // generating password
+        $password = self::generateUserPass();
         $userData = array(
-            'user_login'  =>  $user['log'],
-            'user_pass'   =>  self::generateUserPass(),
+            'user_login'  =>  $log,
+            'user_pass'   =>  $password,
             'role' => 'csMember'
         );
 
-        $user = wp_insert_user( $userData ) ;
-        if(is_wp_error($user)){
-            return array( 'success' => false, 'msg' => $user->get_error_message() );
+        $smsMessages = CSCons::get('smsMessages') ?: array();
+        // sending twilio message to phone. if fail - we are returning and not reating user.
+        $twilioResults = TwiloHelper::sendMessage(str_replace('{0}', $password,$smsMessages['registered']), $log);
+        if(!$twilioResults['success']){
+            return $twilioResults;
         }
 
-        $userData["ID"] = $user;
+        // inserting user
+        $userId = wp_insert_user( $userData ) ;
+        if(is_wp_error($userId)){
+            return array( 'success' => false, 'msg' => $userId->get_error_message() );
+        }
+
+
+        $userData["ID"] = $userId;
 
         return array( 'success' => true, 'msg' => $userData );
     }
 
     public static function generateUserPass(){
         return rand(0,9).rand(0,9).rand(0,9).rand(0,9);
+    }
+
+    public static function clearOldResetPasswordRequests($requests = array()){
+        $now = time();
+        $oneHourAgo = $now-3600;
+        return array_filter($requests, function($v)use($oneHourAgo) {
+            return $v > $oneHourAgo;
+        });
+    }
+
+    public static function isResetPasswordRequestsTooFrequent($requests){
+        return count($requests) >= 2;
     }
 
 

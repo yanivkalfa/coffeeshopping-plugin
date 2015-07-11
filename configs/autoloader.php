@@ -20,4 +20,10 @@ $classes = array(
     'UserDatabaseHelper' => '/libs/database/',
     'SuperDatabaseHelper' => '/libs/database/',
     'CartDatabaseHelper' => '/libs/database/',
+    'TwiloHelper' => '/libs/API/twilo/'
+
+    /*
+    'BulkSms' => '/libs/API/bulkSms/',
+    'BulkSmsHelper' => '/libs/API/bulkSms/',
+    */
 );

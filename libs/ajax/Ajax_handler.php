@@ -72,6 +72,56 @@ class Ajax_handler {
 	}
 
     /**
+     * @param $post
+     * @return array
+     */
+    public function requestResetPassword($post){
+        $log = json_decode($post['log'], true);
+        if(!$log) {
+            return array(
+                'success'   => false,
+                'msg'       => array('name' =>'noUserName', 'errorMsg' => __( "You have to supply your phone number", 'coffee-shopping' ))
+            );
+        }
+
+        $user = get_user_by( 'login', $log );
+        if(!$user){
+            return array(
+                'success'   => false,
+                'msg'       => array('name' =>'noUser', 'errorMsg' => __( "User with this phone number was not found", 'coffee-shopping' ))
+            );
+        }
+
+        $token = UserDatabaseHelper::generateUserPass().UserDatabaseHelper::generateUserPass();
+
+        $resetPassword = get_user_meta($user->ID, 'resetPassword', true) ?: array();
+        $resetPassword['requests'] = isset($resetPassword['requests']) ? $resetPassword['requests'] : array();
+        $resetPassword['requests'] = UserDatabaseHelper::clearOldResetPasswordRequests($resetPassword['requests']);
+        $tooFrequent = UserDatabaseHelper::isResetPasswordRequestsTooFrequent($resetPassword['requests']);
+        if($tooFrequent){
+            return array(
+                'success'   => false,
+                'msg'       => array('name' =>'tooFrequent', 'errorMsg' => __( "You can only reset your password twice every hour", 'coffee-shopping' ))
+            );
+        }
+
+        $smsMessages = CSCons::get('smsMessages') ?: array();
+        $twilioResults = TwiloHelper::sendMessage(str_replace('{0}', $token,$smsMessages['resetPassword']), $log);
+
+        if(!$twilioResults['success']){
+            return $twilioResults;
+        }
+
+        $resetPassword['token'] = $token;
+        $resetPassword['requests'][] = time();
+        rsort($resetPassword['requests']);
+
+        update_user_meta( $user->ID, 'resetPassword', $resetPassword);
+
+        return array( 'success' => true, 'msg' => '');
+    }
+
+    /**
      * @param   $post
      * @return  array
      *          success -   bool    -   status.

@@ -4,7 +4,13 @@
 </script>
 
 <form id="loginform" action="/wp-login.php" method="post">
+    <?php
+    if(isset($_GET['register']) && $_GET['register'] === 'success'){
+        Utils::getTemplate('registrationSuccess');
+    }
+    ?>
     <div class="inline">
+
         <div id="userlogintitle">
             <h2><?php _e("Login details:", 'coffee-shopping' ); ?></h2>
         </div>
