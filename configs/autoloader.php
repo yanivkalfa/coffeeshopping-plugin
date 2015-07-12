@@ -24,6 +24,7 @@ $classes = array(
     'SavedProductsHelper' => '/libs/database/',
     'ProductsLists' => '/libs/',
     'TwiloHelper' => '/libs/API/twilo/',
+
     /*
     'BulkSms' => '/libs/API/bulkSms/',
     'BulkSmsHelper' => '/libs/API/bulkSms/',
