@@ -48,11 +48,17 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 
                 <div id="shipToHomeTab" class="display-none">
 
+                    <div class="inline toDoorStep">
+                        <label><?php _e("Ship to door steps", 'coffee-shopping' ); ?></label>
+                        <input type="checkbox" name="to_door_step" id="toDoorStep"/>
+                    </div>
+
                     <div class="form-group">
                         <div id="shipToHome" class="inline shipToHome">
                             <img src="<?php echo $shiptohome;?>" alt="<?php _e("Ship to home", 'coffee-shopping' ); ?>"/>
                         </div>
                         <div id="savedAddressTab">
+
                             <?php
                                 $scope = array(
                                     'addresses' => $addresses,

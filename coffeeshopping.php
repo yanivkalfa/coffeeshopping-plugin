@@ -191,6 +191,10 @@ if(!class_exists('coffee_shopping'))
          */
         public function instantiateCart(){
             CartHelper::instantiateCart();
+
+            /*
+            $a = TwiloHelper::sendMessage('this is a new message', "4237074169");
+            Utils::pageEcho($a);*/
         }
 
 

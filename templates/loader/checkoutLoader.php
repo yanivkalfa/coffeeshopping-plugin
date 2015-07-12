@@ -55,7 +55,13 @@ if(is_user_logged_in()){
 
             // is address id newAddress then $deliver_to get the home flag, and the new address is used
         }else if($_POST['address_id'] === 'newAddress'){
+
             $deliver_to = 'home';
+            if($_POST['to_door_step']){
+                $deliver_to = 'doorStep';
+            }
+
+
             $address = $_POST['address'];
 
             // instantiating new address
@@ -80,6 +86,9 @@ if(is_user_logged_in()){
 
             // is address id and id then $deliver_to get the home flag, and we are fetching the address from the db.
             $deliver_to = 'home';
+            if($_POST['to_door_step']){
+                $deliver_to = 'doorStep';
+            }
             $address_id = $_POST['address_id'];
         }
 

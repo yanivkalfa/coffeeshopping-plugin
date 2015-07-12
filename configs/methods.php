@@ -24,4 +24,5 @@ $methods = array(
     'updateQuantity' => array('protected' => false, 'req_capabilities' => []),
     'getClosestStore' => array('protected' => false, 'req_capabilities' => []),
     'saveCart' => array('protected' => true, 'req_capabilities' => ['manage_options', 'cs_member']),
+    'requestResetPassword' => array('protected' => false, 'req_capabilities' => []),
 );

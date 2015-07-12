@@ -15,6 +15,8 @@ class ClassLoader{
         require_once $pluginFolder.'/libs/cart/ProductPriceModifier.php';
         require_once $pluginFolder.'/libs/cart/Product.php';
         require_once $pluginFolder.'/libs/cart/Cart.php';
+        require_once $pluginFolder.'/libs/API/twilio/Services/Twilio.php';
+        require_once $pluginFolder.'/libs/API/twilio/TwilioHelper.php';
 
     }
 }

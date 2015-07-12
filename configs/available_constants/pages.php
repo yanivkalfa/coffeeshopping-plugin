@@ -7,6 +7,7 @@ $value = array(
     array("name" => "home", "title"=> __( "Home", "coffee-shopping" )),
     array("name" => "myAccount", "title"=> __( "My Account", "coffee-shopping")),
     array("name" => "register", "title"=> __( "Register", "coffee-shopping")),
+    array("name" => "resetPassword", "title"=> __( "Reset Password", "coffee-shopping")),
     array("name" => "login", "title"=>  __( "Login", "coffee-shopping")),
     array("name" => "logout", "title"=>__( "Logout", "coffee-shopping")),
     array("name" => "stores", "title"=> __( "Our Stores", "coffee-shopping")),

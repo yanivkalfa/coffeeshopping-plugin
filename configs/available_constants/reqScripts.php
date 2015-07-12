@@ -25,7 +25,7 @@ $value = array(
         array('handle' => 'login_css',                 'src' => '/css/login',                       'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'login'),
         array('handle' => 'login_js',                  'src' => '/scripts/pages/login',             'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'login'),
 
-        array('handle' => 'register_css',              'src' => '/css/register',                    'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'register'),
+        array('handle' => 'register_css',              'src' => '/css/register',                    'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => array('register','resetpassword')),
         array('handle' => 'register_js',               'src' => '/scripts/pages/register',          'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'register'),
 
         array('handle' => 'checkout_css',              'src' => '/css/checkout',                    'extension' => 'css',   'deps' => '', 'media' => 'screen' , 'page' => 'checkout'),
@@ -40,6 +40,8 @@ $value = array(
         array('handle' => 'theme_css',                 'src' => '/templates/theme/css/theme',       'extension' => 'css',   'deps' => '', 'media' => 'screen'),
 
         //array('handle' => 'address_form_js',           'src' => '/scripts/partials/addressForm',    'extension' => 'js',    'deps' => '', 'media' => '', 'page' => array('checkout' )),
+
+        array('handle' => 'reset_password_js',          'src' => '/scripts/pages/resetPassword',   'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'resetpassword'),
     ),
 
     'backEnd' => array(
