@@ -11,6 +11,7 @@ $classes = array(
     'searchResultsTemplates' => '/templates/',
     'productViewTemplates' => '/templates/',
     'ebayAdapter' => '/libs/API/ebay/',
+    'productRecommendations' => '/libs/API/',
     'productSearch' => '/libs/API/',
     'productView' => '/libs/API/',
     'currencyExchange' => '/libs/',
@@ -20,4 +21,6 @@ $classes = array(
     'UserDatabaseHelper' => '/libs/database/',
     'SuperDatabaseHelper' => '/libs/database/',
     'CartDatabaseHelper' => '/libs/database/',
+    'SavedProductsHelper' => '/libs/database/',
+    'ProductsLists' => '/libs/',
 );

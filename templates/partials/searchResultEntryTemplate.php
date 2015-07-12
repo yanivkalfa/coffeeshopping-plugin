@@ -34,11 +34,11 @@
                 </li>
                 <li class="buyprice">
                     <div class="inline"><?php _e("Price:", 'coffee-shopping' ); ?></div>
-                    <div class="inline"><b><?php echo $item["priceSymbol".$exchangeExtension];?></b><?php echo $item["price".$exchangeExtension];?></b></div>
+                    <div class="inline"><b><?php echo $item["priceSymbolExch"];?></b><?php echo $item["priceExch"];?></b></div>
                 </li>
                 <li class="shippinginfo">
                         <?php
-                            $shippingtext = ($item["shipping".$exchangeExtension]==0) ? __("Free", "coffee-shopping") : $item["shippingSymbol".$exchangeExtension].$item["shipping".$exchangeExtension];
+                            $shippingtext = ($item["shippingExch"]==0) ? __("Free", "coffee-shopping") : $item["shippingSymbolExch"].$item["shippingExch"];
                         ?>
                     <div class="inline"><?php _e("Shipping:", 'coffee-shopping' ); ?></div>
                     <div class="inline"><?php echo $shippingtext;?></div>

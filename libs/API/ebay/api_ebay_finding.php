@@ -285,7 +285,7 @@ class ebay_FindingAPI extends ebayAdapter {
                 "conditionText"     =>          (string)$item->condition->conditionDisplayName
             );
             // get exchange rates:
-            Utils::addExchangeKeys($ObjSearch->item[$index],  Array("price", "shipping"), $this->exchSuff, $this->exchCurrency);
+            Utils::addExchangeKeys($ObjSearch->item[$index],  Array("price", "shipping"));
 
             $index++;
         }

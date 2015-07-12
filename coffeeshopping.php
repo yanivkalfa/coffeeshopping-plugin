@@ -21,6 +21,7 @@ define("CONFIGS", BASE_ADDRESS.'/configs');
 define("SERVICES",BASE_ADDRESS.'/services');
 define("TEMPLATE_DIR",BASE_ADDRESS.'/templates');
 define("THEME_DIR", get_template_directory());
+define("EXCH_CURRENCY", "ILS"); // Our exchange currency - TODO:: load from admin.
 
 
 // run time configs
@@ -272,11 +273,11 @@ if(!class_exists('coffee_shopping'))
         public function register_coffeeshoppingwidgets() {
             require (dirname(__FILE__).'/services/templateLoaderWidget.php');
             require (dirname(__FILE__).'/services/searchWidget.php');
-            require (dirname(__FILE__).'/services/featuredProductsWidget.php');
+            require(dirname(__FILE__) . '/services/ProductsListWidget.php');
             require (dirname(__FILE__).'/services/myCartWidget.php');
             register_widget( 'templateLoaderWidget' );
             register_widget( 'searchWidget' );
-            register_widget( 'featuredProductsWidget' );
+            register_widget( 'ProductsListWidget' );
             register_widget( 'myCartWidget' );
 
         }
@@ -618,14 +619,14 @@ if(!class_exists('coffee_shopping'))
             $table = "CREATE TABLE $table_name (
               ID bigint(20) NOT NULL AUTO_INCREMENT,
               productID bigint(20) NOT NULL,
-              store varchar(50) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-              title varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-              image varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              store varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              title varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              image varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               price float(10, 2) NOT NULL,
-              priceCurrency varchar(4) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              priceCurrency varchar(4) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               shipping float(10, 2) NOT NULL,
-              shippingCurrency varchar(4) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-              listname varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              shippingCurrency varchar(4) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              listname varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               lastupdate TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
               UNIQUE KEY cuunique (`ID`)
               );";

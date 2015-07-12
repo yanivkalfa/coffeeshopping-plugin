@@ -14,9 +14,9 @@
     $ns.variationSets = <?php echo json_encode($product->variationSets);?>;
     $ns.variations = <?php echo json_encode($product->variations);?>;
     $ns.selectedVariant = -1; // default search result.
-    $ns.exchExtension = "<?php echo $exchangeExtension; ?>";
-    $ns.exchSymbol = "<?php echo Utils::getCurrencySymbol($exchangeCurrency);?>";
-    $ns.exchCurrency = "<?php echo $exchangeCurrency;?>";
+    $ns.exchExtension = "Exch";
+    $ns.exchSymbol = "<?php echo Utils::getCurrencySymbol(EXCH_CURRENCY);?>";
+    $ns.exchCurrency = "<?php echo EXCH_CURRENCY;?>";
     $ns.productID = "<?php echo $product->ID;?>";
     $ns.productPic = "<?php echo (isset($product->pics[0]["picURL"])) ? $product->pics[0]["picURL"] : "" ;?>";
     $ns.productTitle = "<?php echo $product->title;?>";
@@ -141,7 +141,7 @@
                                 <label for="<?php echo "shipradio".$i;?>"><?php Utils::pageEcho($shippingOpts["name"]);?></label>
                             </div>
                             <div class="pricecol">
-                                <label for="<?php echo "shipradio".$i;?>"> <?php echo $shippingOpts["price".$exchangeExtension]." ".Utils::getCurrencySymbol($exchangeCurrency);?> </label>
+                                <label for="<?php echo "shipradio".$i;?>"> <?php echo $shippingOpts["priceExch"]." ".Utils::getCurrencySymbol(EXCH_CURRENCY);?> </label>
                             </div>
                         </div>
                         <?php
@@ -179,7 +179,7 @@
                 <div><?php _e("Pricing summary:", 'coffee-shopping' ); ?></div>
                 <div>
                     <div class="inline header"><?php _e("Item price:", 'coffee-shopping' ); ?></div>
-                    <div id="itemprice" class="inline"> <?php echo $itemPricing["priceSymbol".$exchangeExtension].$itemPricing["price".$exchangeExtension];?> </div>
+                    <div id="itemprice" class="inline"> <?php echo $itemPricing["priceSymbolExch"].$itemPricing["priceExch"];?> </div>
                 </div>
                 <div>
                     <div class="inline header"><?php _e("Shipping price:", 'coffee-shopping' ); ?></div>
@@ -201,7 +201,7 @@
 
             <div id="pricingsumm" class="inline" align="center">
                 <div><?php _e("Price per item:", 'coffee-shopping' ); ?></div>
-                <div id="totalprice"> <?php echo $itemPricing["priceSymbol".$exchangeExtension].$itemPricing["price".$exchangeExtension];?> </div>
+                <div id="totalprice"> <?php echo $itemPricing["priceSymbolExch"].$itemPricing["priceExch"];?> </div>
             </div>
 
             <div id="exchangeDisplayDiv">
@@ -263,7 +263,7 @@
             </div>
             <div class="inline">
                 <div class="inline header"><?php _e("Total price:", 'coffee-shopping' ); ?> </div>
-                <div id="finalPrice" class="inline" align="center"> <?php echo $itemPricing["priceSymbol".$exchangeExtension].$itemPricing["price".$exchangeExtension];?> </div>
+                <div id="finalPrice" class="inline" align="center"> <?php echo $itemPricing["priceSymbolExch"].$itemPricing["priceExch"];?> </div>
             </div>
             <div class="inline addtocart">
                 <div id="buynowbuttondiv" align="center"><?php _e("Add to cart", 'coffee-shopping' ); ?></div>
@@ -291,8 +291,4 @@
             <iframe id="productDescriptionIframe" src="<?php echo plugins_url( '../../templates/partials/productDescriptionTemplate.php?view-product='.$_GET['view-product'].'&store='.$_GET['store'] , __FILE__ );?>"></iframe>
         </div>
     </div>
-</div>
-Debug Output: [<a href="#" id="debugOutPutTogg">+</a>]
-<div id="DebugProductOutput">
-    <?php Utils::preEcho($product);?>
 </div>

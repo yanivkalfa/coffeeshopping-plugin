@@ -6,14 +6,14 @@
  * Time: 9:01 PM
  */
 
-class featuredProductsWidget extends WP_Widget {
+class ProductsListWidget extends WP_Widget {
 
     // Register widget with WordPress.
     function __construct() {
         parent::__construct(
-            'featuredProductsWidget', // Base ID
+            'ProductsListWidget', // Base ID
             __( 'CoffeeShopping featured', 'coffee-shopping' ), // Name
-            array( 'description' => __( 'Featured products widget', 'coffee-shopping' ), ) // Args
+            array( 'description' => __( 'Products List widget', 'coffee-shopping' ), ) // Args
         );
     }
 
@@ -30,22 +30,11 @@ class featuredProductsWidget extends WP_Widget {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         }
 
-        $myCartWidgetPageLink = get_permalink(get_option("cs_cart_p_id"));
-        if (!$myCartWidgetPageLink){
-            Utils::adminPreECHO(__( "Can't get search page link", 'coffee-shopping' ), __( "myCartWidget.php ERROR:: ", 'coffee-shopping' ));
-            echo Utils::getErrorCode("frontEnd", "widget", "myCartWidget", "7");
-            return;
-        }
+        if ( ! empty( $instance['listname'] ) ) {
 
-        $cart = array(
-            'productCount' => 0
-        );
-        if(isset($_SESSION['cart'])){
-            $cart =  $_SESSION['cart']->getStats();
-        }
 
-        $cart['page'] = $myCartWidgetPageLink;
-        Utils::getTemplate('myCartWidget', $cart);
+            Utils::getTemplate($instance['listname'], null, "theme/");
+        }
 
         echo $args['after_widget'];
     }
@@ -58,10 +47,15 @@ class featuredProductsWidget extends WP_Widget {
      */
     public function form( $instance ) {
         $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'coffee-shopping' );
+        $listname = ! empty( $instance['listname'] ) ? $instance['listname'] : __( 'List name', 'coffee-shopping' );
         ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'listname' ); ?>"><?php _e( 'List name:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'listname' ); ?>" name="<?php echo $this->get_field_name( 'listname' ); ?>" type="text" value="<?php echo esc_attr( $listname ); ?>">
         </p>
     <?php
     }
@@ -78,8 +72,9 @@ class featuredProductsWidget extends WP_Widget {
     public function update( $new_instance, $old_instance ) {
         $instance = array();
         $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['listname'] = ( ! empty( $new_instance['listname'] ) ) ? strip_tags( $new_instance['listname'] ) : '';
 
         return $instance;
     }
 
-} // class featuredProductsWidget
+} // class ProductsListWidget

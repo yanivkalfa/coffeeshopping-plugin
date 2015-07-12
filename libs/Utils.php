@@ -290,14 +290,14 @@ abstract class Utils{
     }
 
     /**
-     * @func addExchangeKeys(&$mixed, $keys, $exchSuff, $exchCurrency)
+     * @func addExchangeKeys(&$mixed, $keys)
      *  - Add exchange keys to a given array/object.
      * @param   mixed     $mixed        - The array/object to temper with.
      * @param   array     $keys         - The key we are exchanging (must have a $key.'Currency' key to hold it's currencyID.
-     * @param   string    $exchSuff     - The new key suffix.
-     * @param   string    $exchCurrency - The currency to convert to.
      */
-    static public function addExchangeKeys(&$mixed, $keys, $exchSuff, $exchCurrency){
+    static public function addExchangeKeys(&$mixed, $keys){
+        $exchSuff = "Exch";
+        $exchCurrency = EXCH_CURRENCY;
         $exchanger = new currencyExchange();
         foreach($keys as $key){
             if (is_object($mixed)){

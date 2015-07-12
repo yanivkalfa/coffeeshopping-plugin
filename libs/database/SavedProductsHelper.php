@@ -18,7 +18,7 @@ abstract class SavedProductsHelper extends SuperDatabaseHelper{
     public static function getSavedProducts($identifier, $values){
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_saved_products';
-        return $wpdb->get_results("SELECT * FROM $table_name WHERE `$identifier` IN (" . implode(",", $values) . ")", ARRAY_A);
+        return $wpdb->get_results("SELECT * FROM $table_name WHERE `$identifier` IN ('" . implode("','", $values) . "')", ARRAY_A);
     }
 
     /**
@@ -86,61 +86,5 @@ abstract class SavedProductsHelper extends SuperDatabaseHelper{
             $productArray[$row["Field"]] = $row["Type"];
         }
         return $productArray;
-    }
-
-    /**
-     * @func insertSavedProductsList($IDs, $store, $listname)
-     *  - Gets and inserts a list of products to the saved products database list.
-     * @param $IDs          -   array   -   an array of id's to get.
-     * @param $store        -   string  -   an API identifier.
-     * @param $listname     -   string  -   to which list should we insert these.
-     * @return              -   bool    -   true/false;
-     */
-    function insertSavedProductsList($IDs, $store, $listname){
-        if (isset($IDs) && !empty($IDs) && isset($store) && !empty($store)) {
-            // Our options array. //TODO:: when we'll have more APIs, add a function to get these properly.
-            $itemOpts = array(
-                'IncludeSelector' => explode(",", "Details")
-            );
-            // performs the actual request.
-            $result = productView::getProducts($store, $IDs, $itemOpts);
-
-            // Output results if we have any proper ones, else display errors.
-            if ($result["result"] == "ERROR") {
-                // Failed to get the products.
-                Utils::adminPreECHO(__( "featuredProductsWidget::productView::getProducts(...) failed!", 'coffee-shopping' ), __( "featuredProductsWidget ERROR:: ", 'coffee-shopping' ));
-                Utils::adminPreECHO($result["output"]);
-
-            } else {
-                foreach($result["output"] as $product){
-                    // Form a proper array
-                    $productsArr = array(
-                        "productID"         => $product->ID,
-                        "store"             => $store,
-                        "title"             => $product->title,
-                        "image"             => $product->pics[0]["picURL"],
-                        "price"             => $product->price,
-                        "priceCurrency"     => $product->priceCurrency,
-                        "shipping"          => $product->shipping,
-                        "shippingCurrency"  => $product->shippingCurrency,
-                        "listname"          => $listname,
-                    );
-
-                    // Get the current ID's for this list:
-
-                    // Insert the new product to the db.
-                    $result = SavedProductsHelper::insertSavedProduct($productsArr);
-                    if (!$result){
-                        Utils::adminPreECHO($productsArr, "Failed to insert the saved product to the DB, product:");
-                    }
-
-                }
-            }
-        }else{
-            // No products or bad store.
-            Utils::adminPreECHO(__( "No featured product IDs where set!", 'coffee-shopping' ), __( "featuredProductsWidget ERROR:: ", 'coffee-shopping' ));
-            return false;
-        }
-        return true;
     }
 }

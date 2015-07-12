@@ -53,18 +53,16 @@ if (
                 // Load our template.
                 $scope = array();
                 $scope["product"]               = $result["output"];
-                $scope["exchangeCurrency"]      = "ILS"; // TODO:: get from admin panel.
-                $scope["exchangeExtension"]     = "Exch"; // TODO:: get from admin panel.
                 $scope["store"]                 = $store;
 
                 $scope["itemPricing"] = array(
                         "price"                                         => $scope['product']->price,
                         "priceCurrency"                                 => $scope['product']->priceCurrency,
                         "priceSymbol"                                   => $scope['product']->priceSymbol,
-                        "price".$scope['exchangeExtension']             => $scope['product']->{'price'.$scope['exchangeExtension']},
-                        "priceCurrency".$scope['exchangeExtension']     => $scope['product']->{'priceCurrency'.$scope['exchangeExtension']},
-                        "priceSymbol".$scope['exchangeExtension']       => $scope['product']->{'priceSymbol'.$scope['exchangeExtension']},
-                        "exchextension"                                 => $scope['exchangeExtension'],
+                        "priceExch"             => $scope['product']->priceExch,
+                        "priceCurrencyExch"     => $scope['product']->priceCurrencyExch,
+                        "priceSymbolExch"       => $scope['product']->priceSymbolExch,
+                        "exchextension"                                 => "Exch",
                 );
 
                 Utils::getTemplate('product',$scope, 'pages');

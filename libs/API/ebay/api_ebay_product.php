@@ -19,12 +19,21 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $this->itemOptions = new stdClass();
         $this->itemOptions->IncludeSelector = array();      //  Simple array of selectors to request for the item. (empty by default)
         //          [Details, Description, TextDescription, ShippingCosts, ItemSpecifics, Variations, Compatibility]
-        $this->itemOptions->toGet = "0";                   //  The unique item ID(s) to get info for. [for multiple items use a simple array(ID, ID, ID...)]
+        $this->itemOptions->toGet = "0";                    //  The unique item ID(s) to get info for. [for multiple items use a simple array(ID, ID, ID...)]
 
+        $this->itemOptions->getShippingOpts = true;         //  Get extended shipping options.
         // Default comms header.
         $this->headers = array();
         $this->_setDefaultHeaders();
 
+    }
+
+    /*
+     * @func _setGetShippingOpts()
+     *  - sets our option for getting extended shipping options info.
+     */
+    public function _setGetShippingOpts($bool){
+        $this->itemOptions->getShippingOpts = $bool;
     }
 
     /*
@@ -148,22 +157,27 @@ class ebay_ShoppingAPI extends ebayAdapter {
             );
         }
 
-        // get the shipping costs for this product
-        $shippingDetails = $this->getShippingCosts();
-        // Checks to see if we have any type of failed call.
-        if ($shippingDetails["result"] == "ERROR") {
-            // Returns an error.
-            return array(
-                'result' => "ERROR",
-                "output" => $shippingDetails["output"] // Just pass on the error from prev func.
-            );
+
+        if ($this->itemOptions->getShippingOpts) {
+            // get the shipping costs for this product
+            $shippingDetails = $this->getShippingCosts();
+            // Checks to see if we have any type of failed call.
+            if ($shippingDetails["result"] == "ERROR") {
+                // Returns an error.
+                return array(
+                    'result' => "ERROR",
+                    "output" => $shippingDetails["output"] // Just pass on the error from prev func.
+                );
+            }
         }
 
         // format our product properly.
         $itemDetailsProp = $this->_formatProductOutput($itemDetails->Item);
 
-        // add our shipping costs to our proper object.
-        $itemDetailsProp->shippingDetails = $shippingDetails["output"];
+        if ($this->itemOptions->getShippingOpts) {
+            // add our shipping costs to our proper object.
+            $itemDetailsProp->shippingDetails = $shippingDetails["output"];
+        }
 
         // Returns a proper products object.
         return array(
@@ -286,14 +300,35 @@ class ebay_ShoppingAPI extends ebayAdapter {
 
         // Iterate over all items and properly form them. (No shipping details!)
         $itemDetailsProp = [];
+        $index = 0;
         foreach($itemDetails->Item as $Item){
             // Make sure our item listing is "Active".
             if ($Item->ListingStatus != "Active"){
                 continue;
             }
 
+            if ($this->itemOptions->getShippingOpts) {
+                // get the shipping costs for this product
+                $this->_setGetter($Item->ItemID);
+                $shippingDetails = $this->getShippingCosts();
+                // Checks to see if we have any type of failed call.
+                if ($shippingDetails["result"] == "ERROR") {
+                    // Returns an error.
+                    return array(
+                        'result' => "ERROR",
+                        "output" => $shippingDetails["output"] // Just pass on the error from prev func.
+                    );
+                }
+            }
+
             // format our product properly.
-            $itemDetailsProp[] = $this->_formatProductOutput($Item);
+            $itemDetailsProp[$index] = $this->_formatProductOutput($Item);
+
+            if ($this->itemOptions->getShippingOpts) {
+                // add our shipping costs to our proper object.
+                $itemDetailsProp[$index]->shippingDetails = $shippingDetails["output"];
+            }
+            $index++;
         }
 
         // Returns a proper products object.
@@ -329,7 +364,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
         $ObjProduct->price                  =     (string)  $productOutput->CurrentPrice;
         $ObjProduct->priceCurrency          =     (string)  $productOutput->CurrentPrice["currencyID"];
         // Get exchange rates.
-        Utils::addExchangeKeys($ObjProduct, array("price"), $this->exchSuff, $this->exchCurrency);
+        Utils::addExchangeKeys($ObjProduct, array("price"));
 
         $ObjProduct->country                =     (string)  $productOutput->Country;
         $ObjProduct->location               =     (string)  $productOutput->Location;
@@ -409,7 +444,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
                     "quantitySold"                  =>  (string)    $variation->SellingStatus->QuantitySold
                 );
                 // get exchange rates:
-                Utils::addExchangeKeys($ObjProduct->variations[$varIndex], array("price"), $this->exchSuff, $this->exchCurrency);
+                Utils::addExchangeKeys($ObjProduct->variations[$varIndex], array("price"));
 
                 // Associate our variation with it's SET(s).
                 foreach($variation->VariationSpecifics->NameValueList as $variationSet){
@@ -458,7 +493,7 @@ class ebay_ShoppingAPI extends ebayAdapter {
                 "insuranceCurrency"         =>  (string)    $option->ShippingInsuranceCost["currencyID"],
             );
             // get exchange rates:
-            Utils::addExchangeKeys($ObjShipping->shippingOptions[$index],  Array("price", "additional", "duty", "insurance"), $this->exchSuff, $this->exchCurrency);
+            Utils::addExchangeKeys($ObjShipping->shippingOptions[$index],  Array("price", "additional", "duty", "insurance"));
 
             $index++;
         }

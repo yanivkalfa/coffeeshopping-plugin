@@ -135,11 +135,12 @@ abstract class productSearch {
 
     }
 
-    static public function _addExchangeRates(&$ObjSearch, $exchCurrency = "ILS", $priceExtension = "Exch"){
+    static public function _addExchangeRates(&$ObjSearch){
+        $exchCurrency = EXCH_CURRENCY;
         $exchanger = new currencyExchange();
         foreach($ObjSearch->items as $API => $items){
             foreach($ObjSearch->items[$API] as $item){
-                $ObjSearch->items[$API][$item]["price".$priceExtension] = $exchanger->exchangeRateConvert($item['priceCurrency'], $item['price'], $exchCurrency);
+                $ObjSearch->items[$API][$item]["priceExch"] = $exchanger->exchangeRateConvert($item['priceCurrency'], $item['price'], $exchCurrency);
             }
         }
     }
