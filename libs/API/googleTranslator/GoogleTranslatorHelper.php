@@ -16,7 +16,6 @@ abstract class GoogleTranslatorHelper{
                 get_option('google_endPoint', 'https://www.googleapis.com/language/translate/v2')
             );
         }
-        Utils::preEcho($googleTranslator);
 
         return $googleTranslator->translate($expression, $toLanguages, $fromLanguages);
     }

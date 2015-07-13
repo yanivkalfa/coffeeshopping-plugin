@@ -25,13 +25,7 @@ class GoogleTranslator {
     }
 
     public function composeURL($params){
-        $uriPart = array();
-        foreach($params as $key => $value){
-            if(!empty($value) && $value != ''){
-                $uriPart[] = $key.'='.$value;
-            }
-        }
-        return $this->endPoint.'?'.implode('&',$uriPart);
+        return $this->endPoint.'?'.http_build_query($params);
     }
 
     public function translate($expression, $toLanguages, $fromLanguages = false){
@@ -40,13 +34,9 @@ class GoogleTranslator {
         }
         $this->toLanguages = $toLanguages;
 
-        $toReturn = array(
-            "success" => false,
-            "msg" => ""
-        );
         $params = array(
             "key" => $this->secretKey,
-            "q" => $expression,//urlencode($expression),
+            "q" => $expression,
             "source" =>$this->fromLanguages,
             "target" => $this->toLanguages,
             "prettyprint" => true
@@ -55,18 +45,12 @@ class GoogleTranslator {
         $url = $this->composeURL($params);
 
         $optsOverride = array(
-            //CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-            //CURLOPT_SSL_VERIFYPEER => false,
-            //CURLOPT_SSL_VERIFYHOST => false,
-            //CURLOPT_HTTPHEADER => array('content_type: application/json')
+            CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_HTTPHEADER => array('content_type: application/json')
         );
         $response = Utils::get_url($url, 'get',array(), NULL, $optsOverride);
-
-        //$translation = json_decode(urldecode($response['output']), true);
-
-        echo '<textarea>'.htmlentities($response['output']).'</textarea>';
-        echo json_last_error();
-        //Utils::preEcho($translation);
 
         if($response['result'] == 'ERROR'){
             return array(
@@ -74,10 +58,15 @@ class GoogleTranslator {
                 "msg" => array('name' =>'cUrlError', 'errorMsg' => __( "We've encounter and error accessing the api", 'coffee-shopping' ))
             );
         }
-        $translation = json_decode($response['output']);
 
-        Utils::preEcho($translation);
-        /*
+        $translation = json_decode($response['output']);
+        $decodingError = json_last_error ();
+        if($decodingError){
+            return array(
+                "success" => false,
+                "msg" => array('name' =>'cUrlError', 'errorMsg' => __( "We've encounter and error accessing the api", 'coffee-shopping' ))
+            );
+        }
 
         if(empty($translation->error) && !empty($translation->data->translations)){
             $toReturn['msg'] = $translation->data->translations[0]->translatedText;
@@ -86,6 +75,5 @@ class GoogleTranslator {
         }
 
         return $toReturn;
-        */
     }
 }

@@ -248,36 +248,32 @@ abstract class Utils{
         $crl = curl_init();
         curl_setopt ($crl, CURLOPT_URL,$url);
         if (strtolower($method)=="get"){
-            //curl_setopt($crl, CURLOPT_HTTPGET, true);
+            curl_setopt($crl, CURLOPT_HTTPGET, true);
         }elseif(strtolower($method)=="post"){
             curl_setopt($crl, CURLOPT_POST, 1);
             curl_setopt($crl, CURLOPT_POSTFIELDS, $data);
         }
-        //curl_setopt($crl, CURLOPT_HTTPHEADER, $headers);
-        //curl_setopt($crl, CURLOPT_HEADER, false);
+        curl_setopt($crl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($crl, CURLOPT_HEADER, false);
         curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
-        //curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, 20);
+        curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, 20);
 
         // overriding opts
         foreach($optsOverride as $opt => $value){
-            //curl_setopt($crl, $opt['name'],$opt['value']);
-
-            Utils::preEcho($opt);
-            Utils::preEcho($value);
             curl_setopt($crl, $opt, $value);
         }
 
         $ret = curl_exec($crl);
+        $curlInfo = curl_getinfo($crl);
 
-        Utils::preEcho( curl_getinfo($crl) );
         // Check if any error occured
         if(curl_errno($crl)){
-            $errno = curl_errno($crl);
-            $error = curl_error($crl);
+            //$errno = curl_errno($crl);
+            //$error = curl_error($crl);
             curl_close($crl);
             return array(
                 "result" => "ERROR",
-                "output" => '<br />cURLing::'.$url.'- Curl error: (#'.$errno.') ' . $error.'<br />'
+                "output" => $ret
             );
         }
         curl_close($crl);

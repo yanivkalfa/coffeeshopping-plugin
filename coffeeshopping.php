@@ -195,24 +195,6 @@ if(!class_exists('coffee_shopping'))
          */
         public function instantiateCart(){
             CartHelper::instantiateCart();
-            /*
-            $results = GoogleTranslatorHelper::translate("ערב טוב לך", 'en');
-
-            Utils::preEcho($results);
-            */
-             //require_once $pluginFolder.'/libs/API/bulkSms/BulkSms.php';
-
-
-            /*
-            global $bulkSms;
-            $bulkSms = new BulkSms(
-                get_option('bulk_username', 'yanivkalfaYahoo'),
-                get_option('bulk_password', 'shk123456'),
-                get_option('bulk_endPoint', 'http://bulksms.vsms.net/eapi'),
-                5567
-            );
-            Utils::preEcho($bulkSms->send_sms('sHLOMI Is Gay In Capital', "525975040"));
-            */
 
 
             /*
