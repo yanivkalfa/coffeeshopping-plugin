@@ -15,7 +15,7 @@ class Shortcode_management{
                 "errorsText" => "Failed to load the products, please check your details!"
             );
             ob_start();
-            Utils::getTemplate('ProductsListError', $scope);
+            Utils::getTemplate('productsListError', $scope);
             return ob_get_clean();
 
         } else {
@@ -30,7 +30,7 @@ class Shortcode_management{
                 'products' => $result["output"],
             );
             ob_start();
-            Utils::getTemplate('ProductsList', $scope);
+            Utils::getTemplate('productsList', $scope);
             return ob_get_clean();
         }
     }

@@ -6,12 +6,12 @@
  * Time: 9:01 PM
  */
 
-class ProductsListWidget extends WP_Widget {
+class productsListWidget extends WP_Widget {
 
     // Register widget with WordPress.
     function __construct() {
         parent::__construct(
-            'ProductsListWidget', // Base ID
+            'productsListWidget', // Base ID
             __( 'CoffeeShopping Lists', 'coffee-shopping' ), // Name
             array( 'description' => __( 'Products List widget', 'coffee-shopping' ), ) // Args
         );
@@ -42,7 +42,7 @@ class ProductsListWidget extends WP_Widget {
             $scope = array(
                 "errorsText" => "Failed to load the products, please check your details!"
             );
-            Utils::getTemplate('ProductsListError', $scope);
+            Utils::getTemplate('productsListError', $scope);
 
         } else {
             if (count($result["output"])==0){
@@ -54,7 +54,7 @@ class ProductsListWidget extends WP_Widget {
             $scope = array(
                 'products' => $result["output"],
             );
-            Utils::getTemplate('ProductsList', $scope);
+            Utils::getTemplate('productsList', $scope);
         }
 
         echo $args['after_widget'];
