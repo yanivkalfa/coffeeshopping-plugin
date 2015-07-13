@@ -202,7 +202,7 @@ if(!class_exists('coffee_shopping'))
             */
 
             $a = TwiloHelper::sendMessage('this is a new message', "4239678106");
-            Utils::pageEcho($a);
+            Utils::preEcho($a);
             /*
 
             */
