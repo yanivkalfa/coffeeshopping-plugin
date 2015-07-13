@@ -16,15 +16,15 @@ $exchanger = new currencyExchange();
     </div>
 
     <div class="exchangePanelCont">
-        <div>
+        <div class="detail">
             <div class="inline"><?php _e("USD:", "coffee-shipping");?></div>
             <div class="inline"><span>$1</span> <i class="fa fa-exchange"></i> ₪<?php echo $exchanger->exchangeRate("USD", "ILS");?></div>
         </div>
-        <div>
+        <div class="detail">
             <div class="inline"><?php _e("EUR:", "coffee-shipping");?></div>
             <div class="inline"><span>&euro;1</span> <i class="fa fa-exchange"></i> ₪<?php echo $exchanger->exchangeRate("EUR", "ILS");?></div>
         </div>
-        <div>
+        <div class="detail">
             <div class="inline"><?php _e("GBP:", "coffee-shipping");?></div>
             <div class="inline"><span>&pound;1</span> <i class="fa fa-exchange"></i> ₪<?php echo $exchanger->exchangeRate("GBP", "ILS");?></div>
         </div>
