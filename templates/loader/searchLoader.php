@@ -97,8 +97,6 @@ function loadSearchPage(){
             "productPage" => $productPage,
             "searchResults" => $result["output"]
         );
-        $scope["exchangeCurrency"]      = "ILS";
-        $scope["exchangeExtension"]     = "Exch";
         $scope["searchVal"]             = $_GET["search-product"];
         Utils::getTemplate('search', $scope, 'pages');
     }

@@ -15,17 +15,12 @@
 
 class ebayAdapter {
     // API variables
-    public  $appid,                 // Our appID.
-            $exchCurrency,          // The website set exchange currency.
-            $exchSuff,              // The suffix for the exchange rates variables.
-            $exchanger;             // The currencyExchange class.
+    public  $appid;                 // Our appID.
 
     // Basic construct function.
     public function __construct( ){
         // TODO:: // Get details from admin panel.
         $this->appid = "coffeesh-b71a-4145-bb26-3a4b57d7a787";
-        $this->exchCurrency = "ILS";
-        $this->exchSuff = "Exch";
     }
 
     /**
@@ -94,6 +89,8 @@ require_once dirname(__FILE__)."/api_ebay_finding.php";
 if (!class_exists("ebay_FindingAPI")){ _e( "Failed to load ebay_FindingAPI class!", 'coffee-shopping' );}
 require_once dirname(__FILE__) . "/api_ebay_product.php";
 if (!class_exists("ebay_ShoppingAPI")){ _e( "Failed to load ebay_ShoppingAPI class!", 'coffee-shopping' );}
+require_once dirname(__FILE__) . "/api_ebay_merchandising.php";
+if (!class_exists("ebay_MerchandisingAPI")){ _e( "Failed to load ebay_MerchandisingAPI class!", 'coffee-shopping' );}
 require_once dirname(__FILE__) . "/api_ebay_utils.php";
 if (!class_exists("ebay_Utils")){ _e( "Failed to load ebay_Utils class!", 'coffee-shopping' );}
 

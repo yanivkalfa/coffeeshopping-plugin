@@ -1,7 +1,6 @@
 /**
  * Created by SK on 6/30/2015.
  */
-
 jQuery(document).ready( function(){
     var masonry = jQuery('.grid');
     masonry.imagesLoaded( function() {

@@ -17,3 +17,15 @@
 .gf-menu{
     width:80%;
 }
+
+.exchangePanelCont{}
+.exchangePanelCont span{color:#2698de;}
+.exchangePanelCreds{
+    text-align: center;
+    font-style: italic;
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+}

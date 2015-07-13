@@ -38,7 +38,9 @@
 .va-top{vertical-align: top;}
 
 .font-small{font-size:12px;}
-
+.displaynone{
+    display: none;
+}
 .display-none {
     display: none !important;
 }

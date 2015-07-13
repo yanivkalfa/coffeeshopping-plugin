@@ -11,6 +11,7 @@ $classes = array(
     'searchResultsTemplates' => '/templates/',
     'productViewTemplates' => '/templates/',
     'ebayAdapter' => '/libs/API/ebay/',
+    'productRecommendations' => '/libs/API/',
     'productSearch' => '/libs/API/',
     'productView' => '/libs/API/',
     'currencyExchange' => '/libs/',
@@ -20,12 +21,16 @@ $classes = array(
     'UserDatabaseHelper' => '/libs/database/',
     'SuperDatabaseHelper' => '/libs/database/',
     'CartDatabaseHelper' => '/libs/database/',
+    'SavedProductsHelper' => '/libs/database/',
+    'ProductsLists' => '/libs/',
     'TwiloHelper' => '/libs/API/twilo/',
-
-    //'BulkSms' => '/libs/API/bulkSms/',
-    //'BulkSmsHelper' => '/libs/API/bulkSms/',
-
     'GoogleTranslator' => '/libs/API/googleTranslator/',
-    'GoogleTranslatorHelper' => '/libs/API/googleTranslator/',
+    'GoogleTranslatorHelper' => '/libs/API/googleTranslator/'
+
+    /*
+    'BulkSms' => '/libs/API/bulkSms/',
+    'BulkSmsHelper' => '/libs/API/bulkSms/',
+    */
+
 
 );

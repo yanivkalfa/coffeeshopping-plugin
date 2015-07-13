@@ -295,25 +295,27 @@ abstract class Utils{
 
     // Get a full currency name for a given $currency.
     static public function getCurrencyName($currency){
+        if (empty($currency)){return "";}
         $currencyNames = CSCons::get('currencyNames') ?: NULL;
         return isset($currencyNames[$currency]) ? $currencyNames[$currency] : "Unknown (".$currency.")";
     }
 
     // Get an html valid symbol for a given $currency.
     static public function getCurrencySymbol($currency){
+        if (strlen($currency)<3){return "";}
         $currencySymbols = CSCons::get('currencySymbols') ?: NULL;
         return isset($currencySymbols[$currency]) ? $currencySymbols[$currency] : $currency;
     }
 
     /**
-     * @func addExchangeKeys(&$mixed, $keys, $exchSuff, $exchCurrency)
+     * @func addExchangeKeys(&$mixed, $keys)
      *  - Add exchange keys to a given array/object.
      * @param   mixed     $mixed        - The array/object to temper with.
      * @param   array     $keys         - The key we are exchanging (must have a $key.'Currency' key to hold it's currencyID.
-     * @param   string    $exchSuff     - The new key suffix.
-     * @param   string    $exchCurrency - The currency to convert to.
      */
-    static public function addExchangeKeys(&$mixed, $keys, $exchSuff, $exchCurrency){
+    static public function addExchangeKeys(&$mixed, $keys){
+        $exchSuff = "Exch";
+        $exchCurrency = EXCH_CURRENCY;
         $exchanger = new currencyExchange();
         foreach($keys as $key){
             if (is_object($mixed)){

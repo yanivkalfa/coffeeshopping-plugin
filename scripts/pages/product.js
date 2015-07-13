@@ -1,17 +1,4 @@
 /*
- if(!window.$ns) window.$ns = {};
- $ns.itemPricing = <?php echo json_encode($itemPricing);?>;
- $ns.shippingOpts = <?php echo json_encode($product->shippingDetails->shippingOptions);?>;
- $ns.selectedShipping = 0; // proper indexes start from 0.
- $ns.variationSets = <?php echo json_encode($product->variationSets);?>;
- $ns.variations = <?php echo json_encode($product->variations);?>;
- $ns.selectedVariant = 0; // default search result.
- $ns.exchExtension = "<?php echo $exchangeExtension; ?>";
- $ns.exchSymbol = "<?php echo Utils::getCurrencySymbol($exchangeCurrency);?>";
- $ns.exchCurrency = "<?php echo $exchangeCurrency;?>";
-* */
-
-/*
 * This section are function that are made available for the ifram.
 * */
 (function(){

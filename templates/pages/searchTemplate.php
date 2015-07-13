@@ -12,7 +12,6 @@
                 $scope = array(
                     "item" => $item,
                     "productPageLink" => $productPageLink,
-                    "exchangeExtension" => $exchangeExtension,
                     "API" => $API,
                 );
                 Utils::getTemplate('searchResultEntry', $scope);
