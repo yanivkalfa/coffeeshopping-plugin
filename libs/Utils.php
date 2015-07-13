@@ -286,12 +286,14 @@ abstract class Utils{
 
     // Get a full currency name for a given $currency.
     static public function getCurrencyName($currency){
+        if (empty($currency)){return "";}
         $currencyNames = CSCons::get('currencyNames') ?: NULL;
         return isset($currencyNames[$currency]) ? $currencyNames[$currency] : "Unknown (".$currency.")";
     }
 
     // Get an html valid symbol for a given $currency.
     static public function getCurrencySymbol($currency){
+        if (strlen($currency)<3){return "";}
         $currencySymbols = CSCons::get('currencySymbols') ?: NULL;
         return isset($currencySymbols[$currency]) ? $currencySymbols[$currency] : $currency;
     }

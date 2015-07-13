@@ -8,6 +8,10 @@
 
 abstract class ProductsLists {
 
+    public static function getSavedProductsLists(){
+        return SavedProductsHelper::getSavedProductsLists();
+    }
+
     /**
      * @func insertSavedProductsList($IDs, $store, $listname)
      *  - Gets and inserts a list of products to the saved products database list.
@@ -19,10 +23,11 @@ abstract class ProductsLists {
     public static function insertSavedProductsList($IDs, $store, $listname){
         // Get the products:
         $result = self::getProductsByIDs($store, $IDs);
-        if(!$result){
+        if ($result["result"]=="ERROR"){
             // Failed to get the products.
             Utils::adminPreECHO(__( "insertSavedProductsList::self::getProductsByIDs(...) failed!", 'coffee-shopping' ), __( "insertSavedProductsList ERROR:: ", 'coffee-shopping' ));
             Utils::adminPreECHO($result["output"]);
+            return false;
         }else{
             foreach($result as $product) {
                 $result = SavedProductsHelper::insertSavedProduct($product);
@@ -37,7 +42,11 @@ abstract class ProductsLists {
 
 
     public static function getSavedProductsList($listname){
-        return SavedProductsHelper::getSavedProducts("listname", array($listname));
+        $products = SavedProductsHelper::getSavedProducts("listname", array($listname));
+        foreach($products as $key => $product){
+            Utils::addExchangeKeys($products[$key], array("price", "shipping"));
+        }
+        return $products;
     }
 
     public static function getProductsByIDs($store, $IDs){
@@ -53,7 +62,11 @@ abstract class ProductsLists {
         if ($result["result"] == "ERROR") {
             // Failed to get the products.
             Utils::adminPreECHO(__( "getProductsByIDs::productView::getProducts(...) failed!", 'coffee-shopping' ), __( "getProductsByIDs ERROR:: ", 'coffee-shopping' ));
-            return false;
+            return array(
+                "result" => "ERROR",
+                "output" => $result["output"]
+            );
+
         } else {
             $productsArr = [];
             $index = 0;
@@ -72,8 +85,10 @@ abstract class ProductsLists {
                 Utils::addExchangeKeys($productsArr[$index], array("price", "shipping"));
                 $index++;
             }
-
-            return $productsArr;
+            return array(
+                "result" => "OK",
+                "output" => $productsArr
+            );
         }
     }
 

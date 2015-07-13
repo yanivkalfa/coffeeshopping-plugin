@@ -8,6 +8,12 @@
 
 abstract class SavedProductsHelper extends SuperDatabaseHelper{
 
+    public static function getSavedProductsLists(){
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'cs_saved_products';
+        return $wpdb->get_results("SELECT DISTINCT `listname` FROM $table_name WHERE 1", ARRAY_A);
+    }
+
     /**
      * @func getSavedProducts($identifier, $values)
      *  - Gets an array of product arrays according to the criteria specified.

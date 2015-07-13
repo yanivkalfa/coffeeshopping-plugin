@@ -71,23 +71,17 @@ class ebay_MerchandisingAPI extends ebayAdapter {
      *  - Sets our search to use the ebay live url.
      */
     public function _setLive(){
-        $this->endpoint = "http://svcs.ebay.com/MerchandisingService";
+        $this->endpoint = "http://svcs.ebay.com/MerchandisingService?";
     }
 
     public function getMostWatchedItems(){
-        $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-        $xmlrequest .= "<getMostWatchedItemsRequest xmlns=\"http://www.ebay.com/marketplace/services\">\n";
+        // Build our URL:
+        $url = $this->endpoint."OPERATION-NAME=getMostWatchedItems&SERVICE-VERSION=1.5.0&CONSUMER-ID=".$this->appid."&RESPONSE-DATA-FORMAT=XML&REST-PAYLOAD";
+        $url .= "&maxResults=".$this->maxResults;
         if ($this->categoryID){
-            $xmlrequest .= "<categoryId>".$this->categoryID."</categoryId>\n";
+            $url .= "&categoryId=".$this->categoryID;
         }
-        $xmlrequest .= "<maxResults>".$this->maxResults."</maxResults>\n";
-        $xmlrequest .= "</getMostWatchedItemsRequest>\n";
-
-        // Set our headers properly
-        $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "getMostWatchedItems";
-
-        // Make the call to eBay.
-        $merchandisingRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+        $merchandisingRaw = Utils::get_url($url, "GET");
 
         if ($merchandisingRaw["result"]=="ERROR"){
             Utils::adminPreECHO($merchandisingRaw["output"], "cURL ERROR details:: ");
@@ -110,31 +104,31 @@ class ebay_MerchandisingAPI extends ebayAdapter {
                 "output" => Utils::getErrorCode("API", "ebay", "getMostWatchedItems", "6")
             );
         }
+
+        // Reformat our results:
+        $formatMerchandisingOutput = $this->_formatMerchandisingOutput($merchandising);
+        if (count($formatMerchandisingOutput)==0){Utils::adminPreECHO('Empty results from: ebay_MerchandisingAPI::getMostWatchedItems().');}
+
         // Returns a proper products object.
         return array(
             'result' => "OK",
-            "output" => $this->_formatMerchandisingOutput($merchandising)
+            "output" => $formatMerchandisingOutput
         );
     }
 
 
     public function getRelatedCategoryItems(){
-        $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-        $xmlrequest .= "<getRelatedCategoryItemsRequest xmlns=\"http://www.ebay.com/marketplace/services\">\n";
+        // Build our URL:
+        $url = $this->endpoint."OPERATION-NAME=getRelatedCategoryItems&SERVICE-NAME=MerchandisingService&SERVICE-VERSION=1.5.0&CONSUMER-ID=".$this->appid."&RESPONSE-DATA-FORMAT=XML&REST-PAYLOAD";
+        $url .= "&maxResults=".$this->maxResults;
         if ($this->categoryID){
-            $xmlrequest .= "<categoryId>".$this->categoryID."</categoryId>\n";
+            $url .= "&categoryId=".$this->categoryID;
         }
         if ($this->itemID){
-            $xmlrequest .= "<itemId>".$this->itemID."</itemId>\n";
+            $url .= "&itemId=".$this->itemID;
         }
-        $xmlrequest .= "<maxResults>".$this->maxResults."</maxResults>\n";
-        $xmlrequest .= "</getRelatedCategoryItemsRequest>\n";
+        $merchandisingRaw = Utils::get_url($url, "GET");
 
-        // Set our headers properly
-        $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "getRelatedCategoryItems";
-
-        // Make the call to eBay.
-        $merchandisingRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
         if ($merchandisingRaw["result"]=="ERROR"){
             Utils::adminPreECHO($merchandisingRaw["output"], "cURL ERROR details:: ");
             return array(
@@ -156,32 +150,32 @@ class ebay_MerchandisingAPI extends ebayAdapter {
                 "output" => Utils::getErrorCode("API", "ebay", "getRelatedCategoryItems", "6")
             );
         }
+
+        // Reformat our results:
+        $formatMerchandisingOutput = $this->_formatMerchandisingOutput($merchandising);
+        if (count($formatMerchandisingOutput)==0){Utils::adminPreECHO('Empty results from: ebay_MerchandisingAPI::getRelatedCategoryItems().');}
+
         // Returns a proper products object.
         return array(
             'result' => "OK",
-            "output" => $this->_formatMerchandisingOutput($merchandising)
+            "output" => $formatMerchandisingOutput
         );
     }
 
 
     public function getSimilarItems(){
-        $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-        $xmlrequest .= "<getSimilarItemsRequest xmlns=\"http://www.ebay.com/marketplace/services\">\n";
+        // Build our URL:
+        $url = $this->endpoint."OPERATION-NAME=getSimilarItems&SERVICE-NAME=MerchandisingService&SERVICE-VERSION=1.5.0&CONSUMER-ID=".$this->appid."&RESPONSE-DATA-FORMAT=XML&REST-PAYLOAD";
+        $url .= "&listingType=FixedPriceItem,StoresFixedPrice";
+        $url .= "&maxResults=".$this->maxResults;
         if ($this->categoryID){
-            $xmlrequest .= "<categoryId>".$this->categoryID."</categoryId>\n";
+            $url .= "&categoryId=".$this->categoryID;
         }
         if ($this->itemID){
-            $xmlrequest .= "<itemId>".$this->itemID."</itemId>\n";
+            $url .= "&itemId=".$this->itemID;
         }
-        $xmlrequest .= "<listingType>".$this->listingType."</listingType>\n";
-        $xmlrequest .= "<maxResults>".$this->maxResults."</maxResults>\n";
-        $xmlrequest .= "</getSimilarItemsRequest>\n";
+        $merchandisingRaw = Utils::get_url($url, "GET");
 
-        // Set our headers properly
-        $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "getSimilarItems";
-
-        // Make the call to eBay.
-        $merchandisingRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
         if ($merchandisingRaw["result"]=="ERROR"){
             Utils::adminPreECHO($merchandisingRaw["output"], "cURL ERROR details:: ");
             return array(
@@ -203,10 +197,15 @@ class ebay_MerchandisingAPI extends ebayAdapter {
                 "output" => Utils::getErrorCode("API", "ebay", "getSimilarItems", "6")
             );
         }
+
+        // Reformat our results:
+        $formatMerchandisingOutput = $this->_formatMerchandisingOutput($merchandising);
+        if (count($formatMerchandisingOutput)==0){Utils::adminPreECHO('Empty results from: ebay_MerchandisingAPI::getSimilarItems().');}
+
         // Returns a proper products object.
         return array(
             'result' => "OK",
-            "output" => $this->_formatMerchandisingOutput($merchandising)
+            "output" => $formatMerchandisingOutput
         );
     }
 
@@ -220,27 +219,102 @@ class ebay_MerchandisingAPI extends ebayAdapter {
      *                                              array of items fit for product list display.
      */
     public function _formatMerchandisingOutput($merchandisingOutput){
-        $ObjMerchandising = new stdClass();
-        $ObjMerchandising->item = array();
+        $ObjMerchandising = array();
         $index = 0;
         foreach ($merchandisingOutput->itemRecommendations->item as $item){
-            $ObjMerchandising->item[$index]  = array(
-                "productID"         => $item->itemId,
-                "store"             => "ebay",
-                "title"             => $item->title,
-                "image"             => $item->imageURL,
-                "price"             => $item->currentPrice ,
-                "priceCurrency"     => $item->currentPrice["currencyId"],
-                "shipping"          => $item->shippingCost,
-                "shippingCurrency"  => $item->shippingCost["currencyId"],
+            $ObjMerchandising[$index]  = array(
+                "productID"         => (string)$item->itemId,
+                "store"             => (string)"ebay",
+                "title"             => (string)$item->title,
+                "image"             => (string)$item->imageURL,
+                "price"             => (isset($item->currentPrice)) ? (string)$item->currentPrice : (string)$item->buyItNowPrice,
+                "priceCurrency"     => (isset($item->currentPrice["currencyId"])) ? (string)$item->currentPrice["currencyId"] : (string)$item->buyItNowPrice["currencyId"],
+                "shipping"          => (string)$item->shippingCost,
+                "shippingCurrency"  => (string)$item->shippingCost["currencyId"],
                 "listname"          => "",
             );
             // get exchange rates:
-            Utils::addExchangeKeys($ObjMerchandising->item[$index],  Array("price", "shipping"));
+            Utils::addExchangeKeys($ObjMerchandising[$index],  Array("price", "shipping"));
             $index++;
         }
         return $ObjMerchandising;
     }
 
 }
+?>
+
+
+
+<?php
+
+/*
+
+EBAY APPEARS TO HAVE ISSUES WITH THE XML VERSION!
+::: getMostWatchedItemsRequest :::
+
+        $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+        $xmlrequest .= "<getMostWatchedItemsRequest xmlns=\"http://www.ebay.com/marketplace/services\">\n";
+        if ($this->categoryID){
+            $xmlrequest .= "<categoryId>".$this->categoryID."</categoryId>\n";
+        }
+        $xmlrequest .= "<maxResults>".$this->maxResults."</maxResults>\n";
+        $xmlrequest .= "</getMostWatchedItemsRequest>\n";
+
+        // Set our headers properly
+        $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "getMostWatchedItems";
+
+        // Make the call to eBay.
+        $merchandisingRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+*/
+
+
+/*
+
+EBAY APPEARS TO HAVE ISSUES WITH THE XML VERSION!
+::: getRelatedCategoryItemsRequest :::
+
+        $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+        $xmlrequest .= "<getRelatedCategoryItemsRequest xmlns=\"http://www.ebay.com/marketplace/services\">\n";
+        if ($this->categoryID){
+            $xmlrequest .= "<categoryId>".$this->categoryID."</categoryId>\n";
+        }
+        if ($this->itemID){
+            $xmlrequest .= "<itemId>".$this->itemID."</itemId>\n";
+        }
+        $xmlrequest .= "<maxResults>".$this->maxResults."</maxResults>\n";
+        $xmlrequest .= "</getRelatedCategoryItemsRequest>\n";
+
+        // Set our headers properly
+        $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "getRelatedCategoryItems";
+
+        // Make the call to eBay.
+        $merchandisingRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+
+ */
+
+
+/*
+ *
+EBAY APPEARS TO HAVE ISSUES WITH THE XML VERSION!
+::: getSimilarItemsRequest :::
+
+        $xmlrequest  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+        $xmlrequest .= "<getSimilarItemsRequest xmlns=\"http://www.ebay.com/marketplace/services\">\n";
+        if ($this->categoryID){
+            $xmlrequest .= "<categoryId>".$this->categoryID."</categoryId>\n";
+        }
+        if ($this->itemID){
+            $xmlrequest .= "<itemId>".$this->itemID."</itemId>\n";
+        }
+        $xmlrequest .= "<listingType>".$this->listingType."</listingType>\n";
+        $xmlrequest .= "<maxResults>".$this->maxResults."</maxResults>\n";
+        $xmlrequest .= "</getSimilarItemsRequest>\n";
+
+        // Set our headers properly
+        $this->headers["X-EBAY-SOA-OPERATION-NAME"] = "getSimilarItems";
+
+        // Make the call to eBay.
+        $merchandisingRaw = Utils::get_url($this->endpoint, "POST", $this->_formCurlHeaders($this->headers), $xmlrequest);
+
+ */
 ?>

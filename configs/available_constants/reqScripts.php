@@ -14,7 +14,7 @@ $value = array(
         array('handle' => 'product_css',               'src' => '/css/product',                                         'extension' => 'css',   'deps' => '', 'media' => 'screen', 'page' => 'product'),
         array('handle' => 'product_js',                'src' => '/scripts/pages/product',                               'extension' => 'js',    'deps' => '', 'media' => '', 'page' => 'product'),
 
-        array('handle' => 'ProductsListWidget',        'src' => '/scripts/partials/ProductsListWidget',             'extension' => 'js',    'deps' => '', 'media' => ''),
+        array('handle' => 'ProductsList',              'src' => '/scripts/partials/ProductsList',                       'extension' => 'js',    'deps' => '', 'media' => ''),
         array('handle' => 'header_css',                'src' => '/css/header',                      'extension' => 'css',   'deps' => '', 'media' => 'screen'),
         array('handle' => 'searchWidget_css',          'src' => '/css/searchWidget',                'extension' => 'css',   'deps' => '', 'media' => 'screen'),
         array('handle' => 'myCartWidget_css',          'src' => '/css/myCartWidget',                'extension' => 'css',   'deps' => '', 'media' => 'screen'),
@@ -45,6 +45,7 @@ $value = array(
     ),
 
     'backEnd' => array(
+        array('handle' => 'ProductsListWidget',        'src' => '/scripts/partials/ProductsListWidget',                 'extension' => 'js',    'deps' => '', 'media' => ''),
 
     ),
 

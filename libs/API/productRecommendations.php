@@ -56,7 +56,24 @@ abstract class productRecommendations {
         );
     }
 
+    /**
+     * @func getRelatedCategoryItems($API, $itemID = "", $catID = "", $limit = 20, $sandbox = false)
+     *  -
+     * @param        $API
+     * @param string $itemID    - Either itemID |OR| catID must be provided!
+     * @param string $catID     - Either itemID |OR| catID must be provided!
+     * @param int    $limit
+     * @param bool   $sandbox
+     * @return array
+     */
     static public function getRelatedCategoryItems($API, $itemID = "", $catID = "", $limit = 20, $sandbox = false){
+        if ($itemID=="" && $catID==""){
+            Utils::adminPreECHO("ERROR: Missing args - itemID/catID must be provided!");
+            return array(
+                "result" => "ERROR",
+                "output" => "ERROR: Missing args - itemID/catID must be provided!"
+            );
+        }
         // Check if our Adapter exists.
         if ( !Utils::API_Exists($API) ){
             Utils::adminPreECHO(sprintf( __( 'API class (%1$s Adapter) doesn\'t exists, can\'t get product!', 'coffee-shopping' ), $API ), __( "getRelatedCategoryItems() ERROR:: ", 'coffee-shopping' ));
@@ -152,6 +169,107 @@ abstract class productRecommendations {
             );
         }
 
+        return array(
+            "result" => "OK",
+            "output" => $result["output"]
+        );
+    }
+
+    static public function getProductListByType($options){
+        if (!isset($options['type']) || empty($options['type'])) {
+            return array(
+                "result" => "ERROR",
+                "output" => "no type specified!"
+            );
+        }
+        switch ($options['type']){
+            case "savedlist":
+                if (!isset($options['listname']) || empty($options['listname'])){
+                    return array(
+                        "result" => "ERROR",
+                        "output" => "no listname specified!"
+                    );
+                }
+                $result = ProductsLists::getSavedProductsList($options['listname']);
+                break;
+
+            case "mostwatched":
+                if (!isset($options['api']) || empty($options['api'])){
+                    return array(
+                        "result" => "ERROR",
+                        "output" => "no api specified!"
+                    );
+                }
+                $catID = (isset($options['catid']))?$options['catid']:"";
+                $limit = (isset($options['limit']))?$options['limit']:20;
+                $result = productRecommendations::getMostWatchedItems($options['api'], $catID, $limit);
+                break;
+
+            case "relateditems":
+                if (!isset($options['api']) || empty($options['api'])){
+                    return array(
+                        "result" => "ERROR",
+                        "output" => "no api specified!"
+                    );
+                }
+
+                $itemID = (isset($options['itemid'])) ? $options['itemid']:"";
+                $itemID = (isset($_GET["view-product"])) ? $_GET["view-product"]:$itemID;
+                $catID = (isset($options['catid']))?$options['catid']:"";
+                $limit = (isset($options['limit']))?$options['limit']:20;
+                $result = productRecommendations::getRelatedCategoryItems($options['api'], $itemID, $catID, $limit);
+                break;
+
+            case "similaritems":
+                if (!isset($options['api']) || empty($options['api'])){
+                    return array(
+                        "result" => "ERROR",
+                        "output" => "no api specified!"
+                    );
+                }
+                if (!isset($options['itemid']) || empty($options['itemid'])){
+                    if (!isset($_GET["view-product"]) || empty($_GET["view-product"])){
+                        return array(
+                            "result" => "ERROR",
+                            "output" => "no itemid specified and view-product wasn't found."
+                        );
+                    }else{
+                        $itemID = $_GET["view-product"];
+                    }
+                }else{
+                    $itemID = $options['itemid'];
+                }
+                $catID = (isset($options['catid']))?$options['catid']:"";
+                $limit = (isset($options['limit']))?$options['limit']:20;
+                $result = productRecommendations::getSimilarItems($options['api'], $itemID, $catID, $limit);
+                break;
+
+            case "specificids":
+                if (!isset($options['api']) || empty($options['api'])){
+                    return array(
+                        "result" => "ERROR",
+                        "output" => "no api specified!"
+                    );
+                }
+                if (!isset($options['specificids']) || empty($options['specificids'])){
+                    return array(
+                        "result" => "ERROR",
+                        "output" => "no specificids specified"
+                    );
+                }
+                if (preg_match_all("/\\d+/", $options['specificids'], $specificIDs, PREG_PATTERN_ORDER)){
+                    $specificIDs = $specificIDs[0];
+                }
+                $result = ProductsLists::getProductsByIDs($options['api'], $specificIDs);
+                break;
+        }
+
+        if ($result["result"]=="ERROR") {
+            return array(
+                "result" => "ERROR",
+                "output" => $result["output"]
+            );
+        }
         return array(
             "result" => "OK",
             "output" => $result["output"]

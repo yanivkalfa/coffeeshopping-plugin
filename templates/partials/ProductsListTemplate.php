@@ -1,6 +1,7 @@
 <div>
     <div id="featured-products-widget" class="masonrygrid grid">
         <?php foreach($products as $product){
+            if (!isset($product["productID"]) || empty($product["productID"])){break;}
             $imgURL = (isset($product["image"])) ? '<img src="'.Utils::getPictureBySize($product["store"], $product["image"], "500wh").'" />' : __("Image Not Found!", 'coffee-shopping' );
             ?>
             <div class="grid-sizer"></div>

@@ -62,6 +62,11 @@ if(!class_exists('coffee_shopping'))
             add_action( 'plugins_loaded', array($this, 'instantiateCart') );
 
             /*
+            * @ Instantiate shortcodes
+            */
+            add_action( 'plugins_loaded', array($this, 'instantiateShortcodes') );
+
+            /*
              * $ add some roles/capabilities
              * */
             add_action( 'admin_init', array($this, 'dashboard_roles'));
@@ -76,7 +81,6 @@ if(!class_exists('coffee_shopping'))
              * @ adding admin menus
              * */
             add_action('admin_menu', array($this, 'set_up_admin_menu'));
-
 
             /*
              * @ creating DBs on activation/deleting on deactivation
@@ -195,6 +199,10 @@ if(!class_exists('coffee_shopping'))
             /*
             $a = TwiloHelper::sendMessage('this is a new message', "4237074169");
             Utils::pageEcho($a);*/
+        }
+
+        public function instantiateShortcodes(){
+            new Shortcode_management();
         }
 
 
