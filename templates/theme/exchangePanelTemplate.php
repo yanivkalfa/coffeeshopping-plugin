@@ -11,7 +11,7 @@ $exchanger = new currencyExchange();
 <div class="exchangeRatesPanel">
     <div>
         <h2 class="title">
-            <div class="inline"> <i class="fa fa-university"></i><?php _e("Exchange Rates:", "coffee-shipping");?></div>
+            <div class="inline"> <i class="fa fa-university"></i> <?php _e("Exchange Rates:", "coffee-shipping");?></div>
         </h2>
     </div>
 
@@ -31,7 +31,7 @@ $exchanger = new currencyExchange();
     </div>
 
     <div class="exchangePanelCreds">
-        <div><?php _e("Rates provided by", "coffee-shipping");?></div>
+        <div><?php _e("*Rates provided by", "coffee-shipping");?></div>
         <div><a href="http://www.ecb.int"><?php _e("European Central Bank", "coffee-shipping");?></a></div>
     </div>
 

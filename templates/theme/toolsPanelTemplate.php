@@ -3,17 +3,17 @@
  * Created by PhpStorm.
  * User: SK
  * Date: 7/13/2015
- * Time: 7:32 PM
+ * Time: 8:12 PM
  */
 ?>
-<div class="storeCommissionPanel">
+<div class="toolsPanel">
     <div>
         <h2 class="title">
             <div class="inline"> <i class="fa fa-tags"></i> <?php _e("Commissions:", "coffee-shipping");?></div>
         </h2>
     </div>
 
-    <div class="storeCommissionCont">
+    <div class="toolsCont">
         <div>
             <div><i class="fa fa-paypal"></i> <?php _e("Paypal commission:", "coffee-shipping");?></div>
             <div class="detail"><?php _e("2.5% flat", "coffee-shipping");?></div>
