@@ -14,7 +14,7 @@ jQuery(document).ready( function(){
         toggleWidget("#" + jQuery(this).parents(".widget").attr("id"));
         shortcodeUpdate("#" + jQuery(this).parents(".widget").attr("id"));
     });
-    //jQuery(".typeselect").each(function(){jQuery(this).change();});
+    jQuery(".typeselect").each(function(){jQuery(this).change();});
 
     function shortcodeUpdate(widgetID){
         console.log("Updating " + widgetID);

@@ -46,7 +46,17 @@ abstract class ProductsLists {
         foreach($products as $key => $product){
             Utils::addExchangeKeys($products[$key], array("price", "shipping"));
         }
-        return $products;
+
+        if(!$products){
+            return array(
+                "result" => "ERROR",
+                "output" => "failed getting the list '$listname' from the DB."
+            );
+        }
+        return array(
+            "result" => "OK",
+            "output" => $products
+        );
     }
 
     public static function getProductsByIDs($store, $IDs){

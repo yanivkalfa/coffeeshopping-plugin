@@ -23,6 +23,8 @@ class currencyExchange {
      *  - init our class and set some base variables.
      * @param   string $url
      *  - European Central Bank         - http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml            - All rates are indexed by 1 EUR.   [ie. 4 ILS = 1 EUR]    ( use - Amount/FROM*TO)
+
+     *  Not supported yet:
      *  - Bank of Israel rates          - http://boi.org.il/currency.xml                                    - All rates are indexed by 1 ILS.   [ie. 3 ILS = 1 USD]    ( use - Amount/FROM*TO)
      *  - Google uses: (swiss-exchange) - http://www.six-swiss-exchange.com/ajax/ihcc/currency-rates.json   - All rates are index/currency.     [ie. 0.25 ILS = index] ( use - FROM/TO*Amount)
      */
