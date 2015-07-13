@@ -35,15 +35,3 @@ class BulkSms {
     }
 
 }
-
-/*
-             * //require_once $pluginFolder.'/libs/API/bulkSms/BulkSms.php';
-            global $bulkSms;
-            $bulkSms = new BulkSms(
-                get_option('bulk_username', 'yanivkalfa'),
-                get_option('bulk_password', 'shk123456'),
-                get_option('bulk_endPoint', 'http://usa.bulksms.com/eapi'),
-                5567
-            );
-            Utils::preEcho($bulkSms->send_sms('This is a message', 4237074169));
-            */

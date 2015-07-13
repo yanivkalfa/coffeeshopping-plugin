@@ -24,9 +24,13 @@ $classes = array(
     'SavedProductsHelper' => '/libs/database/',
     'ProductsLists' => '/libs/',
     'TwiloHelper' => '/libs/API/twilo/',
+    'GoogleTranslator' => '/libs/API/googleTranslator/',
+    'GoogleTranslatorHelper' => '/libs/API/googleTranslator/'
 
     /*
     'BulkSms' => '/libs/API/bulkSms/',
     'BulkSmsHelper' => '/libs/API/bulkSms/',
     */
+
+
 );
