@@ -101,7 +101,7 @@ class Ajax_handler {
         if($tooFrequent){
             return array(
                 'success'   => false,
-                'msg'       => array('name' =>'tooFrequent', 'errorMsg' => __( "You can only reset your password twice every hour", 'coffee-shopping' ))
+                'msg'       => array('name' =>'tooFrequent', 'errorMsg' => __( "You can only reset your password twice every hour Please contact support", 'coffee-shopping' ))
             );
         }
 
@@ -120,6 +120,66 @@ class Ajax_handler {
 
         return array( 'success' => true, 'msg' => '');
     }
+
+    /**
+     * @param $post
+     * @return array
+     */
+    public function resetPassword($post){
+        $log = json_decode($post['log'], true);
+        if(!$log) {
+            return array(
+                'success'   => false,
+                'msg'       => array('name' =>'noUserName', 'errorMsg' => __( "You have to supply your phone number", 'coffee-shopping' ))
+            );
+        }
+
+        $token = json_decode($post['token'], true);
+        if(!$token) {
+            return array(
+                'success'   => false,
+                'msg'       => array('name' =>'noToken', 'errorMsg' => __( "You must enter a token!", "coffee-shopping") )
+            );
+        }
+
+        $user = get_user_by( 'login', $log );
+        if(!$user){
+            return array(
+                'success'   => false,
+                'msg'       => array('name' =>'noUser', 'errorMsg' => __( "User with this phone number was not found", 'coffee-shopping' ))
+            );
+        }
+
+        $resetPassword = get_user_meta($user->ID, 'resetPassword', true) ?: array();
+
+        if($resetPassword['token'] != $token){
+            return array(
+                'success'   => false,
+                'msg'       => array('name' =>'wrongToken', 'errorMsg' => __( "The token we have stored is different then the token you've supplied", 'coffee-shopping' ))
+            );
+        }
+
+        $newPassword = UserDatabaseHelper::generateUserPass();
+
+        $smsMessages = CSCons::get('smsMessages') ?: array();
+        $twilioResults = TwiloHelper::sendMessage(str_replace('{0}', $newPassword,$smsMessages['resetPasswordSuccess']), $log);
+        if(!$twilioResults['success']){
+            return $twilioResults;
+        }
+
+        $user_id = wp_update_user( array( 'ID' => $user->ID, 'user_pass' => $newPassword ) );
+
+        if ( is_wp_error( $user_id ) ) {
+            return array(
+                'success'   => false,
+                'msg'       => array('name' =>'CantUpdateUser', 'errorMsg' => __( "We were unable to reset user password", 'coffee-shopping' ))
+            );
+        }
+
+        return array( 'success' => true, 'msg' => '');
+    }
+
+
 
     /**
      * @param   $post

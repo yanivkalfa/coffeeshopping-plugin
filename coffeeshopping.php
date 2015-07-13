@@ -190,6 +190,31 @@ if(!class_exists('coffee_shopping'))
          */
         public function instantiateCart(){
             CartHelper::instantiateCart();
+            /*
+            $results = GoogleTranslatorHelper::translate("ערב טוב לך", 'en');
+
+            Utils::preEcho($results);
+            */
+
+            $a = TwiloHelper::sendMessage('this is a new message', "4239678106");
+            Utils::pageEcho($a);
+            /*
+
+            */
+             //require_once $pluginFolder.'/libs/API/bulkSms/BulkSms.php';
+
+
+            /*
+            global $bulkSms;
+            $bulkSms = new BulkSms(
+                get_option('bulk_username', 'yanivkalfaYahoo'),
+                get_option('bulk_password', 'shk123456'),
+                get_option('bulk_endPoint', 'http://bulksms.vsms.net/eapi'),
+                5567
+            );
+            Utils::preEcho($bulkSms->send_sms('sHLOMI Is Gay In Capital', "525975040"));
+            */
+
 
             /*
             $a = TwiloHelper::sendMessage('this is a new message', "4237074169");
@@ -494,6 +519,22 @@ if(!class_exists('coffee_shopping'))
             return remove_role( 'csMember' );
         }
 
+        public function setHomePage(){
+
+            /*
+            $loginPage = get_permalink();
+            if (!$loginPage){Utils::adminPreECHO(__("Can't get login page id", 'coffee-shopping' ), __("topTemplate.php ERROR:: ", 'coffee-shopping' ));
+            $homepage = get_page_by_title( 'Front Page' );
+                */
+
+            $homePage = get_option("cs_home_p_id");
+            if ( $homePage)
+            {
+                update_option( 'page_on_front', $homePage );
+                update_option( 'show_on_front', 'page' );
+            }
+        }
+
         /*
          * @ On activation create Db and default page
          * https://docs.google.com/spreadsheets/d/1i_vk_ftcvHzHuoeu5_vh08uMAqY9zkCbRBNsYzgbTZI/edit#gid=0
@@ -504,6 +545,7 @@ if(!class_exists('coffee_shopping'))
             $this->addTemplatesToTheme();
             $this->createPages();
             $this->addCsMemberRole();
+            $this->setHomePage();
 
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 

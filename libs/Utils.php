@@ -240,27 +240,36 @@ abstract class Utils{
      * @param string $method - The method to use - get/post, defaults to get.
      * @param array $headers - The headers to send - eg.: $headers('Content-type: text/plain', 'Content-length: 100')
      * @param mixed $data -  The data to send - eg.: array["key"=>"value"], string, array("file" => "filename"), xml file content etc.
-     * @param mixed $port -  incase we need a port
+     * @param mixed $optsOverride -  options override - if supplied will override existing options
      * @return mixed - Whatever is returned by the server.
      */
-    static function get_url($url, $method = "get", $headers = array(), $data = "", $port = false){
+    static function get_url($url, $method = "get", $headers = array(), $data = "", $optsOverride = array()){
 
         $crl = curl_init();
         curl_setopt ($crl, CURLOPT_URL,$url);
-        if($port){
-            curl_setopt ( $crl, CURLOPT_PORT, $port );
-        }
         if (strtolower($method)=="get"){
-            curl_setopt($crl, CURLOPT_HTTPGET, true);
+            //curl_setopt($crl, CURLOPT_HTTPGET, true);
         }elseif(strtolower($method)=="post"){
             curl_setopt($crl, CURLOPT_POST, 1);
             curl_setopt($crl, CURLOPT_POSTFIELDS, $data);
         }
-        curl_setopt($crl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($crl, CURLOPT_HEADER, false);
-        curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, 20);
+        //curl_setopt($crl, CURLOPT_HTTPHEADER, $headers);
+        //curl_setopt($crl, CURLOPT_HEADER, false);
+        curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+        //curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, 20);
+
+        // overriding opts
+        foreach($optsOverride as $opt => $value){
+            //curl_setopt($crl, $opt['name'],$opt['value']);
+
+            Utils::preEcho($opt);
+            Utils::preEcho($value);
+            curl_setopt($crl, $opt, $value);
+        }
+
         $ret = curl_exec($crl);
+
+        Utils::preEcho( curl_getinfo($crl) );
         // Check if any error occured
         if(curl_errno($crl)){
             $errno = curl_errno($crl);

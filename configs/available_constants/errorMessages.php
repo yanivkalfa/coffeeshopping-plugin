@@ -9,5 +9,6 @@ $value = array(
     "length" => __( "field length must be {0} digits long", "coffee-shopping"),
     "equalTo" => __( "Passwords does not match", "coffee-shopping"),
     "address_id" => __( "You must select a shipping method", "coffee-shopping"),
-    "serverError" => __( "There was some server error, we were unable to complete the request", "coffee-shopping")
+    "serverError" => __( "There was some server error, we were unable to complete the request", "coffee-shopping"),
+    "noToken" => __( "You must enter a token!", "coffee-shopping")
 );

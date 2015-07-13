@@ -8,6 +8,10 @@
     if(isset($_GET['register']) && $_GET['register'] === 'success'){
         Utils::getTemplate('registrationSuccess');
     }
+
+    if(isset($_GET['resetPassword']) && $_GET['resetPassword'] === 'success'){
+        Utils::getTemplate('resetPasswordSuccess');
+    }
     ?>
     <div class="inline">
 

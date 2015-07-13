@@ -20,10 +20,12 @@ $classes = array(
     'UserDatabaseHelper' => '/libs/database/',
     'SuperDatabaseHelper' => '/libs/database/',
     'CartDatabaseHelper' => '/libs/database/',
-    'TwiloHelper' => '/libs/API/twilo/'
+    'TwiloHelper' => '/libs/API/twilo/',
 
-    /*
-    'BulkSms' => '/libs/API/bulkSms/',
-    'BulkSmsHelper' => '/libs/API/bulkSms/',
-    */
+    //'BulkSms' => '/libs/API/bulkSms/',
+    //'BulkSmsHelper' => '/libs/API/bulkSms/',
+
+    'GoogleTranslator' => '/libs/API/googleTranslator/',
+    'GoogleTranslatorHelper' => '/libs/API/googleTranslator/',
+
 );
