@@ -304,7 +304,7 @@ if(!class_exists('coffee_shopping'))
         public function register_coffeeshoppingwidgets() {
             require (dirname(__FILE__).'/services/templateLoaderWidget.php');
             require (dirname(__FILE__).'/services/searchWidget.php');
-            require(dirname(__FILE__) . '/services/productsListWidget1.php');
+            require(dirname(__FILE__) . '/services/productsListWidget.php');
             require (dirname(__FILE__).'/services/myCartWidget.php');
             register_widget( 'templateLoaderWidget' );
             register_widget( 'searchWidget' );
