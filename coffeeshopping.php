@@ -196,8 +196,8 @@ if(!class_exists('coffee_shopping'))
         public function instantiateCart(){
             CartHelper::instantiateCart();
 
-            $results = GoogleTranslatorHelper::translate('something', 'en');
-            Utils::preEcho($results);
+            //$results = GoogleTranslatorHelper::translate('something', 'en');
+            //Utils::preEcho($results);
             /*
             $a = TwiloHelper::sendMessage('this is a new message', "4237074169");
             Utils::pageEcho($a);*/

@@ -264,7 +264,6 @@ abstract class Utils{
         }
 
         $ret = curl_exec($crl);
-        $curlInfo = curl_getinfo($crl);
 
         // Check if any error occured
         if(curl_errno($crl)){
