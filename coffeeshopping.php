@@ -200,12 +200,6 @@ if(!class_exists('coffee_shopping'))
 
             Utils::preEcho($results);
             */
-
-            $a = TwiloHelper::sendMessage('this is a new message', "4239678106");
-            Utils::preEcho($a);
-            /*
-
-            */
              //require_once $pluginFolder.'/libs/API/bulkSms/BulkSms.php';
 
 
