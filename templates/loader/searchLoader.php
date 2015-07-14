@@ -81,6 +81,13 @@ function loadSearchPage(){
     $sandbox = false;
 
     // performs the actual search.
+    $translateSearch = true;// TODO:: get from admin.
+    if ($translateSearch){
+        $translatedSearch = GoogleTranslatorHelper::translate($searchVal, 'en');
+        if ($translatedSearch["success"]){
+            $searchVal = $translatedSearch["msg"];
+        }
+    }
     $result = productSearch::searchALL($APIs, $searchVal, $searchOpts, $sandbox);
 
     // error checking

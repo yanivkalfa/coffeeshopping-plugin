@@ -37,7 +37,6 @@ class GoogleTranslator {
         $params = array(
             "key" => $this->secretKey,
             "q" => $expression,
-            //"source" =>$this->fromLanguages,
             "target" => $this->toLanguages,
             "prettyprint" => true
         );
@@ -68,6 +67,8 @@ class GoogleTranslator {
             );
         }
 
+        $toReturn = array();
+        $toReturn["success"] = true;
         if(empty($translation->error) && !empty($translation->data->translations)){
             $toReturn['msg'] = $translation->data->translations[0]->translatedText;
         }else{
