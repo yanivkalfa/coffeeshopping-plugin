@@ -73,6 +73,10 @@
     border-top: 2px solid #ddd;
 }
 
+.aStoreDescImageDiv .aStoreImage{
+    width:100%;
+}
+
 /*
       RESPONSIVENESS-NESS!
 */
