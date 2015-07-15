@@ -5,6 +5,19 @@
 
 abstract class CartDatabaseHelper extends SuperDatabaseHelper {
 
+    public static function prepareCart($carts){
+        if(!$carts) return array();
+        if($carts['ID']){
+            $carts['price_modifiers'] = unserialize($carts['price_modifiers']);
+        }else{
+            foreach($carts as $key => $cart){
+                $carts[$key]['price_modifiers'] = unserialize($carts[$key]['price_modifiers']);
+            }
+        }
+
+        return $carts;
+    }
+
     public static function generateCart($carts){
         foreach($carts as $key => $cart){
             $products = self::getCartProduct($cart['ID']);
@@ -38,7 +51,7 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
             $unfinishedCarts = array();
         }
         $carts = array_merge ($currentCart, $unfinishedCarts);
-        return self::generateCart($carts);
+        return self::generateCart(self::prepareCart($carts));
     }
 
     /**
@@ -52,7 +65,7 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
         $cartStatus = CSCons::get('cartStatus') ?: array();
         $table_name = $wpdb->prefix . 'cs_carts';
         $carts = $wpdb->get_results("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['delivered']['name']."' ORDER BY `create_date` DESC", ARRAY_A);
-        return self::generateCart($carts);
+        return self::generateCart(self::prepareCart($carts));
     }
 
     /**
@@ -64,7 +77,7 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
     public static function getCartAddressId($cartId){
         global $wpdb;
         $table_name = $wpdb->prefix . 'cs_carts';
-        return $wpdb->get_var("SELECT `address_id` FROM $table_name WHERE `ID` = '$cartId'", ARRAY_A);
+        return $wpdb->get_var("SELECT `address_id` FROM $table_name WHERE `ID` = '$cartId'");
     }
 
     /**
@@ -89,7 +102,8 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
         global $wpdb;
         $cartStatus = CSCons::get('cartStatus') ?: array();
         $table_name = $wpdb->prefix . 'cs_carts';
-        return $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['saved']['name']."' ORDER BY `create_date` DESC", ARRAY_A);
+        $cart = $wpdb->get_row("SELECT * FROM $table_name WHERE `user_id` = '$userId' AND `status` = '".$cartStatus['saved']['name']."' ORDER BY `create_date` DESC", ARRAY_A);
+        return self::prepareCart($cart);
     }
 
     /**
@@ -119,9 +133,12 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
     public static function saveCart() {
         if(!isset($_SESSION['cart'])) return false;
         // array that is used to filter the properties on cart class to fit the DB fields
-        $keep = array('ID','user_id','deliver_to','address_id','payment_method','payment_amount','purchase_location','status','note','create_date', 'delivered_date');
+        $keep = array('ID','user_id','deliver_to','address_id','payment_method','payment_amount','price_modifiers','purchase_location','status','note','create_date', 'delivered_date');
         // turning the cart class into an array.
         $cart = (array)$_SESSION['cart'];
+
+        // serializing price_modifiers
+        $cart['price_modifiers'] = serialize($cart['price_modifiers']);
 
         // checking if we have an id, if we do it means we are editing if we don't its a new cart.
         if(empty($cart['ID'])){
@@ -136,7 +153,7 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
         // checking if we got cartid from previous insert or update,
         // and if original cart id is set which mean we are editing - so we delete all products related to the cart.
         if($cartId !== false && !empty($cart['ID'])){
-            $deleted =  self::deleteItem(array('cart_id' => $cartId), 'cs_cart_products');
+            self::deleteItem(array('cart_id' => $cartId), 'cs_cart_products');
         }
 
         // iterating over cart product.

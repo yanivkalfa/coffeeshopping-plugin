@@ -1,10 +1,5 @@
 <!-- all variables comes from Utils::getTemplate -->
 
-<script language="javascript" type="text/javascript">
-    // Set some vars.
-    $ns.cart = <?php echo json_encode($_SESSION['cart']->getObjectAsArray());?>;
-</script>
-
 <div id="cartcontainer" class="<?php echo (count($_SESSION['cart']->get())) ? '' : 'display-none'; ?> cart has-products">
 
     <?php

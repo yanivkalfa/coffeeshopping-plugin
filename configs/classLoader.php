@@ -12,7 +12,7 @@ class ClassLoader{
         require_once $pluginFolder.'/libs/cart/BasicCartObject.php';
         require_once $pluginFolder.'/libs/cart/Collection.php';
         require_once $pluginFolder.'/libs/cart/Address.php';
-        require_once $pluginFolder.'/libs/cart/ProductPriceModifier.php';
+        require_once $pluginFolder.'/libs/cart/PriceModifier.php';
         require_once $pluginFolder.'/libs/cart/Product.php';
         require_once $pluginFolder.'/libs/cart/Cart.php';
         require_once $pluginFolder.'/libs/API/twilio/Services/Twilio.php';

@@ -11,8 +11,9 @@ class Cart extends Collection{
     public $note;
     public $create_date;
     public $delivered_date;
+    public $price_modifiers;
 
-    public function __construct($cart = NULL, $products = NULL) {
+    public function __construct($cart = array(), $products = NULL) {
         $prdc = $products;
         if($products && count($products) && is_array($products[0])){
             $prdc = [];
@@ -24,19 +25,29 @@ class Cart extends Collection{
         $colOpts = array( 'collection' => $prdc, 'colName' => 'products', 'prop'=> 'unique_store_id'  );
         parent::__construct($colOpts);
 
-        if(is_array($cart)){
-            $cartStatus = CSCons::get('cartStatus') ?: array();
-            $this->ID = isset($cart['ID']) ? $cart['ID'] : null;
-            $this->user_id = isset($cart['user_id']) ? $cart['user_id'] : null;
-            $this->deliver_to = isset($cart['deliver_to']) ? $cart['deliver_to'] : null;
-            $this->address_id = isset($cart['address_id']) ? $cart['address_id'] : null;
-            $this->payment_method = isset($cart['payment_method']) ? $cart['payment_method'] : null;
-            $this->payment_amount = isset($cart['payment_amount']) ? $cart['payment_amount'] : null;
-            $this->purchase_location = isset($cart['purchase_location']) ? $cart['purchase_location'] : null;
-            $this->status = isset($cart['status']) ?  $cart['status'] : $cartStatus['saved']['name'] ;
-            $this->note = isset($cart['note']) ? $cart['note'] : null;
-            $this->create_date = isset($cart['create_date']) ? $cart['create_date'] : null;
-            $this->delivered_date = isset($cart['create_date']) ? $cart['create_date'] : null;
+        $cartStatus = CSCons::get('cartStatus') ?: array();
+        $this->ID = isset($cart['ID']) ? $cart['ID'] : null;
+        $this->user_id = isset($cart['user_id']) ? $cart['user_id'] : null;
+        $this->deliver_to = isset($cart['deliver_to']) ? $cart['deliver_to'] : null;
+        $this->address_id = isset($cart['address_id']) ? $cart['address_id'] : null;
+        $this->payment_method = isset($cart['payment_method']) ? $cart['payment_method'] : 'cash';
+        $this->payment_amount = isset($cart['payment_amount']) ? $cart['payment_amount'] : null;
+        $this->purchase_location = isset($cart['purchase_location']) ? $cart['purchase_location'] : null;
+        $this->status = isset($cart['status']) ?  $cart['status'] : $cartStatus['saved']['name'] ;
+        $this->note = isset($cart['note']) ? $cart['note'] : null;
+        $this->create_date = isset($cart['create_date']) ? $cart['create_date'] : null;
+        $this->delivered_date = isset($cart['create_date']) ? $cart['create_date'] : null;
+
+        if($cart['price_modifiers'] && count($cart['price_modifiers'])){
+            if(is_array($cart['price_modifiers'][0])){
+                foreach($cart['price_modifiers'] as $key => $PPM){
+                    $this->price_modifiers[$key] = new PriceModifier($PPM);
+                }
+            }else if(is_object($cart['price_modifiers'][0])){
+                $this->price_modifiers = $cart['price_modifiers'];
+            }else{
+                $this->price_modifiers = [];
+            }
         }
 
     }
@@ -98,10 +109,98 @@ class Cart extends Collection{
         return $total;
     }
 
+    public function getPayPalFees($total){
+        if(!$total){
+            return false;
+        }
+        $payPalFees = get_option('payPalFees', array( 'percentage' => 2.5));
+
+        return $payPalFees['percentage'] ?  $total * $payPalFees['percentage']/100 : 0;
+    }
+
+    public function getStoreCommission($total){
+        if(!$total){
+            return false;
+        }
+
+        $paymentMethods = CSCons::get('paymentMethods') ?: array();
+        $memberType = UserDatabaseHelper::isClubMember() ? 'clubMember' : 'normal';
+        $optionName = $paymentMethods[$this->payment_method][$memberType]['optionName'];
+        $defaultValue = $paymentMethods[$this->payment_method][$memberType]['default'];
+        $storeCommission = get_option($optionName, $defaultValue);
+
+        $fees = $storeCommission['store'];
+        $percentageFees = 0;
+        if($storeCommission['percentage'] || $storeCommission['bigger']){
+            $percentageFees = $total * $storeCommission['percentage']/100;
+        }
+
+        if($storeCommission['bigger']){
+            $fees = max($fees, $percentageFees);
+        }
+
+        return $fees;
+    }
+    public function getCartPriceModifier($modifierName){
+
+        foreach($this->price_modifiers as $modifier){
+            if($modifier->name == $modifierName){
+                return $modifier;
+            }
+        }
+        return false;
+    }
+
+    public function updateCartPriceModifiers($total){
+        $priceModifiersNames = CSCons::get('priceModifiers') ?: array();
+
+        $modifier = $this->getCartPriceModifier('payPalFees');
+        $payPalFees = $this->getPayPalFees($total);
+        if(!$modifier){
+            $modifier = array(
+                'name' => 'payPalFees',
+                'nameAs' => $priceModifiersNames['payPalFees'],
+                'value' => $payPalFees,
+            );
+            $modifier = new PriceModifier($modifier);
+            $modifier->order = 0;
+            $this->price_modifiers[] = $modifier;
+        }else{
+            $modifier->value = $payPalFees;
+        }
+
+        $modifier = $this->getCartPriceModifier('storeCommission');
+        $total += $payPalFees;
+        $storeCommission = $this->getStoreCommission($total);
+        if(!$modifier){
+            $modifier = array(
+                'name' => 'storeCommission',
+                'nameAs' => $priceModifiersNames['storeCommission'],
+                'value' => $storeCommission,
+            );
+            $modifier = new PriceModifier($modifier);
+            $modifier->order = 1;
+            $this->price_modifiers[] = $modifier;
+        }else{
+            $modifier->value = $storeCommission;
+        }
+
+        usort($this->price_modifiers, function($a, $b) {
+            if ($a->order == $b->order) {
+                return 0;
+            }
+            return ($a->order < $b->order) ? -1 : 1;
+        });
+
+    }
+
     public function getCalculatedTotal(){
         $total = $this->getTotalAfterProductModifiers();
-        $total += $this->getPayPalFees($total);
-        $total += $this->getStoreCommission($total);
+        $this->updateCartPriceModifiers($total);
+
+        foreach($this->price_modifiers as $modifier){
+            $total += $modifier->value;
+        }
         return $total;
     }
 
@@ -133,59 +232,21 @@ class Cart extends Collection{
         foreach($this->get() as $key => $product){
             foreach($product->getPriceModifiers() as $mKey => $modifier){
                 if(!isset($modifiers[$modifier->name])) {
-                    $modifiers[$modifier->name] = new ProductPriceModifier((array)$modifier);
+                    $modifiers[$modifier->name] = new PriceModifier((array)$modifier);
                     $modifiers[$modifier->name]->value = $modifier->getModifierValue($product->getQuantity());
                 }else{
                     $modifiers[$modifier->name]->value += $modifier->getModifierValue($product->getQuantity());
                 }
             }
         }
-        $total = $this->getTotalAfterProductModifiers();
-        $PayPalFees = $this->getPayPalFees($total);
-        $PayPalFeesArr = array(
-            'name' => 'PayPalFees',
-            'nameAs' => 'PayPal Fees',
-            'value' => $PayPalFees,
-        );
-        $modifiers['PayPalFees'] = new ProductPriceModifier($PayPalFeesArr);
 
-        $total += $PayPalFees;
-        $storeCommissionArr = array(
-            'name' => 'storeCommission',
-            'nameAs' => 'Store Commission',
-            'value' => $this->getStoreCommission($total),
-        );
-        $modifiers['storeCommission'] = new ProductPriceModifier($storeCommissionArr);
+        $total = $this->getTotalAfterProductModifiers();
+        $this->updateCartPriceModifiers($total);
+        foreach($this->price_modifiers as $modifier){
+            $modifiers[$modifier->name] = $modifier;
+        }
 
         return array_values($modifiers);
-    }
-
-    public function getPayPalFees($total){
-        if(!$total){
-            return false;
-        }
-        $PayPalFees = get_option('PayPalFees', array( 'percentage' => 2.5));
-
-        return $PayPalFees['percentage'] ?  $total * $PayPalFees['percentage']/100 : 0;
-    }
-
-    public function getStoreCommission($total){
-        if(!$total){
-            return false;
-        }
-        $storeCommission = get_option('storeCommission', array('store' => 5, 'percentage' => 10, 'bigger' => true));
-
-        $fees = $storeCommission['store'];
-        $percentageFees = 0;
-        if($storeCommission['percentage'] || $storeCommission['bigger']){
-            $percentageFees = $total * $storeCommission['percentage']/100;
-        }
-
-        if($storeCommission['bigger']){
-            $fees = max($fees, $percentageFees);
-        }
-
-        return $fees;
     }
 
     public function productExist($newItem, $savedItem){
