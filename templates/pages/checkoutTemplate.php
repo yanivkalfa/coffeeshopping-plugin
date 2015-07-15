@@ -82,10 +82,10 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                                 <div class="carriershippingimg"></div>
                                 <input type="checkbox" name="to_door_step" id="toDoorStep" class="inline"/>
                                 <div class="inline"><?php _e("Ship to door steps", 'coffee-shopping' ); ?></div>
-                                <div class="carrierCost"><?php _e("It's only", 'coffee-shopping' ); ?> <span >60.20$</span></div>
+                                <div class="carrierCost"><?php _e("It's only", 'coffee-shopping' ); ?> <span ><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->getToDoorStepPrice()); ?></span></div>
                                 <div class="cartTotals">
-                                    <div class="cartOldCost"><?php _e("Cart cost:", 'coffee-shopping' ); ?> <span >10.00$</span></div>
-                                    <div class="newTotalCost"><?php _e("New cost:", 'coffee-shopping' ); ?> <span >72.20$</span></div>
+                                    <div class="cartOldCost"><?php _e("Cart total:", 'coffee-shopping' ); ?> <span ><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->getCalculatedTotal()); ?></span></div>
+                                    <div class="newTotalCost"><?php _e("Cart new total:", 'coffee-shopping' ); ?> <span ><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->totalIncludingToDoorStep()); ?></span></span></div>
                                 </div>
                             </label>
 

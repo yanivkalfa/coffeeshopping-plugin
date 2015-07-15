@@ -141,20 +141,11 @@ class Cart extends Collection{
 
         return $fees;
     }
-    public function getCartPriceModifier($modifierName){
-
-        foreach($this->price_modifiers as $modifier){
-            if($modifier->name == $modifierName){
-                return $modifier;
-            }
-        }
-        return false;
-    }
 
     public function updateCartPriceModifiers($total){
         $priceModifiersNames = CSCons::get('priceModifiers') ?: array();
 
-        $modifier = $this->getCartPriceModifier('payPalFees');
+        $modifier = CartPriceModifierHelper::get($this->price_modifiers,'payPalFees');
         $payPalFees = $this->getPayPalFees($total);
         if(!$modifier){
             $modifier = array(
@@ -164,12 +155,12 @@ class Cart extends Collection{
             );
             $modifier = new PriceModifier($modifier);
             $modifier->order = 0;
-            $this->price_modifiers[] = $modifier;
+            CartPriceModifierHelper::add($this->price_modifiers,$modifier);
         }else{
             $modifier->value = $payPalFees;
         }
 
-        $modifier = $this->getCartPriceModifier('storeCommission');
+        $modifier = CartPriceModifierHelper::get($this->price_modifiers,'storeCommission');
         $total += $payPalFees;
         $storeCommission = $this->getStoreCommission($total);
         if(!$modifier){
@@ -180,7 +171,7 @@ class Cart extends Collection{
             );
             $modifier = new PriceModifier($modifier);
             $modifier->order = 1;
-            $this->price_modifiers[] = $modifier;
+            CartPriceModifierHelper::add($this->price_modifiers,$modifier);
         }else{
             $modifier->value = $storeCommission;
         }
@@ -204,6 +195,13 @@ class Cart extends Collection{
         return $total;
     }
 
+    public function getToDoorStepPrice(){
+        return 60;
+    }
+
+    public function totalIncludingToDoorStep(){
+        return $this->getCalculatedTotal() + $this->getToDoorStepPrice();
+    }
 
     public function getStats($extended = false){
         $productCount = 0;
