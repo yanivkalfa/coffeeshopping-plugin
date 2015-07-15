@@ -61,11 +61,11 @@
                 ?>
                 <div class="aStoreDiv"
                      data-store-id="<?php echo $aStore["ID"];?>"
-                     data-embed="<?php echo StoreDatabaseHelper::getStoreGoogleMapsEmbed($aStore["address"]);?>"
-                     data-title-name="<?php esc_attr_e($aStore["name"]);?>"
-                     data-title-address="<?php esc_attr_e($aStore["address"]);?>"
-                     data-description="<?php esc_attr_e($aStore["description"]);?>"
-                     data-imgurl="<?php esc_attr_e($aStore["imgurl"]);?>"
+                     data-embed="<?php if(isset($aStore["address"])){echo StoreDatabaseHelper::getStoreGoogleMapsEmbed($aStore["address"]);} ?>"
+                     data-title-name="<?php if(isset($aStore["name"])){esc_attr_e($aStore["name"]);} ?>"
+                     data-title-address="<?php if(isset($aStore["address"])){esc_attr_e($aStore["address"]);} ?>"
+                     data-description="<?php if(isset($aStore["description"])){esc_attr_e($aStore["description"]);} ?>"
+                     data-imgurl="<?php if(isset($aStore["imgurl"])){esc_attr_e($aStore["imgurl"]);} ?>"
                      data-wazeurl="<?php esc_attr_e("waze://?ll=".$aStore["lat"].",".$aStore["lng"]."&navigate=yes");?>"
                     >
                     <div class="aStoreTitle">

@@ -28,7 +28,7 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
 
         <form id="addressForm" action="/checkout/" method="post">
             <h4><?php _e("Please select where to ship to:", 'coffee-shopping' ); ?></h4>
-            <div id="reselect" class="display-none"><?php _e("Shipping options", 'coffee-shopping' ); ?></div>
+            <div id="reselect" class="display-none"><a href="javascript:"><i class="fa fa-arrow-circle-right"></i></a> <?php _e("Back to shipping options", 'coffee-shopping' ); ?></div>
             <div id="shippingSelection" align="center">
                 <div id="shipToHome" class="inline shipToHome"><img src="<?php echo $shiptohome;?>" alt="<?php _e("Ship to home", 'coffee-shopping' ); ?>"/></div>
                 <div id="shipToStore" class="inline shipToStore"><img src="<?php echo $shiptostore;?>" alt="<?php _e("Ship to store", 'coffee-shopping' ); ?>"/></div>
@@ -47,12 +47,6 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                 </div>
 
                 <div id="shipToHomeTab" class="display-none">
-
-                    <div class="inline toDoorStep">
-                        <label><?php _e("Ship to door steps", 'coffee-shopping' ); ?></label>
-                        <input type="checkbox" name="to_door_step" id="toDoorStep"/>
-                    </div>
-
                     <div class="form-group">
                         <div id="shipToHome" class="inline shipToHome">
                             <img src="<?php echo $shiptohome;?>" alt="<?php _e("Ship to home", 'coffee-shopping' ); ?>"/>
@@ -80,6 +74,21 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                         </div>
                         <div id="newAddressTab" class="<?php echo isset($addresses) ? 'display-none' : ''; ?>">
                             <?php Utils::getTemplate('addressForm'); ?>
+                        </div>
+
+                        <div class="toDoorStep">
+
+                            <label for="toDoorStep">
+                                <div class="carriershippingimg"></div>
+                                <input type="checkbox" name="to_door_step" id="toDoorStep" class="inline"/>
+                                <div class="inline"><?php _e("Ship to door steps", 'coffee-shopping' ); ?></div>
+                                <div class="carrierCost"><?php _e("It's only", 'coffee-shopping' ); ?> <span >60.20$</span></div>
+                                <div class="cartTotals">
+                                    <div class="cartOldCost"><?php _e("Cart cost:", 'coffee-shopping' ); ?> <span >10.00$</span></div>
+                                    <div class="newTotalCost"><?php _e("New cost:", 'coffee-shopping' ); ?> <span >72.20$</span></div>
+                                </div>
+                            </label>
+
                         </div>
 
                     </div>

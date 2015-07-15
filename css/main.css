@@ -69,6 +69,10 @@
     -moz-border-radius: 5px;
     box-shadow: 4px 4px 1px #eee;
 }
+.ls-bottom-nav-wrapper {
+    top: 30px;
+    position: relative;
+}
 
 /*
         Store logos, specific img+sizes - copyrighted!

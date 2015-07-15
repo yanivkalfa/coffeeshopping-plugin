@@ -264,11 +264,8 @@ abstract class Utils{
         }
 
         $ret = curl_exec($crl);
-
         // Check if any error occured
         if(curl_errno($crl)){
-            //$errno = curl_errno($crl);
-            //$error = curl_error($crl);
             curl_close($crl);
             return array(
                 "result" => "ERROR",

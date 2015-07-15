@@ -42,7 +42,7 @@ $result = productView::getProduct($store, $productID, $itemOpts, $sandbox);
     <?php echo $result['output']->descriptionHTML; ?>
 </div>
 
-<script>
+<script type="text/javascript">
     (function(){
         var jqueryUrl = window.parent.getJqueryUrl();
         var jqueryScript = document.createElement('script');

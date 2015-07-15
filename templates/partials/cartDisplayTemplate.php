@@ -55,7 +55,7 @@ if (!$cartPage){Utils::adminPreECHO(__("Can't get cart page id", 'coffee-shoppin
                 Utils::getTemplate('singleAddress', $scope);
             }else{
                 $store = StoreDatabaseHelper::getStore($cart->address_id);
-                esc_attr_e($aStore["name"]).' - '.esc_attr_e($aStore["address"]);
+                esc_attr_e($store["name"]).' - '.esc_attr_e($store["address"]);
             }
             ?>
             </div>
