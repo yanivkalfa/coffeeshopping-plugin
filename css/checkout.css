@@ -1,5 +1,5 @@
-#reselect{cursor:pointer;}
-#shipToHome, #shipToStore{
+#reselect {cursor:pointer;}
+#shipToHome, #shipToStore {
     border: 1px solid #ddd;
     margin: 10px;
     border-radius: 10px;
@@ -7,16 +7,76 @@
     cursor:pointer;
     vertical-align: top;
 }
-#shipToStore{margin-right:10px;}
+#shipToStore {margin-right:10px;}
 
-#newAddress label{display: inline-block;}
+#newAddress label {display: inline-block;}
 
-#savedAddressTab{display:inline-block;}
-.addressradio{vertical-align: top;}
-.addressdets{margin-top: 3px;}
+#savedAddressTab {display:inline-block;}
+.addressradio {vertical-align: top;}
+.addressdets {margin-top: 3px;}
 
-#newAddressTab{display:inline-block;width: 200px;}
+#newAddressTab {display:inline-block;width: 200px;}
 
-#checkoutheader{
+#checkoutheader {
     text-align:center;
+}
+
+.toDoorStep {
+    display:inline-block;
+    text-align: center;
+    vertical-align: top;
+}
+.toDoorStep label{
+    text-align: -webkit-center !important;
+}
+.toDoorStep input {
+    vertical-align: text-bottom;
+}
+
+.carrierCost {
+    font-weight: bold;
+    color:#8EBE1A;
+}
+.cartOldCost {
+    font-weight: bold;
+    /*color: #369DDE;*/
+}
+.newTotalCost {
+    font-weight: bold;
+    /*color: #F84C90;*/
+}
+.cartTotals{
+    border: 1px solid #ddd;
+    margin-top: 5px;
+}
+.carriershippingimg {
+    background: url("images/carriershipment1.png") no-repeat;
+    width: 145px;
+    height: 202px;
+}
+
+
+/*
+      RESPONSIVENESS-NESS!
+*/
+@media screen and (min-width: 300px) and (max-width: 540px){
+    .toDoorStep {display:block;}
+    #newAddressTab{width:100%;display:block;text-align: center;}
+}
+@media screen and (min-width: 540px) and (max-width: 768px){
+    .toDoorStep {display:block;}
+    #newAddressTab{width:100%;display:block;text-align: center;}
+}
+@media screen and (min-width: 768px) and (max-width: 960px){
+    .toDoorStep {display:block;}
+    #newAddressTab{width:200px;display:inline-block;text-align: initial;}
+
+}
+@media screen and (min-width: 960px) and (max-width: 1200px){
+    .toDoorStep {display:inline-block;}
+    #newAddressTab{width:200px;display:inline-block;text-align: initial;}
+}
+@media screen and (min-width: 1200px){
+    .toDoorStep {display:inline-block;}
+    #newAddressTab{width:200px;display:inline-block;text-align: initial;}
 }
