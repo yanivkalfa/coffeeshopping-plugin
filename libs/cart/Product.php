@@ -42,7 +42,7 @@ class Product extends BasicCartObject {
             if($product['price_modifiers'] && count($product['price_modifiers'])){
                 if(is_array($product['price_modifiers'][0])){
                     foreach($product['price_modifiers'] as $key => $PPM){
-                        $this->price_modifiers[$key] = new ProductPriceModifier($PPM);
+                        $this->price_modifiers[$key] = new PriceModifier($PPM);
                     }
                 }else if(is_object($product['price_modifiers'][0])){
                     $this->price_modifiers = $product['price_modifiers'];

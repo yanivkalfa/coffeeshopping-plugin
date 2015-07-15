@@ -20,13 +20,3 @@ abstract class GoogleTranslatorHelper{
         return $googleTranslator->translate($expression, $toLanguages, $fromLanguages);
     }
 }
-
-/*
-define('secret_key','AIzaSyAbh66PiI2faK4XzYQFpWfotBq-_zCV8UY');
-define('API_ENDPOINT','https://www.googleapis.com/language/translate/v2');
-
-public $secretKey;
-public $endPoint;
-public $fromLanguages;
-public $toLanguages;
-*/

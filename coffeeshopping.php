@@ -538,7 +538,7 @@ if(!class_exists('coffee_shopping'))
             global $wpdb;
 
             $table_name = $wpdb->prefix . "cs_carts";
-            $table = "CREATE TABLE $table_name (
+            $table = "CREATE TABLE IF NOT EXISTS $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 user_id bigint(20) NOT NULL,
                 deliver_to varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
@@ -547,6 +547,7 @@ if(!class_exists('coffee_shopping'))
                 payment_amount float(20) NOT NULL,
                 purchase_location varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 status varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'saved',
+                price_modifiers text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 note varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 delivered_date TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -555,7 +556,7 @@ if(!class_exists('coffee_shopping'))
             dbDelta($table);
 
             $table_name = $wpdb->prefix . "cs_cart_products";
-            $table = "CREATE TABLE $table_name (
+            $table = "CREATE TABLE IF NOT EXISTS $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 cart_id bigint(20) NOT NULL,
                 unique_store_id varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
@@ -579,7 +580,7 @@ if(!class_exists('coffee_shopping'))
             dbDelta($table);
 
             $table_name = $wpdb->prefix . "cs_stats";
-            $table = "CREATE TABLE $table_name (
+            $table = "CREATE TABLE IF NOT EXISTS $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 type varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 value varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
@@ -589,7 +590,7 @@ if(!class_exists('coffee_shopping'))
             dbDelta($table);
 
             $table_name = $wpdb->prefix . "cs_items_override";
-            $table = "CREATE TABLE $table_name (
+            $table = "CREATE TABLE IF NOT EXISTS $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 item_id bigint(20) NOT NULL,
                 attribute varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
@@ -599,7 +600,7 @@ if(!class_exists('coffee_shopping'))
             dbDelta($table);
 
             $table_name = $wpdb->prefix . "cs_search_override";
-            $table = "CREATE TABLE $table_name (
+            $table = "CREATE TABLE IF NOT EXISTS $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 item_id bigint(20) NOT NULL,
                 search_keyword varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
@@ -610,7 +611,7 @@ if(!class_exists('coffee_shopping'))
             dbDelta($table);
 
             $table_name = $wpdb->prefix . "cs_addresses";
-            $table = "CREATE TABLE $table_name (
+            $table = "CREATE TABLE IF NOT EXISTS $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 city varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
                 street varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
@@ -624,7 +625,7 @@ if(!class_exists('coffee_shopping'))
             dbDelta($table);
 
             $table_name = $wpdb->prefix . "cs_categories";
-            $table = "CREATE TABLE $table_name (
+            $table = "CREATE TABLE IF NOT EXISTS $table_name (
                 ID bigint(20) NOT NULL AUTO_INCREMENT,
                 parent_id bigint(20) NOT NULL,
                 title varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
@@ -634,20 +635,20 @@ if(!class_exists('coffee_shopping'))
             dbDelta($table);
 
             $table_name = $wpdb->prefix . "cs_stores";
-            $table = "CREATE TABLE $table_name (
+            $table = "CREATE TABLE IF NOT EXISTS $table_name (
               ID bigint(20) NOT NULL AUTO_INCREMENT,
-              name varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-              address varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              name varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              address varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               lat float(10, 6) NOT NULL,
               lng float(10, 6) NOT NULL,
-              description varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-              imgurl varchar(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              description varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+              imgurl varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
               UNIQUE KEY cuunique (`ID`)
               );";
             dbDelta($table);
 
             $table_name = $wpdb->prefix . "cs_saved_products";
-            $table = "CREATE TABLE $table_name (
+            $table = "CREATE TABLE IF NOT EXISTS $table_name (
               ID bigint(20) NOT NULL AUTO_INCREMENT,
               productID bigint(20) NOT NULL,
               store varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci,

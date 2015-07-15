@@ -58,5 +58,10 @@ abstract class UserDatabaseHelper extends SuperDatabaseHelper{
         return count($requests) >= 2;
     }
 
+    public static function isClubMember(){
+        $user = wp_get_current_user();
+        return (bool)get_user_meta($user->ID, 'clubMember', true);
+    }
+
 
 }

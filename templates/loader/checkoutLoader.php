@@ -86,10 +86,30 @@ if(is_user_logged_in()){
 
             // is address id and id then $deliver_to get the home flag, and we are fetching the address from the db.
             $deliver_to = 'home';
-            if($_POST['to_door_step']){
-                $deliver_to = 'doorStep';
-            }
             $address_id = $_POST['address_id'];
+
+
+            $priceModifiersNames = CSCons::get('priceModifiers') ?: array();
+            $modifier = CartPriceModifierHelper::get($_SESSION['cart']->price_modifiers,'toDoorStep');
+            if(isset($_POST['to_door_step'])){
+                $deliver_to = 'doorStep';
+                if($modifier){
+                    $modifier->value = $_SESSION['cart']->getToDoorStepPrice();
+                }else{
+                    $modifier = array(
+                        'name' => 'toDoorStep',
+                        'nameAs' => $priceModifiersNames['toDoorStep'],
+                        'value' => $_SESSION['cart']->getToDoorStepPrice()
+                    );
+                    $modifier = new PriceModifier($modifier);
+                    $modifier->order = 2;
+                    $Res = CartPriceModifierHelper::add($_SESSION['cart']->price_modifiers,$modifier);
+                }
+            }else {
+                if ($modifier) {
+                    CartPriceModifierHelper::remove($_SESSION['cart']->price_modifiers, $modifier);
+                }
+            }
         }
 
         // set user id
@@ -113,7 +133,7 @@ if(is_user_logged_in()){
         $cartId = CartDatabaseHelper::saveCart();
 
         // redirect to checkout with id.
-        wp_redirect( $checkoutPage.'?orderId='.$cartId );
+        //wp_redirect( $checkoutPage.'?orderId='.$cartId );
         return;
 
     } else {

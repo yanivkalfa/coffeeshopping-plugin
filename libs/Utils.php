@@ -113,7 +113,7 @@ abstract class Utils{
             */
 
 
-            if($prop && $item[$prop] && ($item[$prop] === $srch[$prop] || $item[$prop] === $srch)) return $i;
+            if($prop && $item[$prop] && ((isset($srch[$prop]) && $item[$prop] === $srch[$prop]) || $item[$prop] === $srch)) return $i;
             if($item === $srch) return $i;
         }
         return -1;
