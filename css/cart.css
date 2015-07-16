@@ -78,7 +78,10 @@
     padding: 10px;
 }
 #carttotalsdiv .header{
-    width: 50%;
+    width: 65%;
+}
+#carttotalsdiv .detail {
+    float: left;
 }
 
 /*

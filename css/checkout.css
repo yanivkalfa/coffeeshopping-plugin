@@ -65,12 +65,7 @@
     float: left;
     width: 23%;
 }
-.cart-totals .header{
-    width:65% !important;
-}
-.cart-totals .detail {
-    float: left;
-}
+
 .toDoorStep{
     margin-right: 50px;
 }
