@@ -104,6 +104,7 @@ if(is_user_logged_in()){
                     $modifier = new PriceModifier($modifier);
                     $modifier->order = 2;
                     $Res = CartPriceModifierHelper::add($_SESSION['cart']->price_modifiers,$modifier);
+                    Utils::adminPreECHO($Res);
                 }
             }else {
                 if ($modifier) {

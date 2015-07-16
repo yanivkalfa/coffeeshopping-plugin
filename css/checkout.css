@@ -48,6 +48,7 @@
 .cartTotals{
     border: 1px solid #ddd;
     margin-top: 5px;
+    padding: 5px;
 }
 .carriershippingimg {
     background: url("images/CarrierShipment.png") no-repeat;
@@ -56,27 +57,55 @@
 }
 
 
+#shipToHomeTab #carttotalsdiv {
+    border-top: 1px solid;
+    margin-right: 0;
+    padding: 10px;
+    vertical-align: top;
+    float: left;
+    width: 23%;
+}
+.cart-totals .header{
+    width:65% !important;
+}
+.cart-totals .detail {
+    float: left;
+}
+.toDoorStep{
+    margin-right: 50px;
+}
+
+input.error,.form-control.error{
+    border: 1px solid #FD9EC3;
+    box-shadow: 0px 0px 7px 0px #F9CBDD;
+}
+
 /*
       RESPONSIVENESS-NESS!
 */
 @media screen and (min-width: 300px) and (max-width: 540px){
-    .toDoorStep {display:block;}
+    #shipToHome, #shipToStore{  width: 95%;text-align: center;  }
     #newAddressTab{width:100%;display:block;text-align: center;}
+    .toDoorStep {display:block;}
+    #shipToHomeTab #carttotalsdiv {  display:block;  width: 100%;  margin-bottom: 15px;  }
 }
 @media screen and (min-width: 540px) and (max-width: 768px){
-    .toDoorStep {display:block;}
+    #shipToHome, #shipToStore{  width: 95%;text-align: center;  }
     #newAddressTab{width:100%;display:block;text-align: center;}
+    .toDoorStep {display:block;}
+    #shipToHomeTab #carttotalsdiv {  display:block;  width: 100%;  margin-bottom: 15px;  }
 }
 @media screen and (min-width: 768px) and (max-width: 960px){
-    .toDoorStep {display:block;}
     #newAddressTab{width:200px;display:inline-block;text-align: initial;}
-
+    .toDoorStep {display:inline-block;width: 50%;margin-right: 0;}
+    #shipToHomeTab #carttotalsdiv {  display:inline-block;  width: 45%;  margin-bottom: 0px;  }
 }
 @media screen and (min-width: 960px) and (max-width: 1200px){
+    #newAddressTab {width:200px;display:inline-block;text-align: initial;}
     .toDoorStep {display:inline-block;}
-    #newAddressTab{width:200px;display:inline-block;text-align: initial;}
+    #shipToHomeTab #carttotalsdiv {  display:block;  width: 100%;  margin-bottom: 15px;  }
 }
 @media screen and (min-width: 1200px){
-    .toDoorStep {display:inline-block;}
     #newAddressTab{width:200px;display:inline-block;text-align: initial;}
+    .toDoorStep {display:inline-block;}
 }

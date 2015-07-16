@@ -1,7 +1,9 @@
 jQuery(document).ready( function(){
     var form, formAlert, hasSavedAddress, formRulesLoaded;
     var submitCheckout, reselect, shippingSelection, shippingContents, shipToHomeTab, shipToStoreTab,
-        savedAddressTab, newAddressTab, shipToHome, newAddressField, shipToStore, shipToStoreInput;
+        savedAddressTab, newAddressTab, shipToHome, newAddressField, backButton,
+        toDoorStep, cartToDoorStep, cartToDoorStepCost, toDoorStepInput, totalCost,
+        shipToStore, shipToStoreInput;
 
     form = $('#addressForm');
     formAlert = $('#form-alert');
@@ -15,6 +17,12 @@ jQuery(document).ready( function(){
     newAddressTab = $('#newAddressTab');
     shipToHome = $('.shipToHome');
     newAddressField = $('#newAddressField');
+    backButton = $('#backButton');
+    toDoorStep = $('.toDoorStep');
+    toDoorStepInput = $('#toDoorStepInput');
+    toDoorStepCost = $('.toDoorStepCost');
+    cartToDoorStepCost = $('.cart-toDoorStep .detail .cost');
+    totalCost = $('#cart-calculated-total .totalCost');
     shipToStore = $('.shipToStore');
     shipToStoreInput = $('#shipToStoreInput');
 
@@ -66,8 +74,10 @@ jQuery(document).ready( function(){
                 }
             },
             showErrors: function () {
+
                 this.defaultShowErrors();
                 $("#address_id-error").hide();
+                $('.form-group label.error').hide();
             }
 
         });
@@ -151,6 +161,22 @@ jQuery(document).ready( function(){
             });
         }else{
             $ns.Utils.addOrRemoveRules(method, $ns.addressRules, form);
+        }
+    });
+
+    backButton.on("click", function(){
+        shipToHome.click();
+    });
+
+    toDoorStep.on("click", function(){
+        var cost = parseFloat(toDoorStepCost.html());
+        var totalCostVal = parseFloat(totalCost.data("origcost"));
+        if (toDoorStepInput.is(":checked")){
+            cartToDoorStepCost.html(cost);
+            totalCost.html(totalCostVal+cost);
+        }else{
+            cartToDoorStepCost.html("0");
+            totalCost.html(totalCostVal);
         }
     });
 });

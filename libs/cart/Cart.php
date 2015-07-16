@@ -200,7 +200,13 @@ class Cart extends Collection{
     }
 
     public function totalIncludingToDoorStep(){
-        return $this->getCalculatedTotal() + $this->getToDoorStepPrice();
+        $toDoorStep = CartPriceModifierHelper::get($_SESSION['cart']->price_modifiers,'toDoorStep');
+        return $this->getCalculatedTotal() + (!$toDoorStep?$this->getToDoorStepPrice():0);
+    }
+
+    public function getTotalMinusModifier($modifierName){
+        $modifier = CartPriceModifierHelper::get($_SESSION['cart']->price_modifiers, $modifierName);
+        return $this->getCalculatedTotal() - $modifier->value;
     }
 
     public function getStats($extended = false){

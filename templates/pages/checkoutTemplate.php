@@ -52,7 +52,6 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                             <img src="<?php echo $shiptohome;?>" alt="<?php _e("Ship to home", 'coffee-shopping' ); ?>"/>
                         </div>
                         <div id="savedAddressTab">
-
                             <?php
                                 $scope = array(
                                     'addresses' => $addresses,
@@ -73,22 +72,46 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                             </div>
                         </div>
                         <div id="newAddressTab" class="<?php echo isset($addresses) ? 'display-none' : ''; ?>">
-                            <?php Utils::getTemplate('addressForm'); ?>
+                            <?php
+                                $scope = array(
+                                    "backButton" => true
+                                );
+                                Utils::getTemplate('addressForm', $scope);
+                            ?>
                         </div>
 
                         <div class="toDoorStep">
-
-                            <label for="toDoorStep">
+                            <label for="toDoorStepInput">
                                 <div class="carriershippingimg"></div>
-                                <input type="checkbox" name="to_door_step" id="toDoorStep" class="inline"/>
-                                <div class="inline"><?php _e("Ship to door steps", 'coffee-shopping' ); ?></div>
-                                <div class="carrierCost"><?php _e("It's only", 'coffee-shopping' ); ?> <span ><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->getToDoorStepPrice()); ?></span></div>
-                                <div class="cartTotals">
-                                    <div class="cartOldCost"><?php _e("Cart total:", 'coffee-shopping' ); ?> <span ><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->getCalculatedTotal()); ?></span></div>
-                                    <div class="newTotalCost"><?php _e("Cart new total:", 'coffee-shopping' ); ?> <span ><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->totalIncludingToDoorStep()); ?></span></span></div>
-                                </div>
+                                <?php $checked = (CartPriceModifierHelper::get($_SESSION['cart']->price_modifiers,'toDoorStep'))? " checked=checked" : "";?>
+                                <input type="checkbox" name="to_door_step" id="toDoorStepInput" class="inline"<?php echo $checked;?>/>
+                                <div class="inline"><?php _e("Ship to door step", 'coffee-shopping' ); ?></div>
+                                <div class="carrierCost"><?php _e("It's only", 'coffee-shopping' ); ?> <span ><?php echo Utils::getCurrencySymbol("ILS");?><span class="toDoorStepCost"><?php echo CartHelper::formatNumber($_SESSION['cart']->getToDoorStepPrice()); ?></span></span></div>
                             </label>
 
+                        </div>
+
+                        <div id="carttotalsdiv">
+                            <div class="cart-totals">
+                                <div class="cart-subtotal">
+                                    <div class="inline header"><?php _e("Subtotal:", 'coffee-shopping' ); ?></div>
+                                    <div id="cart-total" class="inline detail"><?php echo Utils::getCurrencySymbol("ILS").CartHelper::formatNumber($_SESSION['cart']->getTotal()); ?></div>
+                                </div>
+
+                                <div id="aggregated-price-modifier">
+                                    <?php foreach ( $_SESSION['cart']->getAggregatedPriceModifiers() as $key => $aggregatedPriceModifier ){ ?>
+                                        <div class="cart-<?php echo $aggregatedPriceModifier->name; ?>">
+                                            <div class="inline header"><?php echo $aggregatedPriceModifier->nameAs; ?>:</div>
+                                            <div class="inline detail cart-total"><?php echo Utils::getCurrencySymbol("ILS");?><span class="cost"><?php echo CartHelper::formatNumber($aggregatedPriceModifier->value); ?></div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="cart-subtotal">
+                                    <div class="inline header"><?php _e("Total:", 'coffee-shopping' ); ?></div>
+                                    <div id="cart-calculated-total" class="inline detail"><?php echo Utils::getCurrencySymbol("ILS");?><span class="totalCost" data-origcost="<?php echo CartHelper::formatNumber($_SESSION['cart']->getTotalMinusModifier("toDoorStep")); ?>"><?php echo CartHelper::formatNumber($_SESSION['cart']->getCalculatedTotal()); ?></div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
