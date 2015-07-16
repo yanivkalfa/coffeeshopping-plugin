@@ -36,7 +36,7 @@
                 <h2><?php Utils::pageEcho($product->subtitle); ?></h2>
             </div>
             <div class="productCategoryText">
-                <?php echo (isset($product->categoryText) && !empty($product->categoryText))? "<h4> Category: ".$product->categoryText."</h4>": "";?>
+                <?php echo (isset($product->categoryText) && !empty($product->categoryText))? "<h4> ".__("Category:", 'coffee-shopping' )." ".$product->categoryText."</h4>": "";?>
             </div>
         </div>
     </div>
@@ -81,10 +81,10 @@
         </div>
 
         <div id="productchoices">
-            <a href="<?php echo $product->storeLink;?>" title="View on <?php echo $store;?>" target="_blank"><div class="<?php echo Utils::getAPILogoClass($store);?> flleft"></div></a>
+            <a href="<?php echo $product->storeLink;?>" title="<?php _e("View on", 'coffee-shopping' ); ?> <?php echo $store;?>" target="_blank"><div class="<?php echo Utils::getAPILogoClass($store);?> flleft"></div></a>
             <h3>
                 <?php _e("Make your order", 'coffee-shopping' ); ?>
-                <?php echo $product->topRatedItem ? "<div title=\"Top rated product!\" class=\"topratedproductimg flleft\"></div>" : "";?>
+                <?php echo $product->topRatedItem ? "<div title=\"".__("Top rated seller", 'coffee-shopping' )."\" class=\"topratedproductimg flleft\"></div>" : "";?>
                 :
             </h3>
             <div id="itemcondition">
@@ -101,7 +101,7 @@
                         <div class="inline header"><?php Utils::pageEcho($setName);?>:</div>
                         <div class="inline">
                             <select id="varset_<?php echo $varSetCnt;?>" name="varset_<?php echo $varSetCnt;?>" class="varset" data-name="<?php echo $setName;?>">
-                                <option value="">Select <?php echo $setName;?></option>
+                                <option value=""><?php _e("Select", 'coffee-shopping' ); ?> <?php echo $setName;?></option>
                                 <?php
                                 foreach ($setVars as $variation => $variationIMG){
                                     ?>
@@ -185,6 +185,8 @@
                     <div class="inline header"><?php _e("Shipping price:", 'coffee-shopping' ); ?></div>
                     <div id="shippingprice" class="inline"></div>
                 </div>
+                <?php
+                /*
                 <div>
                     <div class="inline header"><?php _e("Store comission:", 'coffee-shopping' ); ?></div>
                     <div id="storeprice" class="inline popupinfo"
@@ -193,6 +195,8 @@
                          data-popup-footer="<?php _e('*CoffeeShopping club members enjoy <br> store commission discount!','coffee-shopping' ); ?>">
                         (?)</div>
                 </div>
+                */
+                ?>
                 <div>
                     <div class="inline header"><?php _e("Paypal comission:", 'coffee-shopping' ); ?></div>
                     <div id="paypalprice" class="inline"></div>
@@ -215,7 +219,7 @@
                     <div id="pop_rate">
                         <div class="popinline header"> <?php _e("Exchange rate:", 'coffee-shopping' ); ?> </div>
                         <div class="popinline">
-                            <?php echo Utils::getCurrencySymbol($exchangeCurrency);?><span id="exchangeRate"></span>
+                            <?php echo Utils::getCurrencySymbol(EXCH_CURRENCY);?><span id="exchangeRate"></span>
                             =
                             <span id="originalCurrSymbol2"></span>1
                         </div>

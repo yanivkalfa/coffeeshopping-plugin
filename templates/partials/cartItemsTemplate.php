@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="cartitemdetailstore">
-                    <a href="<?php echo $product->store_link;?>" title="View on <?php echo $product->store;?>" target="_blank">
+                    <a href="<?php echo $product->store_link;?>" title="<?php _e("View on", 'coffee-shopping' ); ?> <?php echo $product->store;?>" target="_blank">
                         <div class="<?php echo Utils::getAPILogoClass($product->store);?>"></div>
                     </a>
                 </div>
@@ -67,7 +67,7 @@
                 <div class="cartitemstatusicons inline">
                     <?php
                     $scope = array(
-                        'statusArr' => array_keys(CSCons::get('productStatus')),
+                        'statusArr' => CSCons::get('productStatus'),
                         'status' => $product->status,
                         'size' => 3
                     );

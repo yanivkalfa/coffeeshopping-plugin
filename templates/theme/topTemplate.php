@@ -29,7 +29,7 @@ if (!$storesPage){Utils::adminPreECHO(__("Can't get stores page id", 'coffee-sho
     <?php } else {
         $user = wp_get_current_user();
         ?>
-        <span> Hey <?php echo $user->user_nicename ?> <a href="<?php echo $logoutPage;?>"><?php _e("Logout", 'coffee-shopping' ); ?></a></span>
+        <span> <?php _e("Hey", 'coffee-shopping' ); ?> <?php echo $user->user_nicename ?> <a href="<?php echo $logoutPage;?>"><?php _e("Logout", 'coffee-shopping' ); ?></a></span>
 
     <?php }?>
 </div>

@@ -20,6 +20,9 @@
 
 .exchangePanelCont{}
 .exchangePanelCont span{color:#2698de;}
+.exchangePanelCont .inline.detail {
+    float:left;
+}
 .exchangePanelCreds{
     text-align: center;
     font-style: italic;
@@ -31,5 +34,5 @@
 }
 
 .storeCommissionCont .detail{
-    margin-right:20px;
+    margin-right:25px;
 }

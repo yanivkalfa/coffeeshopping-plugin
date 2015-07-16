@@ -10,7 +10,7 @@
 <div class="toolsPanel">
     <div>
         <h2 class="title">
-            <div class="inline"> <i class="fa fa-plug"></i> <?php _e("Tools:", "coffee-shipping");?></div>
+            <div class="inline"> <i class="fa fa-plug"></i> <?php _e("Tools:", "coffee-shopping");?></div>
         </h2>
     </div>
 

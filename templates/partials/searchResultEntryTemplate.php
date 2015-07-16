@@ -57,7 +57,7 @@
             </ul>
             <ul class="viewproductdiv nolistbull minidetails">
                 <li>
-                    <a href="<?php echo $item["storeLink"];?>" title="View on <?php echo $API;?>" target="_blank"><div class="<?php echo Utils::getAPILogoClass($API);?>"></div></a>
+                    <a href="<?php echo $item["storeLink"];?>" title="<?php _e("View on", 'coffee-shopping' ); ?> <?php echo $API;?>" target="_blank"><div class="<?php echo Utils::getAPILogoClass($API);?>"></div></a>
                 </li>
             </ul>
         </div>

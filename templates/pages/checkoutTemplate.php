@@ -42,7 +42,7 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                         <div id="shipToStore" class="inline shipToStore">
                             <img src="<?php echo $shiptostore;?>" alt="<?php _e("Ship to store", 'coffee-shopping' ); ?>"/>
                         </div>
-                        <input type="radio" name="address_id" id="shipToStoreInput" value="<?php _e("shipToStore", 'coffee-shopping' ); ?>" class="display-none"/>
+                        <input type="radio" name="address_id" id="shipToStoreInput" value="shipToStore" class="display-none"/>
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                             ?>
                             <div id="newAddress" class="single-address <?php echo isset($addresses) ? '' : 'display-none'; ?>">
                                 <div class="inline addressradio">
-                                    <input type="radio" name="address_id" id="newAddressField" value="<?php _e("newAddress", 'coffee-shopping' ); ?>"/>
+                                    <input type="radio" name="address_id" id="newAddressField" value="newAddress"/>
                                 </div>
                                 <label for="newAddressField">
                                     <div class="inline addressdets">

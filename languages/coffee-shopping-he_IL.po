@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: coffee-shopping\n"
-"POT-Creation-Date: 2015-07-10 01:14-0400\n"
-"PO-Revision-Date: 2015-07-10 12:16+0300\n"
+"POT-Creation-Date: 2015-07-16 17:26+0300\n"
+"PO-Revision-Date: 2015-07-16 17:27+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -10,116 +10,118 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.2\n"
-"X-Poedit-Basepath: .\n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: bower_components\n"
+"X-Poedit-SearchPathExcluded-1: libs/API/twilio\n"
 
-#: coffeeshopping.php:377
+#: coffeeshopping.php:402
 msgid "You do not have sufficient permissions to access this page."
-msgstr ""
+msgstr "אין לך הרשאות מתאימות בכדי להיכנס לעמוד זה"
 
-#: coffeeshopping.php:469
+#: coffeeshopping.php:495
 msgid "CoffeeShopping Member"
-msgstr ""
+msgstr "חבר בקופי-שופינג"
 
 #: configs/available_constants/cartStatus.php:6
 #: configs/available_constants/productStatus.php:6
+#: templates/partials/cartDisplayTemplate.php:12
 msgid "In cart"
 msgstr "בעגלת הקניות"
 
-#: configs/available_constants/cartStatus.php:10
-#: configs/available_constants/productStatus.php:10
+#: configs/available_constants/cartStatus.php:11
+#: configs/available_constants/productStatus.php:11
 msgid "Paid"
-msgstr ""
+msgstr "משולם"
 
-#: configs/available_constants/cartStatus.php:14
-#: configs/available_constants/productStatus.php:14
+#: configs/available_constants/cartStatus.php:16
+#: configs/available_constants/productStatus.php:16
 msgid "In storage"
-msgstr ""
+msgstr "במחסן"
 
-#: configs/available_constants/cartStatus.php:18
-#: configs/available_constants/productStatus.php:18
+#: configs/available_constants/cartStatus.php:21
+#: configs/available_constants/productStatus.php:21
 msgid "At store"
-msgstr ""
+msgstr "בחנות"
 
-#: configs/available_constants/cartStatus.php:22
-#: configs/available_constants/productStatus.php:22
+#: configs/available_constants/cartStatus.php:26
+#: configs/available_constants/productStatus.php:26
 msgid "Delivered"
-msgstr ""
+msgstr "נימסר"
 
 #: configs/available_constants/countries.php:3
 msgid "Afghanistan"
-msgstr ""
+msgstr "אפגניסטן"
 
 #: configs/available_constants/countries.php:4
 msgid "Aland Islands"
-msgstr ""
+msgstr "אולנד"
 
 #: configs/available_constants/countries.php:5
 msgid "Albania"
-msgstr ""
+msgstr "אלבניה"
 
 #: configs/available_constants/countries.php:6
 msgid "Algeria"
-msgstr ""
+msgstr "אלג'יריה"
 
 #: configs/available_constants/countries.php:7
 msgid "American Samoa"
-msgstr ""
+msgstr "סמואה האמריקאית"
 
 #: configs/available_constants/countries.php:8
 msgid "Andorra"
-msgstr ""
+msgstr "אנדורה"
 
 #: configs/available_constants/countries.php:9
 msgid "Angola"
-msgstr ""
+msgstr "אנגולה"
 
 #: configs/available_constants/countries.php:10
 msgid "Anguilla"
-msgstr ""
+msgstr "אנגווילה"
 
 #: configs/available_constants/countries.php:11
 msgid "Antarctica"
-msgstr ""
+msgstr "אנטרטיקה"
 
 #: configs/available_constants/countries.php:12
 msgid "Antigua And Barbuda"
-msgstr ""
+msgstr "אנטיגואה וברבודה"
 
 #: configs/available_constants/countries.php:13
 msgid "Argentina"
-msgstr ""
+msgstr "ארגנטינה"
 
 #: configs/available_constants/countries.php:14
 msgid "Armenia"
-msgstr ""
+msgstr "ארמניה"
 
 #: configs/available_constants/countries.php:15
 msgid "Aruba"
-msgstr ""
+msgstr "ארובה"
 
 #: configs/available_constants/countries.php:16
 msgid "Australia"
-msgstr ""
+msgstr "אוסטרליה"
 
 #: configs/available_constants/countries.php:17
 msgid "Austria"
-msgstr ""
+msgstr "אוסטריה"
 
 #: configs/available_constants/countries.php:18
 msgid "Azerbaijan"
-msgstr ""
+msgstr "אזרבייג'ן"
 
 #: configs/available_constants/countries.php:19
 msgid "Bahamas"
-msgstr ""
+msgstr "איי בהאמה"
 
 #: configs/available_constants/countries.php:20
 msgid "Bahrain"
-msgstr ""
+msgstr "בכריין"
 
 #: configs/available_constants/countries.php:21
 msgid "Bangladesh"
@@ -1031,31 +1033,31 @@ msgstr ""
 
 #: configs/available_constants/currencyNames.php:3
 msgid "US Dollar"
-msgstr ""
+msgstr "דולר אמריקאי"
 
 #: configs/available_constants/currencyNames.php:4
 msgid "Pound Sterling"
-msgstr ""
+msgstr "לירה סטרלינג"
 
 #: configs/available_constants/currencyNames.php:5
 msgid "Japanese Yen"
-msgstr ""
+msgstr "יין יפני"
 
 #: configs/available_constants/currencyNames.php:6
 msgid "European Euro"
-msgstr ""
+msgstr "יורו אירופאי"
 
 #: configs/available_constants/currencyNames.php:7
 msgid "Australian Dollar"
-msgstr ""
+msgstr "דולר אוסטרלי"
 
 #: configs/available_constants/currencyNames.php:8
 msgid "Canadian Dollar"
-msgstr ""
+msgstr "דולר קנדי"
 
 #: configs/available_constants/currencyNames.php:9
 msgid "Denmark Krone"
-msgstr ""
+msgstr "קורונה דנית"
 
 #: configs/available_constants/currencyNames.php:10
 msgid "Norway Krone"
@@ -1091,11 +1093,11 @@ msgstr ""
 
 #: configs/available_constants/currencyNames.php:18
 msgid "Chinese Yuan Renminbi"
-msgstr ""
+msgstr "יין סיני"
 
 #: configs/available_constants/currencyNames.php:19
 msgid "Indian Rupee"
-msgstr ""
+msgstr "רופי הודי"
 
 #: configs/available_constants/currencyNames.php:20
 msgid "Singapore Dollar"
@@ -1103,7 +1105,7 @@ msgstr ""
 
 #: configs/available_constants/currencyNames.php:21
 msgid "Israeli Shekel"
-msgstr ""
+msgstr "שקל ישראלי"
 
 #: configs/available_constants/currencyNames.php:22
 msgid "Thai Baht"
@@ -1135,7 +1137,7 @@ msgstr ""
 
 #: configs/available_constants/currencyNames.php:29
 msgid "Russian Rouble"
-msgstr ""
+msgstr "רובל רוסי"
 
 #: configs/available_constants/currencyNames.php:30
 msgid "Turkish Lira"
@@ -1169,48 +1171,191 @@ msgstr ""
 msgid "Philippine Peso"
 msgstr ""
 
+#: configs/available_constants/ebayCategories.php:9
+msgid "All Categories"
+msgstr "כל הקטגוריות"
+
+#: configs/available_constants/ebayCategories.php:10
+msgid "Antiques"
+msgstr "ענתיקות"
+
+#: configs/available_constants/ebayCategories.php:11
+msgid "Art"
+msgstr "אומנות"
+
+#: configs/available_constants/ebayCategories.php:12
+msgid "Baby"
+msgstr "תינוקות"
+
+#: configs/available_constants/ebayCategories.php:13
+msgid "Books"
+msgstr "ספרים"
+
+#: configs/available_constants/ebayCategories.php:14
+msgid "Business &amp; Industrial"
+msgstr "תעשייה ועסקים"
+
+#: configs/available_constants/ebayCategories.php:15
+msgid "Cameras &amp; Photo"
+msgstr "מצלמות ותמונות"
+
+#: configs/available_constants/ebayCategories.php:16
+msgid "Cell Phones &amp; Accessories"
+msgstr "מכשירים סלולריים ועזרים"
+
+#: configs/available_constants/ebayCategories.php:17
+msgid "Clothing, Shoes &amp; Accessories"
+msgstr "ביגוד, נעליים ועזרים"
+
+#: configs/available_constants/ebayCategories.php:18
+msgid "Coins &amp; Paper Money"
+msgstr "מטבעות ושטרות"
+
+#: configs/available_constants/ebayCategories.php:19
+msgid "Collectibles"
+msgstr "אוספים"
+
+#: configs/available_constants/ebayCategories.php:20
+msgid "Computers/Tablets &amp; Networking"
+msgstr "מחשבים, טאבלטים וציוד רשת"
+
+#: configs/available_constants/ebayCategories.php:21
+msgid "Consumer Electronics"
+msgstr "מוצרי אלקטרוניקה"
+
+#: configs/available_constants/ebayCategories.php:22
+msgid "Crafts"
+msgstr "עבודות יד"
+
+#: configs/available_constants/ebayCategories.php:23
+msgid "Dolls &amp; Bears"
+msgstr "בובות ודובים"
+
+#: configs/available_constants/ebayCategories.php:24
+msgid "DVDs &amp; Movies"
+msgstr "די-וי-די וסרטים"
+
+#: configs/available_constants/ebayCategories.php:25
+msgid "eBay Motors"
+msgstr "מכוניות באיביי"
+
+#: configs/available_constants/ebayCategories.php:26
+msgid "Entertainment Memorabilia"
+msgstr "בידור"
+
+#: configs/available_constants/ebayCategories.php:27
+msgid "Gift Cards &amp; Coupons"
+msgstr "קופונים וכרטיסי מתנה"
+
+#: configs/available_constants/ebayCategories.php:28
+msgid "Health &amp; Beauty"
+msgstr "בריאות ויופי"
+
+#: configs/available_constants/ebayCategories.php:29
+msgid "Home &amp; Garden"
+msgstr "בית וגן"
+
+#: configs/available_constants/ebayCategories.php:30
+msgid "Jewelry &amp; Watches"
+msgstr "תכשיטים ושעונים"
+
+#: configs/available_constants/ebayCategories.php:31
+msgid "Music"
+msgstr "מוסיקה"
+
+#: configs/available_constants/ebayCategories.php:32
+msgid "Musical Instruments &amp; Gear"
+msgstr "כלי נגינה וציוד מוסיקלי"
+
+#: configs/available_constants/ebayCategories.php:33
+msgid "Pet Supplies"
+msgstr "אספקה לבעלי חיים"
+
+#: configs/available_constants/ebayCategories.php:34
+msgid "Pottery &amp; Glass"
+msgstr "כדרות ועבודות זכוכית"
+
+#: configs/available_constants/ebayCategories.php:35
+msgid "Real Estate"
+msgstr "נדלן"
+
+#: configs/available_constants/ebayCategories.php:36
+msgid "Specialty Services"
+msgstr "שירותי מומחים"
+
+#: configs/available_constants/ebayCategories.php:37
+msgid "Sporting Goods"
+msgstr "ציוד ספורט"
+
+#: configs/available_constants/ebayCategories.php:38
+msgid "Sports Mem, Cards &amp; Fan Shop"
+msgstr "מזכרות ספורט וכרטיסים"
+
+#: configs/available_constants/ebayCategories.php:39
+msgid "Stamps"
+msgstr "בולים"
+
+#: configs/available_constants/ebayCategories.php:40
+msgid "Tickets &amp; Experiences"
+msgstr "כרטיסים וחוויות"
+
+#: configs/available_constants/ebayCategories.php:41
+msgid "Toys &amp; Hobbies"
+msgstr "צעצועים ותחביבים"
+
+#: configs/available_constants/ebayCategories.php:42
+msgid "Travel"
+msgstr "טיולים ומסעות"
+
+#: configs/available_constants/ebayCategories.php:43
+msgid "Video Games &amp; Consoles"
+msgstr "משחקי וידאו וקונסולות"
+
+#: configs/available_constants/ebayCategories.php:44
+msgid "Everything Else"
+msgstr "אחר"
+
 #: configs/available_constants/errorCodesHandler.php:3
 msgid "Improper search string"
-msgstr ""
+msgstr "חיפוש לא תקין"
 
 #: configs/available_constants/errorCodesHandler.php:4
 msgid "cURL Communication error"
-msgstr ""
+msgstr "בעיית תקשורת עם השרת"
 
 #: configs/available_constants/errorCodesHandler.php:5
 msgid "Failed to get the requested item details"
-msgstr ""
+msgstr "כשל בהשגת פרטי הפריט המבוקש"
 
 #: configs/available_constants/errorCodesHandler.php:6
 msgid "Failed to get page contents, some arguments are missing"
-msgstr ""
+msgstr "כשל בהשגת תוכן העמוד, חסר מידע"
 
 #: configs/available_constants/errorCodesHandler.php:7
 msgid "It seems like this item's listing is inactive"
-msgstr ""
+msgstr "פריט זה אינו פעיל"
 
 #: configs/available_constants/errorCodesHandler.php:8
 msgid "Failed to get the requested item(s) details"
-msgstr ""
+msgstr "כשל בהשגת פרטי הפריט(ים) המבוקש(ים)"
 
 #: configs/available_constants/errorCodesHandler.php:9
 msgid "Failed to get the search results"
-msgstr ""
+msgstr "כשל בהשגת תוצאות החיפוש"
 
 #: configs/available_constants/errorCodesHandler.php:10
-#: services/featuredProductsWidget.php:35 services/myCartWidget.php:32
-#: services/searchWidget.php:34 templates/theme/headerTemplate.php:18
-#: templates/theme/headerTemplate.php:40
+#: services/myCartWidget.php:32 services/searchWidget.php:34
+#: templates/theme/headerTemplate.php:18 templates/theme/headerTemplate.php:41
 msgid "Can't get search page link"
-msgstr ""
+msgstr "כשל בהשגת הקישור לעמוד החיפוש"
 
 #: configs/available_constants/errorCodesHandler.php:11
 msgid "Can't get product page link"
-msgstr ""
+msgstr "כשל בהשגת הקישור לעמוד הפריט"
 
 #: configs/available_constants/errorCodesHandler.php:12
 msgid "Widget failed to load."
-msgstr ""
+msgstr "כשל בטעינת התוסף"
 
 #: configs/available_constants/errorMessages.php:3
 msgid "Method does not exist"
@@ -1218,96 +1363,209 @@ msgstr ""
 
 #: configs/available_constants/errorMessages.php:4
 msgid "This field is required"
-msgstr ""
+msgstr "חובה למלאות"
 
 #: configs/available_constants/errorMessages.php:5
 msgid "Please specify correct Israel phone number"
-msgstr ""
+msgstr "הכנס מספר ישראלי תקין"
 
 #: configs/available_constants/errorMessages.php:6
 msgid "Must be a number"
-msgstr ""
+msgstr "מספר בלבד"
 
 #: configs/available_constants/errorMessages.php:7
 msgid "Field cannot be longer then {0} digits"
-msgstr ""
+msgstr "עד {0} ספרות"
 
 #: configs/available_constants/errorMessages.php:8
 msgid "Field cannot be shorter then {0} digits"
-msgstr ""
+msgstr "לפחות {0} ספרות"
 
 #: configs/available_constants/errorMessages.php:9
 msgid "field length must be {0} digits long"
-msgstr ""
+msgstr "הכנס {0} ספרות"
 
 #: configs/available_constants/errorMessages.php:10
 msgid "Passwords does not match"
-msgstr ""
+msgstr "סיסמה לא תואמת"
 
 #: configs/available_constants/errorMessages.php:11
 msgid "You must select a shipping method"
-msgstr ""
+msgstr "חובה לבחור אפשרות משלוח"
+
+#: configs/available_constants/errorMessages.php:12
+msgid "There was some server error, we were unable to complete the request"
+msgstr "אירעה שגיאה בתקשורת, כשל בביצוע הפעולה."
+
+#: configs/available_constants/errorMessages.php:13
+#: libs/ajax/Ajax_handler.php:141
+msgid "You must enter a token!"
+msgstr "עליך להכניס את המידע המבוקש"
 
 #: configs/available_constants/pages.php:3
 msgid "Cart"
-msgstr ""
+msgstr "עגלה"
 
 #: configs/available_constants/pages.php:4
 msgid "Product"
-msgstr ""
+msgstr "פריט"
 
 #: configs/available_constants/pages.php:5
-#: templates/partials/searchWidgetTemplate.php:4
+#: templates/partials/searchWidgetTemplate.php:5
+#: templates/partials/searchWidgetTemplate.php:7
 msgid "Search"
-msgstr ""
+msgstr "חיפוש"
 
-#: configs/available_constants/pages.php:6 templates/pages/cartTemplate.php:47
-#: templates/pages/checkoutTemplate.php:87
+#: configs/available_constants/pages.php:6 templates/pages/cartTemplate.php:42
+#: templates/pages/checkoutTemplate.php:140
 msgid "Checkout"
-msgstr ""
+msgstr "צ'קאאוט"
 
 #: configs/available_constants/pages.php:7
 msgid "Home"
-msgstr ""
+msgstr "בית"
 
 #: configs/available_constants/pages.php:8
-#: templates/partials/checkoutDoneTemplate.php:12
+#: templates/partials/checkoutDoneTemplate.php:16
 msgid "My Account"
-msgstr ""
+msgstr "החשבון שלי"
 
 #: configs/available_constants/pages.php:9
-#: templates/pages/registerTemplate.php:29
+#: templates/pages/registerTemplate.php:31
 #: templates/partials/checkoutLoginRequestTemplate.php:9
 #: templates/theme/topTemplate.php:27
 msgid "Register"
-msgstr ""
+msgstr "הירשם"
 
 #: configs/available_constants/pages.php:10
-#: templates/pages/loginTemplate.php:30
+msgid "Reset Password"
+msgstr "אתחול סיסמה"
+
+#: configs/available_constants/pages.php:11
+#: templates/pages/loginTemplate.php:40
 #: templates/partials/checkoutLoginRequestTemplate.php:9
 #: templates/theme/topTemplate.php:26
 msgid "Login"
-msgstr ""
-
-#: configs/available_constants/pages.php:11
-#: templates/pages/registerTemplate.php:61 templates/theme/topTemplate.php:32
-msgid "Logout"
-msgstr ""
+msgstr "התחברות"
 
 #: configs/available_constants/pages.php:12
-msgid "Our Stores"
-msgstr ""
+#: templates/pages/registerTemplate.php:47 templates/theme/topTemplate.php:32
+msgid "Logout"
+msgstr "התנתקות"
 
-#: libs/API/ebay/ebayAdapter.php:94
+#: configs/available_constants/pages.php:13
+msgid "Our Stores"
+msgstr "הסניפים שלנו"
+
+#: configs/available_constants/paymentMethods.php:11
+msgid "Cash"
+msgstr "מזומן"
+
+#: configs/available_constants/paymentMethods.php:12
+msgid "Cash (Club Member)"
+msgstr "מזומן (חבר מועדון)"
+
+#: configs/available_constants/paymentMethods.php:16
+msgid "Credit"
+msgstr "אשראי"
+
+#: configs/available_constants/paymentMethods.php:17
+msgid "Credit (Club Member)"
+msgstr "אשראי (חבר מועדון)"
+
+#: configs/available_constants/paymentMethods.php:21
+msgid "PayPal"
+msgstr "פייפאל"
+
+#: configs/available_constants/paymentMethods.php:22
+msgid "PayPal (Club Member)"
+msgstr "פייפאל (חבר מועדון)"
+
+#: configs/available_constants/priceModifiers.php:10
+msgid "PayPal Fees"
+msgstr "עמלות פייפאל"
+
+#: configs/available_constants/priceModifiers.php:11
+msgid "Store Commission"
+msgstr "עמלות חנות"
+
+#: configs/available_constants/priceModifiers.php:12
+msgid "Store Commission (Club Member)"
+msgstr "עמלות חנות (חבר מועדון)"
+
+#: configs/available_constants/priceModifiers.php:13
+msgid "Shipping Costs"
+msgstr "עלויות משלוח"
+
+#: configs/available_constants/priceModifiers.php:14
+#: templates/pages/checkoutTemplate.php:88
+msgid "Ship to door step"
+msgstr "משלוח עד הבית"
+
+#: configs/available_constants/smsMessages.php:4
+msgid ""
+"You've registered to CoffeeShopping successfully This is your password {0} "
+"please memorize it!"
+msgstr "נרשמת לקופי-שופינג בהצלחה. זו הסיסמה שלך {0} אנא שנן וזכור אותה!"
+
+#: configs/available_constants/smsMessages.php:5
+msgid ""
+"You've requested password reset from CoffeeShopping Please verify by filling "
+"the following code {0} "
+msgstr ""
+"ביקשת אתחול סיסמה לאתר קופי-שופינג. אנא וודא זאת ע\"י הכנסת הקוד הבא {0}"
+
+#: configs/available_constants/smsMessages.php:6
+msgid ""
+"You've reset your password successfully your new password is {0} please "
+"memorize it!"
+msgstr "אתחלת את סיסמתך בהצלחה. הסיסמה החדשה היא {0}, אנא שנן וזכור אותה."
+
+#: libs/API/ebay/ebayAdapter.php:89
 msgid "Failed to load ebay_FindingAPI class!"
 msgstr ""
 
-#: libs/API/ebay/ebayAdapter.php:96
+#: libs/API/ebay/ebayAdapter.php:91
 msgid "Failed to load ebay_ShoppingAPI class!"
 msgstr ""
 
-#: libs/API/ebay/ebayAdapter.php:98
+#: libs/API/ebay/ebayAdapter.php:93
+msgid "Failed to load ebay_MerchandisingAPI class!"
+msgstr ""
+
+#: libs/API/ebay/ebayAdapter.php:95
 msgid "Failed to load ebay_Utils class!"
+msgstr ""
+
+#: libs/API/googleTranslator/GoogleTranslator.php:57
+#: libs/API/googleTranslator/GoogleTranslator.php:66
+msgid "We've encounter and error accessing the api"
+msgstr ""
+
+#: libs/API/productRecommendations.php:14
+#: libs/API/productRecommendations.php:79
+#: libs/API/productRecommendations.php:131 libs/API/productView.php:45
+#, php-format
+msgid "API class (%1$s Adapter) doesn't exists, can't get product!"
+msgstr ""
+
+#: libs/API/productRecommendations.php:14
+#: libs/API/productRecommendations.php:22
+msgid "getMostWatchedItems() ERROR:: "
+msgstr ""
+
+#: libs/API/productRecommendations.php:22
+#: libs/API/productRecommendations.php:87
+#: libs/API/productRecommendations.php:139 libs/API/productView.php:54
+#, php-format
+msgid "API class (%1$s) doesn't exists, can't get product!"
+msgstr ""
+
+#: libs/API/productRecommendations.php:79
+#: libs/API/productRecommendations.php:87
+#: libs/API/productRecommendations.php:131
+#: libs/API/productRecommendations.php:139
+msgid "getRelatedCategoryItems() ERROR:: "
 msgstr ""
 
 #: libs/API/productSearch.php:35
@@ -1316,7 +1574,7 @@ msgid "API class (%1$s Adapter) doesn't exists, can't search!"
 msgstr ""
 
 #: libs/API/productSearch.php:35 libs/API/productSearch.php:43
-#: libs/API/productSearch.php:127
+#: libs/API/productSearch.php:129
 msgid "searchAPI() ERROR:: "
 msgstr ""
 
@@ -1325,18 +1583,24 @@ msgstr ""
 msgid "API class (%1$s) doesn't exists, can't search!"
 msgstr ""
 
-#: libs/API/productView.php:45
-#, php-format
-msgid "API class (%1$s Adapter) doesn't exists, can't get product!"
-msgstr ""
-
 #: libs/API/productView.php:45 libs/API/productView.php:54
 msgid "getProduct() ERROR:: "
 msgstr ""
 
-#: libs/API/productView.php:54
-#, php-format
-msgid "API class (%1$s) doesn't exists, can't get product!"
+#: libs/ProductsLists.php:28
+msgid "insertSavedProductsList::self::getProductsByIDs(...) failed!"
+msgstr ""
+
+#: libs/ProductsLists.php:28
+msgid "insertSavedProductsList ERROR:: "
+msgstr ""
+
+#: libs/ProductsLists.php:74
+msgid "getProductsByIDs::productView::getProducts(...) failed!"
+msgstr ""
+
+#: libs/ProductsLists.php:74
+msgid "getProductsByIDs ERROR:: "
 msgstr ""
 
 #: libs/ajax/Ajax_handler.php:63
@@ -1347,74 +1611,101 @@ msgstr ""
 msgid "method was not defined or authenticate request."
 msgstr ""
 
-#: libs/ajax/Ajax_handler.php:98
+#: libs/ajax/Ajax_handler.php:83 libs/ajax/Ajax_handler.php:133
+msgid "You have to supply your phone number"
+msgstr "עליך לספק מספר פלאפון"
+
+#: libs/ajax/Ajax_handler.php:91 libs/ajax/Ajax_handler.php:149
+msgid "User with this phone number was not found"
+msgstr "מספר פלאפון זה אינו רשום במערכת"
+
+#: libs/ajax/Ajax_handler.php:104
+msgid ""
+"You can only reset your password twice every hour Please contact support"
+msgstr ""
+"אתחול הסיסמה מוגבל לפעמיים בשעה, פנה לקבוצת התמיכה או נסה שוב מאוחר יותר"
+
+#: libs/ajax/Ajax_handler.php:158
+msgid "The token we have stored is different then the token you've supplied"
+msgstr "התוכן שסיפקת שונה מזה השמור במערכת"
+
+#: libs/ajax/Ajax_handler.php:175
+msgid "We were unable to reset user password"
+msgstr "אתחול הסיסמה כשל"
+
+#: libs/ajax/Ajax_handler.php:208
 msgid "prevent-login"
-msgstr ""
+msgstr "מנע-התחברות"
 
-#: libs/ajax/Ajax_handler.php:121
+#: libs/ajax/Ajax_handler.php:231
 msgid "Cant change another user' profile"
-msgstr ""
+msgstr "לא ניתן לשנות פרופיל משתמש אחר"
 
-#: libs/ajax/Ajax_handler.php:129
+#: libs/ajax/Ajax_handler.php:239
 msgid "We could not update user!"
-msgstr ""
+msgstr "לא ניתן לעדכן את פרופיל המשתמש"
 
-#: libs/ajax/Ajax_handler.php:135
+#: libs/ajax/Ajax_handler.php:245
 msgid "You've successfully updated you're account"
-msgstr ""
+msgstr "עדכון הפרופיל בוצע בהצלחה"
 
-#: libs/ajax/Ajax_handler.php:163
+#: libs/ajax/Ajax_handler.php:273
 msgid "Unable to insert new address"
-msgstr ""
+msgstr "כשל בעת הכנסת כתובת חדשה"
 
-#: libs/ajax/Ajax_handler.php:172
+#: libs/ajax/Ajax_handler.php:282
 msgid "Unable to add address to user"
-msgstr ""
+msgstr "כשל בעת הוספת כתובת למשתמש"
 
-#: libs/ajax/Ajax_handler.php:193
+#: libs/ajax/Ajax_handler.php:303
 msgid "No address id was supplied"
-msgstr ""
+msgstr "לא סופק מספר כתובת"
 
-#: libs/ajax/Ajax_handler.php:206
+#: libs/ajax/Ajax_handler.php:316
 msgid "Unable to remove address"
-msgstr ""
+msgstr "לא ניתן להסיר את הכתובת"
 
-#: libs/ajax/Ajax_handler.php:243
+#: libs/ajax/Ajax_handler.php:353
 msgid "Couldn't add the product to cart"
-msgstr ""
+msgstr "כשל בהוספת הפריט לעגלה"
 
-#: libs/ajax/Ajax_handler.php:272
+#: libs/ajax/Ajax_handler.php:382
 msgid "Error: Product was not found"
-msgstr ""
+msgstr "שגיאה: פריט לא נימצא"
 
-#: libs/ajax/Ajax_handler.php:278
+#: libs/ajax/Ajax_handler.php:388
 msgid "Error: Could not update product's quantity"
-msgstr ""
+msgstr "שגיאה: לא ניתן לעדכן את כמות הפריט"
 
-#: libs/currencyExchange.php:99
+#: libs/currencyExchange.php:101
 #, php-format
 msgid "File %1$s is not WRITABLE - check folder permissions"
 msgstr ""
 
-#: services/featuredProductsWidget.php:15
-msgid "CoffeeShopping featured"
+#: libs/shortcode/Shortcode_management.php:13
+msgid ""
+"productsListShortCode::productRecommendations::getProductListByType(...) "
+"failed!"
 msgstr ""
 
-#: services/featuredProductsWidget.php:16
-msgid "Featured products widget"
+#: libs/shortcode/Shortcode_management.php:13
+msgid "productsListShortCode ERROR:: "
 msgstr ""
 
-#: services/featuredProductsWidget.php:35 services/myCartWidget.php:32
-#: templates/theme/headerTemplate.php:40
-msgid "myCartWidget.php ERROR:: "
+#: services/displayPostWidget.php:15
+msgid "CoffeeShopping posts"
 msgstr ""
 
-#: services/featuredProductsWidget.php:60
-msgid "New title"
+#: services/displayPostWidget.php:16
+msgid "Display posts anywhere"
 msgstr ""
 
-#: services/featuredProductsWidget.php:63
+#: services/displayPostWidget.php:55 services/productsListWidget.php:97
 msgid "Title:"
+msgstr ""
+
+#: services/displayPostWidget.php:60
+msgid "Choose the post to display:"
 msgstr ""
 
 #: services/myCartWidget.php:15
@@ -1423,6 +1714,58 @@ msgstr ""
 
 #: services/myCartWidget.php:16
 msgid "My cart widget"
+msgstr ""
+
+#: services/myCartWidget.php:32 templates/theme/headerTemplate.php:41
+msgid "myCartWidget.php ERROR:: "
+msgstr ""
+
+#: services/productsListWidget.php:15
+msgid "CoffeeShopping Lists"
+msgstr ""
+
+#: services/productsListWidget.php:16
+msgid "Products List widget"
+msgstr ""
+
+#: services/productsListWidget.php:40
+msgid "widget::productRecommendations::getProductListByType(...) failed!"
+msgstr ""
+
+#: services/productsListWidget.php:40
+msgid "widget ERROR:: "
+msgstr ""
+
+#: services/productsListWidget.php:103
+msgid "List type:"
+msgstr ""
+
+#: services/productsListWidget.php:114
+msgid "Store API:"
+msgstr ""
+
+#: services/productsListWidget.php:122
+msgid "Category ID:"
+msgstr ""
+
+#: services/productsListWidget.php:137
+msgid "Item ID:"
+msgstr ""
+
+#: services/productsListWidget.php:143
+msgid "List name:"
+msgstr ""
+
+#: services/productsListWidget.php:145
+msgid "List name"
+msgstr ""
+
+#: services/productsListWidget.php:160
+msgid "Specific IDs:"
+msgstr ""
+
+#: services/productsListWidget.php:167
+msgid "Limit: (1-20)"
 msgstr ""
 
 #: services/searchWidget.php:17
@@ -1477,115 +1820,118 @@ msgstr ""
 msgid "loginLoader.php ERROR:: "
 msgstr ""
 
-#: templates/loader/homeLoader.php:37
-msgid "featuredProductsWidget::productView::getProducts(...) failed!"
-msgstr ""
-
-#: templates/loader/homeLoader.php:37 templates/loader/homeLoader.php:60
-msgid "featuredProductsWidget ERROR:: "
-msgstr ""
-
-#: templates/loader/homeLoader.php:60
-msgid "No featured product IDs where set!"
-msgstr ""
-
 #: templates/loader/registerLoader.php:12 templates/theme/topTemplate.php:7
 msgid "Can't get logout page id"
 msgstr ""
 
-#: templates/loader/registerLoader.php:12 templates/theme/topTemplate.php:3
-#: templates/theme/topTemplate.php:5 templates/theme/topTemplate.php:7
-#: templates/theme/topTemplate.php:9
+#: templates/loader/registerLoader.php:12
+#: templates/loader/registerLoader.php:14
+#: templates/loader/resetPasswordLoader.php:9
+#: templates/theme/topTemplate.php:3 templates/theme/topTemplate.php:5
+#: templates/theme/topTemplate.php:7 templates/theme/topTemplate.php:9
 msgid "topTemplate.php ERROR:: "
 msgstr ""
 
-#: templates/loader/searchLoader.php:55
-msgid "productSearch::searchALL(...) failed!"
+#: templates/loader/registerLoader.php:14
+#: templates/loader/resetPasswordLoader.php:9
+#: templates/partials/checkoutLoginRequestTemplate.php:3
+#: templates/theme/topTemplate.php:3
+msgid "Can't get login page id"
 msgstr ""
 
-#: templates/loader/searchLoader.php:55
-msgid "searchLoader() ERROR:: "
+#: templates/loader/registerLoader.php:26
+msgid "We couldn't register the user"
 msgstr ""
 
-#: templates/loader/searchLoader.php:65
+#: templates/loader/searchLoader.php:49
 msgid "Can't get product page id"
 msgstr ""
 
-#: templates/loader/searchLoader.php:65
+#: templates/loader/searchLoader.php:49
 msgid "searchTemplate() ERROR:: "
 msgstr ""
 
-#: templates/pages/cartTemplate.php:27
-msgid "Subtotal:"
+#: templates/loader/searchLoader.php:95
+msgid "productSearch::searchALL(...) failed!"
 msgstr ""
+
+#: templates/loader/searchLoader.php:95
+msgid "searchLoader() ERROR:: "
+msgstr ""
+
+#: templates/pages/cartTemplate.php:22 templates/pages/checkoutTemplate.php:97
+msgid "Subtotal:"
+msgstr "מחיר"
+
+#: templates/pages/cartTemplate.php:36
+#: templates/pages/checkoutTemplate.php:126
+msgid "Total:"
+msgstr "מחיר כולל"
 
 #: templates/pages/cartTemplate.php:41
-msgid "Total:"
-msgstr ""
-
-#: templates/pages/cartTemplate.php:46
 msgid "Continue shopping"
-msgstr ""
+msgstr "המשך בקניות"
 
 #: templates/pages/checkoutTemplate.php:30
 msgid "Please select where to ship to:"
-msgstr ""
+msgstr "אנא בחר אחת מאפשרויות המשלוח:"
 
 #: templates/pages/checkoutTemplate.php:31
-msgid "Shipping options"
-msgstr ""
+msgid "Back to shipping options"
+msgstr "בחזרה לאפשרויות המשלוח"
 
 #: templates/pages/checkoutTemplate.php:33
-#: templates/pages/checkoutTemplate.php:53
+#: templates/pages/checkoutTemplate.php:52
 msgid "Ship to home"
-msgstr ""
+msgstr "משלוח לבית"
 
 #: templates/pages/checkoutTemplate.php:34
 #: templates/pages/checkoutTemplate.php:43
 msgid "Ship to store"
-msgstr ""
+msgstr "משלוח לחנות"
 
-#: templates/pages/checkoutTemplate.php:45
-msgid "shipToStore"
-msgstr ""
-
-#: templates/pages/checkoutTemplate.php:59
+#: templates/pages/checkoutTemplate.php:58
 msgid "Shipping to:"
-msgstr ""
+msgstr "משלוח אל:"
 
-#: templates/pages/checkoutTemplate.php:66
-msgid "newAddress"
-msgstr ""
-
-#: templates/pages/checkoutTemplate.php:70
+#: templates/pages/checkoutTemplate.php:69
 msgid "Create New Address"
-msgstr ""
+msgstr "הוסף כתובת חדשה"
 
-#: templates/pages/loginTemplate.php:9
+#: templates/pages/checkoutTemplate.php:89
+msgid "It's only"
+msgstr "זה רק"
+
+#: templates/pages/checkoutTemplate.php:115
+msgid "Ship to door step:"
+msgstr "משלוח עד הבית"
+
+#: templates/pages/loginTemplate.php:19
 msgid "Login details:"
-msgstr ""
+msgstr "פרטי התחברות:"
 
-#: templates/pages/loginTemplate.php:12
+#: templates/pages/loginTemplate.php:22
 #: templates/pages/registerTemplate.php:18
-#: templates/partials/addressFormTemplate.php:7
+#: templates/pages/resetPasswordTemplate.php:16
+#: templates/partials/addressFormTemplate.php:15
 msgid "Phone Number *"
-msgstr ""
+msgstr "* מספר פלאפון"
 
-#: templates/pages/loginTemplate.php:16
+#: templates/pages/loginTemplate.php:26
 msgid "Password *"
-msgstr ""
+msgstr "* סיסמה"
 
-#: templates/pages/loginTemplate.php:21
+#: templates/pages/loginTemplate.php:31
 msgid "Don't have an account?"
-msgstr ""
+msgstr "אין לך חשבון?"
 
-#: templates/pages/loginTemplate.php:21
+#: templates/pages/loginTemplate.php:31
 msgid "Register!"
-msgstr ""
+msgstr "הירשם!"
 
-#: templates/pages/loginTemplate.php:25
+#: templates/pages/loginTemplate.php:35
 msgid "Login Failed"
-msgstr ""
+msgstr "התחברות ניכשלה"
 
 #: templates/pages/logoutTemplate.php:1
 msgid "You've logged out successfully"
@@ -1593,322 +1939,314 @@ msgstr "ביצעת התנתקות  בהצלחה"
 
 #: templates/pages/myAccountTemplate.php:9
 msgid "Profile"
-msgstr ""
+msgstr "פרופיל"
 
 #: templates/pages/myAccountTemplate.php:10
 msgid "Addresses"
-msgstr ""
+msgstr "כתובות"
 
 #: templates/pages/myAccountTemplate.php:11
 msgid "Orders"
-msgstr ""
+msgstr "הזמנות"
 
 #: templates/pages/myAccountTemplate.php:12
 msgid "History"
-msgstr ""
+msgstr "היסטוריה"
 
 #: templates/pages/myAccountTemplate.php:24
 msgid "Update Profile"
-msgstr ""
+msgstr "עדכן פרופיל"
 
 #: templates/pages/myAccountTemplate.php:36
 msgid "Add address"
-msgstr ""
+msgstr "הוסף כתובת"
 
 #: templates/pages/myAccountTemplate.php:43
 msgid "Your addresses:"
-msgstr ""
+msgstr "הכתובות שלך:"
 
 #: templates/pages/myAccountTemplate.php:68
 msgid "No existing Orders!"
-msgstr ""
+msgstr "לא קיימות הזמנות"
 
 #: templates/pages/myAccountTemplate.php:69
 msgid "You don't have any orders in your account yet!"
-msgstr ""
+msgstr "לא קיימות הזמנות בחשבונך עדיין!"
 
 #: templates/pages/myAccountTemplate.php:70
 msgid "Stop wasting time, browse our site and make some orders!"
-msgstr ""
+msgstr "הפסק לבזבז זמן, דפדף באתר ובצע הזמנות!"
 
 #: templates/pages/myAccountTemplate.php:94
 msgid "Empty History!"
-msgstr ""
+msgstr "היסטוריה ריקה"
 
 #: templates/pages/myAccountTemplate.php:95
 msgid "You don't have any order history yet!"
-msgstr ""
+msgstr "לא קיימת היסטוריית הזמנות עדיין!"
 
 #: templates/pages/myAccountTemplate.php:96
 msgid "Once an order have been delivered it will be moved here."
-msgstr ""
+msgstr "ברגע שהטיפול בהזמנה מסוימת יסתיים היא תעבור לאזור זה."
+
+#: templates/pages/productTemplate.php:39
+#: templates/partials/searchResultEntryTemplate.php:18
+msgid "Category:"
+msgstr "קטגוריה:"
+
+#: templates/pages/productTemplate.php:84
+#: templates/partials/cartItemsTemplate.php:31
+#: templates/partials/searchResultEntryTemplate.php:60
+msgid "View on"
+msgstr "צפה באתר המקור -"
 
 #: templates/pages/productTemplate.php:86
 msgid "Make your order"
-msgstr ""
+msgstr "בצע הזמנה"
+
+#: templates/pages/productTemplate.php:87
+msgid "Top rated seller"
+msgstr "מוכר מוערך מאד!"
 
 #: templates/pages/productTemplate.php:91
 msgid "Item condition:"
-msgstr ""
+msgstr "מצב הפריט:"
+
+#: templates/pages/productTemplate.php:104
+msgid "Select"
+msgstr "בחר"
 
 #: templates/pages/productTemplate.php:123
-#: templates/pages/productTemplate.php:254
+#: templates/pages/productTemplate.php:258
 msgid "Available"
-msgstr ""
+msgstr "זמין"
 
 #: templates/pages/productTemplate.php:123
-#: templates/pages/productTemplate.php:254
+#: templates/pages/productTemplate.php:258
 msgid "Sold"
-msgstr ""
+msgstr "נימכר"
 
 #: templates/pages/productTemplate.php:128
 msgid "Shipping options:"
-msgstr ""
+msgstr "אפשרויות משלוח:"
 
 #: templates/pages/productTemplate.php:159
 msgid "Order details"
-msgstr ""
+msgstr "פרטי הזמנה"
 
 #: templates/pages/productTemplate.php:162
 msgid "Seller:"
-msgstr ""
+msgstr "המוכר:"
 
 #: templates/pages/productTemplate.php:165
 msgid "Score:"
-msgstr ""
+msgstr "ניקוד:"
 
 #: templates/pages/productTemplate.php:166
 msgid "Positive:"
-msgstr ""
+msgstr "חיובי:"
 
 #: templates/pages/productTemplate.php:173
 msgid "Shipping from:"
-msgstr ""
+msgstr "נישלח מ:"
 
 #: templates/pages/productTemplate.php:179
 msgid "Pricing summary:"
-msgstr ""
+msgstr "סיכום תמכור:"
 
 #: templates/pages/productTemplate.php:181
 #: templates/partials/cartItemsTemplate.php:98
 msgid "Item price:"
-msgstr ""
+msgstr "עלות הפריט:"
 
 #: templates/pages/productTemplate.php:185
 msgid "Shipping price:"
-msgstr ""
+msgstr "עלות המשלוח:"
 
-#: templates/pages/productTemplate.php:189
-msgid "Store comission:"
-msgstr ""
-
-#: templates/pages/productTemplate.php:191
-msgid "Store commission info"
-msgstr ""
-
-#: templates/pages/productTemplate.php:192
-msgid "Store commission will be calculated on checkout."
-msgstr ""
-
-#: templates/pages/productTemplate.php:193
-msgid "*CoffeeShopping club members enjoy <br> store commission discount!"
-msgstr ""
-
-#: templates/pages/productTemplate.php:197
+#: templates/pages/productTemplate.php:201
 msgid "Paypal comission:"
-msgstr ""
+msgstr "עמלות פייפאל:"
 
-#: templates/pages/productTemplate.php:203
+#: templates/pages/productTemplate.php:207
 msgid "Price per item:"
-msgstr ""
+msgstr "מכיר פריט:"
 
-#: templates/pages/productTemplate.php:210
+#: templates/pages/productTemplate.php:214
 msgid "Original price:"
-msgstr ""
+msgstr "מכיר מקורי:"
 
-#: templates/pages/productTemplate.php:216
+#: templates/pages/productTemplate.php:220
 msgid "Exchange rate:"
-msgstr ""
+msgstr "תעריף המרה:"
 
-#: templates/pages/productTemplate.php:224
+#: templates/pages/productTemplate.php:228
 msgid "*Exchange rates supplied by"
-msgstr ""
+msgstr "* תעריפי המרה מסופקים ע\"י"
 
-#: templates/pages/productTemplate.php:225
+#: templates/pages/productTemplate.php:229
 msgid "'European Central Bank'"
-msgstr ""
+msgstr "'הבנק המרכזי של אירופה'"
 
-#: templates/pages/productTemplate.php:258
+#: templates/pages/productTemplate.php:262
 #: templates/partials/cartItemsTemplate.php:83
 msgid "Quantity:"
-msgstr ""
-
-#: templates/pages/productTemplate.php:265
-msgid "Total price:"
-msgstr ""
+msgstr "כמות:"
 
 #: templates/pages/productTemplate.php:269
+msgid "Total price:"
+msgstr "מחיר כולל:"
+
+#: templates/pages/productTemplate.php:273
 msgid "Add to cart"
-msgstr ""
+msgstr "הוסף לעגלה"
 
-#: templates/pages/productTemplate.php:276
+#: templates/pages/productTemplate.php:280
 msgid "item number:"
-msgstr ""
+msgstr "מספר הפריט:"
 
-#: templates/pages/productTemplate.php:279
+#: templates/pages/productTemplate.php:283
 msgid "Item Specifics:"
-msgstr ""
+msgstr "פרטי הפריט:"
 
 #: templates/pages/registerTemplate.php:14
 msgid "Register to CoffeeShopping:"
-msgstr ""
+msgstr "הרשמה לקופי-שופינג:"
 
-#: templates/pages/registerTemplate.php:26
-msgid "Register successfully"
-msgstr ""
-
-#: templates/pages/registerTemplate.php:40
-msgid "Thank you for registering!"
-msgstr ""
-
-#: templates/pages/registerTemplate.php:41
-msgid "An automated login password was generated for you, "
-msgstr ""
-
-#: templates/pages/registerTemplate.php:41
-msgid "please memorize it!"
-msgstr ""
-
-#: templates/pages/registerTemplate.php:42
-msgid "Password:"
-msgstr ""
-
-#: templates/pages/registerTemplate.php:43
-msgid "* You can change your password in your"
-msgstr ""
-
-#: templates/pages/registerTemplate.php:43
-msgid "account page."
-msgstr ""
-
-#: templates/pages/registerTemplate.php:45
-msgid "Go back to where you were."
-msgstr ""
-
-#: templates/pages/registerTemplate.php:60
+#: templates/pages/registerTemplate.php:46
 msgid "Already registered"
-msgstr ""
+msgstr "הנך רשום כבר"
 
-#: templates/pages/registerTemplate.php:61
+#: templates/pages/registerTemplate.php:47
 msgid "If you would like to register a new account please logout first."
-msgstr "אם תרצי לרשום חשבון חדש בבקשה קודם התנתק."
+msgstr "במידה וברצונך ליצור חשבון חדש אנא התנתק קודם לכך."
+
+#: templates/pages/resetPasswordTemplate.php:11
+msgid "Reset your password:"
+msgstr "אתחול הסיסמה:"
+
+#: templates/pages/resetPasswordTemplate.php:26
+msgid "Reset"
+msgstr "אתחול"
+
+#: templates/pages/resetPasswordTemplate.php:32
+msgid "Verification Token"
+msgstr "קוד האימות"
+
+#: templates/pages/resetPasswordTemplate.php:40
+msgid "Verify Token"
+msgstr "קוד אימות"
+
+#: templates/pages/resetPasswordTemplate.php:41
+msgid "Send verification code again!"
+msgstr "שלח קוד אימות שוב!"
 
 #: templates/pages/searchTemplate.php:7
 msgid "Search Results"
-msgstr ""
+msgstr "תוצאות חיפוש"
 
-#: templates/pages/searchTemplate.php:50
+#: templates/pages/searchTemplate.php:49
 msgid "per page:"
-msgstr ""
+msgstr "הצג בעמוד:"
 
-#: templates/partials/addressFormTemplate.php:2
+#: templates/partials/addressFormTemplate.php:7
+msgid "Back to saved addresses"
+msgstr "חזרה אל הכתובות השמורות"
+
+#: templates/partials/addressFormTemplate.php:9
 msgid "New address:"
-msgstr ""
+msgstr "כתובת חדשה:"
 
-#: templates/partials/addressFormTemplate.php:4
+#: templates/partials/addressFormTemplate.php:12
 msgid "Full Name *"
-msgstr ""
+msgstr "* שם מלא"
 
-#: templates/partials/addressFormTemplate.php:10
+#: templates/partials/addressFormTemplate.php:18
 msgid "City *"
-msgstr ""
+msgstr "* עיר"
 
-#: templates/partials/addressFormTemplate.php:13
+#: templates/partials/addressFormTemplate.php:21
 msgid "Street *"
-msgstr ""
+msgstr "* רחוב"
 
-#: templates/partials/addressFormTemplate.php:16
+#: templates/partials/addressFormTemplate.php:24
 msgid "House #*"
-msgstr ""
+msgstr "* מספר בית"
 
-#: templates/partials/addressFormTemplate.php:17
+#: templates/partials/addressFormTemplate.php:25
 msgid "Apartment #*"
-msgstr ""
+msgstr "* מספר דירה"
 
-#: templates/partials/addressFormTemplate.php:20
+#: templates/partials/addressFormTemplate.php:28
 msgid "Postal Code *"
-msgstr ""
+msgstr "* מיקוד"
 
-#: templates/partials/cartDisplayTemplate.php:3
+#: templates/partials/cartDisplayTemplate.php:4
 msgid "Can't get cart page id"
 msgstr ""
 
-#: templates/partials/cartDisplayTemplate.php:3
+#: templates/partials/cartDisplayTemplate.php:4
 msgid "cartDisplayTemplate.php ERROR:: "
 msgstr ""
 
-#: templates/partials/cartDisplayTemplate.php:10
-msgid "Order ID: #"
-msgstr ""
-
 #: templates/partials/cartDisplayTemplate.php:11
-msgid "In Cart"
-msgstr ""
+msgid "Order ID: #"
+msgstr "מספר הזמנה: #"
 
-#: templates/partials/cartDisplayTemplate.php:17
+#: templates/partials/cartDisplayTemplate.php:18
 msgid "Created at:"
-msgstr ""
+msgstr "נוצר ב:"
 
-#: templates/partials/cartDisplayTemplate.php:27
+#: templates/partials/cartDisplayTemplate.php:28
 msgid "Order status:"
-msgstr ""
+msgstr "מצב הזמנה:"
 
-#: templates/partials/cartDisplayTemplate.php:48
+#: templates/partials/cartDisplayTemplate.php:50
 msgid "Deliver to:"
-msgstr ""
+msgstr "שלח אל:"
 
-#: templates/partials/cartDisplayTemplate.php:65
+#: templates/partials/cartDisplayTemplate.php:68
+msgid "Shipping to your door step"
+msgstr "משלוח עד הבית עם שליח"
+
+#: templates/partials/cartDisplayTemplate.php:76
 msgid "Payment details:"
-msgstr ""
+msgstr "פרטי תשלום:"
 
 #: templates/partials/cartItemsTemplate.php:48
 msgid "Estimated delivery:"
-msgstr ""
+msgstr "תאריך מסירה משוער:"
 
 #: templates/partials/cartItemsTemplate.php:57
 msgid "Delivered at:"
-msgstr ""
+msgstr "נימסר ב:"
 
 #: templates/partials/cartItemsTemplate.php:89
 msgid "Update:"
-msgstr ""
+msgstr "עדכן"
 
 #: templates/partials/cartItemsTemplate.php:90
 msgid "Remove item"
-msgstr ""
+msgstr "הסר פריט"
 
 #: templates/partials/cartItemsTemplate.php:107
 msgid "Shipping cost:"
-msgstr ""
+msgstr "עלות משלוח:"
 
-#: templates/partials/checkoutDoneTemplate.php:11
-msgid "You've successfully save your cart, order ID:"
-msgstr ""
+#: templates/partials/checkoutDoneTemplate.php:14
+msgid "You've successfully saved your cart, your order ID:"
+msgstr "שמרת את ההזמנה בהצלחה! מספר הזמנתך: #"
 
-#: templates/partials/checkoutDoneTemplate.php:12
+#: templates/partials/checkoutDoneTemplate.php:15
 msgid ""
-"You can visit your account to review your card, order status and general "
+"You can visit your account to review your profile, orders status and general "
 "information"
 msgstr ""
+"בעמוד החשבון שלך תוכל לראות את פרופיל המשתמש שלך, פרטי ההזמנה והיסטוריית "
+"הזמנות קודמות"
 
-#: templates/partials/checkoutDoneTemplate.php:13
+#: templates/partials/checkoutDoneTemplate.php:17
 msgid "To complete the order, please, refer to one of our stores."
-msgstr ""
-
-#: templates/partials/checkoutLoginRequestTemplate.php:3
-#: templates/theme/topTemplate.php:3
-msgid "Can't get login page id"
-msgstr ""
+msgstr "בכדי להשלים את ההזמנה יש לגשת לאחד מסניפנו לביצוע תשלום."
 
 #: templates/partials/checkoutLoginRequestTemplate.php:3
 #: templates/partials/checkoutLoginRequestTemplate.php:5
@@ -1917,113 +2255,268 @@ msgstr ""
 
 #: templates/partials/checkoutLoginRequestTemplate.php:8
 msgid "You have to login or register to save your cart and make an order"
-msgstr ""
+msgstr "עליך להתחבר או להירשם לאתר בכדי לבצע הזמנה"
 
 #: templates/partials/checkoutLoginRequestTemplate.php:9
 msgid "Please"
-msgstr ""
+msgstr "אנא"
 
 #: templates/partials/emptyCartErrorTemplate.php:1
 msgid "Your shopping cart is empty, but it doesn't have to be."
-msgstr ""
+msgstr "עגלת הקניות שלך ריקה, אך היא לא חייבת להישאר כך."
 
 #: templates/partials/emptyCartErrorTemplate.php:2
 msgid ""
 "There are lots of great deals and one-of-a-kind items just waiting for you."
-msgstr ""
+msgstr "ישנן המון עסקאות נהדרות ופריטים ייחודיים הממתינים עבורך באתר."
 
 #: templates/partials/emptyCartErrorTemplate.php:3
 msgid ""
 "Start shopping, and look for the \"Add to cart\" button. You can add several "
 "items to your cart from different sellers and pay for them all at once."
 msgstr ""
-
-#: templates/partials/featuredProductsWidgetTemplate.php:4
-msgid "Image Not Found!"
-msgstr ""
-
-#: templates/partials/featuredProductsWidgetTemplate.php:11
-#: templates/partials/searchResultEntryTemplate.php:32
-msgid "Price:"
-msgstr ""
+"סייר באתר ובעת מציאת פריט המוצא חן בעינך לחץ על כפתור \"הוסף לעגלה\". ניתן "
+"להוסיף מספר מוצרים שונים לעגלה ולבצע הזמנה אחת בו זמנית."
 
 #: templates/partials/myCartWidgetTemplate.php:2
 #: templates/partials/myCartWidgetTemplate.php:5
 msgid "View your cart!"
-msgstr ""
+msgstr "צפה בעגלה שלך!"
+
+#: templates/partials/productsListTemplate.php:5
+msgid "Image Not Found!"
+msgstr "תמונה לא נימצא"
+
+#: templates/partials/productsListTemplate.php:12
+#: templates/partials/searchResultEntryTemplate.php:36
+msgid "Price:"
+msgstr "מחיר:"
+
+#: templates/partials/productsListTemplate.php:13
+#: templates/partials/searchResultEntryTemplate.php:43
+msgid "Shipping:"
+msgstr "משלוח:"
 
 #: templates/partials/profileFormTemplate.php:6
 msgid "Profile details:"
-msgstr ""
+msgstr "פרטי פרופיל:"
 
 #: templates/partials/profileFormTemplate.php:9
 msgid "Account Phone #:"
-msgstr ""
+msgstr "שיוך החשבון לפלאפון:"
 
 #: templates/partials/profileFormTemplate.php:17
 msgid "First Name:"
-msgstr ""
+msgstr "שם פרטי:"
 
 #: templates/partials/profileFormTemplate.php:26
 msgid "Last Name:"
-msgstr ""
+msgstr "שם משפחה:"
 
 #: templates/partials/profileFormTemplate.php:35
 msgid "E-mail:"
-msgstr ""
+msgstr "דואר אלקטרוני:"
 
 #: templates/partials/profileFormTemplate.php:44
 msgid "New Password:"
-msgstr ""
+msgstr "סיסמה חדשה:"
 
 #: templates/partials/profileFormTemplate.php:52
 msgid "Repeat New Password:"
-msgstr ""
+msgstr "חזור על הסיסמה:"
 
 #: templates/partials/profileFormTemplate.php:59
 msgid "* Fill in only if you wish to update you're password."
-msgstr ""
+msgstr "* מלא אך ורק אם ברצונך לעדכן את הסיסמה."
 
-#: templates/partials/searchResultEntryTemplate.php:17
-msgid "Category:"
-msgstr ""
+#: templates/partials/registrationSuccessTemplate.php:4
+msgid "Thank you for registering!"
+msgstr "תודה לך על שנרשמת לקופי-שופינג!"
 
-#: templates/partials/searchResultEntryTemplate.php:28
+#: templates/partials/registrationSuccessTemplate.php:5
+msgid "We've send you a sms message to your phone with your password. "
+msgstr "שלחנו למספר הפלאפון שסופק מסרון עם הסיסמה שהונפקה עבורך!"
+
+#: templates/partials/registrationSuccessTemplate.php:5
+#: templates/partials/resetPasswordSuccessTemplate.php:5
+msgid "please memorize it!"
+msgstr "אנא שמור וזכור את הסיסמה!"
+
+#: templates/partials/resetPasswordSuccessTemplate.php:4
+msgid "You've reset your password successfully!"
+msgstr "אתחלת את סיסמתך בהצלחה!"
+
+#: templates/partials/resetPasswordSuccessTemplate.php:5
+msgid "We've send you a sms message to your phone with your new password. "
+msgstr "הסיסמה החדשה נשלחה למספר הפלאפון שלך."
+
+#: templates/partials/searchResultEntryTemplate.php:32
+#: templates/partials/searchWidgetTemplate.php:32
 msgid "Condition:"
-msgstr ""
+msgstr "מצב:"
 
-#: templates/partials/searchResultEntryTemplate.php:38
-msgid "Shipping:"
-msgstr ""
+#: templates/partials/searchResultEntryTemplate.php:41
+msgid "Free"
+msgstr "חינם"
 
-#: templates/partials/searchResultEntryTemplate.php:45
-msgid "From"
-msgstr ""
+#: templates/partials/searchResultEntryTemplate.php:49
+msgid "From:"
+msgstr "מ:"
+
+#: templates/partials/searchWidgetTemplate.php:9
+msgid "Advanced search"
+msgstr "חיפוש מתקדם"
+
+#: templates/partials/searchWidgetTemplate.php:14
+#: templates/theme/topTemplate.php:15
+msgid "Stores:"
+msgstr "סניפים:"
+
+#: templates/partials/searchWidgetTemplate.php:20
+msgid "eBay"
+msgstr "איביי"
+
+#: templates/partials/searchWidgetTemplate.php:27
+msgid "aliexpress"
+msgstr "אלי-אקספרס"
+
+#: templates/partials/searchWidgetTemplate.php:38
+msgid "new"
+msgstr "חדש"
+
+#: templates/partials/searchWidgetTemplate.php:45
+msgid "used"
+msgstr "משומש"
+
+#: templates/partials/searchWidgetTemplate.php:50
+msgid "Sort by:"
+msgstr "מיין לפי:"
+
+#: templates/partials/searchWidgetTemplate.php:53
+msgid "Best match"
+msgstr "המתאים ביותר:"
+
+#: templates/partials/searchWidgetTemplate.php:54
+msgid "Price + shipping lowest"
+msgstr "מחיר + משלוח הזול ביותר"
+
+#: templates/partials/searchWidgetTemplate.php:55
+msgid "Price + shipping highest"
+msgstr "מחיר + משלוח היקר ביותר"
 
 #: templates/partials/storeLocatorTemplate.php:13
 msgid "Search for a store close to:"
-msgstr ""
+msgstr "חפש את החנות הקרובה ביותר אל:"
 
 #: templates/partials/storeLocatorTemplate.php:16
 msgid "Go!"
-msgstr ""
+msgstr "חפש!"
 
 #: templates/partials/storeLocatorTemplate.php:19
 msgid "We couldn't find the provided address!"
-msgstr ""
+msgstr "לא ניתן היה למצוא את הכתובת שסיפקת!"
 
 #: templates/partials/storeLocatorTemplate.php:24
 msgid "Closest store location:"
-msgstr ""
+msgstr "מיקום החנות הקרובה ביותר אליך:"
 
-#: templates/partials/storeLocatorTemplate.php:40
+#: templates/partials/storeLocatorTemplate.php:45
+msgid "Click to navigate using waze: "
+msgstr "לחץ בכדי לנווט באמצעות 'ווייז':"
+
+#: templates/partials/storeLocatorTemplate.php:55
 msgid "Our stores:"
-msgstr ""
+msgstr "הסניפים שלנו:"
+
+#: templates/theme/exchangePanelTemplate.php:14
+msgid "Exchange Rates:"
+msgstr "שערי המרה:"
+
+#: templates/theme/exchangePanelTemplate.php:20
+msgid "USD:"
+msgstr "דולר אמריקאי:"
+
+#: templates/theme/exchangePanelTemplate.php:24
+msgid "EUR:"
+msgstr "יורו אירופאי:"
+
+#: templates/theme/exchangePanelTemplate.php:28
+msgid "GBP:"
+msgstr "לירה שטרלינג:"
+
+#: templates/theme/exchangePanelTemplate.php:34
+msgid "*Rates provided by"
+msgstr "* שערי המרה מסופקים ע\"י"
+
+#: templates/theme/exchangePanelTemplate.php:35
+msgid "European Central Bank"
+msgstr "הבנק המרכזי האירופאי"
+
+#: templates/theme/storeCommissionsPanelTemplate.php:12
+msgid "Commissions:"
+msgstr "עמלות:"
+
+#: templates/theme/storeCommissionsPanelTemplate.php:18
+msgid "Paypal commission:"
+msgstr "עמלת פייפאל:"
+
+#: templates/theme/storeCommissionsPanelTemplate.php:19
+msgid "2.5&#37; flat"
+msgstr "2.5&#37; שטוח"
+
+#: templates/theme/storeCommissionsPanelTemplate.php:22
+msgid "Store commission: (guest)"
+msgstr "עמלות חנות: (אורח)"
+
+#: templates/theme/storeCommissionsPanelTemplate.php:23
+msgid "10&#37; or &#8362;5 for cash"
+msgstr "10&#37; או &#8362;5 במזומן"
+
+#: templates/theme/storeCommissionsPanelTemplate.php:24
+msgid "12&#37; or &#8362;7 for credit"
+msgstr "12&#37; או &#8362;7 באשראי"
+
+#: templates/theme/storeCommissionsPanelTemplate.php:27
+msgid "Store commission: (club member)"
+msgstr "עמלות חנות: (חבר מועדון)"
+
+#: templates/theme/storeCommissionsPanelTemplate.php:28
+msgid "7&#37; or &#8362;3 for cash"
+msgstr "7&#37; או &#8362;3 במזומן"
+
+#: templates/theme/storeCommissionsPanelTemplate.php:29
+msgid "10&#37; or &#8362;5 for credit"
+msgstr "10&#37; או &#8362;5 במזומן"
+
+#: templates/theme/toolsPanelTemplate.php:13
+msgid "Tools:"
+msgstr "כלים:"
 
 #: templates/theme/topTemplate.php:9
 msgid "Can't get stores page id"
 msgstr ""
 
-#: templates/theme/topTemplate.php:15
-msgid "Stores:"
-msgstr ""
+#: templates/theme/topTemplate.php:32
+msgid "Hey"
+msgstr "היי"
+
+#~ msgid "Cash(Club Member)"
+#~ msgstr "מזומן (חבר מועדון)"
+
+#~ msgid "Credit(Club Member)"
+#~ msgstr "אשראי (חבר מועדון)"
+
+#~ msgid "PayPal(Club Member)"
+#~ msgstr "פייפאל (חבר מועדון)"
+
+#~ msgid "Store comission:"
+#~ msgstr "עמלת חנות:"
+
+#~ msgid "Store commission info"
+#~ msgstr "מידע לגבי עמלת החנות"
+
+#~ msgid "Store commission will be calculated on checkout."
+#~ msgstr "עמלת החנות תחושב בעת הצ'קאאוט"
+
+#~ msgid "*CoffeeShopping club members enjoy <br> store commission discount!"
+#~ msgstr "חברי מועדון קופי-שופינג נהנים <br> מהנחות בעמלות החנות"

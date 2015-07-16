@@ -2,11 +2,11 @@
 	<div id="searchinputdiv">
     <div id="searchwidgetdiv" class="input-prepend">
 		<input id="searchwidgetinput" type="text" class="span2 search-query" name="search-product"
-               placeholder="<?php esc_attr_e( 'Search', 'rt_gantry_wp_lang' ); ?>"
+               placeholder="<?php _e("Search", 'coffee-shopping' ); ?>"
                value="<?php echo (isset($_GET["search-product"])) ? wp_kses( $_GET["search-product"], null ) : ""; ?>">
-		<button id="searchwidgetbutton" type="submit" class="btn btn-primary" value="<?php esc_attr_e( 'Search', 'rt_gantry_wp_lang' ); ?>"><?php _e("Search", 'coffee-shopping' ); ?></button>
+		<button id="searchwidgetbutton" type="submit" class="btn btn-primary" value="<?php _e( 'Search', 'coffee-shopping' ); ?>"><?php _e("Search", 'coffee-shopping' ); ?></button>
 	</div>
-        <i id="searchadvbutton" class="fa fa-bars fa-2x<?php echo ($adv) ? ' active' : "";?>"></i>
+        <i id="searchadvbutton" class="fa fa-bars fa-2x<?php echo ($adv) ? ' active' : "";?>" title="<?php _e("Advanced search", 'coffee-shopping' ); ?>"></i>
     </div>
 
     <div id="searchwidgetadvanceddiv" <?php echo (!$adv) ? 'class="display-none"' : "";?>>

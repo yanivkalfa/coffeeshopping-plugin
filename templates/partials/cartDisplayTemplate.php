@@ -1,4 +1,5 @@
 <?php
+$shiptodoorstepimage = plugins_url( '../../css/images/CarrierShipment.png', __FILE__ );
 $cartPage = get_permalink(get_option("cs_cart_p_id"));
 if (!$cartPage){Utils::adminPreECHO(__("Can't get cart page id", 'coffee-shopping' ), __("cartDisplayTemplate.php ERROR:: ", 'coffee-shopping' ));}
 ?>
@@ -34,7 +35,8 @@ if (!$cartPage){Utils::adminPreECHO(__("Can't get cart page id", 'coffee-shoppin
             <div class="cartorderstatusicons inline">
                 <?php
                 $scope = array(
-                    'statusArr' => array_keys(CSCons::get('cartStatus')),
+                    'statusArr' => CSCons::get('cartStatus'),
+                    //'statusArr' => array_keys(CSCons::get('cartStatus')),
                     'status' => $cart->status,
                     'size' => 2
                 );
@@ -48,7 +50,7 @@ if (!$cartPage){Utils::adminPreECHO(__("Can't get cart page id", 'coffee-shoppin
             <div class="header"><?php _e("Deliver to:", 'coffee-shopping' ); ?></div>
             <div>
             <?php
-            if ($cart->deliver_to=="home"){
+            if ($cart->deliver_to=="home" || $cart->deliver_to=="doorStep"){
                 $scope = array(
                     'address' => AddressDatabaseHelper::getAddress($cart->address_id)
                 );
@@ -59,11 +61,24 @@ if (!$cartPage){Utils::adminPreECHO(__("Can't get cart page id", 'coffee-shoppin
             }
             ?>
             </div>
+            <div>
+                <?php
+                if ($cart->deliver_to=="doorStep"){
+                ?>
+                    <img src="<?php echo $shiptodoorstepimage;?>" class="inline" width="32px" height="32px;"/><div class="inline"> <?php _e("Shipping to your door step", 'coffee-shopping' ); ?></div>
+                <?php
+                }
+                ?>
+            </div>
         </div>
 
         <div class="cartorderpayment">
             <div class="header"><?php _e("Payment details:", 'coffee-shopping' ); ?></div>
-            <div><?php echo $cart->payment_method.' - '.Utils::getCurrencySymbol("ILS").round($cart->payment_amount, 2);?></div>
+            <?php
+            $paymentMethods = CSCons::get("paymentMethods");
+            $methodTxt = $paymentMethods[$cart->payment_method]["normal"]["nameAs"];
+            ?>
+            <div><?php echo $methodTxt.' - '.Utils::getCurrencySymbol("ILS").round($cart->payment_amount, 2);?></div>
         </div>
 
     </div>
