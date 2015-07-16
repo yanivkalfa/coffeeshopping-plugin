@@ -2,7 +2,7 @@ jQuery(document).ready( function(){
     var form, formAlert, hasSavedAddress, formRulesLoaded;
     var submitCheckout, reselect, shippingSelection, shippingContents, shipToHomeTab, shipToStoreTab,
         savedAddressTab, newAddressTab, shipToHome, newAddressField, backButton,
-        toDoorStep, cartToDoorStep, cartToDoorStepCost, toDoorStepInput, totalCost,
+        toDoorStep, cartToDoorStepCost, toDoorStepInput, toDoorStepCost, totalCost,
         shipToStore, shipToStoreInput;
 
     form = $('#addressForm');

@@ -206,7 +206,7 @@ class Cart extends Collection{
 
     public function getTotalMinusModifier($modifierName){
         $modifier = CartPriceModifierHelper::get($_SESSION['cart']->price_modifiers, $modifierName);
-        return $this->getCalculatedTotal() - $modifier->value;
+        return ($modifier) ? $this->getCalculatedTotal() - $modifier->value: $this->getCalculatedTotal();
     }
 
     public function getStats($extended = false){

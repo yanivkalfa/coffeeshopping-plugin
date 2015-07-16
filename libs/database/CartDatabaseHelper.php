@@ -5,6 +5,22 @@
 
 abstract class CartDatabaseHelper extends SuperDatabaseHelper {
 
+    public static function prepareCart($carts){ // FUNCTION FIXED?!
+        if (!$carts) return array();
+
+        if (isset($carts['ID'])){
+            // single cart:
+            $carts['price_modifiers'] = (!is_array($carts['price_modifiers']) ) ? unserialize($carts['price_modifiers']) : $carts['price_modifiers'];
+        }else{
+            foreach($carts as $key => $cart){
+                $carts[$key]['price_modifiers'] = (!is_array($cart['price_modifiers']) ) ? unserialize($cart['price_modifiers']) : $cart['price_modifiers'];
+            }
+        }
+
+        return $carts;
+    }
+
+    /* ORIGINAL FUNCTION.
     public static function prepareCart($carts){
         if(!$carts) return array();
         if($carts['ID']){
@@ -17,6 +33,7 @@ abstract class CartDatabaseHelper extends SuperDatabaseHelper {
 
         return $carts;
     }
+    */
 
     public static function generateCart($carts){
         foreach($carts as $key => $cart){

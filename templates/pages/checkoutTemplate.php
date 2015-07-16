@@ -99,13 +99,28 @@ $shiptostore = plugins_url( '../../css/images/shiptostore.png', __FILE__ );
                                 </div>
 
                                 <div id="aggregated-price-modifier">
-                                    <?php foreach ( $_SESSION['cart']->getAggregatedPriceModifiers() as $key => $aggregatedPriceModifier ){ ?>
+                                    <?php
+                                    $toDoorStepExists = false;
+                                    foreach ( $_SESSION['cart']->getAggregatedPriceModifiers() as $key => $aggregatedPriceModifier ){
+                                        $toDoorStepExists = ($aggregatedPriceModifier->name=="toDoorStep") ? true : false;
+                                        ?>
                                         <div class="cart-<?php echo $aggregatedPriceModifier->name; ?>">
                                             <div class="inline header"><?php echo $aggregatedPriceModifier->nameAs; ?>:</div>
                                             <div class="inline detail cart-total"><?php echo Utils::getCurrencySymbol("ILS");?><span class="cost"><?php echo CartHelper::formatNumber($aggregatedPriceModifier->value); ?></div>
                                         </div>
-                                    <?php } ?>
+                                    <?php }
+                                    if (!$toDoorStepExists){
+                                        ?>
+                                        <div class="cart-toDoorStep">
+                                            <div class="inline header"><?php _e("Ship to door step:", "coffee-shopping"); ?></div>
+                                            <div class="inline detail cart-total"><?php echo Utils::getCurrencySymbol("ILS");?><span class="cost">0</span></div>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
+
+
 
                                 <div class="cart-subtotal">
                                     <div class="inline header"><?php _e("Total:", 'coffee-shopping' ); ?></div>
