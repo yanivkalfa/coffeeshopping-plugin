@@ -80,6 +80,17 @@ input.error,.form-control.error{
     box-shadow: 0px 0px 7px 0px #F9CBDD;
 }
 
+.inCartImage{
+    background: url("images/inCart.png") no-repeat;
+    width: 135px;
+    height: 135px;
+    display: inline-block;
+}
+.linktomyaccount{font-size:40px;}
+.storesbellow{
+    color:#2698de;
+}
+
 /*
       RESPONSIVENESS-NESS!
 */

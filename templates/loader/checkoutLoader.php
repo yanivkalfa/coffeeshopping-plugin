@@ -134,7 +134,7 @@ if(is_user_logged_in()){
         $cartId = CartDatabaseHelper::saveCart();
 
         // redirect to checkout with id.
-        //wp_redirect( $checkoutPage.'?orderId='.$cartId );
+        wp_redirect( $checkoutPage.'?orderId='.$cartId );
         return;
 
     } else {

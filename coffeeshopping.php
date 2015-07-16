@@ -289,10 +289,12 @@ if(!class_exists('coffee_shopping'))
             require (dirname(__FILE__).'/services/searchWidget.php');
             require(dirname(__FILE__) . '/services/productsListWidget.php');
             require (dirname(__FILE__).'/services/myCartWidget.php');
+            require (dirname(__FILE__).'/services/displayPostWidget.php');
             register_widget( 'templateLoaderWidget' );
             register_widget( 'searchWidget' );
             register_widget( 'productsListWidget' );
             register_widget( 'myCartWidget' );
+            register_widget( 'displayPostWidget' );
 
         }
 
