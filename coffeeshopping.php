@@ -11,7 +11,6 @@
  * on gantry framework plugin - \wp-content\plugins\gantry\core\renderers\gantrymainbodyrenderer.class.php there is
  * an error/bug on line 157, the function should be static, so change to: static public function invertPositionOrder($sidebar_widgets).
  * */
-
 define("BASE_URL", plugin_dir_url(__FILE__));
 define("BASE_ADDRESS", dirname(__FILE__));
 define("IMAGES_DIR", dirname(plugin_dir_url(__FILE__))."/images/");
@@ -22,7 +21,6 @@ define("SERVICES",BASE_ADDRESS.'/services');
 define("TEMPLATE_DIR",BASE_ADDRESS.'/templates');
 define("THEME_DIR", get_template_directory());
 define("EXCH_CURRENCY", "ILS"); // Our exchange currency - TODO:: load from admin.
-
 
 // run time configs
 error_reporting( E_ALL /*-1*/);
@@ -141,7 +139,7 @@ if(!class_exists('coffee_shopping'))
         /**
          * Removing top bar for users who aren't admins
          */
-        public function removeAdminBarForUsers(){
+        public function removeAdminBarForUsers() {
 
             if (!current_user_can('manage_options')) {
                 // for the front-end
@@ -161,8 +159,7 @@ if(!class_exists('coffee_shopping'))
         /*
         * @ Including libs
         */
-        public function includeClasses()
-        {
+        public function includeClasses() {
             $allClassFolders = array(
                 glob(CONFIGS.'/*.php'),
             );
@@ -193,7 +190,7 @@ if(!class_exists('coffee_shopping'))
         /**
          * Instantiate shopping car.
          */
-        public function instantiateCart(){
+        public function instantiateCart() {
             CartHelper::instantiateCart();
 
             //$results = GoogleTranslatorHelper::translate('something', 'en');
@@ -203,7 +200,7 @@ if(!class_exists('coffee_shopping'))
             Utils::pageEcho($a);*/
         }
 
-        public function instantiateShortcodes(){
+        public function instantiateShortcodes() {
             new Shortcode_management();
         }
 
@@ -211,8 +208,7 @@ if(!class_exists('coffee_shopping'))
         /*
          * $ Add some roles/capabilities\
          * */
-        public function dashboard_roles()
-        {
+        public function dashboard_roles() {
             //remove_cap( 'subscriber', 'read' );
 
             global $wp_roles; // global class wp-includes/capabilities.php
@@ -241,8 +237,7 @@ if(!class_exists('coffee_shopping'))
         /*
          * @ Changing how login works and making it so it wont redirect to (wp_login) if login fail
          * */
-        public function custom_login_fail( $username )
-        {
+        public function custom_login_fail( $username ) {
             /*
             $referrer = (isset($_GET['referrer'])) ? $_GET['referrer'] : "";
             if ( !empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') )
@@ -265,8 +260,7 @@ if(!class_exists('coffee_shopping'))
         /*
          * @ Changing how login works and making it so it wont redirect to (wp_login) if login fail
          * */
-        public function custom_login_empty()
-        {
+        public function custom_login_empty() {
             /*
             $referrer = get_home_url();
             if ( strstr($referrer,get_home_url()) && $user==null )
@@ -301,7 +295,7 @@ if(!class_exists('coffee_shopping'))
         /**
          * Dequeue and deregister old jquery
          */
-        public function removeJquery(){
+        public function removeJquery() {
             wp_dequeue_script( 'jquery');
             wp_deregister_script( 'jquery');
         }
@@ -309,8 +303,7 @@ if(!class_exists('coffee_shopping'))
         /**
          * Removing jquery - adding shared scripts and then fonrend scripts lastly adding constants. to constants.js
          */
-        public function frontRegisterScripts()
-        {
+        public function frontRegisterScripts() {
             $this->removeJquery();
             $this->registerScripts(CSCons::get('reqScripts')['shared']);
             $this->registerScripts(CSCons::get('reqScripts')['frontEnd']);
@@ -332,8 +325,7 @@ if(!class_exists('coffee_shopping'))
         /**
          * Removing jquery - adding shared scripts and then backend scripts lastly adding constants to app.js.
          */
-        public function backRegisterScripts()
-        {
+        public function backRegisterScripts() {
             $this->removeJquery();
             $this->registerScripts(CSCons::get('reqScripts')['shared']);
             $this->registerScripts(CSCons::get('reqScripts')['backEnd']);
@@ -355,8 +347,7 @@ if(!class_exists('coffee_shopping'))
          *
          * @param {array} $scripts
          */
-        public function registerScripts($scripts)
-        {
+        public function registerScripts($scripts) {
             global $pagename;
             foreach($scripts as $singleHeader)
             {
@@ -389,14 +380,12 @@ if(!class_exists('coffee_shopping'))
          * @ Create admin pages
          *
         */
-        public function set_up_admin_menu()
-        {
+        public function set_up_admin_menu() {
             add_menu_page('Coffee Shopping', 'Coffee Shopping', 'manage_options', 'coffeeShopping', array($this, 'settings'));
             add_submenu_page('coffeeShopping', 'Settings', 'Settings', 'manage_options', 'settings', array($this, 'settings'));
         }
 
-        public function settings()
-        {
+        public function settings() {
             if ( !current_user_can( 'manage_options' ))
             {
                 wp_die( __( "You do not have sufficient permissions to access this page.", 'coffee-shopping' ) );
@@ -407,8 +396,7 @@ if(!class_exists('coffee_shopping'))
         /**
          * Creating new templates
          */
-        public function addTemplatesToTheme()
-        {
+        public function addTemplatesToTheme() {
             require_once(LIBS . '/Utils.php');
             require_once(CONFIGS . '/constant.php');
             $pages = CSCons::get('pages') ?: array();
@@ -426,8 +414,7 @@ if(!class_exists('coffee_shopping'))
         /**
          * Remove cs_templates from theme.
          */
-        public function removeTemplatesFromTheme()
-        {
+        public function removeTemplatesFromTheme() {
             $dst = THEME_DIR.'/cs_templates';
             // deleting cs_templates
             Utils::deleteLocation($dst);
@@ -436,8 +423,7 @@ if(!class_exists('coffee_shopping'))
         /**
          * Create pages.
          */
-        public function createPages()
-        {
+        public function createPages() {
             $pages = CSCons::get('pages') ?: array();
             foreach($pages as $page){
                 $optionName = 'cs_'.$page['name'].'_p_id';
@@ -461,8 +447,7 @@ if(!class_exists('coffee_shopping'))
         /**
          * Remove pages.
          */
-        public function removePages()
-        {
+        public function removePages() {
             $pages = CSCons::get('pages') ?: array();
             foreach($pages as $page){
                 $optionName = 'cs_'.$page['name'].'_p_id';
@@ -476,11 +461,11 @@ if(!class_exists('coffee_shopping'))
          * @param string $lang
          * @return string
          */
-        public function set_admin_language($lang){
+        public function set_admin_language($lang) {
 
-            if(is_admin()){
+            if (is_admin()) {
                 return 'en_US';
-            }else{
+            } else {
                 return $lang;
             }
         }
@@ -489,7 +474,7 @@ if(!class_exists('coffee_shopping'))
          * Adds csMember role
          * @return mixed
          */
-        public function addCsMemberRole(){
+        public function addCsMemberRole() {
             return add_role(
                 'csMember',
                 __( 'CoffeeShopping Member' ),
@@ -503,11 +488,11 @@ if(!class_exists('coffee_shopping'))
          * Removes csMember role
          * @return mixed
          */
-        public function removeCsMemberRole(){
+        public function removeCsMemberRole() {
             return remove_role( 'csMember' );
         }
 
-        public function setHomePage(){
+        public function setHomePage() {
 
             /*
             $loginPage = get_permalink();
@@ -528,8 +513,7 @@ if(!class_exists('coffee_shopping'))
          * https://docs.google.com/spreadsheets/d/1i_vk_ftcvHzHuoeu5_vh08uMAqY9zkCbRBNsYzgbTZI/edit#gid=0
          *
         */
-        public function pluginActivate()
-        {
+        public function pluginActivate() {
             $this->addTemplatesToTheme();
             $this->createPages();
             $this->addCsMemberRole();
@@ -671,8 +655,7 @@ if(!class_exists('coffee_shopping'))
         /*
         * @ on deactivation remove DB and pages
         */
-        public function pluginDeactivate()
-        {
+        public function pluginDeactivate() {
             $this->removePages();
             $this->removeTemplatesFromTheme();
             $this->removeCsMemberRole();
